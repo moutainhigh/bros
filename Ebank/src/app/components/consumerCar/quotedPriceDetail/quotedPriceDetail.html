@@ -1,0 +1,101 @@
+<div class="max_inner">
+    <div class="box1">
+        <header class="header">
+            <h6>销售订单 # <span ng-bind="vm.model.quoteId"></span></h6>
+        </header>
+        <table class="table1">
+            <tr>
+                <td class="color">类型</td>
+                <td class="right">
+                    <span ng-bind="vm.model.quoteType"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="color">销售渠道</td>
+                <td class="right">
+                    <span ng-bind="vm.model.salesChannel"></span></td>
+            </tr>
+            <tr>
+                <td class="color">状态</td>
+                <td class="right">
+                    <span ng-bind="vm.model.status"></span></td>
+            </tr>
+            <tr>
+                <td class="color">客户标识</td>
+                <td class="right">
+                    <span ng-bind="vm.model.partyId"></span></td>
+            </tr>
+            <tr>
+                <td class="color">报价名</td>
+                <td class="right">
+                    <span ng-bind="vm.model.quoteName"></span></td>
+            </tr>
+            <tr>
+                <td class="color">描述</td>
+                <td class="right">
+                    <span ng-bind="vm.model.description"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="color">货币</td>
+                <td class="right">
+                    <span ng-bind="vm.model.currency"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="color">产品销售网点</td>
+                <td class="right">
+                    <span ng-bind="vm.model.storeName"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="box2">
+        <header class="header">
+            <h6>报价角色</h6>
+        </header>
+        <table class="table1">
+            <tr ng-repeat="item in vm.model.quoteRoleList">
+                <td class="color">报价角色名称</td>
+                <td class="right"><span ng-bind="item.quoteRoleName"></span></td>
+            </tr>
+        </table>
+    </div>
+    <div class="box3">
+        <header class="header">
+            <h6>订单列表</h6>
+        </header>
+        <!-- /header -->
+        <table class="tableList">
+            <thead>
+                <tr>
+                    <th class="title">名称</th>
+                    <th style="text-align:center">数量</th>
+                    <th class="money">原价(元)</th>
+                    <th class="money">调整金额(元)</th>
+                    <th class="money">小计</th>
+                    <th class="money">总额</th>
+                    <th class="title">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in vm.model.quoteItemList">
+                    <td class="title">
+                        <p ng-bind="x.productId + x.internalName"></p>
+                    </td>
+                    <td align="center" ng-bind="x.quantity"></td>
+                    <td class="money" ng-bind="x.quoteUnitPriceMap.quoteUnitPrice|currency:'¥'"></td>
+                    <td class="money" ng-bind="x.totalQuoteItemAdjustmentAmountMap.totalQuoteItemAdjustmentAmount|currency:'¥'"></td>
+                    <td class="money" ng-bind="x.totalQuoteAmountMap.totalQuoteAmount|currency:'¥'"></td>
+                    <td class="money" ng-bind="x.grandTotalQuoteAmountMap.grandTotalQuoteAmount|currency:'¥'"></td>
+                    <td>
+                        <button type="button" class="btn btn-default" ng-show="vm.model.value" ng-click="vm.addRecordShopCartFun(x);">
+                            <i class="glyphicon glyphicon-shopping-cart"></i> 加入购物车</button>
+                        <button type="button" class="btn btn-default" ng-click="vm.showDetailInfo(x);">
+                            <i class="glyphicon glyphicon-shopping-cart"></i> 查产品详情</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

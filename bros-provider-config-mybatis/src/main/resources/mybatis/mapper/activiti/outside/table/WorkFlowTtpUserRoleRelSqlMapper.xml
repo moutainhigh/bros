@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.activiti.outside.table.ttpuserrolerel">
+	
+	<resultMap id="ttpUserRoleRelMap" type="java.util.HashMap">
+		<result property="id" column="TURR_ID"/>
+		<result property="userId" column="TURR_USERID"/>
+		<result property="roleId" column="TURR_ROLEID"/>
+	</resultMap>
+	
+	<sql id="ttp_user_role_rel_param">
+		TURR_ID,
+		TURR_USERID,
+		TURR_ROLEID
+    </sql>
+	
+	<!-- 根据操作员编号查询操作员和角色关联信息 -->
+	<select id="queryOperatorRoleRelListByUserId" resultMap="ttpUserRoleRelMap" parameterType="java.util.HashMap">
+       select  <include refid="ttp_user_role_rel_param"/>  
+	   <![CDATA[      
+	      from TTP_USER_ROLE_REL 
+		        where TURR_USERID=#{userId}
+	   ]]>  
+	</select>
+	
+	
+	
+</mapper>

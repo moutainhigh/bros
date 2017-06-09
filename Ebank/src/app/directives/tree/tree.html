@@ -1,0 +1,15 @@
+<ul id="menu">
+    <li  ng-repeat="item in list.children" ng-if="list.children">
+    	<a ui-sref={{item.itemValue.bmfUrl}} ng-click="vm.getTreeList(item);">{{item.itemValue.bmfName}}</a>
+    	<ul>
+            <li  ng-repeat="itemTwo in item.children" ng-if="item.children">
+                <a ui-sref={{itemTwo.itemValue.bmfUrl}} ng-click="vm.getTreeList(itemTwo);">{{itemTwo.itemValue.bmfName}}</a>
+                <ul>
+                    <li ng-repeat="itemThree in itemTwo.children" ng-if="itemTwo.children">
+                    	<a ui-sref="{{itemThree.itemValue.bmfUrl}}" ng-click="vm.getTreeList(itemThree);">{{itemThree.itemValue.bmfName}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

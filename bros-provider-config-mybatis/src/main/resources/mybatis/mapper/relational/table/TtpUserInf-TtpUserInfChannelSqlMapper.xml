@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.TtpUserInfTtpUserInfChannelSqlMapper">
+	<sql id="ttpUserInf-TtpUserInfChannel">
+		tui_id,
+		tui_userno,
+		tui_cstno,
+		tui_username,
+		tui_usernameen,
+		tui_ctftype,
+		tui_ctfno,
+		tui_department,
+		tui_jobtitle,
+		tui_mobile,
+		tui_email,
+		tui_legalid,
+		tuin_id,
+		tuin_alias,
+		tuin_opandate,
+		tuin_closedate,
+		tuin_opennode,
+		tuin_lasedate,
+		tuin_password,
+		tuin_stt
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="ttpUserInfResult">
+    	<result property="operatorId" column="tui_id"/><!-- UUID -->
+    	<result property="operatorUserno" column="tui_userno"/><!-- 员工编号 -->
+    	<result property="cstNo" column="tui_cstno"/><!-- 用户所属的企业客户号 -->
+    	<result property="operatorUsername" column="tui_username"/><!-- 姓名 -->
+    	<result property="operatorUserEn" column="tui_usernameen"/><!-- 英文名 -->
+    	<result property="operatorCtftype" column="tui_ctftype"/><!--证件类型  -->
+    	<result property="operatorCtfno" column="tui_ctfno"/><!--证件号码  -->
+    	<result property="operatorDepartment" column="tui_department"/><!-- 部门 -->
+    	<result property="operatorJobtitle" column="tui_jobtitle"/><!-- 职位 -->
+    	<result property="operatorMobile" column="tui_mobile"/><!--手机号码  -->
+    	<result property="operatorEmail" column="tui_email"/><!-- 电子邮件 -->
+    	<result property="legalId" column="tui_legalid"/><!--法人ID  -->
+    	<result property="tuin_id" column="tuin_id"/>
+    	<result property="operatorAlias" column="tuin_alias"/>
+    	<result property="operatorOpandate" column="tuin_opandate"/>
+    	<result property="operatorClosedate" column="tuin_closedate"/>
+    	<result property="operatorOpennode" column="tuin_opennode"/>
+    	<result property="operatorLasedate" column="tuin_lasedate"/>
+    	<result property="operatorPassword" column="tuin_password"/>
+    	<result property="operatorStt" column="tuin_stt"/>
+    </resultMap>
+     <!-- 查询全部角色 -->
+    <select id="queryTtpUserInfByCstNo" resultMap="ttpUserInfResult" parameterType="java.util.HashMap">
+       select
+       	<include refid="ttpUserInf-TtpUserInfChannel"/> 
+       from ttp_user_inf tui,ttp_user_inf_channel tuic
+       	where 
+	       tui.tui_id=tuic.tuin_id and
+	       tuic.tuin_stt !='2' and
+	       tui.tui_cstno=#{operatorUserno} 
+    </select>
+    
+	<!-- 根据条件查询总条数-->
+	<select id="queryTtpUserInfByCstNoTotalNum" resultType="int" parameterType="java.util.HashMap">
+		select  count(1) 
+	       from ttp_user_inf tui,ttp_user_inf_channel tuic
+	       	where 
+		       tui.tui_id=tuic.tuin_id and
+		       tuic.tuin_stt !='2' and
+		       tui.tui_cstno=#{operatorUserno} 
+	</select>
+    <!-- 根据法人id+企业客户号+证件类型+证件号码查询操作员信息 -->
+    <select id="queryTtpUserInfByConditon" resultMap="ttpUserInfResult">
+       select
+       	<include refid="ttpUserInf-TtpUserInfChannel"/> 
+       from ttp_user_inf tui,ttp_user_inf_channel tuic
+       	where 
+       tui.tui_id=tuic.tuin_id and
+       tuic.tuin_stt !='2' and
+       tui.tui_ctftype=#{operatorCtftype} and
+       tui.tui_ctfno=#{operatorCtfno} and
+       tui.tui_legalcode=#{legalId} and
+       tui.tui_cstno=#{cstNo} 
+    </select>
+     <!-- 根据证件类型证件号码查询操作员信息 -->
+    <select id="queryTtpUserInfManageByCstNoAndoperatorId" resultMap="ttpUserInfResult">
+       select
+       	<include refid="ttpUserInf-TtpUserInfChannel"/> 
+       from ttp_user_inf tui,ttp_user_inf_channel tuic
+       	where 
+       tui.tui_id=tuic.tuin_id and
+       tuic.tuin_stt !='2' and
+       tui.tui_userno=#{operatorUserno} and
+       tui.tui_cstno=#{cstNo} 
+    </select>
+    
+    <!--操作员信息查询-->
+	<select id="selectOperatorInfoByParam" resultMap="ttpUserInfResult" parameterType="java.util.HashMap">
+		SELECT 
+			<include refid="ttpUserInf-TtpUserInfChannel"/>  
+		FROM 
+			ttp_user_inf tui,ttp_user_inf_channel tuic
+		WHERE  
+			tui.tui_id=tuic.tuin_id 
+			<if test="operatorUserno!=null and operatorUserno!=''">
+				and tui.tui_userno=#{operatorUserno}
+			</if>
+			<if test="cstNo!=null and cstNo!=''">
+				and tui.tui_cstno= #{cstNo}
+			</if>
+			<if test="operatorName!=null and operatorName!=''">
+				and tui.tui_username=#{operatorName}
+			</if>
+			<if test="operatorCertType!=null and operatorCertType!=''">
+				and tui.tui_ctftype =#{operatorCertType}
+			</if> 
+			<if test="operatorCertNo!=null and operatorCertNo!=''">
+				and tui.tui_ctfno =#{operatorCertNo}
+			</if> 
+	
+	</select>
+</mapper>

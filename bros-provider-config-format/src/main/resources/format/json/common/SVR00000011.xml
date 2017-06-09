@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000011SendFmt">
+		     <xmlRel rel="SendFmt"/>
+			 <xmlField tagName="partyId" dataName="partyId"/><!--当事人标识  -->
+	</fmtDef>
+	<fmtDef id="SVR00000011RecFmt">
+	         <xmlRel rel="RecFmt"/>
+	          <xmlList tagName="quoteList" dataName="quoteList"><!--产品规则 -->
+	               <xmlTag>
+			               <xmlField tagName="quoteId" dataName="quoteId"/><!--报价标识-->
+			               <xmlField tagName="quoteType" dataName="quoteType"/><!--报价类型-->
+			               <xmlField tagName="salesChannel" dataName="salesChannel"/><!--销售渠道-->
+			               <xmlField tagName="status" dataName="status"/><!--状态-->
+			               <xmlField tagName="partyId" dataName="partyId"/><!--客户标识-->
+			               <xmlField tagName="quoteName" dataName="quoteName"/><!--报价名-->
+			               <xmlField tagName="description" dataName="description"/><!--描述-->
+			               <xmlField tagName="currency" dataName="currency"/><!--货币-->
+			               <xmlField tagName="storeName" dataName="storeName"/><!--产品销售网点名称-->
+			               <xmlList tagName="quoteRoleList" dataName="quoteRoleList"><!--报价角色列表 -->
+		                       <xmlTag>
+		               		   <xmlField tagName="quoteRoleName" dataName="quoteRoleName"/><!--列表名称 -->
+				               </xmlTag>
+			           	  </xmlList>
+			           	   <xmlList tagName="quoteItemList" dataName="quoteItemList"><!--报价项目列表 -->
+				                 <xmlTag>
+	                  				<xmlField tagName="quoteItemSeqId" dataName="quoteItemSeqId"/><!--报价项目序明细标识 -->
+	                  				<xmlField tagName="productId" dataName="productId"/><!--报价项目序明细标识 -->
+	                  				<xmlField tagName="imageUrl" dataName="imageUrl"/><!--产品图片地址 -->
+	                  				<xmlField tagName="internalName" dataName="internalName"/><!--产品内部名称 -->
+	                  				<xmlField tagName="quantity" dataName="quantity"/><!--数量 -->
+	                  				<xmlField tagName="selectedAmount" dataName="selectedAmount"/><!--已选金额 -->
+	                  					<xmlTag   tagName="quoteUnitPriceMap" dataName="quoteUnitPriceMap">
+	                  						<xmlField tagName="quoteUnitPrice" dataName="quoteUnitPrice"/><!--报价单价 -->
+	                  						<xmlField tagName="currencyUomId" dataName="currencyUomId"/><!--币种 -->
+	                  					</xmlTag>
+	                  					<xmlTag   tagName="totalQuoteItemAdjustmentAmountMap" dataName="totalQuoteItemAdjustmentAmountMap">
+	                  						<xmlField tagName="totalQuoteItemAdjustmentAmount" dataName="totalQuoteItemAdjustmentAmount"/><!--调整 -->
+	                  						<xmlField tagName="currencyUomId" dataName="currencyUomId"/><!--币种 -->
+	                  					</xmlTag>
+	                  					<xmlTag   tagName="totalQuoteItemAmountMap" dataName="totalQuoteItemAmountMap">
+	                  						<xmlField tagName="totalQuoteItemAmount" dataName="totalQuoteItemAmount"/><!--小计 -->
+	                  						<xmlField tagName="currencyUomId" dataName="currencyUomId"/><!--币种 -->
+	                  					</xmlTag>
+	                  					<xmlList tagName="quoteTermList" dataName="quoteTermList"><!--报价角色列表 -->
+		                       				<xmlTag>
+		               		   					<xmlField tagName="termTypeName" dataName="termTypeName"/><!--协议类型 -->
+		               		   					<xmlField tagName="termValue" dataName="termValue"/><!--协议值 -->
+		               		   					<xmlField tagName="termDays" dataName="termDays"/><!--协议天数 -->
+		               		   					<xmlField tagName="quoteTermDescription" dataName="quoteTermDescription"/><!--条款描述 -->
+				               				</xmlTag>
+			           	  				</xmlList>
+			           	  				<xmlTag   tagName="totalQuoteAmountMap" dataName="totalQuoteAmountMap">
+	                  						<xmlField tagName="totalQuoteAmount" dataName="totalQuoteAmount"/><!--小计 -->
+	                  						<xmlField tagName="currencyUomId" dataName="currencyUomId"/><!--币种 -->
+	                  					</xmlTag>
+	                  					<xmlTag   tagName="grandTotalQuoteAmountMap" dataName="grandTotalQuoteAmountMap">
+	                  						<xmlField tagName="grandTotalQuoteAmount" dataName="grandTotalQuoteAmount"/><!--小计 -->
+	                  						<xmlField tagName="currencyUomId" dataName="currencyUomId"/><!--币种 -->
+	                  					</xmlTag>
+				                 </xmlTag>
+				           </xmlList>
+	               </xmlTag>
+           	</xmlList>
+	</fmtDef>
+</formats>

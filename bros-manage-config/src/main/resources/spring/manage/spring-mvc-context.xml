@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop   
+            http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/mvc
+			http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+			default-autowire="byName" default-lazy-init="false">
+			
+
+	<!-- 默认的注解映射的支持 -->
+	<mvc:annotation-driven />
+	
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	
+	<!-- 自动扫描的包名,把标记@Controller注解的类转换为bean -->
+<!-- 	<context:component-scan base-package="bros.**" /> -->
+	<context:component-scan base-package="bros">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+	</context:component-scan>
+	
+	<!-- 注册ConversionService -->
+ 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+<!--  	    <property name="converters"> -->
+<!--  	       <list> -->
+<!--  	       		<bean class="bros.consumer.converter.CustomerConverter" /> -->
+<!--  	       </list> -->
+<!--  	    </property> -->
+ 	    <!-- <property name="formatters">
+ 	       <list>  
+ 	       </list>
+ 	    </property> -->
+ 	</bean>
+
+	<!-- 声明式数据验证配置 -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>
+        <!-- 如果不加默认,使用CLASSPATH下的 ValidationMessages.properties -->
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    
+    <!-- 使用ConfigurableWebBindingInitializer注册conversionService -->
+    <bean id="webBindingInitializer" class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+	    <property name="conversionService" ref="conversionService"/>
+	    <property name="validator" ref="validator"/>
+	</bean>
+	
+	<!-- annotation默认的方法默认处理器映射 -->
+	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+	    <property name="interceptors">
+            <list>
+                <bean class="org.springframework.web.servlet.handler.ConversionServiceExposingInterceptor">
+                    <constructor-arg ref="conversionService"/>
+                </bean>
+            </list>
+        </property>
+	</bean>
+	
+	<!-- 配置处理器适配器,启动Spring MVC的注解功能,完成请求和注解POJO的映射 -->
+	<bean id="handlerAdapter" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	    <!-- session访问不是线程安全的，如果需要线程安全，设置属性为true，即可线程安全的访问session -->
+	    <property name="synchronizeOnSession" value="true" />
+	    <!-- <property name="messageConverters">      
+            <list >      
+                <ref bean="mappingJacksonHttpMessageConverter" />      
+            </list>
+        </property> -->
+        <property name="webBindingInitializer" ref="webBindingInitializer" />
+	</bean>
+	
+	<!-- JACKSON转换器 -->  
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">    
+	    <property name="supportedMediaTypes">    
+	        <list>    
+	            <value>application/json;charset=UTF-8</value>    
+	       </list>    
+	    </property>  
+	</bean> 
+
+    <!-- 视图解释类,对模型视图名称的解析,即在模型视图名称添加前后缀 -->
+	<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+        <property name="prefix" value="/WEB-INF/jsp/" />  
+        <property name="suffix" value=".jsp" />
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+    </bean>
+    
+    <!-- 文件上传解析器 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="maxUploadSize" value="32505856" /><!-- 上传文件大小限制为31M，31*1024*1024 -->  
+        <property name="maxInMemorySize" value="4096" />    
+    </bean>
+    
+    <!-- xml视图，XStreamMarshaller，可以转换任何形式的java对象 -->
+	<bean name="xStreamMarshallingView" class="org.springframework.web.servlet.view.xml.MarshallingView">
+		<property name="marshaller">
+			<bean class="org.springframework.oxm.xstream.XStreamMarshaller">
+				<!-- 启用annotation -->
+				<property name="autodetectAnnotations" value="true" />
+				
+				<!-- 类名别名 -->
+				<property name="aliases">
+					<map>
+						<!-- 这个类的别名就变成了myBeans，那么转换后的xml中就是myBeans -->
+						<!--<entry key="myBeans" value="com.zdp.domain.Account" />-->
+					</map>
+				</property>
+				
+				<!-- 基本属性别名 -->
+				<property name="fieldAliases">
+					<map>
+						<!--<entry key="com.zdp.domain.Account.birthday" value="birthday" />-->
+					</map>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 配置拦截器链，拦截器的执行顺序就是此处添加拦截器的顺序 -->
+    <!-- <mvc:interceptors> -->
+      <!-- 会话检查拦截器 -->   
+	 <!--  <mvc:interceptor>
+	    <mvc:mapping path="/*" />
+	    <mvc:mapping path="/ajax/*" />  
+	    <bean class="bros.common.core.web.interceptor.SessionCheckInterceptor" />
+	  </mvc:interceptor> -->
+	  <!-- <mvc:interceptor>
+	    <mvc:mapping path="/*" />
+	    <bean class="bros.consumer.login.interceptor.ValidatInterceptor" />
+	  </mvc:interceptor> -->
+	<!-- </mvc:interceptors> -->
+	
+	<!-- 国际化解析器 -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/>
+	<!-- 依据 accept-language请求头信息进行解析处理,但不支持修改。 -->
+	<!--<bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"/>-->
+    
+    <!-- 对静态资源文件的访问 -->
+	<!-- <mvc:resources mapping="/resource/images/**" location="/resource/images/" cache-period="31536000"/>
+	<mvc:resources mapping="/resource/js/**" location="/resource/js/" cache-period="31536000"/> -->
+	<!-- <mvc:resources mapping="/resource/css/**" location="/resource/css/" cache-period="31536000"/> -->
+    
+    <!-- 全局错误处理-->  
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<!-- 定义默认的异常处理页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置 -->
+	    <property name="defaultErrorView" value="error/error"></property>
+	    <!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->  
+        <property name="exceptionAttribute" value="ex"></property>
+        <!-- 默认HTTP状态码    
+	    <property name="defaultStatusCode" value="500"></property>-->
+	    <!-- 自定义异常类型 --> 
+	    <property name="exceptionMappings">  
+			<props>
+			  <prop key="java.lang.Exception">error/500</prop>    
+              <prop key="java.lang.Throwable">error/404</prop>
+              <prop key="java.lang.RuntimeException">error/error</prop> 
+			  <prop key="bros.base.exception.SessionException">error/session_expire</prop>
+			  <prop key="bros.base.exception.RepeatedSubmitException">error/repeatedSubmit</prop>
+			  <prop key="bros.base.exception.ValidateCodeInvalidException">error/error</prop>
+			</props>  
+		</property>
+		<!-- HTTP状态码 -->
+		<property name="statusCodes">    
+			<props>    
+				<prop key="error/500">500</prop>
+				<prop key="error/404">404</prop>
+			</props>  
+		</property>
+		<!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->    
+	    <property name="warnLogCategory" value="WARN"></property>   
+	</bean>
+	
+	<!-- 全局错误处理,输出JSON格式错误信息-->
+	<bean id="handlerExceptionResolver" class="bros.common.core.web.exception.resolver.HandlerMethodExceptionResolver">
+		<property name="defaultErrorView" value="error/500"/><!-- 错误页面 -->
+		<property name="messageConverters">
+			<list >      
+                <ref bean="mappingJacksonHttpMessageConverter" />      
+            </list>
+		</property>
+	</bean>
+</beans>

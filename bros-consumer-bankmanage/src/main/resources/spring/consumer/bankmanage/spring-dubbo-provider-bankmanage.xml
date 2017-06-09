@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 对统一接入发布服务                       统一接入与服务消费方之间的zookeeper -->
+	
+	<!-- 机构管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICBranchManageServiceFacade" ref="cbranchManageServiceFacade" />
+	<!-- 柜员管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICTellerServiceFacade" ref="ctellerServiceFacade" />
+	<!-- 柜员角色管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICTellerRoleServiceFacade" ref="ctellerRoleServiceFacade" />
+	<!-- 菜单管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICMenudefServiceFacade" ref="cmenudefServiceFacade" />
+	<!-- 业务功能管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICBusinessFunctionServiceFacade" ref="cbusinessFunctionServiceFacade" />
+	<!-- 法人管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICLegalServiceFacade" ref="clegalServiceFacade" />
+
+	<!-- 产品分类管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICProductTypeServiceFacade" ref="cproductTypeServiceFacade" />
+	<!-- 产品服务管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICProductServiceServiceFacade" ref="cproductServiceServiceFacade" />
+	<!-- 产品目录管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICProductCateServiceFacade" ref="cproductCateServiceFacade" />
+	<!-- 产品信息管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICProductInformationServiceFacade" ref="cproductInformationServiceFacade" />
+	<!-- 渠道分组管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICChannelSysGroupServiceFacade" ref="cchannelSysGroupServiceFacade" />
+	<!-- 渠道系统信息管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICChannelSysInfoServiceFacade" ref="cchannelSysInfoServiceFacade" />
+	<!-- 商城管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICMallInfoServiceFacade" ref="cmallInfoServiceFacade" />
+	<!-- 货架管理 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" ref="cshelfInfoServiceFacade" />
+	<!-- 菜单与货架、商品关联关系 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICMenuProRelServiceFacade" ref="cmenuProRelServiceFacade" />
+	
+	<!-- 客户之声 -->
+	<dubbo:service retries="0"  interface="bros.c.leavewodtran.facade.service.ICLeaveWodTranServiceFacade" ref="cleaveWodTranServiceFacade" />
+	<!-- 银行资讯 -->
+	<dubbo:service retries="0"  interface="bros.c.leavewodtran.facade.service.ICBankNoticeServiceFacade" ref="cbankNoticeServiceFacade" />
+	<!-- 公告管理-->
+	<dubbo:service retries="0"  interface="bros.c.leavewodtran.facade.service.ICNoticeServiceFacade" ref="cnoticeServiceFacade" />
+	<!-- 前台展示菜单查询 -->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICFrontShelfMenuRelServiceFacade" ref="cfrontShelfMenuRelServiceFacade" />
+	<!-- 对内授权模型管理-->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICBmaAuthModelSerivceFacade" ref="cbmaAuthModelSerivceFacade" />
+	<!-- 广告栏管理-->
+	<dubbo:service retries="0"  interface="bros.c.bankmanage.facade.service.ICBannerinfoServiceFacade" ref="cbannerinfoServiceFacade" />
+	<!-- 渠道客户信息管理-->
+	<dubbo:service retries="0"  interface="bros.c.cstmanage.facade.service.ICCstManageServiceFacade" ref="ccstManageServiceFacade" />
+	
+	<!-- 安全工具管理-->
+	<dubbo:service retries="0"  interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" ref="csecurityToolManageServiceFacade" />
+	
+	
+	<!-- 监控当前模块是否存活-->
+	<dubbo:service retries="0"  interface="bros.c.monitor.service.ICApplicationAliveMonitorBankmanageServiceFacade" ref="capplicationAliveMonitorBankmanageServiceFacade" />
+	
+</beans>  

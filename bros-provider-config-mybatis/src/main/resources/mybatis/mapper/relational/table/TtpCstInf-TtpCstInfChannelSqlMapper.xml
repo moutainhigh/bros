@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.TtpCstInf-TtpCstInfChannelSqlMapper">
+	<sql id="TtpCstInf-TtpCstInfChannel">
+		tcic_cstid,
+		tcic_payaccount,
+		tcic_level,
+		tcic_safetype,
+		tcic_opentime,
+		tcic_closetime,
+		tcic_lasttime,
+		tcic_actcode,
+		tcic_stt,
+		tcic_mname,
+		tcic_mcode,
+		tcic_serviceid,
+		tcic_openbranchid,
+		tcic_entrust,
+		tcic_isfee,
+		tcic_manage,
+		tcic_paycreditflag,
+		tcic_channel,
+		tci_cstid,
+		tci_legalid,
+		tci_cstno,
+		tci_hostno,
+		tci_csttype,
+		tci_namecn,
+		tci_nameen,
+		tci_ctftype,
+		tci_ctfno,
+		tci_address,
+		tci_zipcode,
+		tci_fax,
+		tci_legalname,
+		tci_phone,
+		tci_email,
+		tci_groupflag
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="ttpCstInfAndTtpCstinfChannelResult">
+		<result property="cstid" column="tcic_cstid"/>
+		<result property="payaccount" column="tcic_payaccount"/><!-- 收费账号 -->
+		<result property="level" column="tcic_level"/>
+		<result property="safetype" column="tcic_safetype"/><!-- 安全工具 -->
+		<result property="opentime" column="tcic_opentime"/><!-- 开户日期 -->
+		<result property="closetime" column="tcic_closetime"/><!-- 销户时间 -->
+		<result property="lasttime" column="tcic_lasttime"/><!-- 最后修改时间 -->
+		<result property="actcode" column="tcic_actcode"/><!-- 激活码（首次登录时验证） -->
+		<result property="stt" column="tcic_stt"/>
+		<result property="mname" column="tcic_mname"/><!-- 客户经理姓名 -->
+		<result property="mcode" column="tcic_mcode"/><!-- 客户经理编号 -->
+		<result property="serviceid" column="tcic_serviceid"/><!-- 客户所属服务等级 -->
+		<result property="openbranchid" column="tcic_openbranchid"/><!-- 客户网银开户网点branchId -->
+		<result property="entrust" column="tcic_entrust"/><!-- 托管方式（0：银行管理、1：企业管理） -->
+		<result property="isfee" column="tcic_isfee"/><!-- 是否收费（Y-是；N-否；） -->
+		<result property="manage" column="tcic_manage"/><!-- 企业管理模式（0：单人授权、1：双人授权） -->
+		<result property="paycreditflag" column="tcic_paycreditflag"/><!-- 代发工资标示（0：不能代发、1：能代发） -->
+		<result property="channel" column="tcic_channel"/><!-- 开通渠道标志 -->
+		<result property="legalid" column="tci_legalid"/><!-- 法人ID -->
+		<result property="cstno" column="tci_cstno"/><!-- 客户号 -->
+		<result property="hostno" column="tci_hostno"/><!-- 核心客户号 -->
+		<result property="csttype" column="tci_csttype"/><!-- 客户类型 （0：实客户  1：虚客户） -->
+		<result property="namecn" column="tci_namecn"/><!---客户名称(中文) -->
+		<result property="nameen" column="tci_nameen"/><!-- -客户名称(英文) -->
+		<result property="ctftype" column="tci_ctftype"/><!-- 证件类型 -->
+		<result property="ctfno" column="tci_ctfno"/><!-- 证件号码 -->
+		<result property="address" column="tci_address"/><!-- 企业地址 -->
+		<result property="zipcode" column="tci_zipcode"/><!-- 邮政编码 -->
+		<result property="fax" column="tci_fax"/><!--传真号 -->
+		<result property="legalname" column="tci_legalname"/><!-- 法人姓名 -->
+		<result property="phone" column="tci_phone"/><!-- 联系电话 -->
+		<result property="email" column="tci_email"/><!-- E-Mail -->
+		<result property="groupflag" column="tci_groupflag"/><!-- 集团客户标志（0：普通客户；1：集团客户） -->   
+    </resultMap>
+     <!-- 查询全部角色 -->
+    <select id="queryTtpCstInf_TtpCstInfChannelByChannelAndCstNo" resultMap="ttpCstInfAndTtpCstinfChannelResult" parameterType="java.util.HashMap">
+       select
+       	<include refid="TtpCstInf-TtpCstInfChannel"/> 
+       from ttp_cst_inf,ttp_cst_inf_channel 
+       	where 
+	       tci_cstno=#{cstNo}
+	   and tci_legalid=#{legalid}
+	   and tcic_channel=#{channel}
+    </select>
+    
+
+</mapper>

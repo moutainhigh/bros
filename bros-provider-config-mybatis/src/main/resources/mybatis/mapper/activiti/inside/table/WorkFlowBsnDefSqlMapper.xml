@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.activiti.inside.table.workflowbsndef">
+
+	<resultMap type="java.util.HashMap" id="bsnResult">
+    	<result property="bsnCode" column="BBF_BSNCODE"/><!-- 业务编码 -->
+    	<result property="type" column="BBF_TYPE"/><!-- 业务类型（0：普通交易；1：网银查询交易；2：付款录入交易；3：授权交易；4：代理业务录入交易；5：维护类交易；6：申请录入类交易；9：管理台交易；10：交易发送 ；S为系统交易） -->
+    	<result property="requireAuth" column="BBF_REQUIREAUTH"/><!-- 是否需要授权（0:无需授权、1:金额相关、2:金额无关、3:管理类授权） -->
+    	<result property="canBatch" column="BBF_CANBATCH"/><!-- 是否可以批量授权（0：否 ,1：是） -->
+    	<result property="bsnName" column="BBF_NAME"/><!-- 业务名称 -->
+    	<result property="bsnAlias" column="BBF_ALIAS"/><!-- 业务别名 -->
+    </resultMap>
+   
+   <sql id="bma_bsndef_params">
+	   	bbf_bsncode,
+	   	bbf_type,
+	   	bbf_requireauth,
+	   	bbf_alias,
+	   	bbf_canbatch,
+	   	bbf_name
+   </sql>
+   
+	<!-- 根据渠道+业务编号查询业务信息 -->
+    <select id="queryBsnListInfo" parameterType="java.util.HashMap" resultMap="bsnResult">
+        select 
+        	<include refid="bma_bsndef_params"/>
+        from bma_bsndef where bbf_bsncode=#{bsnCode}
+    </select>
+	
+</mapper>

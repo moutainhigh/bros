@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000003SendFmt">
+	         <xmlRel rel="SendFmt"/>
+			 <xmlField tagName="productStoreId" dataName="productStoreId"/><!--店铺标识  -->
+			 <xmlField tagName="webSiteId" dataName="webSiteId"/><!--站点标识   -->
+			 <xmlField tagName="currency" dataName="currency"/><!--币种   -->
+			 <xmlField tagName="partyId" dataName="partyId"/><!--当事人标识   -->
+			 <xmlField tagName="shippingContactMechId" dataName="shippingContactMechId"/><!--货运联系机制标识   -->
+			 <xmlField tagName="shippingMethod" dataName="shippingMethod"/><!--货运方式   -->
+			 <xmlField tagName="paymentMethodId" dataName="paymentMethodId"/><!--支付方式标识   -->
+			 <xmlList tagName="productItemList" dataName="productItemList"><!--产品项组 -->
+			 		<xmlTag>
+			 		  <xmlField tagName="surveyInfo" dataName="surveyInfo"/><!--调查信息   -->
+                      <xmlField tagName="productId" dataName="productId"/><!--产品标识 -->
+	                  <xmlField tagName="prodCatalogId" dataName="prodCatalogId"/><!--产品目录标识 -->
+	                  <xmlField tagName="configOptionId" dataName="configOptionId"/><!--配置项标识   -->
+	                  <xmlField tagName="quantity" dataName="quantity"/><!--数量  -->
+	                  <xmlField tagName="selectedAmount" dataName="selectedAmount"/><!--输入金额  -->
+	                </xmlTag>
+	         </xmlList>
+	</fmtDef>
+	<fmtDef id="SVR00000003RecFmt">
+	      <xmlRel rel="RecFmt"/>
+	       <xmlField tagName="productionRunId" dataName="productionRunId"/><!--产品生产标识  -->
+	       <xmlField tagName="orderId" dataName="orderId"/><!--订单标识  -->
+	       <xmlField tagName="partyId" dataName="partyId"/><!--当事人标识  -->
+	       <xmlField tagName="paymentMethodId" dataName="paymentMethodId"/><!--支付方式标识 -->
+	       <xmlField tagName="shippingContactMechId" dataName="shippingContactMechId"/><!--货运联系机制标识  -->
+	       <xmlField tagName="displaySubTotal" dataName="displaySubTotal"/><!--订单总计 -->
+          <xmlList tagName="productPriceList" dataName="productPriceList"><!--产品价格组 -->
+          	  <xmlTag>
+	             <xmlField tagName="productId" dataName="productId"/><!--产品标识 -->
+	             <xmlField tagName="productNm" dataName="productNm"/><!--产品名称-->
+	             <xmlField tagName="prodCatalogId" dataName="prodCatalogId"/><!--产品目录标识-->
+	             <xmlField tagName="quantity" dataName="quantity"/><!--数量 -->
+	             <xmlField tagName="displayPrice" dataName="displayPrice"/><!--单价 -->
+	             <xmlField tagName="otherAdjustments" dataName="otherAdjustments"/><!--调整价格 -->
+	             <xmlField tagName="displayItemSubTotal" dataName="displayItemSubTotal"/><!--明细合计 -->
+	             <xmlField tagName="selectedAmount" dataName="selectedAmount"/><!--输入金额  -->
+	          </xmlTag>
+         </xmlList>
+         
+		 <xmlField tagName="responseMessage" dataName="responseMessage"/><!--返回码  -->
+		 <xmlField tagName="errorMessage" dataName="errorMessage"/><!--错误信息 -->
+		 <xmlTag tagName="orderHeader" dataName="orderHeader">
+				<xmlField tagName="partyId"  dataName="partyId"/><!--当事人标识 -->
+				<xmlField tagName="partyFullName"  dataName="partyFullName"/><!--当事人姓名 -->
+				<xmlField tagName="orderStatus"  dataName="orderStatus"/><!--订单状态 -->
+				<xmlField tagName="orderDate"  dataName="orderDate"/><!--订单提交日期 -->
+		 </xmlTag>
+		 <xmlTag tagName="orderShippingInformation" dataName="orderShippingInformation">
+				<xmlField tagName="toName"  dataName="toName"/><!--客户名称 -->
+				<xmlField tagName="address1"  dataName="address1"/><!--地址1 -->
+				<xmlField tagName="postalCode"  dataName="postalCode"/><!--邮编 -->
+				<xmlField tagName="shipmentMethodTypeId"  dataName="shipmentMethodTypeId"/><!--货运方式类型标识 -->
+				<xmlField tagName="shipmentMethodTypeName"  dataName="shipmentMethodTypeName"/><!--货运方式类型名称-->
+				<xmlField tagName="geoName"  dataName="geoName"/><!--省份 -->
+				<xmlField tagName="city"  dataName="city"/><!--市 -->
+		 </xmlTag>
+		 <xmlTag tagName="accountingPaymentInformation" dataName="accountingPaymentInformation">
+				<xmlField tagName="paymentMethodId"  dataName="paymentMethodId"/><!--支付方式标识 -->
+				<xmlField tagName="paymentMethodName"  dataName="paymentMethodName"/><!--支付方式名称 -->
+				<xmlField tagName="cardNumber"  dataName="cardNumber"/><!--卡号-->
+				<xmlField tagName="custAcctno"  dataName="custAcctno"/><!--"客户账号 -->
+				<xmlField tagName="batNum"  dataName="batNum"/><!--订单批号-->
+				<xmlField tagName="oNum"  dataName="oNum"/><!--订单序号 -->
+		 </xmlTag>
+	</fmtDef>
+</formats>

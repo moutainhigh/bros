@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="mybatis.mapper.relational.table.outsideworkflowauth"> -->
+<mapper namespace="mybatis.mapper.activiti.outside.table.workflowoutsideauth">
+
+    <resultMap id="authModelMap" type="java.util.HashMap">
+		<result property="moneyType" column="TAM_MONEYTYPE"/><!--有无金额 -->
+		<result property="orderly" column="TAM_ORDERLY"/><!-- 授权顺序-->
+		<result property="modelId" column="TAM_ID"/><!-- 授权模型id-->
+	</resultMap>
+	<resultMap type="java.util.HashMap" id="bsnAuthResult">
+    	<result property="authModelFk" column="TFA_AUTHMODELFK"/>
+    </resultMap>
+    <resultMap id="authRuleResult" type="java.util.HashMap">
+			<result property="argId" column="TAMR_ID"/><!--"规则编号  -->
+			<result property="authModelId" column="TAMR_AUTHMODELID"/><!--"授权模型编号-->
+			<result property="authRnrole1" column="TAMR_AUTHRNROLE1"/><!--"角色1编号-->
+			<result property="authRnrole2" column="TAMR_AUTHRNROLE2"/><!--"角色2编号-->
+			<result property="authRnrole3" column="TAMR_AUTHRNROLE3"/><!--"角色3编号-->
+			<result property="authRnrole4" column="TAMR_AUTHRNROLE4"/><!--"角色4编号-->
+			<result property="authRnrole5" column="TAMR_AUTHRNROLE5"/><!--"角色5编号 -->
+			<result property="roleNumber1" column="TAMR_ROLENUMBER1" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色1人数-->
+			<result property="roleNumber2" column="TAMR_ROLENUMBER2" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色2人数-->
+			<result property="roleNumber3" column="TAMR_ROLENUMBER3" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色3人数-->
+			<result property="roleNumber4" column="TAMR_ROLENUMBER4" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色4人数-->
+			<result property="roleNumber5" column="TAMR_ROLENUMBER5" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色5人数-->
+			<result property="minAmount" column="TAMR_MINAMOUNT"     javaType="java.lang.String" jdbcType="DECIMAL"/><!--"规则起始金额  -->
+			<result property="maxAmount" column="TAMR_MAXAMOUNT"     javaType="java.lang.String" jdbcType="DECIMAL"/><!--"规则结束金额  -->
+			<result property="argRanking" column="TAMR_RANKING"      javaType="java.lang.String" jdbcType="INTEGER"/> <!--"规则所在授权模型序号（从1开始）-->
+	</resultMap>
+	<sql id="authRuleParam">
+		tamr_id,
+		tamr_authmodelid,
+		tamr_authrnrole1,
+		tamr_authrnrole2,
+		tamr_authrnrole3,
+		tamr_authrnrole4,
+		tamr_authrnrole5,
+		tamr_rolenumber1,
+		tamr_rolenumber2,
+		tamr_rolenumber3,
+		tamr_rolenumber4,
+		tamr_rolenumber5,
+		tamr_minamount,
+		tamr_maxamount,
+		tamr_ranking
+	</sql>
+	<!-- 根据法人、客户号、业务编号查询授权配置信息-->
+    <select id="queryBsnAuthInfo"  parameterType="java.util.HashMap" resultMap="bsnAuthResult">
+	       select a.tfa_authmodelfk from ttp_func_auth a
+			where a.tfa_legal=#{legalId} and a.tfa_cstno=#{cstNo} and a.tfa_funcid=#{bsnCode}
+    </select>
+    
+    <!-- 根据授权模型id查询授权模型-->
+	<select id="queryTtpAuthModelByByModelId" resultMap="authModelMap" parameterType="java.util.HashMap">
+		select tam_moneytype,tam_orderly,tam_id from ttp_auth_model
+		where tam_id=#{authModelFk}
+	</select>
+	
+	<!-- 根据授权模型ID或者金额查询授权规则 -->
+	 <select id="queryAuthModelRuleByAuthModelIdAndAmount"  parameterType="java.util.HashMap" resultMap="authRuleResult">
+		SELECT <include refid="authRuleParam"/>
+				  FROM TTP_AUTH_MODEL_RULEGP
+				   where TAMR_AUTHMODELID=#{authModelFk}
+			 <if test="tranAmt!=null and tranAmt!=''">
+				 <![CDATA[
+				 and  TAMR_MINAMOUNT <= #{tranAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				 and  TAMR_MAXAMOUNT >= #{tranAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				 ]]>
+			 </if>
+	</select>
+</mapper>

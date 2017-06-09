@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans.xsd  
+           http://www.springframework.org/schema/aop   
+           http://www.springframework.org/schema/aop/spring-aop.xsd  
+           http://www.springframework.org/schema/tx  
+           http://www.springframework.org/schema/tx/spring-tx.xsd  
+           http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byName" default-lazy-init="false">
+
+	<!-- 采用注释的方式配置bean -->  
+	<context:annotation-config />
+	
+	<!-- 配置要扫描的包 -->
+	<context:component-scan base-package="bros">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+	</context:component-scan>
+	
+	<!-- 读入配置属性文件 -->
+	<bean id="propertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath*:config/network/db-config.properties</value>
+				<value>classpath*:config/network/mybatis-path-config.properties</value>
+				<value>classpath*:config/network/redis-config.properties</value>
+				<value>classpath*:config/network/validation-path-config.properties</value>
+				<value>classpath*:config/network/client-config.properties</value>
+				<value>classpath*:config/network/sys-config.properties</value>
+				<value>classpath*:config/network/sys-ftp-config.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="propertiesConfigs" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	    <property name="locations">
+	        <list>
+	        	<value>classpath*:config/network/sys-config.properties</value>
+	        </list>
+		</property>
+	</bean>
+	<!-- spring国际化文件读取服务 -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	    <!-- 国际化信息所在的文件名 -->
+	    <property name="basename" value="i18n/appmsg"></property>
+	    <!-- 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称  -->               
+        <property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+		
+	<!-- proxy-target-class默认"false",更改为"ture"使用CGLib动态代理 -->  
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	
+	<import resource="classpath*:spring/network/product/spring-mybatis-product.xml" />
+	<import resource="classpath*:spring/network/spring-redis.xml" />
+	<import resource="classpath*:spring/network/beansDefinition.xml" />
+	<import resource="classpath*:spring/network/beansDefinition-client.xml" />
+</beans>

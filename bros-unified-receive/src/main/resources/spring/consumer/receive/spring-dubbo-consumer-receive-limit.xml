@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!--================================================ 限额管理 ================================================-->
+    <!-- 查询银行类限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="queryBankingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="queryBankingLimit" />
+    </dubbo:reference>
+
+    <!-- 查询客户类限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="queryCstingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="queryCstingLimit" />
+    </dubbo:reference>
+
+    <!-- 查询账户类限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="queryAccingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="queryAccingLimit" />
+    </dubbo:reference>
+
+    <!-- 查找银行落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="queryLegalOrBranchLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="queryLegalOrBranchLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 查询客户落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="queryCstLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="queryCstLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 查询账户落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="queryAccLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="queryAccLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 设置银行限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveSingleBankingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveSingleBankingLimit" />
+    </dubbo:reference>
+
+    <!-- 设置客户限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveSingleCstingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveSingleCstingLimit" />
+    </dubbo:reference>
+
+    <!-- 设置银行账户限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveSingleAccingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveSingleAccingLimit" />
+    </dubbo:reference>
+
+    <!-- 设置银行落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveSingleLegalOrBranchLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveSingleLegalOrBranchLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 设置客户落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveSingleCstLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveSingleCstLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 设置账户落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveSingleAccLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveSingleAccLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 更新银行类限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateSingleBankingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateSingleBankingLimit" />
+    </dubbo:reference>
+
+    <!-- 更新客户类限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateSingleCstingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateSingleCstingLimit" />
+    </dubbo:reference>
+
+    <!-- 更新账户类限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateSingleAccingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateSingleAccingLimit" />
+    </dubbo:reference>
+
+    <!-- 更新银行类落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateSingleLegalOrBranchLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateSingleLegalOrBranchLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 更新自定义客户落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateSingleCstLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateSingleCstLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 更新自定义账户落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateSingleAccLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateSingleAccLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量设置银行限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveBatchBankingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveBatchBankingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量设置客户类限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveBatchCstingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveBatchCstingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量设置账户类限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveBatchAccingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveBatchAccingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量设置银行机构与法人落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveBatchLegalOrBranchLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveBatchLegalOrBranchLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量设置自定义客户落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveBatchCstLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveBatchCstLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量设置定义账户落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="saveBatchAccLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="saveBatchAccLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量更新银行限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateBatchBankingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateBatchBankingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量更新客户限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateBatchCstingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateBatchCstingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量更新账户限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateBatchAccingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateBatchAccingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量更新银行落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateBatchLegalOrBranchLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateBatchLegalOrBranchLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量更新客户落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateBatchCstLandingLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateBatchCstLandingLimit" />
+    </dubbo:reference>
+
+    <!-- 批量更新账户落地限额 -->
+    <dubbo:reference check="false" version="1.0.0" id="updateBatchAccLandingLimitLimitAction_1.0.0" interface="bros.c.limit.facade.service.ICLimitServiceFacade">
+         <dubbo:method name="updateBatchAccLandingLimitLimit" />
+    </dubbo:reference>
+    
+    <!-- 检查单笔限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='checkSingleLimitAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='checkSingleLimit' />
+    </dubbo:reference>
+
+    <!-- 检查单笔日累计不入库 -->
+    <dubbo:reference check='false' version='1.0.0' id='checkLimitAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='checkLimit' />
+    </dubbo:reference>
+
+    <!-- 检查单笔日累计入库 -->
+    <dubbo:reference check='false' version='1.0.0' id='checkLimitUpdateAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='checkLimitUpdate' />
+    </dubbo:reference>
+
+    <!-- 检查单笔落地限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='checkLandSingleLimitAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='checkLandSingleLimit' />
+    </dubbo:reference>
+
+    <!-- 查询个人客户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='queryPbCstLimitCustomListPageAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='queryPbCstLimitCustomListPage' />
+    </dubbo:reference>
+
+    <!-- 设置个人客户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='saveSinglePbCstingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='saveSinglePbCstingLimitCustom' />
+    </dubbo:reference>
+
+    <!-- 修改个人客户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='updatePbCstingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='updateSinglePbCstingCustomLimit' />
+    </dubbo:reference>
+
+    <!-- 批量设置个人客户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='saveBatchPbCstingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='saveBatchPbCstingLimitCustom' />
+    </dubbo:reference>
+
+    <!-- 批量修改个人客户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='updateBatchPbCstingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='updateBatchPbCstingLimitCustom' />
+    </dubbo:reference>
+
+    <!-- 查询企业客户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='queryCbCstLimitCustomListPageAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='queryCbCstLimitCustomListPage' />
+    </dubbo:reference>
+
+    <!-- 设置企业客户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='saveSingleCbCstingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='saveSingleCbCstingLimitCustom' />
+    </dubbo:reference>
+
+    <!-- 修改企业客户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='updateCbCstingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='updateCbCstingLimitCustom' />
+    </dubbo:reference>
+
+    <!-- 批量设置企业客户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='saveBatchCbCstingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='saveBatchCbCstingLimitCustom' />
+    </dubbo:reference>
+
+    <!-- 批量修改企业客户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='updateBatchCbCstingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='updateBatchCbCstingLimitCustom' />
+    </dubbo:reference>
+
+    <!-- 查询企业账户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='queryCbAccLimitCustomListPageAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='queryCbAccLimitCustomListPage' />
+    </dubbo:reference>
+
+    <!-- 设置企业账户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='saveSingleCbAccingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='saveSingleCbAccingLimitCustom' />
+    </dubbo:reference>
+
+    <!-- 修改企业账户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='updateCbAccingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='updateCbAccingLimitCustom' />
+    </dubbo:reference>
+
+    <!-- 批量设置企业账户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='saveBatchCbAccingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='saveBatchCbAccingLimitCustom' />
+    </dubbo:reference>
+
+    <!-- 批量修改企业账户自定义限额 -->
+    <dubbo:reference check='false' version='1.0.0' id='updateBatchCbAccingLimitCustomAction_1.0.0' interface='bros.c.limit.facade.service.ICLimitServiceFacade'>
+         <dubbo:method name='updateBatchCbAccingLimitCustom' />
+    </dubbo:reference>
+</beans>  

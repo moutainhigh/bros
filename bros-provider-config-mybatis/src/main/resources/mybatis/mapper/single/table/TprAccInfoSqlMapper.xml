@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.tpraccinfo">
+
+    <sql id="tpr_accInfo_param">
+		TAI_ACCNO,
+		TAI_CSTID,
+		TAI_OPENNODE,
+		TAI_ACCTYPE,
+		TAI_ALIAS,
+		TAI_CARDSTYLES
+	</sql>
+    
+    <resultMap type="java.util.HashMap" id="tprAccInfoResult">
+    	<result property="accNo" column="TAI_ACCNO"/><!-- 账号 -->
+    	<result property="cstId" column="TAI_CSTID"/><!-- 客户id -->
+    	<result property="openNode" column="TAI_OPENNODE"/><!-- 账号核心开户网点 -->
+    	<result property="accType" column="TAI_ACCTYPE"/><!-- 账号类型（1：一卡通；2：定期一本通；3:活期一本通；8:贷款账户；9：其他） -->
+    	<result property="accAlias" column="TAI_ALIAS"/><!-- 别名 -->
+    	<result property="cardStyles" column="TAI_CARDSTYLES"/><!-- 卡样式 -->
+    </resultMap>
+	
+   	<!-- 修改账户渠道信息-账户别名-->
+	<update id="updateAccAliasByCstIdAndAccNo" parameterType="java.util.HashMap">
+		update 
+			TPR_ACC_INFO 
+		<set>
+			TAI_ALIAS = #{accountAlias}	
+		</set>
+		where 
+			TAI_CSTID = #{cstId} and 
+			TAI_ACCNO = #{accNo} 
+	</update>
+	<!-- 根据账号和客户标识删除TPR_ACC_INFO -->
+	<delete id="deleteTprAccInfoByCstIdAndAccNo" parameterType="java.util.HashMap">
+		delete from TPR_ACC_INFO
+			where TAI_CSTID = #{cstId} 
+			 and  TAI_ACCNO = #{accNo} 
+	</delete>
+</mapper>

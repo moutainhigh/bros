@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000002SendFmt">										<!--确认订单 -->
+			<xmlRel rel="SendFmt" />
+			<xmlField tagName="orderId" dataName="orderId" />                      <!-- 订单标识-->
+			<xmlField tagName="surveyInfo" dataName="surveyInfo" />                <!-- 调查信息 -->
+	</fmtDef>
+	<fmtDef id="SVR00000002RecFmt">
+		<xmlRel rel="RecFmt"/>
+		 <xmlField tagName="responseMessage" dataName="responseMessage"/><!--返回码  -->
+		 <xmlField tagName="errorMessage" dataName="errorMessage"/><!--错误信息 -->
+	</fmtDef>
+</formats>

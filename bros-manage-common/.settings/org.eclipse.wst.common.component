@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="bros-manage-common">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="bros-manage-config-dev-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-manage-config/bros-manage-config">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-manage-config-mybatis-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-manage-config-mybatis/bros-manage-config-mybatis">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-manage-config-validation-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-manage-config-validation/bros-manage-config-validation">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-common-core-validation-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-common-core-validation/bros-common-core-validation">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-common-core-comm-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-common-core-comm/bros-common-core-comm">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-pre-common-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-pre-common/bros-pre-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="bros-manage-common"/>
+        <property name="java-output-path" value="/bros-manage-common/target/classes"/>
+    </wb-module>
+</project-modules>

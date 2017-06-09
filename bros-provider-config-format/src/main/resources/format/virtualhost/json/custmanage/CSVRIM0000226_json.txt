@@ -1,0 +1,40 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+    "coreCustNo":"10000981",
+	"subAccountNo":"700001",	
+	"accountNo":"609910901011",	
+	"accountName":"张三",
+	"balance":"1090901.12",	
+	"accountType":"01",
+	"accountState":"0",	
+	"currencyType":"CNY",	
+	"cashFlag":"0",	
+	"openBranch":"700001",	
+	"openBranchName":"雍和宫支行",	
+	"openDate":"20160111",	
+	"balanceAvailable":"12900912"
+}
+
+
+

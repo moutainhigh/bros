@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<!-- 新增商城信息 -->
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="mallCode" message="${CECO000000001}"/><!-- 商城编号 -->
+		<xmlField dataName="mallName" message="${CECO000000001}"/><!-- 商城名称 -->
+		<xmlField dataName="chlId" message="${CECO000000001}"/><!-- 渠道系统唯一标识 -->
+	</xmlTag>
+</formats>

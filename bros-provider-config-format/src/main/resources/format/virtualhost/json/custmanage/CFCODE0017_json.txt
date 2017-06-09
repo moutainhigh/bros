@@ -1,0 +1,47 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+		
+	"totalRecord":"1",
+	"accountNo":"62251234567890",
+	"accountType":"01",
+	"dbtAcctEntry":[{
+		"accountNo":"0001",
+		"currency":"CNY",
+		"balance":"1000",
+		"depositType":"活期",
+		"beginDate":"20150101",
+		"endDate":" "
+	}],
+	"cdtAcctList":[{
+		"cdtAmt":"20000",
+		"avlbAmt":"20000",
+		"cshCdtAmt":"20000",
+		"cshAvlbAmt":"20000",
+		"dedlnDt":"20161028"
+	}],
+	"entry":[{
+		"currency":"CNY",
+		"amt":"0"
+	}]
+}

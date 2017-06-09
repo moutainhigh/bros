@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.relational.table.carole-caaccount">
+	<sql id="ca_role_param">
+		rol_id 				,
+		rol_name 			,
+		rol_desc 			,
+		rol_level 		,
+		rol_branchid ,
+		rol_category ,
+		rol_privilege,
+		rol_moditime ,
+		rol_modiuser ,
+		rol_addbranch
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="caRoleResult">
+    	<result property="id" column="rol_id"/>
+    	<result property="name" column="rol_name"/>
+    	<result property="desc" column="rol_desc"/>
+    	<result property="level" column="rol_level"/>
+    	<result property="branchid" column="rol_branchid"/>
+    	<result property="category" column="rol_category"/>
+    	<result property="privilege" column="rol_privilege"/>
+    	<result property="moditime" column="rol_moditime"/>
+    	<result property="modiuser" column="rol_modiuser"/>
+    	<result property="addbranch" column="rol_addbranch"/>
+    </resultMap>
+    
+    <select id="queryCaRole" resultMap="caRoleResult">
+       select
+       	<include refid="ca_role_param"/>
+       from ca_role
+    </select>
+    
+    <insert id="insertCaRole" parameterType="java.util.HashMap">
+    	insert into ca_role(
+    		<include refid="ca_role_param"/>
+    	) values(#{id},#{name},#{desc},#{level},#{branchid},#{category},#{privilege},#{moditime},#{modiuser},#{addbranch})
+    </insert>
+
+</mapper>

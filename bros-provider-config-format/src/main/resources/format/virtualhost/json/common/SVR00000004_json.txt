@@ -1,0 +1,150 @@
+{
+	RspSvcHeader: {
+        channelDate: "",
+        acctDate: "",
+        tranTime: "",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20170214",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201701203333000000216103019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201701203333000000216103019001000000",
+        globalSeqNo: "000120170120333300000021610301",
+        TranTime: "142929849",
+        backendSysId: "",
+        ReturnMsg: "交易成功"
+    },
+    
+   "orderItemsMap": {
+            "otherAdjAmount": "0.00",
+            "grandTotal": "0.00",
+            "shippingAmount": "0.00",
+            "taxAmount": "0.00",
+            "orderItemLists": [
+                {
+                    "orderItemSeqId": "00001",
+                    "productMap": {
+                        "productConfigOptionMap": {
+                            "configOptionId": "CARD_0521_10010",
+                            "configOptionName": "人民币活期开户"
+                        },
+                        "orderItemDesc": "润和鼎元卡个人人民币活期",
+                        "productId": "CARD_0521_10000-01",
+                        "supplierProductId": "",
+                        "productName": "润和鼎元卡个人人民币活期",
+                        "prodCatalogId": "MODEL-FPSC-DP"
+                    },
+                    "subTotalMap": {
+                        "currencyUomId": "CNY",
+                        "subTotal": "0.00"
+                    },
+                    "priceMap": {
+                        "currencyUomId": "CNY",
+                        "price": "0.000"
+                    },
+                    "quantityMap": {
+                        "quantity": "1.000000"
+                    },
+                    "unitPriceMap": {
+                        "unitPrice": "5.000",
+                        "currencyUomId": "CNY",
+                        "unitListPrice": "0.000"
+                    },
+                    "adjustMentMap": {
+                        "currencyUomId": "CNY",
+                        "adjustMent": "-5.000"
+                    }
+                }
+            ],
+            "orderSubTotal": "0.00"
+        },
+        "errorMessage": "",
+        "orderInfo": {
+            "originFacilityId": "MODEL-FP-OL-STORE-WSW",
+            "invoicePerShipment": "Y",
+            "productStoreMap": {
+                "storeName": "润和云总行",
+                "productStoreId": ""
+            },
+            "createdBy": "010000018435",
+            "currencyUom": "CNY",
+            "orderId": "HR10323",
+            "orderStatusList": [
+                {
+                    "statusDatetime": "2017-01-20 10:04:25.117",
+                    "status": "已完成"
+                },
+                {
+                    "statusDatetime": "2017-01-20 10:04:22.613",
+                    "status": "已批准"
+                },
+                {
+                    "statusDatetime": "2017-01-20 10:04:21.491",
+                    "status": "已创建"
+                }
+            ],
+            "channelName": "网站渠道",
+            "priority": "2",
+            "orderDate": "2017-01-20 10:04:21.491",
+            "orderCurrentStatus": "已完成",
+            "isViewed": ""
+        },
+        "orderContactInfoMap": {
+            "postalAddressList": [
+                {
+                    "countryGeoId": "CHN",
+                    "toName": "cuiyh",
+                    "address2": "",
+                    "city": "南京",
+                    "address1": "南京南",
+                    "postalCode": "200001",
+                    "stateProvinceGeoId": "",
+                    "stateProvinceName": "",
+                    "countryName": "China"
+                }
+            ],
+            "fullName": " 徐志英  徐志英 ",
+            "partyId": "010000018435"
+        },
+        "noteList": [],
+        "orderShippingInfo": [
+            {
+                "shipGroupAddressName": "南京南",
+                "shipmentIdList": [
+                    {
+                        "shipmentId": "10020"
+                    }
+                ],
+                "shipmentMethodTypeName": "线下网点交付"
+            }
+        ],
+        "responseMessage": "",
+        "orderPaymentInfo": {
+            "invoiceIdList": [
+                {
+                    "invoiceId": "10020"
+                }
+            ],
+            "orderPaymentStatusList": [
+                {
+                    "statusUserLogin": "010000018435",
+                    "statusItemName": "已授权",
+                    "statusDatetime": "2017-01-20 10:04:22.78"
+                },
+                {
+                    "statusUserLogin": "010000018435",
+                    "statusItemName": "未授权",
+                    "statusDatetime": "2017-01-20 10:04:21.59"
+                }
+            ],
+            "paymentMethodList": [],
+            "openAmount": "0"
+        }
+}

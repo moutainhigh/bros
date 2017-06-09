@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.bmaauthmodelrulegp">
+	<resultMap id="bmaauthmodelrulegpMap" type="java.util.HashMap">
+			<result property="argId" column="BAMR_ID"/><!--"规则编号  -->
+			<result property="authModelId" column="BAMR_AUTHMODELID"/><!--"授权模型编号-->
+			<result property="authRnrole1" column="BAMR_AUTHRNROLE1"/><!--"角色1编号-->
+			<result property="authRnrole2" column="BAMR_AUTHRNROLE2"/><!--"角色2编号-->
+			<result property="authRnrole3" column="BAMR_AUTHRNROLE3"/><!--"角色3编号-->
+			<result property="authRnrole4" column="BAMR_AUTHRNROLE4"/><!--"角色4编号-->
+			<result property="authRnrole5" column="BAMR_AUTHRNROLE5"/><!--"角色5编号 -->
+			<result property="roleNumber1" column="BAMR_ROLENUMBER1" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色1人数-->
+			<result property="roleNumber2" column="BAMR_ROLENUMBER2" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色2人数-->
+			<result property="roleNumber3" column="BAMR_ROLENUMBER3" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色3人数-->
+			<result property="roleNumber4" column="BAMR_ROLENUMBER4" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色4人数-->
+			<result property="roleNumber5" column="BAMR_ROLENUMBER5" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色5人数-->
+			<result property="minAmount" column="BAMR_MINAMOUNT"     javaType="java.lang.String" jdbcType="DECIMAL"/><!--"规则起始金额  -->
+			<result property="maxAmount" column="BAMR_MAXAMOUNT"     javaType="java.lang.String" jdbcType="DECIMAL"/><!--"规则结束金额  -->
+			<result property="argRanking" column="BAMR_RANKING"      javaType="java.lang.String" jdbcType="INTEGER"/> <!--"规则所在授权模型序号（从1开始）-->
+	</resultMap>
+	 <sql id="bma_auth_model_rulegp_param">
+			BAMR_ID,
+			BAMR_AUTHMODELID,
+			BAMR_AUTHRNROLE1,
+			BAMR_AUTHRNROLE2,
+			BAMR_AUTHRNROLE3,
+			BAMR_AUTHRNROLE4,
+			BAMR_AUTHRNROLE5,
+			BAMR_ROLENUMBER1,
+			BAMR_ROLENUMBER2,
+			BAMR_ROLENUMBER3,
+			BAMR_ROLENUMBER4,
+			BAMR_ROLENUMBER5,
+			BAMR_MINAMOUNT,
+			BAMR_MAXAMOUNT,
+			BAMR_RANKING
+    </sql>
+    
+	<!-- 保存授权模型  -->
+    <insert id="insertBmaAuthModelRuleGp" parameterType="java.util.HashMap">
+		insert into BMA_AUTH_MODEL_RULEGP(
+			<include refid="bma_auth_model_rulegp_param"/>  
+		) values
+			<foreach collection="list" item="item" index="index" separator="," >
+		   (
+		    #{item.argId},
+			#{item.authModelId},
+			#{item.authRnrole1},
+			#{item.authRnrole2},
+			#{item.authRnrole3},
+			#{item.authRnrole4},
+			#{item.authRnrole5},
+			 <if test="item.roleNumber1!=null and item.roleNumber1!=''">
+			#{item.roleNumber1,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			 </if>
+			 <if test="item.roleNumber1==null or item.roleNumber1==''">
+			 default,
+			 </if>
+			 <if test="item.roleNumber2!=null and item.roleNumber2!=''">
+			 #{item.roleNumber2,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			 </if>
+			 <if test="item.roleNumber2==null or item.roleNumber2==''">
+			 default,
+			 </if>
+			 <if test="item.roleNumber3!=null and item.roleNumber3!=''">
+			 #{item.roleNumber3,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			 </if>
+			 <if test="item.roleNumber3==null or item.roleNumber3==''">
+			 default,
+			 </if>
+			 <if test="item.roleNumber4!=null and item.roleNumber4!=''">
+			 #{item.roleNumber4,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			 </if>
+			 <if test="item.roleNumber4==null or item.roleNumber4==''">
+			 default,
+			 </if>
+			 <if test="item.roleNumber5!=null and item.roleNumber5!='' ">
+			  #{item.roleNumber5,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			 </if>
+			 <if test="item.roleNumber5==null or item.roleNumber5==''">
+			 default,
+			 </if>
+			#{item.minAmount},
+			#{item.maxAmount},
+			#{item.argRanking,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+		    )
+		 </foreach>  
+	</insert>
+	
+	<!-- 删除授权模型规则 -->
+	 <delete id="deleteBmaAuthModelRuleByAuthModelId"  parameterType="java.util.HashMap">
+	    <![CDATA[
+		    DELETE FROM BMA_AUTH_MODEL_RULEGP 
+		      WHERE BAMR_AUTHMODELID=#{authorizeId}
+		]]>
+	</delete>
+	
+	<!-- 修改授权模型规则 -->
+	<update id="updateBmaAuthModelRuleGp" parameterType="java.util.HashMap">
+	  
+			update BMA_AUTH_MODEL_RULEGP
+			   set BAMR_AUTHMODELID=#{authModelId,jdbcType=VARCHAR}, 
+			       BAMR_AUTHRNROLE1=#{authRnrole1,jdbcType=VARCHAR}, 
+			       BAMR_AUTHRNROLE2=#{authRnrole2,jdbcType=VARCHAR}, 
+			       BAMR_AUTHRNROLE3=#{authRnrole3,jdbcType=VARCHAR}, 
+			       BAMR_AUTHRNROLE4=#{authRnrole4,jdbcType=VARCHAR},
+			       BAMR_AUTHRNROLE5=#{authRnrole5,jdbcType=VARCHAR},
+			 <if test="roleNumber1!=null  and roleNumber1!=''">
+				 BAMR_ROLENUMBER1=#{roleNumber1,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			 </if>
+			 <if test="roleNumber1==null  or roleNumber1==''">
+			 	 BAMR_ROLENUMBER1=default,
+			 </if>
+			 <if test="roleNumber2!=null  and roleNumber2!=''">
+				 BAMR_ROLENUMBER2=#{roleNumber2,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			 </if>
+			 <if test="roleNumber2==null  or roleNumber2==''">
+			  	 BAMR_ROLENUMBER2=default,
+			 </if>
+			 <if test="roleNumber3!=null  and roleNumber3!=''">
+				 BAMR_ROLENUMBER3=#{roleNumber3,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			 </if>
+			 <if test="roleNumber3==null or roleNumber3==''">
+			 	 BAMR_ROLENUMBER3=default,
+			 </if>
+			 <if test="roleNumber4!=null and roleNumber4!=''">
+				 BAMR_ROLENUMBER4=#{roleNumber4,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			 </if>
+			 <if test="roleNumber4==null or roleNumber4==''">
+			 	BAMR_ROLENUMBER4=default,
+			 </if>
+			 <if test="roleNumber5!=null and roleNumber5!=''">
+				BAMR_ROLENUMBER5=#{roleNumber5,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			 </if>
+			 <if test="roleNumber5==null or roleNumber5==''">
+			 	BAMR_ROLENUMBER5=default,
+			 </if>
+			       BAMR_MINAMOUNT=#{minAmount},
+			       BAMR_MAXAMOUNT=#{maxAmount},
+			       BAMR_RANKING=#{BAMRRanking,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+			   where BAMR_ID=#{argId}
+	</update>
+			
+	<!-- 根据授权模型ID查询授权规则 -->
+	 <select id="queryBmaAuthModelRuleByAuthModelId"  parameterType="java.util.HashMap" resultMap="bmaauthmodelrulegpMap">
+		SELECT <include refid="bma_auth_model_rulegp_param"/>  
+			<![CDATA[	  FROM BMA_AUTH_MODEL_RULEGP  
+				  WHERE BAMR_AUTHMODELID=#{authorizeId}
+		    ]]> 
+	</select>
+	
+	<!-- 根据授权模型ID查询授权规则 -->
+	 <select id="queryBmaAuthModelRuleByAuthModelIdAndAmount"  parameterType="java.util.HashMap" resultMap="bmaauthmodelrulegpMap">
+		SELECT <include refid="bma_auth_model_rulegp_param"/>  
+				  FROM BMA_AUTH_MODEL_RULEGP  
+				   where BAMR_AUTHMODELID=#{authorizeId}
+			 <if test="amount!=null and amount!='' ">
+				 <![CDATA[
+				 and  BAMR_MINAMOUNT <= #{amount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				 and  BAMR_MAXAMOUNT >= #{amount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				 ]]>
+			 </if>
+	</select>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!--================================================ 操作员管理 ================================================-->
+	<!-- 添加操作员服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="addOperatorManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICOperatorManageServiceFacade">
+		<dubbo:method name="addOperatorManageMethod" />
+	</dubbo:reference>
+	<!-- 修改操作员服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateOperatorManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICOperatorManageServiceFacade">
+		<dubbo:method name="updateOperatorManageMethod" />
+	</dubbo:reference>
+	<!-- 删除操作员服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="deleteOperatorManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICOperatorManageServiceFacade">
+		<dubbo:method name="deleteOperatorManageMethod" />
+	</dubbo:reference>
+	<!-- 查询操作员详情服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryAllOperatorManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICOperatorManageServiceFacade">
+		<dubbo:method name="queryOperatorManageMethod" />
+	</dubbo:reference>
+	
+	<!-- 查询所有操作员服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryOperatorListForPageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICOperatorManageServiceFacade">
+		<dubbo:method name="queryOperatorListForPageMethod" />
+	</dubbo:reference>
+	
+</beans>  

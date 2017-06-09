@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.cmamserviceflow">
+	
+	<sql id="cma_cmamServiceFlow_param">
+		cmw_gblflowseq,
+		cmw_bsncode,
+		cmw_channel,
+		cmw_scenecode,
+		cmw_transstarttime,
+		cmw_transendtime,
+		cmw_branchid,
+		cmw_legalcode,
+		cmw_tellerno,
+		cmw_autellerno,
+		cmw_transtt,
+		cmw_batchno,
+		cmw_returncode,
+		cmw_returnmsg
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="cmamServiceFlowResult">
+    	<result property="gblflowSeq" column="cmw_gblflowseq"/><!-- 30位全局流水号 -->
+    	<result property="bsnCode" column="cmw_bsncode"/><!-- 业务编码 -->
+    	<result property="channel" column="cmw_channel"/><!-- 渠道编号 -->
+    	<result property="sceneCode" column="cmw_scenecode"/><!-- 场景编码 -->
+    	<result property="transStartTime" column="cmw_transstarttime"/><!-- 交易提交时间 -->
+    	<result property="transEndTime" column="cmw_transendtime"/><!-- 交易结束时间 -->
+    	<result property="branchId" column="cmw_branchid	"/><!-- 操作机构 -->
+    	<result property="legalCode" column="cmw_legalcode"/><!-- 法人 -->
+    	<result property="tellerNo" column="cmw_tellerno"/><!-- 操作员 -->
+    	<result property="autellerNo" column="cmw_autellerno"/><!-- 授权员 -->
+    	<result property="transtt" column="cmw_transtt"/><!-- 交易状态 -->
+    	<result property="batchNo" column="cmw_batchno"/><!-- 批次号-->
+    	<result property="returnCode" column="cmw_returncode"/><!-- 返回码 -->
+    	<result property="returnMsg" column="cmw_returnmsg"/><!-- 返回信息 -->
+    	<result property="note1" column="cmw_note1"/><!-- 预留字段 -->
+    	<result property="note2" column="cmw_note2"/><!-- 预留字段 -->
+    	<result property="note3" column="cmw_note3"/><!-- 预留字段 -->
+    	<result property="note4" column="cmw_note4"/><!-- 预留字段 -->
+    	<result property="note5" column="cmw_note5"/><!-- 预留字段 -->
+    	<result property="note6" column="cmw_note6"/><!-- 预留字段 -->
+    	<result property="note7" column="cmw_note7"/><!-- 预留字段 -->
+    </resultMap>
+    
+    <!-- 插入主流水表数据定义 -->
+    <insert id="insertCmamServiceFlow" parameterType="java.util.HashMap">
+       insert into cma_mserviceflow(
+    		<include refid="cma_cmamServiceFlow_param"/>
+    	)values(
+    	    <![CDATA[
+		    	#{gblflowSeq},
+				#{bsnCode},
+				#{channel},
+				#{sceneCode},
+				#{transStartTime},
+				#{transEndTime},
+				#{branchId},
+				#{legalCode},
+				#{tellerNo},
+				#{autellerNo},
+				#{transtt},
+				#{batchNo},
+				#{returnCode},
+				#{returnMsg})
+			]]>
+    </insert>
+    
+    <!-- 根据流水号更新主流水表业务信息 -->
+    <update id="updateCmamServiceFlowForMsg" parameterType="java.util.HashMap">
+         <![CDATA[
+			update tpr_tranmb_flow
+				set cmw_bsncode=#{bsnCode},
+					cmw_channel=#{channel},
+					cmw_scenecode=#{sceneCode},
+					cmw_transstarttime=#{transStartTime},
+					cmw_transendtime=#{transEndTime},
+					cmw_branchid=#{branchId},
+					cmw_legalcode=#{legalCode},
+					cmw_tellerno=#{tellerNo},
+					cmw_autellerno=#{autellerNo},
+					cmw_transtt=#{transtt},
+					cmw_batchno=#{batchNo},
+					cmw_returncode=#{returnCode},
+					cmw_returnmsg=#{returnMsg}
+	            where cmw_gblflowseq=#{gblflowSeq}
+         ]]> 
+	</update>
+	
+	<!-- 根据流水号更新主流水表业务状态 -->
+    <update id="updateCmamServiceFlowForState" parameterType="java.util.HashMap">
+		<![CDATA[
+			update cma_mserviceflow
+				set 
+					cmw_transtt=#{transtt},
+					cmw_returncode=#{returnCode},
+					cmw_returnmsg=#{returnMsg}
+				where cmw_gblflowseq=#{gblflowSeq}
+		 ]]>
+	</update>
+	
+	<!-- 根据流水号查询主流水表记录-->
+	<select id="queryCmamServiceFlowByOne" resultMap="cmamServiceFlowResult">
+       select 
+       <include refid="cma_cmamServiceFlow_param"/>
+       from cma_mserviceflow 
+       where cmw_gblflowseq=#{gblflowSeq}
+    </select>
+   
+   <!-- 根据流水号更新主流水表业务状态 -->
+    <update id="updateCmamServiceFlowForStateAndBatchNo" parameterType="java.util.HashMap">
+		update cma_mserviceflow
+			set cmw_gblflowseq=#{gblflowSeq}
+		<if test="transtt!=null and transtt!=''">
+			,cmw_transtt=#{transtt}
+		</if>
+		<if test="batchNo!=null and batchNo!=''">
+			,cmw_batchno=#{batchNo}
+		</if>
+		<if test="returnMsg!=null and returnMsg!=''">
+			,cmw_returnmsg=#{returnMsg}
+		</if>
+		where cmw_gblflowseq=#{gblflowSeq}
+	</update>
+	
+	<!-- 根据批次号查询全局流水号 -->
+    <select id="queryGblFlowSeqByBatchNo" resultMap="cmamServiceFlowResult" parameterType="java.util.HashMap">
+		<![CDATA[ 
+			select cmw_gblflowseq
+				from cma_mserviceflow
+				    where cmw_batchno=#{batchNo}
+		]]>
+	</select>
+</mapper>

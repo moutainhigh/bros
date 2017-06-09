@@ -1,0 +1,31 @@
+<div class="financial-trade-item">
+    <div class="financial-trade">
+        <table rules="rows">
+            <thead>
+                <tr>
+                    <th width="10%" >订单名称</th>
+                    <th width="15%">订单数量</th>
+                    <th width="15%">订单金额</th>
+                    <th width="10%">订单状态</th>
+                    <th width="15%">订单日期</th>
+                    <th width="20%">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in list" ng-if="list">
+                    <td ng-bind="item.orderTypeName"></td>
+                    <td ng-bind="item.totalOrderItemsQuantity|number"></td>
+                    <td ng-bind="item.grandTotalMap.grandTotal|currency:'¥'"></td>
+                    <td ng-bind="item.statusName"></td>
+                    <td ng-bind="item.orderDate"></td>
+                    <td><button type="button" class="btn btn-default" ng-click="vm.showDetailInfo(item.partyId,item.orderId);">
+                    <i class="fa fa-fw fa-newspaper-o text-light-blue"></i> 详情</button>
+                    </td>
+                </tr>
+                <tr ng-if="list.length==0">
+                    <td colspan="4" style="text-align: center">暂无相关记录</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

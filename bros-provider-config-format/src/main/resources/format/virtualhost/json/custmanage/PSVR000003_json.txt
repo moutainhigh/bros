@@ -1,0 +1,64 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+    "accountName": "张三",
+    "totalNo": 2,
+    "accountDetailList": [
+        {
+            "remarkCode": "001",
+            "remark": "汇兑",
+            "tellerCode": "00427",
+            "transBranchNo": "9999",
+            "transferFlowNo": "3445665775",
+            "loanFlag": "D-借",
+            "debitamt": "100.00",
+            "currency": "人民币",
+            "country": "中国",
+            "transDate": "20140303",
+            "balance": "5455.00",
+            "transTime": "12:23:11",
+            "channel": "001",
+            "creditamt": "0.00"
+        },
+        {
+            "remarkCode": "001",
+            "remark": "汇兑",
+            "tellerCode": "00427",
+            "transBranchNo": "9999",
+            "transferFlowNo": "3445665775",
+            "loanFlag": "C-贷",
+            "debitamt": "0.00",
+            "currency": "人民币",
+            "country": "中国",
+            "transDate": "20140303",
+            "balance": "5455.00",
+            "transTime": "12:23:11",
+            "channel": "001",
+            "creditamt": "100.00"
+        }
+    ],
+    "totalPage": 1
+}
+
+
+

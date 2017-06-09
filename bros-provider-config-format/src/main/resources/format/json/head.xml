@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SendFmt">
+			<xmlTag	tagName="ReqSvcHeader" dataName="ReqSvcHeader">
+				<xmlField tagName="channelDate" dataName="channelDate"/>
+				<xmlField tagName="tranDate" dataName="tranDate"/>
+				<xmlField tagName="acctDate" dataName="acctDate"/>
+				<xmlField tagName="tranTime" dataName="tranTime"/>
+				<xmlField tagName="tranTellerNo" dataName="tranTellerNo"/><!-- 交易柜员 -->
+				<xmlField tagName="tranSeqNo" dataName="backGlobalSeqNo"/><!-- 40位接力流水号 -->
+				<xmlField tagName="consumerId" dataName="backSourceConsumerId"/><!-- 调用方系统id -->
+				<xmlField tagName="globalSeqNo" dataName="globalSeqNo"/><!-- 30位全局流水号 -->
+				<xmlField tagName="sourceSysId" dataName="consumerId"/><!-- 源发起系统ID -->
+				<xmlField tagName="branchId" dataName="branchId"/><!-- 机构代码 -->
+				<xmlField tagName="terminalCode" dataName="terminalCode"/>
+				<xmlField tagName="cityCode" dataName="cityCode"/>
+				<xmlField tagName="authrTellerNo" dataName="authrTellerNo"/>
+				<xmlField tagName="reviewAuthrTellerNo" dataName="reviewAuthrTellerNo"/>
+				<xmlField tagName="authrTellerSeqNo" dataName="authrTellerSeqNo"/>
+				<xmlField tagName="authrPwd" dataName="authrPwd"/>
+				<xmlField tagName="userId" dataName="userId"/>
+				<xmlField tagName="orgId" dataName="orgId"/>
+				<xmlField tagName="extendContent" dataName="extendContent"/>
+				<xmlField tagName="tranCode" dataName="backTradeCode"/><!-- 交易吗 -->
+				<xmlField tagName="sceneCode" dataName="sceneCode"/><!-- 场景编码 -->
+				<xmlField tagName="channel" dataName="backConsumerCode"/><!-- 渠道编码 -->
+			</xmlTag>
+	</fmtDef>
+	<fmtDef id="RecFmt">
+			<xmlTag tagName="RspSvcHeader" dataName="RspSvcHeader">
+				<xmlField tagName="tranDate"  dataName="TranDate"/>
+				<xmlField tagName="returnCode"  dataName="ReturnCode"/>
+				<xmlField tagName="backendSeqNo"  dataName="BackendSeqNo"/>
+				<xmlField tagName="tranTime"  dataName="TranTime"/>
+				<xmlList tagName="SubSvcRetInfo" dataName="SubSvcRetInfo">
+					<xmlTag>
+				       <xmlField tagName="SubSvcSysId"  dataName="SubSvcSysId"/>
+					   <xmlField tagName="SubSvcRetCode"  dataName="SubSvcRetCode"/>
+					   <xmlField tagName="SubSvcRetMsg"  dataName="SubSvcRetMsg"/>
+					   <xmlField tagName="RsrvContent"  dataName="RsrvContent"/>
+					</xmlTag>
+				</xmlList>
+				<xmlField tagName="returnMsg"  dataName="ReturnMsg"/>
+				<xmlField tagName="backendSysId"  dataName="BackendSysId"/>
+			</xmlTag>
+	</fmtDef>
+</formats>

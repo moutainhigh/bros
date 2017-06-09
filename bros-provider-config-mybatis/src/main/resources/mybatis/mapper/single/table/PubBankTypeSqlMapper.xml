@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.pubbanktype">
+	<sql id="pub_banktype_par">
+		pbe_banktype,
+		pbe_bankname
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="pubBankTypeResult">
+    	<result property="banktype" column="pbe_banktype"/>
+    	<result property="bankname" column="pbe_bankname"/>
+    </resultMap>
+    
+    <select id="queryPubBankType" resultMap="pubBankTypeResult">
+       select
+       	<include refid="pub_banktype_par"/> 
+       from pub_banktype
+    </select>
+</mapper>

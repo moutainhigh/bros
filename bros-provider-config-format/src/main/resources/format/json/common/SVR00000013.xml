@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000013SendFmt">
+	     <xmlRel rel="SendFmt"/>
+		 <xmlField tagName="partyId" dataName="partyId"/><!--客户号  -->
+	</fmtDef>
+	<fmtDef id="SVR00000013RecFmt">
+         <xmlRel rel="RecFmt"/>
+         	<xmlTag tagName="personOverview" dataName="personOverview"><!-- 个人客户服务总览	 -->
+	          <xmlList tagName="personSummaryInfo" dataName="personSummaryInfo"><!--客户基本信息 -->
+	               <xmlTag>
+               		   <xmlField tagName="partyId" dataName="partyId"/><!--客户号 -->
+		               <xmlField tagName="customerName" dataName="customerName"/><!--客户名称-->
+		               <xmlField tagName="contactCertificateTypeId" dataName="contactCertificateTypeId"/><!--证件类型(主) -->
+		               <xmlField tagName="contactCertificateNo" dataName="contactCertificateNo"/><!--证件号码(主)-->
+		               <xmlField tagName="mobilePhone" dataName="mobilePhone"/><!--手机号码 -->
+		               <xmlField tagName="postalAddress" dataName="postalAddress"/><!--通讯地址-->
+	               </xmlTag>
+    		</xmlList>
+    		<xmlList tagName="personPropertyInfo" dataName="personPropertyInfo"><!--客户资产信息List -->
+	               <xmlTag>
+               		   <xmlField tagName="depositProperty" dataName="depositProperty"/><!--存款资产 -->
+		               <xmlField tagName="loanProperty" dataName="loanProperty"/><!--贷款资产-->
+		               <xmlField tagName="investProperty" dataName="investProperty"/><!--投资资产 -->
+		               <xmlField tagName="signProductCount" dataName="signProductCount"/><!--签约产品汇总-->
+		               <xmlField tagName="creditCardCount" dataName="creditCardCount"/><!--信用卡汇总 -->
+	               </xmlTag>
+    		</xmlList>
+    		<xmlList tagName="personRemindInfo" dataName="personRemindInfo"><!--客户提醒信息List -->
+	               <xmlTag>
+               		   <xmlField tagName="remindTxt" dataName="remindTxt"/><!--提醒内容 -->
+	               </xmlTag>
+    		</xmlList>
+    		<xmlList tagName="familyMemberInfo" dataName="familyMemberInfo"><!--家庭成员信息List -->
+	               <xmlTag>
+               		   <xmlField tagName="partyRelationShipTypeId" dataName="partyRelationShipTypeId"/><!--成员关系 -->
+		               <xmlField tagName="partyId" dataName="partyId"/><!--成员客户号-->
+		               <xmlField tagName="custName" dataName="custName"/><!--成员姓名 -->
+		               <xmlField tagName="contactCertificateTypeId" dataName="contactCertificateTypeId"/><!--成员证件类型-->
+		               <xmlField tagName="contactCertificateNo" dataName="contactCertificateNo"/><!--成员证件号码 -->
+		               <xmlField tagName="authCountry" dataName="authCountry"/><!--成员发证国家-->
+		               <xmlField tagName="birthDate" dataName="birthDate"/><!--成员出生日期 -->
+		               <xmlField tagName="gender" dataName="gender"/><!--成员性别-->
+		               <xmlField tagName="flag" dataName="flag"/><!--成员职业 -->
+		               <xmlField tagName="relatedPartyId" dataName="relatedPartyId"/><!--成员关联对公客户号-->
+		               <xmlField tagName="partyGroupName" dataName="partyGroupName"/><!--成员单位名称 -->
+		               <xmlField tagName="partyAddr" dataName="partyAddr"/><!--成员单位地址-->
+		               <xmlField tagName="partyPostal" dataName="partyPostal"/><!--成员单位邮编 -->
+		               <xmlField tagName="jobTitle" dataName="jobTitle"/><!--成员职称-->
+		               <xmlField tagName="post" dataName="post"/><!--成员职务 -->
+		               <xmlField tagName="contactNumber" dataName="contactNumber"/><!--成员单位电话-->
+		               <xmlField tagName="monthIncome" dataName="monthIncome"/><!--成员月收入 -->
+		               <xmlField tagName="degree" dataName="degree"/><!--学历-->
+		               <xmlField tagName="isOurBankCustomer" dataName="isOurBankCustomer"/><!--是否我行客户-->
+	               </xmlTag>
+    		</xmlList>
+    		<xmlList tagName="relativePersonInfo" dataName="relativePersonInfo"><!--社会关系信息List -->
+	               <xmlTag>
+               		   <xmlField tagName="partyRelationShipTypeId" dataName="partyRelationShipTypeId"/><!--社会关系 -->
+		               <xmlField tagName="partyId" dataName="partyId"/><!--关系人客户号-->
+		               <xmlField tagName="contactCertificateTypeId" dataName="contactCertificateTypeId"/><!--关系人证件类型 -->
+		               <xmlField tagName="contactCertificateNo" dataName="contactCertificateNo"/><!--关系人证件号码-->
+		               <xmlField tagName="lastName" dataName="lastName"/><!--关系人姓名 -->
+		               <xmlField tagName="birthDate" dataName="birthDate"/><!--关系人出生日期-->
+		               <xmlField tagName="gender" dataName="gender"/><!--关系人性别 -->
+		               <xmlField tagName="job" dataName="job"/><!--关系人职业-->
+		               <xmlField tagName="partyName" dataName="partyName"/><!--关系人单位名称 -->
+		               <xmlField tagName="partyAddr" dataName="partyAddr"/><!--关系人单位地址-->
+		               <xmlField tagName="partyPhone" dataName="partyPhone"/><!--关系人单位电话 -->
+		               <xmlField tagName="partyType" dataName="partyType"/><!--关系人单位性质-->
+		               <xmlField tagName="jobTitle" dataName="jobTitle"/><!--关系人职称 -->
+		               <xmlField tagName="post" dataName="post"/><!--关系人职务-->
+		               <xmlField tagName="contactNumber" dataName="contactNumber"/><!--关系人私人电话 -->
+		               <xmlField tagName="monthIncome" dataName="monthIncome"/><!--关系人月收入-->
+		               <xmlField tagName="qualify" dataName="qualify"/><!--学历 -->
+		               <xmlField tagName="isOurBankCustomer" dataName="isOurBankCustomer"/><!--是否我行客户-->
+	               </xmlTag>
+    		</xmlList>
+    	</xmlTag>
+	</fmtDef>
+</formats>

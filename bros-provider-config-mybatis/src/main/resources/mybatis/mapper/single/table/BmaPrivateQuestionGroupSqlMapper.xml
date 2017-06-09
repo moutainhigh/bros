@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.bmaprivatequestiongroup">
+	
+	<resultMap id="bmsPrivateQuestionGroupResultMap" type="java.util.HashMap">
+		<result property="pqGroupId" column="BPQG_PQGROUPID"/>
+		<result property="pqGroupName" column="BPQG_PQGROUPNAME"/>
+	</resultMap>
+	
+	<sql id="bma_private_question_group_param">
+	    BPQG_PQGROUPID,
+		BPQG_PQGROUPNAME
+    </sql>
+    
+	<!-- 查询个人私密问题分组列表 -->
+	<select id="queryBmaPrivateQuestionGroupList" resultMap="bmsPrivateQuestionGroupResultMap">		  
+	      select <include refid="bma_private_question_group_param"/>
+			 from BMA_PRIVATE_QUESTION_GROUP
+	</select>
+
+</mapper>

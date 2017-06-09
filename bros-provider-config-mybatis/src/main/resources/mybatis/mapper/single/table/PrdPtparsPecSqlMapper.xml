@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.prdptparspec">
+	<sql id="prd_prdptparspec_param">
+		ppc_prdtypecode,
+		ppc_property,
+		ppc_propertyname,
+		ppc_defaultval
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="PrdPtparsPecResult">
+    	<result property="prdTypeCode" column="ppc_prdtypecode"/><!-- 产品分类编号 -->
+    	<result property="property" column="ppc_property"/><!-- 产品属性编号 -->
+    	<result property="propertyName" column="ppc_propertyname"/><!-- 产品属性名称 -->
+    	<result property="defaultVal" column="ppc_defaultval" javaType="String" jdbcType="VARBINARY" typeHandler="bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler"/><!-- 默认规格属性值 -->
+    	<result property="note1" column="note1" javaType="String" jdbcType="VARBINARY" typeHandler="bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler"/><!-- 默认属性描述 -->
+    	<result property="note2" column="note2"/><!-- 预留字段 -->
+    </resultMap>
+      <!-- 插入实例属性表数据定义 -->
+    <insert id="insertPrdPtparsPec" parameterType="java.util.HashMap">
+       insert into prd_ptparspec(
+    		<include refid="prd_prdptparspec_param"/>
+    	)values<foreach collection="list" item="item" index="index" separator="," >
+    	(#{item.prdTypeCode},
+		#{item.property},
+		#{item.propertyName},
+		#{item.defaultVal,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler}
+		)
+		</foreach>
+    </insert>
+     <!-- 删除规格属性表所有数据 -->
+    <delete id="deletePrdPtparsPecByprdTypeCode" parameterType="java.util.HashMap">
+       delete from prd_ptparspec where ppc_prdtypecode=#{prdTypeCode}
+    </delete>
+     <!-- 查询规格属性表所有数据 -->
+    <select id="queryPrdPtparsPecByprdTypeCode" resultMap="PrdPtparsPecResult">
+       select 
+       <include refid="prd_prdptparspec_param"/>
+		from prd_ptparspec where ppc_prdtypecode=#{prdTypeCode}
+    </select>
+     <!-- 查询规格属性表所有数据 -->
+    <select id="queryPrdPtparsPecByOne" resultMap="PrdPtparsPecResult">
+       select 
+       <include refid="prd_prdptparspec_param"/>
+		from prd_ptparspec where ppc_prdtypecode=#{prdTypeCode} 
+		and  ppc_property=#{property} 
+    </select>
+    <!-- 查询记录数 -->
+	<select id="queryPrdPtparsPecNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from prd_ptparspec
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="prdTypeCode!=null and prdTypeCode!=''">
+ 			and ppc_prdtypecode=#{prdTypeCode}
+		</if>
+		<if test="parentCode!=null and parentCode!=''">
+ 			 and ppc_property=#{property}
+		</if>
+	</select>
+</mapper>

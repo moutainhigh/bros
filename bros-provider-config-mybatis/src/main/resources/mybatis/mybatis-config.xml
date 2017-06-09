@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+	    <!-- 配置日志打印查询数据库的sql语句、变量和查询结果，方便定位问题 -->
+		<setting name="logImpl" value="STDOUT_LOGGING"/>
+	</settings>
+	<typeHandlers>
+        <typeHandler javaType="String" jdbcType="VARBINARY" handler="bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler"/>
+        <typeHandler javaType="Object" jdbcType="DECIMAL" handler="bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler"/>
+    </typeHandlers>
+	
+	<mappers>
+		<!-- 后台通信服务配置 -->
+		<mapper resource="mybatis/mapper/relational/table/PsvrCommConfigSqlMapper.xml" /><!-- 后台通信服务配置信息sql -->
+		
+		<!--初始化-->
+		<mapper resource="mybatis/mapper/single/table/PubAppParSqlMapper.xml" /><!-- 转义字典 -->
+		<mapper resource="mybatis/mapper/single/table/PubErrCodeSqlMapper.xml" /><!-- 错误码 -->
+		<mapper resource="mybatis/mapper/single/table/PubSystemParSqlMapper.xml" /><!-- 系统几班配置信息 -->
+		<!--日志记录-->
+		<mapper resource="mybatis/mapper/single/table/PubLogBackDetailSqlMapper.xml" /><!-- 调用BIP服务日志详细 -->
+		<mapper resource="mybatis/mapper/single/table/PubLogBackSysSqlMapper.xml" /><!-- 调用BIP服务日志概要 -->
+		<mapper resource="mybatis/mapper/single/table/PubLogFrontDetailSqlMapper.xml" /><!-- 服务提供方服务调用日志详细 -->
+		<mapper resource="mybatis/mapper/single/table/PubLogFrontSysSqlMapper.xml" /><!-- 服务提供方服务调用日志概要 -->
+		<!--业务流水记录  -->
+		<mapper resource="mybatis/mapper/single/table/PubBsnFlowCfgSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/BmaCserviceFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/BmaDserviceFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/BmaMserviceFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/CmaCserviceFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/CmaMserviceFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/CmaDserviceFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TprBatchTrancbFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TprBatchTrandbFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TprBatchTranmbFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TprTrancbFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TprTrandbFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TprTranmbFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TtpBatchTrancbFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TtpBatchTrandbFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TtpBatchTranmbFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TtpTrancbFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TtpTrandbFlowSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TtpTranmbFlowSqlMapper.xml" />
+		
+		<!--<mapper resource="mybatis/mapper/relational/table/TtpTranmbFlow-TtpTrandbFlowSqlMapper.xml" />-->
+
+		<!--spring redis缓存查询-->
+		<mapper resource="mybatis/mapper/single/table/PubCtySqlMapper.xml" /><!-- 城市信息表 -->
+		<mapper resource="mybatis/mapper/single/table/PubPmsBankNoSqlMapper.xml" /><!-- 大小额联行号 -->
+		<mapper resource="mybatis/mapper/single/table/pubProvinceSqlMapper.xml" /><!-- 省信息表 -->
+		<mapper resource="mybatis/mapper/single/table/PubUnionBankNoSqlMapper.xml" /><!-- 网银互联联行号信息表 -->
+		
+		<mapper resource="mybatis/mapper/single/table/PubBankTypeSqlMapper.xml" /><!-- 行别信息表 -->
+		<!--限额-->
+		<mapper resource="mybatis/mapper/single/table/BmaBankLimitSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/BmaCstLimitSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/BmaAccLandLimitSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/BmaAccLimitSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/BmaCstLandLimitSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/BmaLandLimitSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TprCstLimitSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TprCstLimitTotalSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TtpAccLimitSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TtpAccLimitTotalSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TtpCstLimitSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TtpCstLimitTotalSqlMapper.xml"/>
+		<!-- 授权 -->
+		<mapper resource="mybatis/mapper/single/table/TtpAuthModelSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TtpAuthModelRuleGpSqlMapper.xml"/>
+        <mapper resource="mybatis/mapper/single/table/BmaAuthModelSqlMapper.xml"/> 
+        <mapper resource="mybatis/mapper/single/table/BmaAuthModelRuleGpSqlMapper.xml"/> 
+        <mapper resource="mybatis/mapper/single/table/BmaBsnAuthSqlMapper.xml"/>  
+        <mapper resource="mybatis/mapper/single/table/BmaActRoleRefSqlMapper.xml"/> 
+		<mapper resource="mybatis/mapper/single/table/TtpFuncAuthSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/BmaBsndef-TtpFuncAuthSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/BmaMenuDef-BmaBsnDef-BmaMenuBsnDefRef-TtpFuncAuthSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/BmaMenuDef-BmaBsnDef-BmaMenuBsnDefRef-BmaBsnAuthSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/TtpAuthModelRulegp-TtpFuncAuthSqlMapper.xml"/>
+		
+		
+		<!-- 渠道客户信息管理 -->
+		<mapper resource="mybatis/mapper/single/table/TprCstCstinfSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/TprCstCstinf-TprCstChannelSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/TprCstInfo-TprCstChannelinfSqlMapper.xml"/>
+		
+		<!-- 机构管理 -->
+		<mapper resource="mybatis/mapper/single/table/BranchManageSqlMapper.xml"/>
+		<!-- 柜员管理 -->
+		<mapper resource="mybatis/mapper/single/table/BmaTellerSqlMapper.xml"/>
+		<!-- 柜员角色管理 -->
+		<mapper resource="mybatis/mapper/single/table/BmaTellerRoleSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/BmaTellerRoleRelSqlMapper.xml"/>
+		<!-- 菜单管理 -->
+		<mapper resource="mybatis/mapper/single/table/BmaMenudefSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/BmaMenuRoleRelSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/BmaMenuProSerRelSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/BmaBsndefSqlMapper.xml"/>
+		
+		<!--广告栏  -->
+		<mapper resource="mybatis/mapper/single/table/BmaBannerinfoSqlMapper.xml"/>
+		<!-- 法人管理 -->
+		<mapper resource="mybatis/mapper/single/table/CmaLegalSqlMapper.xml"/>
+		<!-- 渠道系统分组 -->
+		<mapper resource="mybatis/mapper/single/table/PrdChlSysTemSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/PubChannelSqlMapper.xml" />
+		
+		<!-- 渠道系统 -->
+		<mapper resource="mybatis/mapper/single/table/PrdChlSysSqlMapper.xml" />
+		<!-- 商城管理 -->
+		<mapper resource="mybatis/mapper/single/table/PrdMallInfoSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/PrdMallStyleSqlMapper.xml" />
+		<!-- 货架管理 -->
+		<mapper resource="mybatis/mapper/single/table/PrdShelfInfoSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/PrdShelfGoodsSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/relational/table/PrdChlSys-PrdMallInfo-PrdShelfDefSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/relational/table/PrdShelfGoods-BmaMenuProSerRel-BmaMenuDefSqlMapper.xml" />
+				
+		<!-- 角色表 -->
+		<mapper resource="mybatis/mapper/single/table/TtpRoleSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TtpRoleBsnRelSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/BmaBsndef-TtpBsnTypeRelTemplateSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/TtpRole-TtpRoleBsnRel-TtpBsndefSqlMapper.xml"/>
+		
+		<!-- 操作员 -->
+		<mapper resource="mybatis/mapper/single/table/TtpUserInfSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TtpUserInfChannelSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TtpUserAccSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TtpUserRoleRelSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/TtpUserInf-TtpUserInfChannelSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/TtpRole-TtpUerRoleRelSqlMapper.xml" />
+				
+		
+		<!-- 系统角色 -->
+		<mapper resource="mybatis/mapper/single/table/BmaRoleSqlMapper.xml"/>
+		
+		<!-- 产品管理 -->
+		<mapper resource="mybatis/mapper/single/table/PrdProductTypeSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/PrdPtparInstSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/PrdPtparsPecSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/PrdAttriParamSpecSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/PrdProductCateSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/PrdProductSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/PrdPtServiceSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/PrdProduct-PrdAttriParamSpecSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/relational/table/PrdPtparspec-PrdAttriParamSpecSqlMapper.xml" />
+		<!-- 工作流 -->
+		<mapper resource="mybatis/mapper/activiti/inside/table/WorkFlowRoleRel.xml"/>
+		<mapper resource="mybatis/mapper/activiti/inside/table/WorkFlowTradeParam.xml"/>
+		<mapper resource="mybatis/mapper/activiti/inside/table/WorkFlowActRuTask.xml" />
+		<mapper resource="mybatis/mapper/activiti/inside/table/WorkFlowInnerAuthSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/activiti/inside/table/WorkFlowInnerUserSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/activiti/inside/table/WorkFlowTellerRoleBranchSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/activiti/inside/table/WorkFlowBsnDefSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/activiti/outside/table/WorkFlowOutSideAuthSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/activiti/outside/table/WorkFlowOutSideUserSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/activiti/outside/table/WorkFlowTtpUserInfSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/activiti/outside/table/WorkFlowTtpUserRoleRelSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/activiti/outside/table/WorkFlowTtpRoleSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/activiti/table/ActHisComment.xml" />
+		<mapper resource="mybatis/mapper/activiti/table/ActHisProcInst.xml" />
+		<mapper resource="mybatis/mapper/activiti/table/ActRuIdentityLink.xml" />
+		<mapper resource="mybatis/mapper/activiti/table/ActRuTask.xml" />
+		<!-- 客户服务 -->
+		<mapper resource="mybatis/mapper/single/table/CstCstleaveWordsSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/PubBankNoticeSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/PubNoticeSqlMapper.xml" />
+		<!-- 收款人名册 -->
+		<mapper resource="mybatis/mapper/relational/table/TprPayBook-SubPayBookSqlMapper.xml"/>
+		<!-- 账户信息 -->
+		<mapper resource="mybatis/mapper/relational/table/TprAccinf-TprAccinfChannelSqlMapper.xml"/>
+		<!-- 转账功能 -->
+		<mapper resource="mybatis/mapper/single/table/TprAccFuncSqlMapper.xml"/>
+		<!-- 默认账户 -->
+		<mapper resource="mybatis/mapper/single/table/TprAccinfDefaultSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/relational/table/TprAccFunc-TprFunclassBsnRelSqlMapper.xml"/>
+		<mapper resource="mybatis/mapper/single/table/TprFunclassBsnRelSqlMapper.xml"/>
+		
+		
+		<!-- 个人客户信息 -->
+		<mapper resource="mybatis/mapper/single/table/TprCstInfoSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TprCstChannelInfSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TprCstLogonCtrlSqlMapper.xml" />
+		
+		<!-- 个人账户信息 -->
+		<mapper resource="mybatis/mapper/single/table/TprAccChannelInfSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TprAccInfoSqlMapper.xml" />
+		
+		<!-- 个人私密问题 -->
+		<mapper resource="mybatis/mapper/single/table/BmaPrivateQuestionGroupSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TprPrivateQuestionSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/single/table/TprCstPrivateQuestionSqlMapper.xml" />
+		<!-- 大额审批落地信息 -->
+		<mapper resource="mybatis/mapper/single/table/TprApproveSqlMapper.xml" />
+		<!-- 电子回单 -->
+		<mapper resource="mybatis/mapper/single/table/TprEletoSingleSqlMapper.xml" />
+
+		<!-- 企业客户信息 --> 
+		<mapper resource="mybatis/mapper/single/table/TtpCstInfSqlMapper.xml" />
+		<mapper resource="mybatis/mapper/relational/table/TtpCstInf-TtpCstInfChannelSqlMapper.xml"/>
+	</mappers>
+</configuration>

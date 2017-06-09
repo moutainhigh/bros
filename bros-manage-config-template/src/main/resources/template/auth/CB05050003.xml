@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+ 	 <xmlField dataName="bmfChannel" label="系统标识" type="text" template="text001" title="角色分配菜单" categroy="bmfChannel"/>
+	 <xmlField dataName="bmrlRoleId" label="角色编号" type="text" template="text001" title="角色分配菜单"/>
+	 <xmlTag title="角色分配菜单" type="tableTree" template="tabletree002">
+		<xmlTag type="thead">
+			<xmlField label="菜单编号"/>
+			<xmlField label="菜单名称"/>
+			<xmlField label="单层级"/>
+			<xmlField label="父菜单ID"/>
+			<xmlField label="状态"/>
+			<xmlField label="菜单顺序号"/>
+			<xmlField label="系统标识"/>
+		</xmlTag>
+		<xmlTag type="tbody">
+			<xmlList dataName="resultList"  tagName="allData">
+				<xmlTag>
+					<xmlField dataName="serial"/>
+					<xmlField dataName="childrenId"/>
+					<xmlField dataName="parentId"/>
+					<xmlField dataName="bmfCode"/>
+					<xmlField dataName="bmfName"/>
+					<xmlField dataName="bmfLevel" categroy="input_bmfLevel"/>
+					<xmlField dataName="bmfParentid"/>
+					<xmlField dataName="bmfStt" categroy="bmfStt"/>
+					<xmlField dataName="bmfSeqno"/>
+					<xmlField dataName="bmfChannel" categroy="bmfChannel"/>
+				</xmlTag>
+			</xmlList>
+			<xmlList dataName="selectData" tagName="selectData"/>
+		</xmlTag>	
+	 </xmlTag>
+</formats>

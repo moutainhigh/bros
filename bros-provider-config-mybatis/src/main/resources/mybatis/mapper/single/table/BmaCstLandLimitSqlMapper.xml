@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.bmacstlandlimit">
+	<sql id="bma_cst_land_limit_param">
+		BCLL_CSTNO,
+		BCLL_LEGALID,
+		BCLL_CHANNEL,
+		BCLL_SINGLEMAX
+	</sql>
+    <resultMap type="java.util.HashMap" id="bmaCstLandLimitResultMap">
+    	<result property="cstNo" column="BCLL_CSTNO"/>
+    	<result property="legalId" column="BCLL_LEGALID"/>
+    	<result property="channel" column="BCLL_CHANNEL"/>
+    	<result property="singleMax" column="BCLL_SINGLEMAX" javaType="java.lang.String" jdbcType="DECIMAL"/>
+    </resultMap>
+    
+      <!--查询银行自定义客户落地限额信息 -->
+      <select id="queryBmaCstLandLimit" resultMap="bmaCstLandLimitResultMap" parameterType="java.util.HashMap">
+      	 select
+       	<include refid="bma_cst_land_limit_param"/>
+      	 		from BMA_CST_LAND_LIMIT
+	      	 	<![CDATA[ 
+	     		 where  BCLL_CHANNEL = #{channel}
+	       		 and    BCLL_LEGALID = #{legalId}
+	       		 and    BCLL_CSTNO  =  #{cstNo}
+       		]]> 
+   	 </select>
+   	 
+   	    <!--查询银行自定义客户落地限额信息条数 -->
+      <select id="queryBmaCstLandLimitTotalNum" resultType="int" parameterType="java.util.HashMap">
+      	<![CDATA[ 
+      	 select count(1)
+      	 		from BMA_CST_LAND_LIMIT
+	     		 where  BCLL_CHANNEL = #{channel}
+	       		 and    BCLL_LEGALID = #{legalId}
+	       		 and    BCLL_CSTNO  =  #{cstNo}
+       		]]> 
+   	 </select>
+   	 
+     <!-- 更新银行客户落地限额信息 -->
+    <update id="updateBmaCstLandlimit" parameterType="java.util.HashMap">
+      	update BMA_CST_LAND_LIMIT 
+      	<![CDATA[ 
+	       	 set    BCLL_SINGLEMAX=#{singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+			 where  BCLL_CHANNEL = #{channel}
+       		 and    BCLL_LEGALID = #{legalId}
+       		 and    BCLL_CSTNO  =  #{cstNo}
+       		]]>  
+    </update>
+     <!-- 设置银行客户落地限额 -->
+    <insert id="insertBmaCstLandlimit" parameterType="java.util.HashMap">
+   		 insert into BMA_CST_LAND_LIMIT ( <include refid="bma_cst_land_limit_param"/>) 
+	    <![CDATA[ 
+		    values(
+		   		 #{cstNo},
+		   		 #{legalId},
+		   		 #{channel},
+		         #{singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+		       )
+	    ]]>  
+    </insert>
+    
+     <!-- 批量设置客户限额 -->
+    <insert id="insertBatchBmaCstLandLimit" parameterType="java.util.HashMap">
+    	insert into BMA_CST_LAND_LIMIT 
+    		( <include refid="bma_cst_land_limit_param"/>) 
+    		values
+			      <foreach collection="list" item="item" index="index" separator="," >
+				        (#{item.cstNo},#{item.legalId},#{item.channel},
+				        #{item.singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler} )
+	   			 </foreach>  
+    </insert>
+    
+    <!-- 批量更新客户自定义限额 -->
+    <update id="updateBatchBmaCstLandLimit" parameterType="java.util.HashMap">
+	        <foreach collection="list" item="item" index="index" separator=";" >
+	         update BMA_CST_LAND_LIMIT 
+	          	set  BCLL_SINGLEMAX = #{item.singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+		       where BCLL_CHANNEL = #{item.channel} 
+		        and  BCLL_LEGALID = #{item.legalId}
+		        and  BCLL_CSTNO  =  #{item.cstNo}
+			 </foreach>  
+    </update>
+    <!--根据删除客户落地限额-->
+	<delete id="deleteBmaCstLandLimit" parameterType="java.util.HashMap">
+		<![CDATA[
+			DELETE FROM BMA_CST_LAND_LIMIT 
+			  WHERE BCLL_CSTNO=#{cstNo}
+	       	    and  BCLL_LEGALID = #{legalId}
+	       	    and  BCLL_CHANNEL = #{channel}
+		]]>    
+	</delete>
+</mapper>

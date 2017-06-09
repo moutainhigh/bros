@@ -1,0 +1,85 @@
+<div class="banner-transfer"></div>
+<div class="main-box">
+        <div class="product-list-two">
+            <div class="nav-title-bar">
+                <div class="title">我的贷款</div>
+                <div loanhead flow="2"></div>
+            </div>
+            <div class="trading-one-box">
+                <div class="ebak-table-list">
+                    <div class="ebak-table-title">贷款信息</div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped table-detail">
+                        <tbody>
+                            <tr>
+                                <th class="right">贷款编号：</th>
+                                <td ng-bind="vm.alldata.loannum"></td>
+                                <th class="right" >贷款品种：</th>
+                                <td ng-bind="vm.alldata.loankind"></td>
+                            </tr>
+                            <tr>
+                                <th class="right">贷款本金：</th>
+                                <td ng-bind="vm.alldata.loanamount|currency:'¥'">
+                                </td>
+                                <th class="right">贷款余额：</th>
+                                <td ng-bind="vm.alldata.loanblance|currency:'¥'"></td>
+                            </tr>
+                            <tr>
+                                <th class="right">起息日：</th>
+                                <td ng-bind="vm.alldata.loanstart|dateFormat:{symbol:'yyyy-mm-dd'}"></td>
+                                <th class="right">到期日：</th>
+                                <td ng-bind="vm.alldata.loanend|dateFormat:{symbol:'yyyy-mm-dd'}"></td>
+                            </tr>
+                            <tr>
+                                <th class="right">执行利率(年)：</th>
+                                <td ng-bind="vm.alldata.nowrate"></td>
+                                <th class="right">罚息执行利率(年)：</th>
+                                <td ng-bind="vm.alldata.defaultrate"></td>
+                            </tr>
+                            <tr>
+                                <th class="right">贷款银行：</th>
+                                <td ng-bind="vm.alldata.loanbank"></td>
+                                <th class="right">还款方式：</th>
+                                <td ng-bind="vm.alldata.paymentway"></td>
+                            </tr>
+                            <tr>
+                                <th class="right">还款周期：</th>
+                                <td ng-bind="vm.alldata.paymentcyc"></td>
+                                <th class="right">还款日：</th>
+                                <td ng-bind="vm.alldata.paymentday"></td>
+                            </tr>
+                            <tr>
+                                <th class="right">还款账号：</th>
+                                <td ng-bind="vm.alldata.peymentacount"></td>
+                                <th class="right">贷款状态：</th>
+                                <td ng-bind="vm.alldata.loantype"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="ebak-table-title">担保信息</div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped table-detail">
+                        <tbody>
+                            <tr>
+                                <th class="right">担保方式：</th>
+                                <td ng-bind="vm.alldata.guaranteeway1">质押</td>
+                                <th class="right">担保物：</th>
+                                <td ng-bind="vm.alldata.guaranteething1">房产</td>
+                            </tr>
+                            <tr>
+                                <th class="right">担保方式：</th>
+                                <td ng-bind="vm.alldata.guaranteeway2">抵押</td>
+                                <th class="right">担保物：</th>
+                                <td ng-bind="vm.alldata.guaranteething2">房产</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 btn-box-big">
+                        <!-- 后期传页数，以便通讯拿值 -->
+                        <button type="button" class="btn btn-default" ui-sref="mayloan">关闭</button>
+
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

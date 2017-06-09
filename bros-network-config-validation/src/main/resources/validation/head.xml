@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="headMap" message="${CECO000000000}">
+		<xmlField variable="branchId" dataName="branchId" message="${CECO000000001}"/><!-- 机构号 -->
+		<xmlField variable="tranTellerNo" dataName="tranTellerNo" message="${CECO000000001}"/><!-- 柜员号 -->
+		<xmlField variable="consumerId" dataName="consumerId" message="${CECO000000001}"/><!-- 调用方系统id -->
+		<xmlField variable="channelDate" dataName="channelDate" message="${CECO000000001}"/><!-- 调用方系统日期 -->
+		<xmlField variable="channel" dataName="channel" message="${CECO000000001}"/><!-- 渠道编号 -->
+		<xmlField variable="sceneCode" dataName="sceneCode" message="${CECO000000001}"/><!-- 场景编号 -->
+		<xmlField variable="legalCode" dataName="legalCode" message="${CECO000000001}"/><!-- 法人编号 -->
+		<xmlField variable="flag" dataName="flag" message="${CECO000000001}"/><!-- 主副交易标志 -->
+		<xmlField variable="tradeType" dataName="tradeType" message="${CECO000000001}"/><!-- 交易类型 -->
+		<xmlField variable="isNeedSeq" dataName="tradeType" message="${CECO000000001}"/><!-- 是否有流水号 -->
+	</xmlTag>
+</formats>

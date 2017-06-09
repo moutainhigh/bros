@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.pubpmsbankno">
+	<sql id="pub_pmsbankno_par">
+		ppo_bankno,
+		ppo_banktype,
+		ppo_citycode,
+		ppo_bankname,
+		ppo_stt
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="pubPmsBankNoResult">
+    	<result property="bankNo" column="ppo_bankno"/>
+    	<result property="bankType" column="ppo_banktype"/>
+    	<result property="cityCode" column="ppo_citycode"/>
+    	<result property="bankName" column="ppo_bankname"/>
+    	<result property="stt" column="ppo_stt"/>
+    </resultMap>
+    
+    <select id="queryAllPubPmsBankNo" resultMap="pubPmsBankNoResult">
+       select
+       <include refid="pub_pmsbankno_par" /> 
+       from pub_pmsbankno
+    </select>
+    <select id="queryPubPmsBankNoByName" resultMap="pubPmsBankNoResult" parameterType="java.util.HashMap">
+       select 
+       <include refid="pub_pmsbankno_par" /> 
+       from pub_pmsbankno where 1=1 
+       <if test="bankName !='' and bankName != null">
+       		and ppo_bankname like '%'||#{bankName}||'%'
+       </if>
+       <if test="bankType !='' and bankType != null">
+       		and ppo_banktype = #{bankType} 
+       </if>
+       <if test="cityCode !='' and cityCode != null">
+       		and ppo_citycode = #{cityCode}
+       </if>
+    </select>
+    
+
+</mapper>

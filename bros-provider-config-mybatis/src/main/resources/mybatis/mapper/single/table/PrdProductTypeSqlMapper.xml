@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.prdproducttype">
+	<sql id="prd_prdproducttype_param">
+		ppe_prdtypecode,
+		ppe_parentcode,
+		ppe_prdtypename,
+		ppe_prdtypedesc,
+		ppe_baseprdcategoryid,
+		ppe_categoryname
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="prdProductTypeResult">
+    	<result property="prdTypeCode" column="ppe_prdtypecode"/><!-- 产品分类编号 -->
+    	<result property="parentCode" column="ppe_parentcode"/><!-- 上级产品分类编号 -->
+    	<result property="prdTypeName" column="ppe_prdtypename"/><!-- 分类名称 -->
+    	<result property="prdTypeDesc" column="ppe_prdtypedesc"/><!-- 分类描述 -->
+    	<result property="basePrdCategoryId" column="ppe_baseprdcategoryid"/><!-- 基础产品编号 -->
+    	<result property="categoryName" column="ppe_categoryname"/><!-- 基础产品名称 -->
+    	<result property="note1" column="note1"/><!-- 预留字段 -->
+    	<result property="note2" column="note2"/><!-- 预留字段 -->
+    </resultMap>
+      <!-- 插入产品分类表数据定义 -->
+    <insert id="insertPrdProductType" parameterType="java.util.HashMap">
+       insert into prd_productype(
+    		<include refid="prd_prdproducttype_param"/>
+    	)values(#{prdTypeCode},
+		#{parentCode},
+		#{prdTypeName},
+		#{prdTypeDesc},
+		#{basePrdCategoryId},
+		#{categoryName})
+    </insert>
+    <!-- 修改产品分类表信息 -->
+    <update id="updatePrdProductType" parameterType="java.util.HashMap">
+		update prd_productype
+		set ppe_prdtypename=#{prdTypeName},
+			ppe_prdtypedesc=#{prdTypeDesc},
+			ppe_baseprdcategoryid=#{basePrdCategoryId},
+			ppe_categoryname=#{categoryName}
+		 where ppe_prdtypecode=#{prdTypeCode} 
+	</update>
+	<!-- 删除产品分类表信息 -->
+    <delete id="deletePrdProductTypeByprdTypeCode" parameterType="java.util.HashMap">
+       delete from prd_productype where ppe_prdtypecode=#{prdTypeCode}
+    </delete>
+    <!-- 查询产品分类表所有数据 -->
+    <select id="queryPrdProductTypeForAll" resultMap="prdProductTypeResult">
+       select <include refid="prd_prdproducttype_param"/> from prd_productype
+    </select>
+     <!-- 查询产品分类表所有数据 -->
+    <select id="queryPrdProductTypeByParameter" resultMap="prdProductTypeResult">
+       select <include refid="prd_prdproducttype_param"/> from prd_productype where 1=1 
+		<if test="prdTypeCode!=null and prdTypeCode!=''">
+ 			 and ppe_prdtypecode=#{prdTypeCode}
+		</if>
+		<if test="parentCode!=null and parentCode!=''">
+ 			 and ppe_parentcode=#{parentCode}
+		</if>
+		<if test="prdTypeName!=null and prdTypeName!=''">
+ 			 and ppe_prdtypename=#{prdTypeName}
+		</if>
+       
+    </select>
+     <!-- 单笔查询产品分类表所有数据 -->
+    <select id="queryPrdProductTypeByOne" resultMap="prdProductTypeResult">
+       select <include refid="prd_prdproducttype_param"/> from prd_productype where 1=1 
+ 			 and ppe_prdtypecode=#{prdTypeCode}
+    </select>
+    <!-- 查询记录数 -->
+	<select id="qqueryPrdProductTypeNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from prd_productype
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="prdTypeCode!=null and prdTypeCode!=''">
+ 			 and ppe_prdtypecode=#{prdTypeCode}
+		</if>
+		<if test="parentCode!=null and parentCode!=''">
+ 			 and ppe_parentcode=#{parentCode}
+		</if>
+		<if test="prdTypeName!=null and prdTypeName!=''">
+ 			 and ppe_prdtypename=#{prdTypeName}
+		</if>
+	</select>
+</mapper>

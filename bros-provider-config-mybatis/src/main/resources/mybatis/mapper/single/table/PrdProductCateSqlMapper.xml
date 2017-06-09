@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.prdproductcate">
+	<sql id="prd_prdproductcate_param">
+		ppe_catecode,
+		ppe_catename,
+		ppe_catedesc,
+		ppe_parentcate
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="prdProductCateResult">
+    	<result property="cateCode" column="ppe_catecode"/><!-- 目录编码 -->
+    	<result property="cateName" column="ppe_catename"/><!-- 目录名称 -->
+    	<result property="cateDesc" column="ppe_catedesc"/><!-- 目录描述 -->
+    	<result property="parentCate" column="ppe_parentcate"/><!-- 上级目录编码产品标识 -->
+    	<result property="note1" column="note1"/><!-- 预留字段 -->
+    	<result property="note2" column="note2"/><!-- 预留字段 -->
+    </resultMap>
+      <!-- 插入产品目录表数据定义 -->
+    <insert id="insertprdProductCate" parameterType="java.util.HashMap">
+       insert into prd_productcate(
+    		<include refid="prd_prdproductcate_param"/>
+    	)values(#{cateCode},
+		#{cateName},
+		#{cateDesc},
+		#{parentCate})
+    </insert>
+    <!-- 修改产品目录表信息 -->
+    <update id="updateprdProductCate" parameterType="java.util.HashMap">
+		update prd_productcate
+		set ppe_catename=#{cateName},
+			ppe_catedesc=#{cateDesc}
+		 where ppe_catecode=#{cateCode} 
+	</update>
+	<!-- 删除产品目录表信息 -->
+    <delete id="deleteprdProductCateBycateCode" parameterType="java.util.HashMap">
+       delete from prd_productcate where ppe_catecode=#{cateCode} 
+    </delete>
+    <!-- 查询产品目录表所有数据 -->
+    <select id="queryprdProductCateForAll" resultMap="prdProductCateResult">
+       select <include refid="prd_prdproductcate_param"/> from prd_productcate
+    </select>
+     <!-- 查询产品目录表所有数据 -->
+    <select id="queryprdProductCateByParameter" resultMap="prdProductCateResult">
+       select <include refid="prd_prdproductcate_param"/> from prd_productcate where 1=1
+       <if test="cateCode!=null and cateCode!=''">
+ 			 and ppe_catecode=#{cateCode}
+		</if>
+		<if test="cateName!=null and cateName!=''">
+ 			 and ppe_catename=#{cateName}
+		</if>
+		<if test="parentCate!=null and parentCate!=''">
+ 			 and ppe_parentcate=#{parentCate}
+		</if>
+    </select>
+     <!-- 单笔查询产品目录数据 -->
+    <select id="queryprdProductCateByOne" resultMap="prdProductCateResult">
+       select <include refid="prd_prdproductcate_param"/> from prd_productcate where ppe_catecode=#{cateCode}
+    </select>
+    <!-- 查询记录数 -->
+	<select id="queryprdProductCateNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from prd_productcate
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="cateCode!=null and cateCode!=''">
+ 			 and ppe_catecode=#{cateCode}
+		</if>
+		<if test="cateName!=null and cateName!=''">
+ 			 and ppe_catename=#{cateName}
+		</if>
+		<if test="parentCate!=null and parentCate!=''">
+ 			 and ppe_parentcate=#{parentCate}
+		</if>
+	</select>
+</mapper>

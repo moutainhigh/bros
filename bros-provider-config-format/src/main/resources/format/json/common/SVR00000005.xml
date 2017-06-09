@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000005SendFmt">
+	         <xmlRel rel="SendFmt"/>
+			 <xmlField tagName="orderId" dataName="orderId"/><!--订单标识-->
+			 <xmlField tagName="orderName" dataName="orderName"/><!--订单名称  -->
+			 <xmlList tagName="orderTypeIds" dataName="orderTypeIds"><!--订单类型标识列表-->
+		 		<xmlTag>
+                     <xmlField tagName="orderTypeId" dataName="orderTypeId"/><!--订单类型标识 -->
+                </xmlTag>
+	         </xmlList>
+	          <xmlList tagName="orderStatusIds" dataName="orderStatusIds"><!--订单状态标识列表-->
+			 		<xmlTag>
+                      <xmlField tagName="orderStatusId" dataName="orderStatusId"/><!--订单状态标识 -->
+	                </xmlTag>
+	         </xmlList>
+	           <xmlList tagName="productStoreIds" dataName="productStoreIds"><!--产品店铺标识列表-->
+			 		<xmlTag>
+                      <xmlField tagName="orderWebSiteId" dataName="orderWebSiteId"/><!--产品店铺标识-->
+	                </xmlTag>
+	         </xmlList>
+	           <xmlList tagName="orderWebSiteIds" dataName="orderWebSiteIds"><!--订单网点标识列表-->
+			 		<xmlTag>
+                      <xmlField tagName="orderStatusId" dataName="orderStatusId"/><!--订单网点标识 -->
+	                </xmlTag>
+	         </xmlList>
+	          <xmlList tagName="salesChannelEnumIds" dataName="salesChannelEnumIds"><!--销售渠道标识列表-->
+			 		<xmlTag>
+                      <xmlField tagName="salesChannelEnumId" dataName="salesChannelEnumId"/><!--销售渠道标识 -->
+	                </xmlTag>
+	         </xmlList>
+			<xmlField tagName="createdBy" dataName="createdBy"/><!--创建者-->
+			<xmlField tagName="terminalId" dataName="terminalId"/><!--终端标识-->
+			<xmlField tagName="transactionId" dataName="transactionId"/><!--事务标识-->
+			<xmlField tagName="externalI" dataName="externalId"/><!--外部标识-->
+			<xmlField tagName="internalCode" dataName="internalCode"/><!--内部代码-->
+			<xmlField tagName="useEntryDate" dataName="useEntryDate"/><!--使用订单日期-->
+			<xmlField tagName="minDate" dataName="minDate"/><!--开始日期-->
+			<xmlField tagName="maxDate" dataName="maxDate"/><!--终止日期-->
+			<xmlField tagName="hasBackOrders" dataName="hasBackOrders"/><!--包括缺货通知单-->
+			<xmlField tagName="userLoginId" dataName="userLoginId"/><!--用户登录标识-->
+			 <xmlList tagName="roleTypeIds" dataName="roleTypeIds"><!--角色类型标识列表-->
+			 		<xmlTag>
+                      <xmlField tagName="roleTypeId" dataName="roleTypeId"/><!--角色类型标识 -->
+	                </xmlTag>
+	         </xmlList>
+			<xmlField tagName="partyId" dataName="partyId"/><!--客户标识-->
+			<xmlField tagName="correspondingPoId" dataName="correspondingPoId"/><!--客户购买订单号-->
+			<xmlField tagName="subscriptionId" dataName="subscriptionId"/><!--订阅标识-->
+			<xmlField tagName="productId" dataName="productId"/><!--产品标识-->
+			<xmlField tagName="budgetId" dataName="budgetId"/><!--预算标识-->
+			<xmlField tagName="quoteId" dataName="quoteId"/><!--报价单标识-->
+			<xmlField tagName="goodIdentificationTypeId" dataName="goodIdentificationTypeId"/><!--产品类型标识-->
+			<xmlField tagName="goodIdentificationIdValue" dataName="goodIdentificationIdValue"/><!--产品标识-->	
+			<xmlField tagName="billingAccountId" dataName="billingAccountId"/><!--账单账户-->
+			<xmlField tagName="finAccountId" dataName="finAccountId"/><!--金融账户标识-->
+			<xmlField tagName="cardNumber" dataName="cardNumber"/><!--卡号-->
+			<xmlField tagName="accountNumber" dataName="accountNumber"/><!--客户号-->
+			<xmlField tagName="paymentStatusId" dataName="paymentStatusId"/><!--支付状态标识-->
+			<xmlField tagName="inventoryItemId" dataName="inventoryItemId"/><!--库存明细标识-->
+			<xmlField tagName="softIdentifier" dataName="softIdentifier"/><!--软标识-->
+			<xmlField tagName="serialNumber" dataName="serialNumber"/><!--序列号-->
+			<xmlField tagName="shipmentId" dataName="shipmentId"/><!--货运标识-->
+			<xmlField tagName="filterInventoryProblems" dataName="filterInventoryProblems"/><!--过滤器：库存问题-->
+			<xmlField tagName="filterPOsWithRejectedItems" dataName="filterPOsWithRejectedItems"/><!--过滤器:采购订单有被拒绝的明细-->
+			<xmlField tagName="filterPOsOpenPastTheirETA" dataName="filterPOsOpenPastTheirETA"/><!--过滤器:采购订单超过预期交货时间-->
+			<xmlField tagName="filterPartiallyReceivedPOs" dataName="filterPartiallyReceivedPOs"/><!--过滤器:采购订单部分收到货-->
+			<xmlField tagName="isViewed" dataName="isViewed"/><!--已浏览-->
+			<xmlField tagName="shipmentMethod" dataName="shipmentMethod"/><!--货运方式-->
+			<xmlField tagName="gatewayAvsResult" dataName="gatewayAvsResult"/><!--地址验证(AVS)-->
+			<xmlField tagName="gatewayScoreResult" dataName="gatewayScoreResult"/><!--记分-->
+			<xmlField tagName="countryGeoId" dataName="countryGeoId"/><!--货运到的国家标识-->
+			<xmlField tagName="includeCountry" dataName="includeCountry"/><!--包括国家-->
+			<xmlField tagName="viewIndex" dataName="viewIndex"/><!--页码-->
+			<xmlField tagName="viewSize" dataName="viewSize"/><!--一页的订单数-->
+			<xmlField tagName="showAll" dataName="showAll"/><!--显示全部-->
+	</fmtDef>
+	<fmtDef id="SVR00000005RecFmt">
+	      <xmlRel rel="RecFmt"/>
+          <xmlList tagName="orderList" dataName="orderList"><!--订单列表 -->
+          	  <xmlTag>
+	             <xmlField tagName="orderTypeName" dataName="orderTypeName"/><!--订单类型 -->
+	             <xmlField tagName="orderId" dataName="orderId"/><!--订单标识-->
+	             <xmlField tagName="fullName" dataName="fullName"/><!--名字-->
+	             <xmlField tagName="totalOrderItemsQuantity" dataName="totalOrderItemsQuantity"/><!--订单项数量 -->
+	             <xmlField tagName="orderBackorderQuantity" dataName="orderBackorderQuantity"/><!--订单缺货数量 -->
+	             <xmlField tagName="orderReturnedQuantity" dataName="orderReturnedQuantity"/><!--退货项数量 -->
+	             <xmlTag tagName="remainingSubTotalMap" dataName="remainingSubTotalMap">
+					<xmlField tagName="remainingSubTotal"  dataName="remainingSubTotal"/><!--剩余小计 -->
+					<xmlField tagName="currencyUomId"  dataName="currencyUomId"/><!--货币-->
+				 </xmlTag>
+				  <xmlTag tagName="grandTotalMap" dataName="grandTotalMap">
+					<xmlField tagName="grandTotal"  dataName="grandTotal"/><!--订单总计 -->
+					<xmlField tagName="currencyUomId"  dataName="currencyUomId"/><!--货币-->
+				 </xmlTag>
+				 <xmlField tagName="statusName" dataName="statusName"/><!--状态 -->
+	             <xmlField tagName="orderDate" dataName="orderDate"/><!--订单日期-->
+	             <xmlField tagName="partyId" dataName="partyId"/><!--客户标识-->
+	          </xmlTag>
+         </xmlList>
+           <xmlField tagName="orderListSize" dataName="orderListSize"/><!--总订单数 -->
+	</fmtDef>
+</formats>

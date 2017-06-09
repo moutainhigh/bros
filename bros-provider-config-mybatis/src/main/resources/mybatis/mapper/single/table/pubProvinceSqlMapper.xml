@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.pubprovince">
+	<sql id="pub_province_par">
+		ppe_code,
+		ppe_name
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="pubProvinceResult">
+    	<result property="code" column="ppe_code"/>
+    	<result property="name" column="ppe_name"/>
+    </resultMap>
+    
+    <select id="queryAllPubProvince" resultMap="pubProvinceResult">
+       select
+       <include refid="pub_province_par"/> 
+       from pub_province
+    </select>
+    <select id="queryPubProvinceByName" resultMap="pubProvinceResult" parameterType="java.util.HashMap">
+       select 
+       <include refid="pub_province_par"/> 
+       from pub_province where ppe_name like '%'||#{name}||'%'
+    </select>
+    
+
+</mapper>

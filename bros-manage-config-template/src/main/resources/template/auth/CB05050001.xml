@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+ 	 <xmlField dataName="bmfCode" label="菜单编号" type="text" template="text001" title="新增菜单" />
+	 <xmlField dataName="bmfName" label="菜单名称" type="text" template="text001" title="新增菜单"/>
+	 <xmlField dataName="bmfUrl" label="菜单链接" type="text" template="text001" title="新增菜单"/>
+ 	 <xmlField dataName="bmfLevel" label="菜单层级" type="text" template="text001" title="新增菜单" categroy="bmfLevel"/>
+	 <xmlField dataName="bmfStt" label="状态" type="text" template="text001" title="新增菜单" categroy="bmfStt"/>
+	 <xmlField dataName="bmfSeqNo" label="菜单顺序号" type="text" template="text001"  title="新增菜单"/>
+ 	 <xmlField dataName="bmfDesc" label="菜单描述" type="text" template="text001" title="新增菜单"/>
+	 <xmlField dataName="bmfChannel" label="系统标识" type="text" template="text001" title="新增菜单" categroy="bmfChannel"/>
+	 <xmlField dataName="bmfProperties" label="菜单性质 " type="text" template="text001" title="新增菜单" categroy="bmfProperties"/>
+</formats>

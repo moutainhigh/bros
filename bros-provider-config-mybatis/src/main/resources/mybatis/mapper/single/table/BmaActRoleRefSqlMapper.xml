@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.bmaactroleref">
+	<sql id="bma_act_role_ref_param">
+		BAR_ID,
+		BAR_ROLEID
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="bmaActRoleRefResultMap">
+    	<result property="barId"     column="BAR_ID"/>
+    	<result property="roleId"   column="BAR_ROLEID"/>
+    </resultMap>
+    
+ 
+    
+    <!-- 批量插入模型关联角色表 -->
+    <insert id="insertBatchBmaActRoleRef" parameterType="java.util.HashMap">
+    		insert into BMA_ACT_ROLEREL 
+    		( <include refid="bma_act_role_ref_param"/>) 
+    		values
+			      <foreach collection="list" item="item" index="index" separator="," >
+				        (#{item.barId},
+				        #{item.roleId})
+	   			 </foreach>  
+    </insert>
+    
+   <!--根据编号删除关联角色-->
+	<delete id="deleteBmaActRoleRefById" parameterType="java.util.HashMap">
+		<![CDATA[
+			DELETE FROM BMA_ACT_ROLEREL 
+			  WHERE BAR_ID=#{barId}
+		]]>    
+	</delete>
+	
+	 <!--根据编号批量删除关联角色-->
+	<delete id="deleteBatchBmaActRoleRefById" parameterType="java.util.HashMap">
+			DELETE FROM BMA_ACT_ROLEREL 
+			  where BAR_ID in
+			<foreach item="item" index="index" collection="roleIdArray" open="(" separator="," close=")">  
+			     <![CDATA[#{item}]]>
+			</foreach>
+	</delete>
+	
+	<!--根据编号查询关联角色-->
+	<select id="queryBmaActRoleRefById" parameterType="java.util.HashMap" resultMap="bmaActRoleRefResultMap">
+			SELECT  <include refid="bma_act_role_ref_param"/> 
+			FROM BMA_ACT_ROLEREL 
+			  WHERE BAR_ID=#{barId}
+	</select>
+</mapper>

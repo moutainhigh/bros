@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 产品上下架渠道分组管理  ================================================-->
+	<!-- 新增渠道系统分组服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addChannelSysGroupAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysGroupServiceFacade">
+		<dubbo:method name="addChannelSysGroupMethod"/>
+	</dubbo:reference>
+	<!-- 修改渠道系统分组信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateChannelSysGroupAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysGroupServiceFacade">
+		<dubbo:method name="updateChannelSysGroupMethod"/>
+	</dubbo:reference>
+	<!-- 删除渠道系统分组信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="deleteChannelSysGroupAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysGroupServiceFacade">
+		<dubbo:method name="deleteChannelSysGroupMethod"/>
+	</dubbo:reference>
+	<!-- 查询渠道系统分组信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryChannelSysGroupAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysGroupServiceFacade">
+		<dubbo:method name="queryChannelSysGroupMethod"/>
+	</dubbo:reference>
+	<!-- 分页查询渠道系统分组信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryChannelSysGroupPageAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysGroupServiceFacade">
+		<dubbo:method name="queryChannelSysGroupPageMethod"/>
+	</dubbo:reference>
+	
+	<!--================================================ 产品上下架渠道系统信息管理   ================================================-->
+	<!-- 产品上下架新增渠道服务-->
+	<dubbo:reference check="false" version="1.0.0"  id="addChannelSysInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysInfoServiceFacade" >
+		<dubbo:method name="addChannelSysInfoMethod"/>
+	</dubbo:reference>
+	<!-- 产品上下架修改渠道信息服务-->
+	<dubbo:reference check="false" version="1.0.0"  id="updateChannelSysInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysInfoServiceFacade" >
+		<dubbo:method name="updateChannelSysInfoMethod"/>
+	</dubbo:reference>
+	<!-- 产品上下架修改渠道状态服务-->
+	<dubbo:reference check="false" version="1.0.0"  id="updateChannelSysStatusAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysInfoServiceFacade" >
+		<dubbo:method name="updateChannelSysStatusMethod"/>
+	</dubbo:reference>
+	<!-- 产品上下架删除渠道信息服务-->
+	<dubbo:reference check="false" version="1.0.0"  id="deleteChannelSysInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysInfoServiceFacade" >
+		<dubbo:method name="deleteChannelSysInfoMethod"/>
+	</dubbo:reference>
+	<!-- 产品上下架查询渠道信息服务-->
+	<dubbo:reference check="false" version="1.0.0"  id="queryChannelSysInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysInfoServiceFacade" >
+		<dubbo:method name="queryChannelSysInfoMethod"/>
+	</dubbo:reference>
+	<!-- 产品上下架分页查询渠道信息服务-->
+	<dubbo:reference check="false" version="1.0.0"  id="queryChannelSysInfoPageAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysInfoServiceFacade" >
+		<dubbo:method name="queryChannelSysInfoPageMethod"/>
+	</dubbo:reference>
+	<!-- 根据法人id查询渠道分组及渠道信息 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryChlSysGroupAndChlInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysGroupServiceFacade" >
+		<dubbo:method name="queryChlSysGroupAndChlInfoMethod"/>
+	</dubbo:reference>
+	
+	
+	<!--================================================ pub_channel渠道分组管理  ================================================-->
+	<!-- 新增渠道系统分组服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addChannelSysGroupBaseInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysGroupServiceFacade">
+		<dubbo:method name="addChannelSysGroupBaseInfoMethod"/>
+	</dubbo:reference>
+	<!-- 删除渠道系统分组服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="deleteChannelSysGroupBaseInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysGroupServiceFacade">
+		<dubbo:method name="deleteChannelSysGroupBaseInfoMethod"/>
+	</dubbo:reference>
+	<!-- 修改渠道系统分组服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateChannelSysGroupBaseInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysGroupServiceFacade">
+		<dubbo:method name="updateChannelSysGroupBaseInfoMethod"/>
+	</dubbo:reference>
+	<!-- 查询渠道系统分组服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryChannelSysGroupBaseInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICChannelSysGroupServiceFacade">
+		<dubbo:method name="queryChannelSysGroupBaseInfoMethod"/>
+	</dubbo:reference>
+</beans>  

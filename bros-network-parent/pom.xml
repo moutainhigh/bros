@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>lczr.dzqd.bros.common</groupId>
+		<artifactId>bros-common-parent</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../bros-common-parent</relativePath>
+	</parent>
+
+	<artifactId>bros-network-parent</artifactId>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<log4j.leve>debug</log4j.leve>
+		<log4j.ale>debug</log4j.ale>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core</artifactId>
+			<version>${bros-common-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-redis</artifactId>
+			<version>${bros-common-core-redis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-shiro</artifactId>
+			<version>${bros-common-core-shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-validation</artifactId>
+			<version>${bros-common-core-validation.version}</version>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>bros-network-parent-product</module>
+		<module>bros-network-parent-account</module>
+		<module>bros-network-parent-transfer</module>
+		<module>bros-network-parent-loan</module>
+		<module>bros-network-parent-manage</module>
+	</modules>
+</project>

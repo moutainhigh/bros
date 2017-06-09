@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.bmabanklimit">
+	
+	<sql id="bma_bank_limit_param">
+	    BBL_ID,
+		BBL_LEGALID,
+		BBL_BRANCHID,
+		BBL_CHANNEL,
+		BBL_CSTLEVEL,
+		BBL_BIZTYPE,
+		BBL_SAFETOOL,
+		BBL_SINGLEMAX,
+		BBL_DAYMAX
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="bmaBankLimitResultMap">
+        <result property="id" column="BBL_ID"/>
+    	<result property="legalId" column="BBL_LEGALID"/>
+    	<result property="branchId" column="BBL_BRANCHID"/>
+    	<result property="channel" column="BBL_CHANNEL"/>
+    	<result property="cstLevel" column="BBL_CSTLEVEL"/>
+    	<result property="bizType" column="BBL_BIZTYPE"/>
+    	<result property="safeTool" column="BBL_SAFETOOL"/>
+    	<result property="singleMax" column="BBL_SINGLEMAX" javaType="java.lang.String" jdbcType="DECIMAL"/>
+    	<result property="dayMax" column="BBL_DAYMAX" javaType="java.lang.String" jdbcType="DECIMAL"/>
+    </resultMap>
+    
+    <!-- 查询银行类机构级限额信息 -->
+    <select id="queryBmaBankLimit" resultMap="bmaBankLimitResultMap" parameterType="java.util.HashMap">
+      	 select
+       	<include refid="bma_bank_limit_param"/>
+      		 from BMA_BANK_LIMIT
+			      	 	<![CDATA[ 
+			     		 where  BBL_CHANNEL = #{channel}
+			       		 and    BBL_LEGALID = #{legalId}
+       					]]> 
+       					<if test="branchId!=null and branchId!=''">
+					        and   BBL_BRANCHID = #{branchId}
+						</if>
+			       		<if test="bizType!=null and bizType!=''">
+					        and   BBL_BIZTYPE = #{bizType}
+						</if>
+						<if test="safeTool!=null and safeTool!=''">
+					        and   BBL_SAFETOOL = #{safeTool}
+						</if>
+						<if test="cstLevel!=null and cstLevel!=''">
+					        and   BBL_CSTLEVEL = #{cstLevel}
+						</if>
+	</select>
+	
+	  <!-- 查询银行类机构级限额信息 -->
+    <select id="queryBmaBankLimitTotalNum" resultType="int" parameterType="java.util.HashMap">
+      	 select  count(1)
+      		 from BMA_BANK_LIMIT
+			      	 	<![CDATA[ 
+			     		 where  BBL_CHANNEL = #{channel}
+			       		 and    BBL_LEGALID = #{legalId}
+       					]]> 
+       					<if test="branchId!=null and branchId!=''">
+					        and   BBL_BRANCHID = #{branchId}
+						</if>
+			       		<if test="bizType!=null and bizType!=''">
+					        and   BBL_BIZTYPE = #{bizType}
+						</if>
+						<if test="safeTool!=null and safeTool!=''">
+					        and   BBL_SAFETOOL = #{safeTool}
+						</if>
+						<if test="cstLevel!=null and cstLevel!=''">
+					        and   BBL_CSTLEVEL = #{cstLevel}
+						</if>
+	</select>
+    
+      <!-- 查询银行类机构级限额信息 -->
+    <select id="queryBmaBankLimitByChannelAndBranchIdAndLegalId" resultMap="bmaBankLimitResultMap" parameterType="java.util.HashMap">
+      	 select
+       	<include refid="bma_bank_limit_param"/>
+      		 from BMA_BANK_LIMIT
+			      	 	<![CDATA[ 
+			     		 where  BBL_CHANNEL = #{channel}
+			       		 and    BBL_LEGALID = #{legalId}
+			       		 and    BBL_BRANCHID = #{branchId}
+       					]]> 
+			       		<if test="bizType!=null and bizType!=''">
+					        and   BBL_BIZTYPE = #{bizType}
+						</if>
+						<if test="safeTool!=null and safeTool!=''">
+					        and   BBL_SAFETOOL = #{safeTool}
+						</if>
+						<if test="cstLevel!=null and cstLevel!=''">
+					        and   BBL_CSTLEVEL = #{cstLevel}
+						</if>
+	</select>
+	
+   	  <!--根据渠道和法人唯一标识查询银行类法人限额信息 -->
+    <select id="queryBmaBankLimitByChannelAndLegalId" resultMap="bmaBankLimitResultMap" parameterType="java.util.HashMap">
+      	 select
+       	<include refid="bma_bank_limit_param"/>
+      			from BMA_BANK_LIMIT
+			      <![CDATA[ 
+		     		 where BBL_CHANNEL = #{channel}
+		       		 and   BBL_LEGALID = #{legalId}
+			      ]]> 
+	     		 <if test="bizType!=null and bizType!=''">
+			         and   BBL_BIZTYPE = #{bizType}
+				</if>
+				<if test="safeTool!=null and safeTool!=''">
+					 and   BBL_SAFETOOL = #{safeTool}
+				</if>
+				<if test="cstLevel!=null and cstLevel!=''">
+					 and   BBL_CSTLEVEL = #{cstLevel}
+				</if>
+   	</select>
+   	<!--查询银行类系统限额信息 -->
+   	<select id="queryBmaBankLimitByChannel" resultMap="bmaBankLimitResultMap" parameterType="java.util.HashMap">
+      	 select
+       	<include refid="bma_bank_limit_param"/>
+      			from BMA_BANK_LIMIT
+			      <![CDATA[ 
+		     		 where BBL_CHANNEL = #{channel}
+		       		 and   BBL_LEGALID = '00000000000000'
+			       ]]> 
+	     		 <if test="bizType!=null and bizType!=''">
+			         and   BBL_BIZTYPE = #{bizType}
+				</if>
+				<if test="safeTool!=null and safeTool!=''">
+				     and   BBL_SAFETOOL = #{safeTool}
+				</if>
+				<if test="cstLevel!=null and cstLevel!=''">
+					 and   BBL_CSTLEVEL = #{cstLevel}
+			   </if>
+   	</select>
+   	
+     <!-- 更新银行类限额信息 -->
+    <update id="updateBmaBankLimit" parameterType="java.util.HashMap">
+      	update BMA_BANK_LIMIT 
+      	<![CDATA[ 
+	       	set    BBL_SINGLEMAX=#{singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+				   BBL_DAYMAX=#{dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+			 where BBL_CHANNEL = #{channel}
+			 and   BBL_LEGALID = #{legalId}
+			 and   BBL_BRANCHID = #{branchId}
+       		]]>  
+       		<if test="bizType!=null and bizType!=''">
+				and  BBL_BIZTYPE = #{bizType}
+			</if>
+			<if test="safeTool!=null and safeTool!=''">
+			    and  BBL_SAFETOOL = #{safeTool}
+			</if>
+			<if test="cstLevel!=null and cstLevel!=''">
+				and   BBL_CSTLEVEL = #{cstLevel}
+			</if>
+    </update>
+    
+     <!-- 设置银行类限额 -->
+    <insert id="insertBmaBankLimit" parameterType="java.util.HashMap">
+   		 insert into BMA_BANK_LIMIT ( <include refid="bma_bank_limit_param"/>) 
+	    <![CDATA[ 
+		    values(
+		         #{id},
+		   		 #{legalId},
+		   		 #{branchId},
+		   		 #{channel},
+		   		 #{cstLevel},
+		         #{bizType},
+		         #{safeTool},
+		         #{singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+		         #{dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+		       )
+	    ]]>  
+    </insert>
+    
+     <!-- 批量设置银行限额 -->
+    <insert id="insertBatchBmaBankLimit" parameterType="java.util.HashMap">
+    		insert into BMA_BANK_LIMIT 
+    		( <include refid="bma_bank_limit_param"/>) 
+    		values
+			      <foreach collection="list" item="item" index="index" separator="," >
+				        (#{item.id},#{item.legalId},#{item.branchId},#{item.channel},#{item.cstLevel},#{item.bizType},
+				        #{item.safeTool},#{item.singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				        ,#{item.dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				        )
+	   			 </foreach>  
+    </insert>
+    
+    <!-- 批量更新银行限额 -->
+    <update id="updateBatchBmaBankLimit" parameterType="java.util.HashMap">
+	        <foreach collection="list" item="item" index="index" separator=";" >
+	         update BMA_BANK_LIMIT 
+	          	set  BBL_SINGLEMAX = #{item.singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+				 	 BBL_DAYMAX = #{item.dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+		       where BBL_CHANNEL = #{item.channel} 
+		        and  BBL_BRANCHID = #{item.branchId} 
+		        and  BBL_LEGALID = #{item.legalId}
+	      	  <if test="item.bizType!=null and item.bizType!=''">
+				and  BBL_BIZTYPE = #{item.bizType}
+			  </if>
+			  <if test="item.safeTool!=null and item.safeTool!=''">
+			    and  BBL_SAFETOOL = #{item.safeTool}
+			  </if>
+			  <if test="item.cstLevel!=null and item.cstLevel!=''">
+				and  BBL_CSTLEVEL = #{item.cstLevel}
+			 </if>
+			 </foreach>  
+    </update>
+</mapper>

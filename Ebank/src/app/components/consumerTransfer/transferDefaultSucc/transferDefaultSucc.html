@@ -1,0 +1,18 @@
+<div class="main-box">
+      <div transferdefaultstate flow="3"></div>
+    <div class="trading-one-box">
+
+
+        <div class="ebank-input-box">
+            <div class="ebank-input-title">查看转账结果</div>
+            <div class="alert alert-success" role="alert">
+                <strong>您的转账汇款交易已成功！</strong>
+                <div class="alert-text"> <span ng-bind="vm.model.custName"></span> ，你好，您已汇款成功，汇款金额 <span ng-bind="(vm.model.payamount | number:2)"></span>元</div>
+                <!-- <div class="alert-text"><a href="#">转账汇款</a><a href="#">交易明细</a><a href="#">账户明细</a><a href="#">行内转账</a></div> -->
+            </div>
+            <div class="btn-box-center-big ">
+                <button type="button" class="btn btn-default btn-lg" ui-sref="accountManagement" >返回</button>
+            </div>
+        </div>
+    </div>
+</div>

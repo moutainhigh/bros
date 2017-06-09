@@ -1,0 +1,51 @@
+{
+    RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+    "customerMap": {
+        "cstNo": "1000000002",
+        "nameCn": "杨占荣",
+        "nameEn": "yzr",
+        "custLevel": "02",
+        "certType": "0",
+        "certNo": "130703196907180622",
+        "sex": "1",
+        "birthday": "19690718",
+        "mobile1": "1000000002@hotmail.com",
+        "mobile2": "",
+        "mobile3": "",
+        "address": "张家口市五一路大街97号",
+        "phone": "15933334838",
+        "fax": "",
+        "zipCode": "",
+        "email": "15933334838@hotmail.com"
+    },
+    "returnList": [
+        {
+            "signChannel": "EB",
+            "alias": "凌风小诗",
+            "pretentInfo": "凌风小诗",
+            "branchId": "0101",
+            "stt": "正常"
+        }
+    ]
+}

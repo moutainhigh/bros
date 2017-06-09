@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 渠道客户信息管理  ================================================-->
+	<!-- 渠道客户信息查询 -->
+	<dubbo:reference check="false" version="1.0.0"  id="cstManagerAction_1.0.0" interface="bros.c.cstmanage.facade.service.ICCstManageServiceFacade" >
+		<dubbo:method name="queryCstInfo"/>
+	</dubbo:reference>
+	
+	<!-- 渠道客户信息签约 -->
+	<dubbo:reference check="false" version="1.0.0"  id="saveOpenChannelCstInfoAction_1.0.0" interface="bros.c.cstmanage.facade.service.ICCstManageServiceFacade" >
+		<dubbo:method name="saveCstInfoChannel"/>
+	</dubbo:reference>
+	<!--查询客户总览 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryPersonOverviewAction_1.0.0" interface="bros.c.custmanage.facade.service.ICPersonOverviewServiceFacade">
+		<dubbo:method name="queryPersonOverview"/>
+	</dubbo:reference>
+	<!--查询客户总览明细 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryCustPropertyDetailAction_1.0.0" interface="bros.c.custmanage.facade.service.ICPersonOverviewServiceFacade">
+		<dubbo:method name="queryCustPropertyDetail"/>
+	</dubbo:reference>
+	<!--根据partyId查询客户产品视图 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryCustomerProductServiceByPartyIdAction_1.0.0" interface="bros.c.custmanage.facade.service.ICPersonOverviewServiceFacade">
+		<dubbo:method name="queryCustomerProductServiceByPartyId"/>
+	</dubbo:reference>
+</beans>

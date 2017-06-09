@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!--================================================ 角色管理 ================================================-->
+	<!-- 添加角色服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="addRoleManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICRoleManageServiceFacade">
+		<dubbo:method name="addRoleManageMethod" />
+	</dubbo:reference>
+	<!-- 修改角色服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateRoleManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICRoleManageServiceFacade">
+		<dubbo:method name="updateRoleManageMethod" />
+	</dubbo:reference>
+	<!-- 更新角色基本信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateRoleBasicManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICRoleManageServiceFacade">
+		<dubbo:method name="updateRoleBasicManageMethod" />
+	</dubbo:reference>
+	<!-- 删除角色服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="deleteRoleManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICRoleManageServiceFacade">
+		<dubbo:method name="deleteRoleManageMethod" />
+	</dubbo:reference>
+	<!-- 删除角色服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="deleteRoleBsnManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICRoleManageServiceFacade">
+		<dubbo:method name="deleteRoleBsnRelMethod" />
+	</dubbo:reference>
+	<!-- 查询所有角色服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryAllRoleManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICRoleManageServiceFacade">
+		<dubbo:method name="queryCorporationRoleMethod" />
+	</dubbo:reference>
+	
+	<!-- 查询角色详细信息 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryRoleDetailManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICRoleManageServiceFacade">
+		<dubbo:method name="queryRoleDetailMethod" />
+	</dubbo:reference>
+	
+</beans>  

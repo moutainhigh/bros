@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.PrdProduct">
+	<sql id="prd_PrdProduct_param">
+		ppt_productcode,
+		ppt_prdname,
+		ppt_catecode,
+		ppt_prdtypecode,
+		ppt_modifiedby,
+		ppt_modifieddate
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="prdProductResult">
+    	<result property="productCode" column="ppt_productcode"/><!-- 产品ID -->
+    	<result property="prdName" column="ppt_prdname"/><!-- 产品名称 -->
+    	<result property="cateCode" column="ppt_catecode"/><!-- 产品目录编号 -->
+    	<result property="prdTypeCode" column="ppt_prdtypecode"/><!-- 产品分类编号 -->
+    	<result property="modifiedBy" column="ppt_modifiedby"/><!-- 维护操作员 -->
+    	<result property="modifiedDate" column="ppt_modifieddate"/><!-- 维护日期 -->
+    	<result property="note1" column="note1"/><!-- 预留字段 -->
+    	<result property="note2" column="note2"/><!-- 预留字段 -->
+    </resultMap>
+      <!-- 插入产品分类表数据定义 -->
+    <insert id="insertPrdProduct" parameterType="java.util.HashMap">
+       insert into prd_product(
+    		<include refid="prd_PrdProduct_param"/>
+    	)values(#{productCode},
+		#{prdName},
+		#{cateCode},
+		#{prdTypeCode},
+		#{modifiedBy},
+		#{modifiedDate})
+    </insert>
+    <!-- 修改产品分类表信息 -->
+    <update id="updatePrdProduct" parameterType="java.util.HashMap">
+		update prd_product
+		set ppt_prdname=#{prdName},
+			ppt_modifiedby=#{modifiedBy},
+			ppt_modifieddate=#{modifiedDate}
+		 where ppt_productcode=#{productCode} 
+	</update>
+	<!-- 删除产品分类表信息 -->
+    <delete id="deletePrdProductByProductCode" parameterType="java.util.HashMap">
+       delete from prd_product where ppt_productcode=#{productCode} 
+    </delete>
+    <!-- 查询产品分类表所有数据 -->
+    <select id="queryPrdProductForAll" resultMap="prdProductResult">
+       select <include refid="prd_PrdProduct_param"/> from prd_product
+    </select>
+     <!-- 查询产品分类表所有数据 -->
+    <select id="queryPrdProductByParameter" resultMap="prdProductResult">
+       select <include refid="prd_PrdProduct_param"/> from prd_product where 1=1
+       <if test="productCode!=null and productCode!=''">
+ 			 and ppt_productcode=#{productCode}
+		</if>
+		<if test="prdName!=null and prdName!=''">
+ 			 and ppt_prdname=#{prdName}
+		</if>
+		<if test="cateCode!=null and cateCode!=''">
+ 			 and ppt_catecode=#{cateCode}
+		</if>
+		<if test="prdTypeCode!=null and prdTypeCode!=''">
+ 			 and ppt_prdtypecode=#{prdTypeCode}
+		</if>
+		<if test="modifiedBy!=null and modifiedBy!=''">
+ 			 and ppt_modifiedby=#{modifiedBy}
+		</if>
+		<if test="modifiedDate!=null and modifiedDate!=''">
+ 			 and ppt_modifieddate=#{modifiedDate}
+		</if>
+    </select>
+    <!-- 查询记录数 -->
+	<select id="queryPrdProductNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from prd_product
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="productCode!=null and productCode!=''">
+ 			 and ppt_productcode=#{productCode}
+		</if>
+		<if test="prdName!=null and prdName!=''">
+ 			 and ppt_prdname=#{prdName}
+		</if>
+		<if test="cateCode!=null and cateCode!=''">
+ 			 and ppt_catecode=#{cateCode}
+		</if>
+		<if test="prdTypeCode!=null and prdTypeCode!=''">
+ 			 and ppt_prdtypecode=#{prdTypeCode}
+		</if>
+		<if test="modifiedBy!=null and modifiedBy!=''">
+ 			 and ppt_modifiedby=#{modifiedBy}
+		</if>
+		<if test="modifiedDate!=null and modifiedDate!=''">
+ 			 and ppt_modifieddate=#{modifiedDate}
+		</if>
+	</select>
+</mapper>

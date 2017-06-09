@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.ttpbatchtrancbflow">
+	
+	<sql id="ttp_ttpBatchTrancbFlow_param">
+		tbcf_flowseq,
+		tbcf_gblflowseq,
+		tbcf_bsncode,
+		tbcf_channel,
+		tbcf_scenecode,
+		tbcf_transstarttime,
+		tbcf_transendtime,
+		tbcf_branchid,
+		tbcf_legalcode,
+		tbcf_tellerno,
+		tbcf_autellerno,
+		tbcf_transtt,
+		tbcf_batchno,
+		tbcf_returncode,
+		tbcf_returnmsg
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="ttpBatchTrancbFlowResult">
+    	<result property="flowSeq" column="tbcf_flowseq"/><!-- 40位交易流水号 -->
+    	<result property="gblflowSeq" column="tbcf_gblflowseq"/><!-- 30位全局流水号 -->
+    	<result property="bsnCode" column="tbcf_bsncode"/><!-- 业务编码 -->
+    	<result property="channel" column="tbcf_channel"/><!-- 渠道编号 -->
+    	<result property="sceneCode" column="tbcf_scenecode"/><!-- 场景编码 -->
+    	<result property="transStartTime" column="tbcf_transstarttime"/><!-- 交易提交时间 -->
+    	<result property="transEndTime" column="tbcf_transendtime"/><!-- 交易结束时间 -->
+    	<result property="branchId" column="tbcf_branchid"/><!-- 操作机构 -->
+    	<result property="legalCode" column="tbcf_legalcode"/><!-- 法人 -->
+    	<result property="tellerNo" column="tbcf_tellerno"/><!-- 操作员 -->
+    	<result property="autellerNo" column="tbcf_autellerno"/><!-- 授权员 -->
+    	<result property="transtt" column="tbcf_transtt"/><!-- 00成功   01失败   02处理中 03待查 -->
+    	<result property="batchNo" column="tbcf_batchno"/><!-- 批次号 -->
+    	<result property="returnCode" column="tbcf_returncode"/><!-- 返回码 -->
+    	<result property="returnMsg" column="tbcf_returnmsg"/><!-- 返回信息 -->
+    	<result property="note1" column="tbcf_note1"/><!-- 预留字段 -->
+    	<result property="note2" column="tbcf_note2"/><!-- 预留字段 -->
+    	<result property="note3" column="tbcf_note3"/><!-- 预留字段 -->
+    	<result property="note4" column="tbcf_note4"/><!-- 预留字段 -->
+    	<result property="note5" column="tbcf_note5"/><!-- 预留字段 -->
+    	<result property="note6" column="tbcf_note6"/><!-- 预留字段 -->
+    	<result property="note7" column="tbcf_note7"/><!-- 预留字段 -->
+    </resultMap>
+    
+    <!-- 插入子流水表数据定义 -->
+    <insert id="insertTtpBatchTrancbFlow" parameterType="java.util.HashMap">
+        insert into ttp_batch_trancb_flow(
+    		<include refid="ttp_ttpBatchTrancbFlow_param"/>
+    	)values(
+    	<![CDATA[
+			#{flowSeq},
+			#{gblflowSeq},
+			#{bsnCode},
+			#{channel},
+			#{sceneCode},
+			#{transStartTime},
+			#{transEndTime},
+			#{branchId},
+			#{legalCode},
+			#{tellerNo},
+			#{autellerNo},
+			#{transtt},
+			#{batchNo},
+			#{returnCode},
+			#{returnMsg})
+		]]>
+    </insert>
+    
+	<!-- 根据流水号更新子流水表业务状态 -->
+    <update id="updateTtpBatchTrancbFlowForState" parameterType="java.util.HashMap">
+		<![CDATA[
+			update ttp_batch_trancb_flow
+			set 
+				tbcf_transtt=#{transtt},
+				tbcf_returncode=#{returnCode},
+				tbcf_returnmsg=#{returnMsg}
+			 where tbcf_flowseq=#{flowSeq}
+		 ]]> 
+	</update>
+	
+    <!-- 根据流水号查询子流水表记录 -->
+	<select id="queryTtpBatchTrancbFlowList" resultMap="ttpBatchTrancbFlowResult">
+       select 
+       <include refid="ttp_ttpBatchTrancbFlow_param"/>
+       from ttp_batch_trancb_flow where tbcf_gblflowseq=#{gblflowSeq}
+       <if test="flowSeq!=null and flowSeq!=''">
+ 			 and tbcf_flowseq=#{flowSeq}
+	   </if>
+    </select>
+    
+</mapper>

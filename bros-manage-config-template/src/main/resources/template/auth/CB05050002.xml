@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+ 	 <xmlField dataName="btrBrancode" label="机构编号" type="text" template="text001" title="柜员角色分配" />
+	 <xmlField dataName="tellerCode" label="柜员编号" type="text" template="text001" title="柜员角色分配"/>
+	 <xmlTag title="柜员角色分配" type="table" template="table002">
+		<xmlTag type="thead">
+			<xmlField label="角色编号"/>
+			<xmlField label="角色名称"/>
+			<xmlField label="状态"/>
+		</xmlTag>
+		<xmlTag type="tbody">
+			<xmlList dataName="roleList"  tagName="allData">
+				<xmlTag>
+					<xmlField dataName="serial"/>
+					<xmlField dataName="breCode"/>
+					<xmlField dataName="breName"/>
+					<xmlField dataName="roleType"/>
+				</xmlTag>
+			</xmlList>
+			<xmlList dataName="selectData" tagName="selectData"/>
+		</xmlTag>	
+	 </xmlTag>
+</formats>

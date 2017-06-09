@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.single.table.bannerinfo">
+
+    <resultMap type="java.util.HashMap" id="bmaBannerinfoResultMap">
+    	<result property="bannerId" column="banner_id" javaType="String" /><!-- 唯一标识ID -->
+    	<result property="bannerLegal" column="banner_legal" javaType="String"/><!-- 法人id -->
+		<result property="bannerCode" column="banner_code" javaType="String"/><!-- 广告栏编码 -->
+		<result property="bannerName" column="banner_name" javaType="String"/><!-- 广告栏名称 -->
+		<result property="bannerUrl" column="banner_url" javaType="String"/><!-- 广告栏跳转的URL -->
+		<result property="bannerStus" column="banner_stus" javaType="String"/><!-- 广告栏状态 -->
+		<result property="bannerDesc" column="banner_desc" javaType="String"/><!-- 广告栏描述 -->
+		<result property="loginFlag" column="login_flag" javaType="String"/><!-- 是否需要登陆 -->
+		<result property="bannerParentid" column="banner_parentid" javaType="String"/><!-- 父菜单ID -->
+		<result property="bannerChannel" column="banner_channel" javaType="String"/><!-- 渠道号 -->
+		<result property="bannerUpdate" column="banner_update" javaType="String"/><!-- 更新时间 -->
+		<result property="bannerSeqno" column="banner_seqno" javaType="String"/><!-- 更新时间 -->
+    </resultMap>
+    <sql id="bma_bannerinfo_queryall">
+	    banner_id,
+	    banner_legal,
+		banner_code,
+		banner_name,
+		banner_url,
+		banner_stus,
+		banner_desc,
+		login_flag,
+		banner_parentid,
+		banner_channel,
+		banner_update,
+		banner_seqno
+	</sql>
+    <!-- 查询菜单信息 -->
+    <select id="queryBannerinfo" resultMap="bmaBannerinfoResultMap">
+       select
+       	<include refid="bma_bannerinfo_queryall"/>
+       from bma_bannerinfo
+       			<![CDATA[ 
+	     		 	where  banner_legal = #{bannerLegal} 
+	       		 ]]> 
+	       		 <if test="bannerCode != null and bannerCode != ''">
+			        and   banner_code = #{bannerCode}
+				</if>
+				<if test="bannerChannel != null and bannerChannel != ''">
+			        and   banner_channel = #{bannerChannel}
+				</if>
+     			<if test="bmfParentId != null and bmfParentId != ''">
+			        and   bannerParentid = #{bannerParentid}
+				</if>
+    </select>
+   
+     <!-- 查询菜单信息总条数 -->
+    <select id="queryBannerinfoNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    	select count(*) from bma_bannerinfo
+    			<![CDATA[ 
+	     		 	where  banner_legal = #{bannerLegal}
+	       		 ]]> 
+     			<if test="bannerCode != null and bannerCode != ''">
+			        and   banner_code = #{bannerCode}
+				</if>
+				<if test="bannerChannel != null and bannerChannel != ''">
+			        and   banner_channel = #{bannerChannel}
+				</if>
+				<if test="bannerParentid != null and bannerParentid != ''">
+			        and   bannerParentid = #{bannerParentid}
+				</if>
+    </select>
+    <!-- 新增广告栏 -->
+    <insert id="insertBannerinfo" parameterType="java.util.HashMap">
+   		 insert into bma_bannerinfo ( <include refid="bma_bannerinfo_queryall"/>) 
+	    <![CDATA[ 
+		    values(
+		   		#{bannerId},
+		   		#{bannerLegal},
+				#{bannerCode},
+				#{bannerName},
+				#{bannerUrl},
+				#{bannerStus},
+				#{bannerDesc},
+				#{loginFlag},
+				#{bannerParentid},
+				#{bannerChannel},
+				#{bannerUpdate},
+				#{bannerSeqno}
+		       )
+	    ]]>  
+    </insert>
+    <!-- 更新菜单信息 -->
+	<update id="updateBannerinfo" parameterType="java.util.HashMap">
+		update bma_bannerinfo
+				 <![CDATA[ 
+					set
+					
+				   		banner_legal = #{bannerLegal},
+						banner_code = #{bannerCode},
+						banner_name = #{bannerName},
+						banner_url = #{bannerUrl},
+						banner_stus = #{bannerStus},
+						banner_desc = #{bannerDesc},
+						login_flag = #{loginFlag},
+						banner_parentid = #{bannerParentid},
+						banner_channel = #{bannerChannel},
+						banner_update= #{bannerUpdate},
+						banner_seqno = #{bannerSeqno}
+						
+					where  banner_id = #{bannerId}
+				 ]]>
+	</update>
+	<!-- 删除菜单 -->
+	<delete id="deleteBannerinfo" parameterType="java.util.HashMap">
+		delete from bma_bannerinfo
+				 <![CDATA[ 
+					where banner_id = #{bannerId}
+				 ]]>
+	</delete>
+	
+	    <!-- 查询菜单信息 -->
+    <select id="queryMenudefByListId" resultMap="bmaBannerinfoResultMap">
+		   <![CDATA[  WITH RECURSIVE newmenu AS ( 
+		       SELECT * FROM bma_menudef  WHERE banner_id in 
+		       ]]>
+		       <foreach item="item" index="index" collection="menuIdArray" open="(" separator="," close=")">  
+			     <![CDATA[#{item}]]>
+			  </foreach>
+			   <![CDATA[ 
+		          and  bmf_legal = #{bmfLegal} 
+    		 	  and   bmf_channel = #{bmfChannel}
+		     union 
+		       SELECT bma_menudef.* FROM bma_menudef, newmenu WHERE bma_menudef.banner_id = newmenu.bmf_parentid
+		     ) 
+		    SELECT * FROM newmenu ORDER BY banner_id;
+		    ]]>
+    </select>
+	
+</mapper>

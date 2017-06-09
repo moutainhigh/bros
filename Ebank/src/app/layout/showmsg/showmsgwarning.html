@@ -1,0 +1,20 @@
+<div class="resultWindowsBox" style="margin-top: 100px; margin-left: -315px;" ng-controller="ShowmessageController as vm">
+    <div>
+        <div class="resultBox resultBoxWarning">
+            <div class="resultIco"></div>
+            <div class="resultInfo">
+              <dl>
+                <dt>警告！</dt>
+                <dd ng-bind="vm.error"></dd>
+              </dl>
+                <div class="btnBox">
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="vm.surebut()">确定</button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="vm.close()">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

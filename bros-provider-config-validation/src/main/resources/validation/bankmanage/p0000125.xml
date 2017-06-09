@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<!-- 根据货架编号查询货架菜单信息,适用于各个渠道-->
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="shelfCode" message="${CECO000000001}"/><!-- 渠道编码 -->
+    </xmlTag>
+</formats>

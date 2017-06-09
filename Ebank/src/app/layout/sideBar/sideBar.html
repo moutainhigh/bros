@@ -1,0 +1,81 @@
+<ul class="icon-bar hidden-xs" ng-controller="sideBarController as vm">
+    <li class="icon-contain" ng-show="none;">
+        <div class="icon-group">
+            <div class="icon icon-weibiaoti2">
+            </div>
+            <div class='icon-tips' ui-sref="customRobot">
+                在线客服
+            </div>
+        </div>
+    </li>
+
+    <li class="icon-contain" ng-click="vm.toggleCompareBlock()">
+        <div class="icon-group">
+            <div class="icon icon-shoppingcart">
+            </div>
+            <div class='icon-tips'>
+                <!-- ui-sref='compare' -->
+                <span ng-show="!showCompareBox">购物车</span>
+                <span ng-show="showCompareBox" class="glyphicon glyphicon-arrow-right"></span>
+            </div>
+        </div>
+    </li>
+    <div ng-class="{'show':showCompareBox}" class="compare-tool-block">
+        <!-- Split button -->
+        <div class="btn-group">
+            <div type="button" class="btn btn-content btn-default">购物车</div>
+            <button type="button" ng-click="vm.toggleOption()" class="btn btn-default dropdown-toggle">
+                <span class="clear-glyphicon glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+        <ul class="compare-diaplay-list">
+            <li ng-if="vm.products" ng-repeat="product in vm.products" class="compare-diaplay-li">
+               <span>
+                   <span ng-bind="product.productId"></span>
+                   <span ng-bind="product.productName"></span>
+                   &nbsp;&nbsp;&nbsp;&nbsp;
+                   <span>
+                       <b ng-bind="product.tradeData.displayPrice|currency:'¥'"></b>x<b ng-bind="product.productAmount"></b>
+                   </span>
+               </span>
+              <i ng-click="vm.productDelete($index,product)" class="clear-list cursor glyphicon glyphicon-remove-sign"></i>
+            </li>
+            <li ng-if="!vm.products" class="compare-diaplay-li">
+                <span>购物车中还没有商品，赶紧选购吧！</span>
+            </li>
+        </ul>
+        <div class="compare-footer-content" ng-show="vm.products.length > 0">
+            <button class="btn btn-danger" ng-click="vm.goCompare()" type="button" ui-sref="compare">结算</button>
+            <span class="clear-info cursor pull-right" ng-click="vm.compareBlockHidden()">清空</span>
+        </div>
+    </div>
+
+    <li class="icon-contain" ng-show="none;">
+        <div class="icon-group">
+            <div class="icon icon-yijianfankui">
+            </div>
+            <div class='icon-tips'>
+                意见反馈
+            </div>
+        </div>
+    </li>
+    <li class="icon-contain" ng-show="none;">
+        <div class="icon-group">
+            <div class="icon icon-bangzhuzhongxin">
+            </div>
+            <div class='icon-tips' ui-sref='helpCenter'>
+                帮助中心
+            </div>
+        </div>
+    </li>
+    <li class="icon-contain">
+        <div class="icon-group">
+            <div class="icon icon-xiangshang">
+            </div>
+            <div class='icon-tips'>
+                <a href="javascript:scroll(0,0)">返回顶部</a>
+            </div>
+        </div>
+    </li>
+</ul>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.pubsystempar">
+	<sql id="pub_systempar_param">
+		psr_name,
+		psr_value,
+		psr_typecode,
+		psr_typename,
+		psr_desc
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="pubSystemParResult">
+    	<result property="name" column="psr_name"/><!-- 系统参数变量名（英文） -->
+    	<result property="value" column="psr_value"/><!-- 系统参数变量值 -->
+    	<result property="typeCode" column="psr_typecode"/><!-- 系统参数分类编码(英文) -->
+    	<result property="typeName" column="psr_typename"/><!-- 系统参数分类名称 -->
+    	<result property="desc" column="psr_desc"/><!-- 描述信息 -->
+    </resultMap>
+    
+    <!-- 查询系统参数定义表 -->
+    <select id="queryPubSystemPar" resultMap="pubSystemParResult">
+       select
+       	<include refid="pub_systempar_param"/>
+       from pub_systempar
+    </select>
+    
+</mapper>

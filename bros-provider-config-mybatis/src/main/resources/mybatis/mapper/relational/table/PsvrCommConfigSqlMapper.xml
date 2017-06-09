@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.relational.table.pubcommconfiginfo">
+
+    <resultMap type="java.util.HashMap" id="commConfigInfoResult">
+    	<!-- pub_comm_relation表 -->
+    	<result property="acallService" column="pcrn_callservice"/><!-- 当前服务后台服务编码 -->
+    	<result property="avmType" column="pcrn_vmtype"/><!-- 当前服务虚拟报文文件后缀名称-->
+    	<result property="asendFmt" column="pcrn_sendfmt"/><!-- 当前服务发送报文模板后缀 -->
+    	<result property="arecFmt" column="pcrn_recfmt"/><!-- 当前服务接收报文模板后缀 -->
+    	<result property="atimeOut" column="pcrn_timeout"/><!-- 当前服务通信超时时间 -->
+    	<result property="avmFlag" column="pcrn_vmflag"/><!-- 当前服务是否是虚拟报文    0实际报文    1虚拟报文-->
+    	<result property="avmPackage" column="pcrn_vmpackage"/><!-- 当前服务虚拟报文包名 -->
+    	
+    	<!-- pub_comm_component表 -->
+    	<result property="cvmType" column="pcct_vmtype"/><!-- 通信组件虚拟报文文件后缀名称 -->
+    	<result property="csendFmt" column="pcct_sendfmt"/><!-- 通信组件发送报文模板后缀 -->
+    	<result property="crecFmt" column="pcct_recfmt"/><!-- 通信组件接收报文模板后缀 -->
+    	<result property="cformatServiceBeanName" column="pcct_formatservicebeanname"/><!-- 通信组件报文打包解包器 -->
+    	<result property="clogServiceBeanName" column="pcct_logservicebeanname"/><!-- 通信组件日志记录器 -->
+    	<result property="cvmFlag" column="pcct_vmflag"/><!-- 通信组件是否是虚拟报文   0实际报文   1虚拟报文 -->
+    	
+    	<!-- pub_comm_config表 -->
+    	<result property="dbeanName" column="pccg_beanname"/><!-- 与后台通信基础bean名 -->
+    	<result property="dip" column="pccg_ip"/><!-- 与后台通信IP地址 -->
+    	<result property="dport" column="pccg_port"/><!-- 与后台通信端口 -->
+    	<result property="dvisitPath" column="pccg_visitpath"/><!-- 后台通信访问路径 -->
+    	<result property="dagreementConfig" column="pccg_agreementconfig"/><!-- 后台通信协议信息 -->
+    	<result property="dtimeOut" column="pccg_timeout"/><!-- 后台通信超时时间 -->
+    	<result property="dsendCharset" column="pccg_sendcharset"/><!-- 后台通信发送报文编码 -->
+    	<result property="drecCharset" column="pccg_reccharset"/><!-- 后台通信接收报文编码 -->
+    	<result property="dvmPackage" column="pccg_vmpackage"/><!-- 后台通信虚拟报文包名 -->
+    	
+    	<!-- pub_channel表 -->
+    	<result property="ecode" column="pcl_code"/><!-- 接力渠道编码-->
+    </resultMap>
+
+    <!--根据法人编号和服务编码查询通信配置信息-->
+	<select id="selectCommConfigInfo" resultMap="commConfigInfoResult">
+        select
+				a.pcrn_callservice,
+				a.pcrn_vmtype,
+				a.pcrn_sendfmt,
+				a.pcrn_recfmt,
+				a.pcrn_timeout,
+				a.pcrn_vmflag,
+				a.pcrn_vmpackage,
+				c.pcct_vmtype,
+				c.pcct_sendfmt,
+				c.pcct_recfmt,
+				c.pcct_formatservicebeanname,
+				c.pcct_logservicebeanname,
+				c.pcct_vmflag,
+				d.pccg_beanname,
+				d.pccg_ip,
+				d.pccg_port,
+				d.pccg_visitpath,
+				d.pccg_agreementconfig,
+				d.pccg_timeout,
+				d.pccg_sendcharset,
+				d.pccg_reccharset,
+				d.pccg_vmpackage,
+				e.pcl_code
+		from 
+			pub_comm_relation a,
+			pub_comm_servicedefine b,
+			pub_comm_component c,
+			pub_comm_config d,
+			pub_channel e
+		where 
+			a.pcrn_legalid=#{legalId} 
+			and b.pcse_id=a.pcrn_codeid 
+			and b.pcse_code=#{serviceCode}
+			and a.pcrn_commid=c.pcct_id 
+			and c.pcct_commid=d.pccg_id
+			and a.pcrn_channelid=e.PCL_ID
+    </select>
+    
+    <select id="selectCountPubCommConfig" resultType="int" parameterType="java.util.HashMap">
+    	select count(1) from pub_comm_config
+    </select>
+</mapper>

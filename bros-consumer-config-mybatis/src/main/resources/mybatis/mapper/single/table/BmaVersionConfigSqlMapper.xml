@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.bmaversionconfig">
+	<sql id="bma_versionConfig_param">
+		bvc_legalid,
+		bvc_channelcode,
+		bvc_servicename,
+		bvc_version
+	</sql>
+
+    <resultMap  id="bmaVersionConfigResult" type="java.util.HashMap">
+    	<result property="legalId" column="bvc_legalid"/><!-- 法人id -->
+    	<result property="channelCode" column="bvc_channelcode"/><!-- 渠道编码-->
+    	<result property="serviceName" column="bvc_servicename"/><!-- 服务名称 -->
+    	<result property="version" column="bvc_version"/><!-- 服务版本 -->
+    </resultMap>
+    
+    <!-- 查询系统参数定义表 -->
+    <select id="queryBmaVersionConfig" resultMap="bmaVersionConfigResult">
+       select
+       	<include refid="bma_versionConfig_param"/>
+       from bma_version_config where bvc_legalid=#{legalId} and bvc_servicename=#{serviceName} order by bvc_version
+    </select>
+    
+</mapper>

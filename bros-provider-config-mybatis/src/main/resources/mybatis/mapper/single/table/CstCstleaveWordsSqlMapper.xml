@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--客户之声信息表 -->
+<mapper namespace="mybatis.mapper.single.table.cstleavewords">
+	<!--客户之声信息表公共出参  -->
+	<resultMap id="pbcstleavewordsResultMap" type="java.util.HashMap">
+		<result property="uuid" column="TCW_ID" />
+		<result property="cstId" column="TCW_CSTID" />
+		<result property="functionType" column="TCW_FUNCTIONTYPE" />
+		<result property="functionName" column="TCW_FUNCTIONNAME" />
+		<result property="customerVoiceInfo" column="TCW_CUSTOMERVOICEINFO" />
+		<result property="customerVoiceState" column="TCW_CUSTOMERVOICESTATE" />
+		<result property="operChannel" column="TCW_CHANNEL" />
+		<result property="timestamp" column="TCW_TIMESTAMP" />
+		<result property="processDate" column="TCW_PROCESSDATE" />
+		<result property="linkMobileNo" column="TCW_LINK_MOBILE_NO" />
+	</resultMap>
+	
+	<sql id="cstleavewords_par">
+		TCW_ID, 
+		TCW_CSTID,
+        TCW_FUNCTIONTYPE,
+        TCW_FUNCTIONNAME, 
+        TCW_CUSTOMERVOICEINFO,
+        TCW_CUSTOMERVOICESTATE,
+        TCW_CHANNEL,
+        TCW_TIMESTAMP, 
+        TCW_PROCESSDATE,
+		TCW_LINK_MOBILE_NO
+	</sql> 
+	
+	<!--分页查询客户之声总记录数  -->
+	<select id="queryPbcstLeaveWordsTotalNo" resultType="int" parameterType="java.util.HashMap">
+		select count(1) from TPR_CSTLEAVE_WORDS where 1=1
+		<![CDATA[and TCW_CSTID = #{cstId}]]> 
+		<if test="functionType!=null and functionType!=''">
+			and TCW_FUNCTIONTYPE like '%'||#{functionType}||'%'
+		</if> 
+		<if test="functionName!=null and functionName!=''">
+		 	and TCW_FUNCTIONNAME like '%'||#{functionName}||'%'
+		</if> 
+		<if test="startDate!=null and startDate!=''">
+		 	<![CDATA[ and TCW_TIMESTAMP >= #{startDate} ]]> 
+		</if>
+		<if test="endDate!=null and endDate!=''">
+			<![CDATA[ and TCW_TIMESTAMP  <  #{endDate} ]]>
+		</if>
+		<if test="customerVoiceState!=null and customerVoiceState!=''">
+		 	and TCW_CUSTOMERVOICESTATE = #{customerVoiceState}
+		</if> 
+		<if test="operatechannel!=null and operatechannel!=''">
+			and TCW_CHANNEL = #{operatechannel}
+		</if> 
+		<if test="processDate!=null and processDate!=''">
+		 	and TCW_PROCESSDATE like '%'||#{processDate}||'%'
+		</if>
+	</select>
+		
+	<!--客户之声条件查询  -->
+	<select id="queryPbcstLeaveWords" resultMap="pbcstleavewordsResultMap" parameterType="java.util.HashMap">
+		select * from TPR_CSTLEAVE_WORDS where 1=1
+		<![CDATA[and TCW_CSTID = #{cstId}]]> 
+		<if test="functionType!=null and functionType!=''">
+		and TCW_FUNCTIONTYPE like '%'||#{functionType}||'%'
+		</if> 
+		<if test="functionName!=null and functionName!=''">
+		 and TCW_FUNCTIONNAME like '%'||#{functionName}||'%'
+		</if> 
+		<if test="startDate!=null and startDate!=''">
+		 <![CDATA[ and TCW_TIMESTAMP >= #{startDate} ]]> 
+		</if>
+		<if test="endDate!=null and endDate!=''">
+		<![CDATA[ and TCW_TIMESTAMP  <  #{endDate} ]]>
+		</if>
+		<if test="customerVoiceState!=null and customerVoiceState!=''">
+		 and TCW_CUSTOMERVOICESTATE = #{customerVoiceState}
+		</if> 
+		<if test="operatechannel!=null and operatechannel!=''">
+		 and TCW_CHANNEL = #{operatechannel}
+		</if> 
+		<if test="processDate!=null and processDate!=''">
+		 and TCW_PROCESSDATE  like '%'||#{processDate}||'%'
+		</if>
+		 order by TCW_TIMESTAMP desc
+	</select>
+	
+	
+	<!--保存客户之声  -->
+	<insert id="insertCstLeaveWords"  parameterType="java.util.HashMap" >
+		insert into TPR_CSTLEAVE_WORDS(
+				<include refid="cstleavewords_par"/>
+		) values(
+			#{uuid},
+			#{cstId},
+			#{functionType},
+			#{functionName},
+			#{customerVoiceInfo},
+			#{customerVoiceState},
+			#{operatechannel},
+			#{timestamp},
+			#{processDate,jdbcType=VARCHAR},
+			#{linkMobileNo}
+		)
+	</insert>
+	
+	<!--更新客户之声处理状态-->
+		<update id="updateCstleavewords" parameterType="java.util.HashMap">
+			update  TPR_CSTLEAVE_WORDS 
+			<set>
+				TCW_CUSTOMERVOICESTATE= #{customerVoiceState},
+			<if test="processDate!=null and processDate!=''">
+				TCW_PROCESSDATE = #{processDate}
+			</if>
+			</set>
+			where TCW_ID = #{uuid}
+		</update>
+</mapper>

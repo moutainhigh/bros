@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.relational.table.bmabsndefttpfuncauth">
+
+    
+	 <resultMap id="bmabsndefttpfuncauthResult" type="java.util.HashMap">
+	        <result property="bsnId" column="BBF_ID"/>
+			<result property="bsnCode" column="BBF_BSNCODE"/>
+			<result property="name" column="BBF_NAME"/>
+			<result property="alias" column="BBF_ALIAS"/>
+			<result property="desc" column="BBF_DESC"/>
+			<result property="type" column="BBF_TYPE"/>
+			<result property="bsnlv" column="BBF_BSNLV"/>
+			<result property="group" column="BBF_GROUP"/>
+			<result property="stt" column="BBF_STT"/>
+			<result property="url" column="BBF_URL"/>
+			<result property="requireAuth" column="BBF_REQUIREAUTH"/>
+			<result property="channel" column="BBF_CHANNEL"/>
+			<result property="canBatch" column="BBF_CANBATCH"/>
+			<result property="modelId" column="TFA_AUTHMODELFK"/>
+		</resultMap>
+	
+	<sql id="bmabsndef_ttpfuncauth_param">
+	           BBF_ID,
+			   BBF_BSNCODE,         
+			   BBF_NAME,            
+			   BBF_ALIAS,           
+			   BBF_DESC,       		 
+			   BBF_TYPE,           
+			   BBF_BSNLV,           
+			   BBF_GROUP,           
+			   BBF_USERLV,         
+			   BBF_STT,             
+			   BBF_URL,             
+			   BBF_REQUIREAUTH,
+			   BBF_CHANNEL,
+			   BBF_CANBATCH,     
+			   TFA_AUTHMODELFK
+    </sql>
+    
+    <!--根据授权查询模型与功能编码-->
+	<select id="queryBsnListByAuth" resultMap="bmabsndefttpfuncauthResult">
+       SELECT <include refid="bmabsndef_ttpfuncauth_param"/>  
+		FROM bma_bsndef,TTP_FUNC_AUTH  
+		WHERE  BBF_BSNCODE = TFA_FUNCID 
+          AND TFA_LEGAL=#{legalId}
+          AND TFA_CSTNO=#{cstNo}
+          AND BBF_REQUIREAUTH !='0'
+    </select>
+</mapper>

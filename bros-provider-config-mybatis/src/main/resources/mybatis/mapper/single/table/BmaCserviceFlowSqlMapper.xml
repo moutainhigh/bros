@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.bmacserviceflow">
+	
+	<sql id="bma_BmacServiceFlow_param">
+		bcw_flowseq,
+		bcw_gblflowseq,
+		bcw_bsncode,
+		bcw_channel,
+		bcw_scenecode,
+		bcw_transstarttime,
+		bcw_transendtime,
+		bcw_branchid,
+		bcw_legalcode,
+		bcw_tellerno,
+		bcw_autellerno,
+		bcw_transtt,
+		bcw_batchno,
+		bcw_returncode,
+		bcw_returnmsg
+	</sql>
+    
+    <resultMap type="java.util.HashMap" id="bmacServiceFlowResult">
+    	<result property="flowSeq" column="bcw_flowseq"/><!-- 40位交易流水号 -->
+    	<result property="gblflowSeq" column="bcw_gblflowseq"/><!-- 30位全局流水号 -->
+    	<result property="bsnCode" column="bcw_bsncode"/><!-- 业务编码 -->
+    	<result property="channel" column="bcw_channel"/><!-- 渠道编号 -->
+    	<result property="sceneCode" column="bcw_scenecode"/><!-- 场景编码 -->
+    	<result property="transStartTime" column="bcw_transstarttime"/><!-- 交易提交时间 -->
+    	<result property="transEndTime" column="bcw_transendtime"/><!-- 交易结束时间 -->
+    	<result property="branchId" column="bcw_branchid"/><!-- 操作机构 -->
+    	<result property="legalCode" column="bcw_legalcode"/><!-- 法人 -->
+    	<result property="tellerNo" column="bcw_tellerno"/><!-- 操作员 -->
+    	<result property="autellerNo" column="bcw_autellerno"/><!-- 授权员 -->
+    	<result property="transtt" column="bcw_transtt"/><!-- 00成功   01失败   02处理中 03待查 -->
+    	<result property="batchNo" column="bcw_batchno"/><!-- 批次号 -->
+    	<result property="returnCode" column="bcw_returncode"/><!-- 返回码 -->
+    	<result property="returnMsg" column="bcw_returnmsg"/><!-- 返回信息 -->
+    	<result property="note1" column="bcw_note1"/><!-- 预留字段 -->
+    	<result property="note2" column="bcw_note2"/><!-- 预留字段 -->
+    	<result property="note3" column="bcw_note3"/><!-- 预留字段 -->
+    	<result property="note4" column="bcw_note4"/><!-- 预留字段 -->
+    	<result property="note5" column="bcw_note5"/><!-- 预留字段 -->
+    	<result property="note6" column="bcw_note6"/><!-- 预留字段 -->
+    	<result property="note7" column="bcw_note6"/><!-- 预留字段 -->
+    </resultMap>
+   
+    <!-- 插入子流水表数据定义 -->
+    <insert id="insertBmacServiceFlow" parameterType="java.util.HashMap">
+        insert into bma_cserviceflow(
+    		<include refid="bma_BmacServiceFlow_param"/>
+    	)values(
+    	<![CDATA[ 
+			#{flowSeq},
+			#{gblflowSeq},
+			#{bsnCode},
+			#{channel},
+			#{sceneCode},
+			#{transStartTime},
+			#{transEndTime},
+			#{branchId},
+			#{legalCode},
+			#{tellerNo},
+			#{autellerNo},
+			#{transtt},
+			#{batchNo},
+			#{returnCode},
+			#{returnMsg}
+			)
+	    ]]>
+    </insert>
+   
+	<!-- 根据流水号更新子流水表业务状态 -->
+    <update id="updateBmacServiceFlowForState" parameterType="java.util.HashMap">
+		<![CDATA[ 
+			update bma_cserviceflow
+				set 
+					bcw_transtt=#{transtt},
+					bcw_returncode=#{returnCode},
+					bcw_returnmsg=#{returnMsg}
+				 where bcw_flowseq=#{flowSeq} 
+		 ]]>
+	</update>
+	
+    <!-- 根据流水号查询子流水表记录 -->
+	<select id="queryBmacServiceFlowList" resultMap="bmacServiceFlowResult">
+      	select 
+		<include refid="bma_BmacServiceFlow_param"/>
+		from bma_cserviceflow where bcw_gblflowseq=#{gblflowSeq}
+      	<if test="flowSeq!=null and flowSeq!=''">
+			 and bcw_flowseq=#{flowSeq}
+		</if>
+    </select>
+   
+</mapper>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<!-- 根据产品分类编码查询产品属性及规格属性参数信息 -->
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="prdTypeCode" message="${CECO000000001}"/><!-- 产品分类编号 -->
+    </xmlTag>
+</formats>

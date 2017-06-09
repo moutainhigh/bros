@@ -1,0 +1,116 @@
+<div class="page-form" ng-controller="custPropertyDetailController as vm" style="padding-left: 30px;padding-right: 30px;">
+  <h>资产明细-<span ng-bind="vm.name"></span></h>
+  <div class="content">
+    <!--存款类明细 -->
+    <div class="tableList" ng-if="vm.assetType=='1'">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>产品名称</th>
+            <th>账号</th>
+            <th>币种</th>
+            <th>金额</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="returnList in vm.depositDetailInfo">
+            <td ng-bind="returnList.productName"></td>
+            <td ng-bind="returnList.accountNum"></td>
+            <td ng-bind="returnList.currency | currencyC"></td>
+            <td ng-bind="returnList.amount  | number:'2'"></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--贷款类明细 -->
+    <div class="tableList" ng-if="vm.assetType=='2'">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>贷款合约号</th>
+            <th>产品名称</th>
+            <th>币种</th>
+            <th>贷款金额</th>
+            <th>期限</th>
+            <th>贷款余额</th>
+            <th>到期日期</th>
+            <th>贷款状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="returnList in vm.loanDetailInfo">
+            <td ng-bind="returnList.loanNo"></td>
+            <td ng-bind="returnList.productName"></td>
+            <td ng-bind="returnList.currency | currencyC"></td>
+            <td ng-bind="returnList.loanAmount | number:'2'"></td>
+            <td ng-bind="returnList.deadline"></td>
+            <td ng-bind="returnList.loanBalance | number:'2'"></td>
+            <td ng-bind="returnList.expireDate"></td>
+            <td ng-bind="returnList.loanStatus | loanStatus"></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--投资类明细 -->
+    <div class="tableList" ng-if="vm.assetType=='3'">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>账号</th>
+            <th>产品名称</th>
+            <th>币种</th>
+            <th>本金</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="returnList in vm.investDetailInfo">
+            <td ng-bind="returnList.accountNum"></td>
+            <td ng-bind="returnList.productName"></td>
+            <td ng-bind="returnList.currency | currencyC"></td>
+            <td ng-bind="returnList.principal | number:'2'"></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--签约类明细 -->
+    <div class="tableList" ng-if="vm.assetType=='4'">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>产品名称</th>
+            <th>签约卡号</th>
+            <th>签约机构</th>
+            <th>签约日期</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="returnList in vm.signDetailInfo">
+            <td ng-bind="returnList.productName"></td>
+            <td ng-bind="returnList.cardNo"></td>
+            <td ng-bind="returnList.org"></td>
+            <td ng-bind="returnList.date"></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--信用卡明细 -->
+    <div class="tableList" ng-if="vm.assetType=='5'">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>卡号</th>
+            <th>开卡日期</th>
+            <th>开卡机构</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="returnList in vm.creditCardDetailInfo">
+            <td ng-bind="returnList.cardNo"></td>
+            <td ng-bind="returnList.issueDate"></td>
+            <td ng-bind="returnList.issueOrg"></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

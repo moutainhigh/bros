@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="  
+    http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/mvc  
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd  
+    http://www.springframework.org/schema/tx    
+    http://www.springframework.org/schema/tx/spring-tx.xsd  
+    http://www.springframework.org/schema/cache    
+	http://www.springframework.org/schema/cache/spring-cache.xsd">
+    
+    <!-- =======================redis单机配置开始=============================== -->
+	<!-- redis管理器 -->
+	<bean id="redisDao" class="bros.common.core.redis.impl.RedisMasterSlaveDaoImpl" init-method="init">
+		<property name="host" value="${redis.single.ip}"/>
+		<property name="port" value="${redis.single.port}"/>
+		<property name="expire" value="${redis.single.expire}" />
+		<!-- <property name="password" value="${redis.single.pass}"/> -->
+	</bean>
+	<!-- =======================redis单机配置结束=============================== -->
+	<!-- =======================redis缓存工具类开始=============================== -->
+		
+	<!-- 从缓存中获取数据工具类 -->
+	<bean id="getCacheDataUtil" class="bros.common.core.redis.util.GetCacheDataUtil">
+		<property name="validationRedisDao" ref="redisDao"/><!-- 获取校验模板缓存 -->
+		<property name="errCodeRedisDao" ref="redisDao"/><!-- 获取错误码缓存 -->
+		<property name="appParRedisDao" ref="redisDao"/><!-- 获取转义数据缓存 -->
+		<property name="propertiesRedisDao" ref="redisDao"/><!-- 获取properties数据缓存 -->
+	</bean>
+	<!-- =======================redis缓存工具类结束=============================== -->
+</beans>

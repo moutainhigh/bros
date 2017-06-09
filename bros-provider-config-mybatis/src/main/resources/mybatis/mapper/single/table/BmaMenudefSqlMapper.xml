@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.single.table.bmamenudef">
+
+    <resultMap type="java.util.HashMap" id="bmaMenudefResultMap">
+    	<result property="bmfId" column="bmf_id" javaType="String"/><!-- 唯一标识ID -->
+    	<result property="bmfLegal" column="bmf_legal" javaType="String"/><!-- 法人id -->
+		<result property="bmfCode" column="bmf_code" javaType="String"/><!-- 菜单编号 -->
+		<result property="bmfName" column="bmf_name" javaType="String"/><!-- 菜单名称 -->
+		<result property="bmfUrl" column="bmf_url" javaType="String"/><!-- 菜单链接 -->
+		<result property="bmfLevel" column="bmf_level" javaType="String"/><!-- 单层级 1:一级菜单，2:二级菜单，3:三级菜单 -->
+		<result property="bmfParentid" column="bmf_parentid" javaType="String"/><!-- 父菜单ID -->
+		<result property="bmfStt" column="bmf_stt" javaType="String"/><!-- 状态：0:正常，1:冻结 -->
+		<result property="bmfSeqno" column="bmf_seqno" javaType="String"/><!-- 菜单顺序号,表示在同一级别菜单中所显示的顺序 -->
+		<result property="bmfDesc" column="bmf_desc" javaType="String"/><!-- 菜单描述 -->
+		<result property="bmfChannel" column="bmf_channel" javaType="String"/><!-- 系统标识：1001：柜面 1002：内管 -->
+		<result property="bmfProperties" column="bmf_properties" javaType="String"/><!-- 菜单性质：Y：与货架关联 N：与货架不关联 -->
+		<result property="bmfUrltype" column="bmf_urltype" javaType="String"/><!-- 渠道类型-->
+		<result property="bmfLoginflag" column="bmf_loginflag" javaType="String"/><!-- 登陆状态-->
+		<result property="bmfTablayout" column="bmf_tablayout" javaType="String"/><!-- 标签布局 -->
+		<result property="bmfUpdatetime" column="bmf_updatetime" javaType="String"/><!-- 更新时间 -->
+		<result property="bmfNote1" column="bmf_note1" javaType="String"/><!-- 备用字段1 -->
+		<result property="bmfNote2" column="bmf_note2" javaType="String"/><!-- 备用字段2 -->
+		<result property="bmfimageName" column="bmf_imageName" javaType="String"/><!-- 图片名称 -->
+    </resultMap>
+    <sql id="bma_menudef_queryall">
+	    bmf_id,
+	    bmf_legal,
+		bmf_code,
+		bmf_name,
+		bmf_url,
+		bmf_level,
+		bmf_parentid,
+		bmf_stt,
+		bmf_seqno,
+		bmf_desc,
+		bmf_channel,
+		bmf_properties,
+		bmf_urltype,
+		bmf_loginflag,
+		bmf_tablayout,
+		bmf_updatetime,
+		bmf_note1,
+		bmf_note2,
+		bmf_imageName
+	</sql>
+    <!-- 查询菜单信息 -->
+    <select id="queryMenudef" resultMap="bmaMenudefResultMap">
+       select
+       	<include refid="bma_menudef_queryall"/>
+       from bma_menudef
+       			<![CDATA[ 
+	     		 	where  bmf_legal = #{bmfLegal} 
+	     		 	
+	       		 ]]> 
+	       		 <if test="bmfCode != null and bmfCode != ''">
+			        and   bmf_code = #{bmfCode}
+				</if>
+				<if test="bmfProperties != null and bmfProperties != ''">
+			        and   bmf_properties = #{bmfProperties}
+				</if>
+				<if test="bmfChannel != null and bmfChannel != ''">
+			        and   bmf_channel = #{bmfChannel}
+				</if>
+     			<if test="bmfParentId != null and bmfParentId != ''">
+			        and   bmf_parentid = #{bmfParentId}
+				</if>
+    </select>
+   
+     <!-- 查询菜单信息总条数 -->
+    <select id="queryMenudefNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    	select count(*) from bma_menudef
+    			<![CDATA[ 
+	     		 	where  bmf_legal = #{bmfLegal} 
+	       		 ]]> 
+     			<if test="bmfCode != null and bmfCode != ''">
+			        and   bmf_code = #{bmfCode}
+				</if>
+				<if test="bmfProperties != null and bmfProperties != ''">
+			        and   bmf_properties = #{bmfProperties}
+				</if>
+				<if test="bmfChannel != null and bmfChannel != ''">
+			        and   bmf_channel = #{bmfChannel}
+				</if>
+				<if test="bmfParentId != null and bmfParentId != ''">
+			        and   bmf_parentid = #{bmfParentId}
+				</if>
+    </select>
+    <!-- 新增菜单 -->
+    <insert id="insertMenudef" parameterType="java.util.HashMap">
+   		 insert into bma_menudef ( <include refid="bma_menudef_queryall"/>) 
+	    <![CDATA[ 
+		    values(
+		   		#{bmfId},
+		   		#{bmfLegal},
+				#{bmfCode},
+				#{bmfName},
+				#{bmfUrl},
+				#{bmfLevel},
+				#{bmfParentid},
+				#{bmfStt},
+				#{bmfSeqno},
+				#{bmfDesc},
+				#{bmfChannel},
+				#{bmfProperties},
+				#{bmfUrltype},
+				#{bmfLoginflag},
+				#{bmfTablayout},
+				#{bmfUpdatetime},
+				#{bmfNote1},
+				#{bmfNote2},
+				#{bmfimageName}
+		       )
+	    ]]>  
+    </insert>
+    <!-- 更新菜单信息 -->
+	<update id="updateMenudef" parameterType="java.util.HashMap">
+		update bma_menudef
+				 <![CDATA[ 
+					set
+						bmf_code = #{bmfCode},
+						bmf_name = #{bmfName},
+						bmf_url = #{bmfUrl},
+						bmf_level = #{bmfLevel},
+						bmf_parentid = #{bmfParentid},
+						bmf_stt = #{bmfStt},
+						bmf_seqno = #{bmfSeqno},
+						bmf_desc = #{bmfDesc},
+						bmf_channel = #{bmfChannel},
+						bmf_properties = #{bmfProperties},
+						bmf_note1 = #{bmfNote1},
+						bmf_note2 = #{bmfNote2},
+						bmf_urltype = #{bmfUrltype},
+						bmf_loginflag = #{bmfLoginflag},
+						bmf_tablayout = #{bmfTablayout},
+						bmf_updatetime = #{bmfUpdatetime},
+						bmf_imageName = #{bmfimageName}
+					where  bmf_id = #{bmfId}
+				 ]]>
+	</update>
+	<!-- 删除菜单 -->
+	<delete id="deleteMenudef" parameterType="java.util.HashMap">
+		delete from bma_menudef
+				 <![CDATA[ 
+					where bmf_id = #{bmfId}
+				 ]]>
+	</delete>
+	
+	    <!-- 查询菜单信息 -->
+    <select id="queryMenudefByListId" resultMap="bmaMenudefResultMap">
+		   <![CDATA[  WITH RECURSIVE newmenu AS ( 
+		       SELECT * FROM bma_menudef  WHERE bmf_id in 
+		       ]]>
+		       <foreach item="item" index="index" collection="menuIdArray" open="(" separator="," close=")">  
+			     <![CDATA[#{item}]]>
+			  </foreach>
+			   <![CDATA[ 
+		          and  bmf_legal = #{bmfLegal} 
+    		 	  and   bmf_channel = #{bmfChannel}
+		     union 
+		       SELECT bma_menudef.* FROM bma_menudef, newmenu WHERE bma_menudef.bmf_id = newmenu.bmf_parentid
+		     ) 
+		    SELECT * FROM newmenu ORDER BY bmf_id;
+		    ]]>
+    </select>
+	
+</mapper>

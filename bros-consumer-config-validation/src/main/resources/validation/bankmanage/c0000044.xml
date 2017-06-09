@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="breId" message="${CECO000000001}"/><!-- 角色编号 -->
+		<xmlField dataName="breName" message="${CECO000000001}"/><!-- 角色名称 -->
+		<xmlField dataName="breDesc" message="${CECO000000001}"/><!-- 角色描述 -->
+		<xmlField dataName="legalPersonId" message="${CECO000000001}"/><!-- 法人id -->
+	</xmlTag>
+</formats>

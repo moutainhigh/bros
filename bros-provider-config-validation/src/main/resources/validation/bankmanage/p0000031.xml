@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- 新增菜单信息 -->
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="bmfCode" message="${CECO000000001}"/><!-- 菜单编号 -->
+		<xmlField dataName="bmfName" message="${CECO000000001}"/><!-- 菜单名称 -->
+		<xmlField dataName="bmfLevel" message="${CECO000000001}"/><!-- 单层级 1:一级菜单，2:二级菜单，3:三级菜单 -->
+		<xmlField dataName="bmfStt" message="${CECO000000001}"/><!-- 状态：0:正常，1:冻结 -->
+		<xmlField dataName="bmfSeqno" message="${CECO000000001}"/><!--菜单顺序号,表示在同一级别菜单中所显示的顺序 -->
+		<xmlField dataName="bmfChannel" message="${CECO000000001}"/><!--系统标识：1001：柜面 1002：内管 -->
+		<xmlField dataName="bmfProperties" message="${CECO000000001}"/><!--菜单性质 -->
+		<xmlField dataName="legalPersonId" message="${CECO000000001}"/><!-- 法人id -->
+	</xmlTag>
+</formats>

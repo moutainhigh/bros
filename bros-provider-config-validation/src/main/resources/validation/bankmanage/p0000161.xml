@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="productCode" message="${CECO000000001}"/><!-- 产品ID -->
+		<xmlField dataName="prdName" message="${CECO000000001}"/><!-- 产品名称 -->
+		<xmlField dataName="cateCode" message="${CECO000000001}"/><!-- 产品目录编号 -->
+	</xmlTag>
+</formats>

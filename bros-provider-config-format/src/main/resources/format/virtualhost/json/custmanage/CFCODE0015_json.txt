@@ -1,0 +1,43 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+	"totalRecord":"总记录数",
+	"totalList": [
+        {
+            "agreeStatus": "PS00",
+            "protocalNo": "1111111协议号",
+            "cstAcc": "查询人账号或客户号",
+            "cstName": "查询人户名或名称",
+            "openBranchName": "查询人开户行名称或查询机构名称",
+            "unionBankNo": "查询机构所属网银系统行号",
+            "opponencyAccount": "62251234567890",
+            "opponencyacctName": "被查询人户名",
+            "receiveBankName": "被查询人开户行名称",
+            "rplirAcctType": "被查询人账户类型",
+            "rplirDpsHdl": "被查询人开户行所属网银系统行号",
+            "remark": "备注",
+            "signDate": "签约日期",
+            "terminatDate": "解约日期"
+        }
+    ]
+}

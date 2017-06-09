@@ -1,0 +1,25 @@
+﻿<!--<script src="login.controller.js"></script>-->
+<div class="banner-login">
+    <!-- login -->
+    <div class="login-box">
+        <div class="login">
+            <div class="title">网上银行登录</div>
+            <form role="form" name="vm.loginForm" novalidate>
+                <div class="alert alert-danger" role="alert" ng-if="errorMsg " ng-bind="errorMsg"></div>
+                    <input class="input" type="label" id="inp_mobileNo" name="inp_mobileNo" maxlength="11" required ng-model="vm.model.mobileNo" placeholder="登录名或卡号">
+                    <input class="input" type="password" id="input_password" name="input_password" required ng-model="vm.model.password" placeholder="登录密码">
+                <div style="visibility:{{vm.isNeedShowValidateCode ? 'visible' : 'hidden'}}">
+                    <input class="input-small" type="text" id="input_small" name="input_small" maxlength="4" required ng-model="vm.model.small" placeholder="验证码">
+                    <span class="refresh-img"><img ng-src="../assets/img/login/a5c8.png" alt=""></span>
+                    <a href="javascript:;" class="refresh" ng-click="vm.requestNewValidateCode()">刷新</a>
+                </div>
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="vm.login();">登录</button>
+            </form>
+            <div class="text-link clearfix">
+                <a ui-sref="forgetPassword">忘记密码</a>
+                <span>|</span>
+                <a ui-sref="selfRegistration">自助注册</a>
+            </div>
+        </div>
+    </div>
+</div>

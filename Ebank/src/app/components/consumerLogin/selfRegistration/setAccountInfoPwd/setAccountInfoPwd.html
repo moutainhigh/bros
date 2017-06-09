@@ -1,0 +1,79 @@
+<div class="main-box">
+    <div registtielt flow="2"></div>
+    <div class="trading-one-box">
+        <div class="ebank-input-box">
+            <div class="ebank-input-title">设置密码</div>
+            <form class="form-horizontal" role="form" name="vm.setPwdForm" novalidate ng-submit="vm.nextGetAccountInfoPage();">
+                <div class="form-group">
+                    <label for="txt_entryPswd" class="col-sm-4 control-label"><span class="red">*</span>网银登录密码</label>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="txt_entryPswd" name="txt_entryPswd" required minlength="8" maxlength="20" ng-model="vm.model.entryPswd" placeholder="请输入您的网银登录密码">
+                            <div class="input-group-addon">
+                                <pwd-eye for="txt_entryPswd"></pwd-eye>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 error" ng-messages="vm.setPwdForm.txt_entryPswd.$error">
+                        <span class="help-block" ng-message="required">请输入您的登录密码</span>
+                        <span class="help-block" ng-message="minlength">密码长度需为8至20位</span>
+                    </div>
+                </div>
+
+                 <div class="form-group" ng-show="vm.setPwdForm.txt_entryPswd.$viewValue">
+                    <div class="col-md-offset-4 col-md-4 col-xs-4 col-sm-4">
+                        <div passwordstrength pwd="vm.model.entryPswd"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_entryPswdTemp" class="col-sm-4 control-label"><span class="red">*</span>重新输入网银登录密码</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" required id="txt_entryPswdTemp" name="txt_entryPswdTemp" minlength="8" maxlength="20" ng-model="vm.model.PswdTemp" placeholder="请重新输入网银登录密码">
+                    </div>
+                    <div class="col-md-4 error" ng-messages="vm.setPwdForm.txt_entryPswdTemp.$error">
+                        <span class="help-block" ng-message="required">请重新输入网银登录密码</span>
+                        <span class="help-block" ng-message="minlength">密码长度需为8至20位</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txt_customerNickname" class="col-sm-4 control-label"><span class="red">*</span>客户昵称</label>
+                    <div class="col-sm-4">
+                        <input type="text" required class="form-control" id="txt_customerNickname" name="txt_customerNickname" ng-model="vm.model.customerNickname" placeholder="请输入客户昵称">
+                    </div>
+                    <div class="col-md-4 error" ng-messages="vm.setPwdForm.txt_customerNickname.$error">
+                        <span class="help-block" ng-message="required">请输入客户昵称</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txt_privacyIssues" class="col-sm-4 control-label"><span class="red">*</span>私密问题</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" required id="txt_privacyIssues" name="txt_privacyIssues" ng-model="vm.model.privacyIssues">
+                            <option value="1">请选择私密问题</option>
+                            <option value="2">您父亲的生日是？</option>
+                            <option value="3">您母亲的生日是？</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 error" ng-messages="vm.setPwdForm.txt_privacyIssues.$error">
+                        <span class="help-block" ng-message="required">请请选择私密问题</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txt_questionAnswer" class="col-sm-4 control-label"><span class="red">*</span>私密问题答案</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" required id="txt_questionAnswer" name="txt_questionAnswer" ng-model="vm.model.questionAnswer" placeholder="请输入私密问题答案">
+                    </div>
+                    <div class="col-md-4 error" ng-messages="vm.setPwdForm.txt_questionAnswer.$error">
+                        <span class="help-block" ng-message="required">请输入私密问题答案</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-4 btn-box-big ">
+                        <button type="submit" class="btn btn-primary btn-lg">确认</button>
+                        <button type="button" class="btn btn-default btn-lg" ng-click="vm.backRegistAccountInforPage();">上一步</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

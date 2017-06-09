@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.activiti.inside.table.actrutask">
+
+	<resultMap id="actRuTaskResultMap" type="java.util.HashMap">
+		<result property="bsnCode" column="BDF_CODE" /><!-- 功能编码 -->
+		<result property="recordNum" column="RECORD_NUM" jdbcType="INTEGER" javaType="java.lang.Integer"/><!-- 记录条数 -->
+		<result property="bsnType" column="BDF_TYPE" /><!-- 类型 -->
+    </resultMap>
+    
+    
+	<!-- 根据法人Id，用户Id统计授权分类概览统计（当前用户在候选者组中，包含签收与未签收的）    修改2016-09-22-->
+	<select id="qryTaskBdfTypeViewListByCondition" resultMap="actRuTaskResultMap" parameterType="java.util.HashMap">
+			select b.TEXT_ as BDF_TYPE,count(distinct c.PROC_INST_ID_) as RECORD_NUM
+			from ACT_RU_IDENTITYLINK a,ACT_RU_VARIABLE b,ACT_RU_TASK c
+			where a.TYPE_='candidate' and a.USER_ID_=#{userId}
+			and a.TASK_ID_=c.ID_ and c.PROC_INST_ID_=b.PROC_INST_ID_
+			and b.NAME_=#{bsnTypeFieldName}
+			and c.SUSPENSION_STATE_=#{state}
+			<!-- and (c.assignee_ is null or c.assignee_='' or c.assignee_='null')  -->
+			and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=c.proc_inst_id_ and r.NAME_=#{legalIdFieldName} and r.TEXT_=#{legalId})
+			and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=c.proc_inst_id_ and r.NAME_=#{authShapeFiledName} and r.TEXT_=#{authShape})
+			<if test="bsnType != null and bsnType != ''">
+			       and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=c.proc_inst_id_ and r.NAME_=#{bsnTypeFieldName} and r.TEXT_=#{bsnType})
+			</if>
+			and not exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=c.proc_inst_id_ and r.NAME_=#{submitTellerNoField} and r.TEXT_=#{userId})
+			group by b.TEXT_
+	</select>
+	
+	<!-- 根据操作柜员ID（签收人不能是任务提交人）+法人ID+业务类型编号统计待签收笔数信息列表-->
+	<select id="qryTaskBdfCodeViewListByCondition" resultMap="actRuTaskResultMap" parameterType="java.util.HashMap">
+			select v.text_ as BDF_CODE,count(distinct t.PROC_INST_ID_) as RECORD_NUM
+			from ACT_RU_TASK t,ACT_RU_VARIABLE v,ACT_RU_IDENTITYLINK k
+			where k.TYPE_='candidate' and k.USER_ID_=#{userId}
+			and t.ID_=k.TASK_ID_
+			and t.PROC_INST_ID_=v.PROC_INST_ID_
+			and v.NAME_=#{bsnCodeFieldName}
+			and t.SUSPENSION_STATE_=#{state}
+			<!-- and (t.ASSIGNEE_ is null or t.ASSIGNEE_='' or t.ASSIGNEE_ ='null') -->
+			<!-- and k.PROC_INST_ID_ is null-->
+			and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=t.proc_inst_id_ and r.NAME_=#{legalIdFieldName} and r.TEXT_=#{legalId})
+			and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=t.proc_inst_id_ and r.NAME_=#{authShapFieldName} and r.TEXT_=#{authShape})
+			<if test="bsnType != null and bsnType != ''">
+			       and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=t.proc_inst_id_ and r.NAME_=#{bsnTypeFieldName} and r.TEXT_=#{bsnType})
+			</if>
+			<if test="bsnCode != null and bsnCode != ''">
+			       and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=t.proc_inst_id_ and r.NAME_=#{bsnCodeFieldName} and r.TEXT_=#{bsnCode})
+			</if>
+			and not exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=t.proc_inst_id_ and r.NAME_=#{submitUserIdFieldName} and r.TEXT_=#{userId})				 
+			group by v.TEXT_
+	</select>
+	
+</mapper> 
+ 

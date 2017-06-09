@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<!-- 新增删除商城样式信息 -->
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="mallId" message="${CECO000000001}"/><!-- 商城唯一标识 -->
+		<xmlField dataName="styleId" message="${CECO000000001}"/><!-- 样式id -->
+	</xmlTag>
+</formats>

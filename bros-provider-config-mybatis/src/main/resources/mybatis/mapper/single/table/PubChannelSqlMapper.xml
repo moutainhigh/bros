@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.pubchannel">
+	<sql id="pub_channel_par">
+		pcl_id,
+        pcl_code,
+        pcl_name,
+        pcl_desc,
+        pcl_parentcode,
+        pcl_flag,
+        pcl_checkauth
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="pubChannellResult">
+    	<result property="channelId" column="pcl_id"/>
+    	<result property="channelCode" column="pcl_code"/>
+    	<result property="channelName" column="pcl_name"/>
+    	<result property="channelDesc" column="pcl_desc"/>
+    	<result property="channelParentcode" column="pcl_parentcode"/>
+    	<result property="channelFlag" column="pcl_flag"/>
+    	<result property="channelCheckauth" column="pcl_checkauth"/>
+    </resultMap>
+    
+      <select id="queryPubChannel" resultMap="pubChannellResult">
+       select
+       	<include refid="pub_channel_par"/> 
+       from pub_channel
+    </select>
+   
+    <select id="queryPubChannelByCode" resultMap="pubChannellResult" parameterType="java.util.HashMap">
+       select 
+       <include refid="pub_channel_par"/> 
+       from pub_channel 
+       <if test="channelCode !='' and channelCode != null">
+       where pcl_code = #{channelCode} 
+       </if>
+    </select>
+    
+    
+    <!-- 更新渠道系统状态信息 ByCode-->
+	<update id="updatePubChannelByCode" parameterType="java.util.HashMap">
+		update pub_channel 
+		       	set 
+		<if test="channelName !='' and channelName != null">
+        pcl_name = #{channelName}
+        </if>
+        <if test="channelDesc !='' and channelDesc != null">
+        ,pcl_desc = #{channelDesc}
+        </if>
+        <if test="channelParentcode !='' and channelParentcode != null">
+        ,pcl_parentcode = #{channelParentcode}
+        </if>
+        <if test="channelFlag !='' and channelFlag != null">
+        ,pcl_flag = #{channelFlag}
+        </if>
+         <if test="channelCheckauth !='' and channelCheckauth != null">
+        ,pcl_checkauth = #{channelCheckauth}
+        </if>
+			   where pcl_code = #{channelCode}
+       		
+		
+	</update>
+
+	<!-- 新增渠道系统信息-->
+	<insert id="insertChlInfo" parameterType="java.util.HashMap">
+		insert into pub_channel (
+		<include refid="pub_channel_par" />) 
+	    <![CDATA[ 
+		    values(	 
+				#{channelId},
+		        #{channelCode},
+		        #{channelName},
+		        #{channelDesc},
+		        #{channelParentcode},
+		        #{channelFlag},
+		        #{channelCheckauth}
+		       )
+	    ]]>
+	</insert>
+	
+    <!-- 删除渠道系统信息-->
+	<delete id="deleteChlInfoByCode" parameterType="java.util.HashMap">
+		delete from pub_channel 
+		 <![CDATA[ 
+		  where   pcl_code = #{channelCode}
+		   ]]>
+	</delete>
+    
+
+</mapper>

@@ -1,0 +1,47 @@
+{
+	RspSvcHeader: {
+        channelDate: "",
+        acctDate: "",
+        tranTime: "",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20170214",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201701203333000000216202019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201701203333000000216202019001000000",
+        globalSeqNo: "000120170120333300000021620201",
+        TranTime: "142929849",
+        backendSysId: "",
+        ReturnMsg: "交易成功"
+    },
+    
+    "orderList": [
+            {
+                "orderReturnedQuantity": "0.00",
+                "orderBackorderQuantity": "0.00",
+                "grandTotalMap": {
+                    "currencyUomId": "CNY",
+                    "grandTotal": "0.00"
+                },
+                "orderId": "HR10323",
+                "statusName": "已完成",
+                "fullName": " 徐志英  徐志英 ",
+                "remainingSubTotalMap": {
+                    "currencyUomId": "CNY",
+                    "remainingSubTotal": "0.00"
+                },
+                "partyId": "010000018435",
+                "totalOrderItemsQuantity": "1.00",
+                "orderDate": "2017-01-20 10:04:21.491",
+                "orderTypeName": "销售订单"
+            }
+        ],
+    "orderListSize": "1"
+}

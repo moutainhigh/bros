@@ -1,0 +1,103 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+     "depositDetailInfo":[
+	     {"productName":"整存整取",
+	      "accountNum":"30100201603080000699903",
+	      "currency":"01",
+	      "amount":"50000.00"
+	     },
+	     {"productName":"通知存款",
+	      "accountNum":"30100201603080000699903",
+	      "currency":"01",
+	      "amount":"100000.00"
+	     }],
+	"loanDetailInfo":[
+		{ "loanNo":"1000000001",
+		  "productNo":"1000000001",
+	      "productName":"购房贷款",
+	      "currency":"01",
+	      "loanAmount":"500000000.00",
+	      "deadline":"10",
+	      "loanBalance":"60000000.00",
+	      "expireDate":"20261104",
+	      "loanStatus":"0"
+	     },
+	     {"productNo":"1000000002",
+	      "productName":"投资贷款",
+	      "currency":"01",
+	      "loanAmount":"900000000.00",
+	      "deadline":"5",
+	      "loanBalance":"80000000.00",
+	      "expireDate":"20211104",
+	      "loanStatus":"3"
+	     },
+	     {"productNo":"1000000003",
+	      "productName":"买车贷款",
+	      "currency":"01",
+	      "loanAmount":"200000000.00",
+	      "deadline":"5",
+	      "loanBalance":"50000000.00",
+	      "expireDate":"20261104",
+	      "loanStatus":"0"
+	     }],
+	"investDetailInfo":[
+		{"accountNum":"6210570100002465786",
+		"productName":"毛国春",
+		"currency":"01",
+		"principal":"89000"
+		},
+		{"accountNum":"6210570100002465789",
+		"productName":"毛蛋蛋",
+		"currency":"01",
+		"principal":"89900"
+		},
+		{"accountNum":"6210570100002465654",
+		"productName":"孙洋洋",
+		"currency":"01",
+		"principal":"900000"
+		},
+		{"accountNum":"6210570100002465853",
+		"productName":"向问天",
+		"currency":"01",
+		"principal":"863500"
+		}],
+	"signDetailInfo":[
+	     {"productName":"异地存款签约",
+	      "cardNo":"6210570100002465789",
+	      "org":"80001",
+	      "date":"20161106"
+	     }],
+	"creditCardDetailInfo":[
+	     {"cardNo":"6210570100002465987",
+			"issueDate":"20161010",
+			"issueOrg":"80001"
+	     },
+	     {"cardNo":"6210570100002465356",
+			"issueDate":"20161130",
+			"issueOrg":"80001"
+	     }]
+}
+
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+			  <xmlTag dataName="roleMap" message="${CECO000000001}">
+					<xmlField dataName="treCstno" message="${CECO000000001}" />
+					<xmlField dataName="treName" message="${CECO000000001}" />
+					<xmlField dataName="treCstno" message="${CECO000000001}" />
+					<xmlField dataName="treName" message="${CECO000000001}" />
+					<xmlField dataName="treState" message="${CECO000000001}" />
+					<xmlField dataName="treType" message="${CECO000000001}" />
+	           </xmlTag>
+	           <xmlList dataName="roleFunctionList" message="${CECO000000001}">
+					<xmlField dataName="roleFunctionId" message="${CECO000000001}" />
+				</xmlList>
+			</xmlTag>
+			<xmlField dataName="roleAuth" message="${CECO000000001}" />
+</formats>

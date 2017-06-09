@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="  
+    http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/mvc  
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd  
+    http://www.springframework.org/schema/tx    
+    http://www.springframework.org/schema/tx/spring-tx.xsd  
+    http://www.springframework.org/schema/cache    
+	http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+	<!-- 支持缓存注解 -->
+	<cache:annotation-driven cache-manager="cacheManager" />   
+    
+    <!-- =======================redis单机配置开始=============================== -->
+	<!-- redis管理器 -->
+	<bean id="redisDao" class="bros.common.core.redis.impl.RedisMasterSlaveDaoImpl" init-method="init">
+		<property name="host" value="${sys.redis.single.ip}"/>
+		<property name="port" value="${sys.redis.single.port}"/>
+		<property name="expire" value="${sys.redis.single.expire}" />
+		<!-- <property name="password" value="${sys.redis.single.pass}"/> -->
+	</bean>
+	<!-- =======================redis单机配置结束=============================== -->
+	<!-- =======================会话共享redis shiro配置开始=============================== -->
+	<!-- 会话ID 生成器-->
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
+    <!-- 会话DAO -->
+	<bean id="sessionDAO" class="bros.common.core.shiro.impl.ShiroSessionRedisDaoImpl" >
+		<property name="redisDao" ref="redisDao" />
+		<property name="securityManager" ref="securityManager" />
+		<property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+	</bean>
+	
+	<!-- 会话验证调度器
+	<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+		<property name="sessionValidationInterval" value="1800000"/>
+		<property name="sessionManager" ref="sessionManager"/>
+	</bean>-->
+	
+	<!-- 会话管理器-->
+	<bean id="shiroSessionManager" class="org.apache.shiro.session.mgt.DefaultSessionManager">
+		<property name="sessionDAO" ref="sessionDAO" />
+		<property name="sessionListeners" ref="sessionListener" />
+		<!--<property name="globalSessionTimeout" value="1800000" />
+		<property name="deleteInvalidSessions" value="true"/>
+		<property name="sessionValidationSchedulerEnabled" value="true"/>
+		<property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>-->	
+	</bean>
+	
+	<!-- 安全管理器-->
+	<bean id="securityManager" class="org.apache.shiro.mgt.DefaultSecurityManager">
+		<property name="sessionManager" ref="shiroSessionManager"/>
+	</bean>
+	
+	<!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>
+		<property name="arguments" ref="securityManager"/>
+	</bean>
+
+    <!-- 会话监听器 -->
+	<bean id="sessionListener" class="bros.common.core.shiro.listener.ShiroSessionListener"/>
+    
+    <!-- =======================会话共享redis shiro配置结束=============================== -->
+	<!-- =======================spring+redis缓存配置开始=============================== -->
+	
+    <!-- 缓存管理器 -->
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+		<property name="caches">
+			<set>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="default" p:expireTime="1800" >
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="0"/><!-- cache集群类型   单机或者集群（0：单机     1：集群） -->
+				</bean>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="redisCache" p:expireTime="3600">
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="0"/>
+				</bean>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="pubCityCacheInfo" p:expireTime="7200">
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="0"/>
+				</bean>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="pubPmsBankNoCacheInfo" p:expireTime="7200">
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="0"/>
+				</bean>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="pubUnionBankNo" p:expireTime="7200">
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="0"/>
+				</bean>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="PubProvinceCacheInfo" p:expireTime="7200">
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="0"/>
+				</bean>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="BsnFlowCfgCacheInfo" p:expireTime="7200">
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="0"/>
+				</bean>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="bmaBsnDefCacheInfo" p:expireTime="7200">
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="0"/>
+				</bean>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="commConfigCacheInfo" p:expireTime="7200">
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="0"/>
+				</bean>
+			</set>
+		</property>
+	</bean>
+	
+	<!-- =======================spring+redis缓存配置结束=============================== -->
+	<!-- =======================redis缓存工具类开始=============================== -->
+		
+	<!-- 从缓存中获取数据工具类 -->
+	<bean id="getCacheDataUtil" class="bros.common.core.redis.util.GetCacheDataUtil">
+		<property name="validationRedisDao" ref="redisDao"/><!-- 获取校验模板缓存 -->
+		<property name="errCodeRedisDao" ref="redisDao"/><!-- 获取错误码缓存 -->
+		<property name="appParRedisDao" ref="redisDao"/><!-- 获取转义数据缓存 -->
+		<property name="propertiesRedisDao" ref="redisDao"/><!-- 获取properties数据缓存 -->
+		<property name="formatRedisDao" ref="redisDao"/><!-- 获取报文缓存 -->
+		<property name="templateRedisDao" ref="redisDao"/><!-- 授权详情页面展示数据模板 -->
+	</bean>
+	<!-- =======================redis缓存工具类结束=============================== -->
+	<!-- 单机版共享会话管理器 -->
+	<bean id="shareShiroSessionManager" class="bros.common.core.shiro.session.manager.ShareShiroSessionManager">
+		<property name="shiroSessionRedisDao" ref="sessionDAO"/>
+		<property name="shareSessionRedisDao" ref="redisDao"/>
+	</bean>
+	
+	<!-- ======================购物车缓存配置开始============================ -->
+	<bean id="shopCartEntityService" class="bros.provider.parent.cache.shop.cart.service.impl.ShopCartEntityServiceImpl">
+		<property name="expire" value="${sys.redis.shop.cart.expire}" /><!-- 失效时间，默认7天 -->
+		<property name="prefix" value="${sys.redis.shop.cart.prefix}" /><!-- 购物车主键前缀 -->
+		<property name="shopCartRedisDao" ref="redisDao" /><!-- 购物车缓存 -->
+	</bean>
+	<!-- ======================购物车缓存配置结束============================ -->
+</beans>

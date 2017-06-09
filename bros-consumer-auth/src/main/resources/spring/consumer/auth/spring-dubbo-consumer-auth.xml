@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!-- 内部授权对外发布服务 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pinsideAuthServiceFacade" interface="bros.p.auth.facade.service.IPInsideAuthServiceFacade" />
+	<!-- 对客授权任务中心对外发布服务 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="poutSideAuthServiceFacade" interface="bros.p.auth.facade.service.IPOutSideAuthSerivceFacade" />
+	
+	<!-- 监控bros-provider-auth模块是否存活 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="papplicationAliveMonitorAuthServiceFacade" interface="bros.p.monitor.service.IPApplicationAliveMonitorAuthServiceFacade" />
+	
+	
+     
+</beans>  

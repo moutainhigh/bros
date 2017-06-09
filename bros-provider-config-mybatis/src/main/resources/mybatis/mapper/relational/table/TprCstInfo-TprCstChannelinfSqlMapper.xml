@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.relational.table.tprcstinfo-tprcstchannelinf">
+	
+	<resultMap id="tprCstInfoResultMap" type="java.util.HashMap">
+		<result property="cstId" column="TCI_CSTID"/>
+		<result property="cstNo" column="TCI_CSTNO"/>
+		<result property="legalId" column="TCI_LEGALID"/>
+		<result property="hostNo" column="TCI_HOSTNO"/>
+		<result property="level" column="TCI_LEVEL"/>
+		<result property="nameCN" column="TCI_NAMECN"/>
+		<result property="nameEN" column="TCI_NAMEEN"/>
+		<result property="certType" column="TCI_CTFTYPE"/>
+		<result property="certNo" column="TCI_CTFNO"/>
+		<result property="sex" column="TCI_SEX"/>
+		<result property="birthDay" column="TCI_BIRTHDAY"/>
+		<result property="mobile1" column="TCI_MOBILE1"/>
+		<result property="mobile2" column="TCI_MOBILE2"/>
+		<result property="mobile3" column="TCI_MOBILE3"/>
+		<result property="address" column="TCI_ADDRESS"/>
+		<result property="phone" column="TCI_PHONE"/>
+		<result property="fax" column="TCI_FAX"/>
+		<result property="zipCode" column="TCI_ZIPCODE"/>
+		<result property="email" column="TCI_EMAIL"/>
+		<result property="allChannel" column="TCI_ALLCHANNEL"/>
+	</resultMap>
+	
+	<sql id="tpr_cst_info_param">
+	    TCI_CSTID,
+		TCI_CSTNO,
+		TCI_LEGALID,
+		TCI_HOSTNO,
+		TCI_LEVEL,
+		TCI_NAMECN,
+		TCI_NAMEEN,
+		TCI_CTFTYPE,
+		TCI_CTFNO,
+		TCI_SEX,
+		TCI_BIRTHDAY,
+		TCI_MOBILE1,
+		TCI_MOBILE2,
+		TCI_MOBILE3,
+		TCI_ADDRESS,
+		TCI_PHONE,
+		TCI_FAX,
+		TCI_ZIPCODE,
+		TCI_EMAIL,
+		TCI_ALLCHANNEL
+    </sql>
+
+	<!-- 根据法人ID+证件类型+证件号码查询个人客户基本信息 -->
+	<select id="queryTprCstInfoByCtfNo" resultMap="tprCstInfoResultMap">		  
+	      select <include refid="tpr_cst_info_param"/>
+			 from TPR_CST_INFO, TPR_CST_CHANNEL_INF 
+		  <![CDATA[	     
+		        where TCI_LEGALID = #{legalId}
+		          and TCI_CTFTYPE = #{certType}
+		          and TCI_CTFNO = #{certNo}
+		          and TCI_CSTID = TCCI_CSTID
+	      ]]>
+	</select>
+</mapper>

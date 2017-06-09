@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 客户管理  ================================================-->
+	<!-- 客户之声查询 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryTranCstleaveWordsAction_1.0.0" interface="bros.c.leavewodtran.facade.service.ICLeaveWodTranServiceFacade" >
+		<dubbo:method name="queryTranCstleaveWords"/>
+	</dubbo:reference>
+	<!-- 客户之声留言添加 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addTranCstleaveWordsAction_1.0.0" interface="bros.c.leavewodtran.facade.service.ICLeaveWodTranServiceFacade" >
+		<dubbo:method name="addTranCstleaveWords"/>
+	</dubbo:reference>
+	<!-- 客户之声处理状态更新 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateTranCstleaveWordsAction_1.0.0" interface="bros.c.leavewodtran.facade.service.ICLeaveWodTranServiceFacade" >
+		<dubbo:method name="updateCstleavewords"/>
+	</dubbo:reference>
+	<!-- 银行资讯查询 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryBankNoticeAction_1.0.0" interface="bros.c.leavewodtran.facade.service.ICBankNoticeServiceFacade" >
+		<dubbo:method name="queryBankNotice"/>
+	</dubbo:reference>
+	<!-- 银行资讯添加 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addBankNoticeAction_1.0.0" interface="bros.c.leavewodtran.facade.service.ICBankNoticeServiceFacade" >
+		<dubbo:method name="addBankNotice"/>
+	</dubbo:reference>
+	<!-- 银行资讯修改 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateBankNoticeAction_1.0.0" interface="bros.c.leavewodtran.facade.service.ICBankNoticeServiceFacade" >
+		<dubbo:method name="updateBankNotice"/>
+	</dubbo:reference>
+	<!-- 公告查询 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryNoticeAction_1.0.0" interface="bros.c.leavewodtran.facade.service.ICNoticeServiceFacade" >
+		<dubbo:method name="queryNotice"/>
+	</dubbo:reference>
+	<!-- 公告添加 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addNoticeAction_1.0.0" interface="bros.c.leavewodtran.facade.service.ICNoticeServiceFacade" >
+		<dubbo:method name="addNotice"/>
+	</dubbo:reference>
+	<!-- 公告修改 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateNoticeAction_1.0.0" interface="bros.c.leavewodtran.facade.service.ICNoticeServiceFacade" >
+		<dubbo:method name="updateNotice"/>
+	</dubbo:reference>
+</beans>  

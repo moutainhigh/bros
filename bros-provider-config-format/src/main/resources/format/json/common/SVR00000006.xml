@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000006SendFmt">
+	         <xmlRel rel="SendFmt"/>
+			 <xmlField tagName="configOptionId" dataName="configOptionId"/><!--配置选项标识-->
+			 <xmlField tagName="productId" dataName="productId"/><!--产品标识-->
+	</fmtDef>
+	<fmtDef id="SVR00000006RecFmt">
+	      <xmlRel rel="RecFmt"/>
+          <xmlList tagName="enumQuestionList" dataName="enumQuestionList"><!--调查信息列表 -->
+          	  <xmlTag>
+	             <xmlField tagName="description" dataName="description"/><!--问题英文名-->
+	             <xmlField tagName="question" dataName="question"/><!--问题中文名-->
+	             <xmlField tagName="custRequest" dataName="custRequest"/><!--是否是用户自己输入-->
+	             <xmlField tagName="enumTypeId" dataName="enumTypeId"/><!--枚举类型标识 -->
+	             <xmlList tagName="enumList" dataName="enumList"><!--问题枚举列表 -->
+		          	  <xmlTag>
+			             <xmlField tagName="enumId" dataName="enumId"/><!--枚举标识-->
+			             <xmlField tagName="descption" dataName="descption"/><!--枚举名称-->
+			          </xmlTag>
+       			 </xmlList>
+	          </xmlTag>
+         </xmlList>
+	</fmtDef>
+</formats>

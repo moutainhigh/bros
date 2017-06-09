@@ -1,0 +1,103 @@
+<!-- content部分开始 -->
+  <div class="content">
+    <div class="content-inner">
+      <div class="content-part1">
+        <div class="part1-top">
+          <p>个人信息</p>
+          <div class="part1-right" ng-hide="true">
+            <a href="">更新</a>
+            <a href="">修改密码</a>
+            <a href="">隐藏过去的</a>
+          </div>
+        </div>
+        <table class="a-table">
+          <tr>
+            <td>客户号</td>
+            <td ng-bind="vm.personSummaryInfo[0].partyId"></td>
+            <td>客户名称</td>
+            <td ng-bind="vm.personSummaryInfo[0].customerName"></td>
+          </tr>
+          <tr>
+            <td>证件类型</td>
+            <td ng-bind="vm.personSummaryInfo[0].contactCertificateTypeId  | idCardType"></td>
+            <td>号码</td>
+            <td ng-bind="vm.personSummaryInfo[0].contactCertificateNo"></td>
+          </tr>
+          <tr>
+            <td>手机号码</td>
+            <td ng-bind="vm.personSummaryInfo[0].mobilePhone"></td>
+            <td>通讯地址</td>
+            <td ng-bind="vm.personSummaryInfo[0].postalAddress"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="content-part2">
+        <div class="part2-top">
+          <p class="xinxi">家庭成员信息</p>
+        </div>
+        
+        <table class="a-table">
+          <tr>
+            <td>成员关系</td>
+            <td>姓名</td>
+            <td>证件类型</td>
+            <td>证件号码</td>
+            <td>出生日期</td>
+            <td>性别</td>
+            <td>职业</td>
+            <td>单位名称</td>
+            <td>月收入</td>
+            <td>学历</td>
+          </tr>
+          <tr ng-repeat="returnList in vm.familyMemberInfo">
+            <td ng-bind="returnList.partyRelationShipTypeId | relationShipType"></td>
+            <td ng-bind="returnList.custName"></td>
+            <td ng-bind="returnList.contactCertificateTypeId  | idCardType"></td>
+            <td ng-bind="returnList.contactCertificateNo"></td>
+            <td ng-bind="returnList.birthDate"></td>
+            <td ng-bind="returnList.gender | gender"></td>
+            <td ng-bind="returnList.flag | profession"></td>
+            <td ng-bind="returnList.partyGroupName"></td>
+            <td ng-bind="returnList.monthIncome | number:2"></td>
+            <td ng-bind="returnList.degree | degree"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="content-part2">
+        <div class="part3-top">
+          <p class="xinxi">社会关系信息</p>
+          <a href="" ng-hide="true">创建新的</a>
+        </div>
+        <table class="a-table">
+          <tr>
+            <td>社会关系</td>
+            <td>姓名</td>
+            <td>证件类型</td>
+            <td>证件号码</td>
+            <td>出生日期</td>
+            <td>性别</td>
+            <td>职业</td>
+            <td>单位名称</td>
+            <td>月收入</td>
+            <td>学历</td>
+          </tr>
+          <tr ng-repeat="returnList in vm.relativePersonInfo">
+            <td ng-bind="returnList.partyRelationShipTypeId | relationShipType"></td>
+            <td ng-bind="returnList.lastName"></td>
+            <td ng-bind="returnList.contactCertificateTypeId | idCardType"></td>
+            <td ng-bind="returnList.contactCertificateNo"></td>
+            <td ng-bind="returnList.birthDate"></td>
+            <td ng-bind="returnList.gender | gender"></td>
+            <td ng-bind="returnList.job | profession"></td>
+            <td ng-bind="returnList.partyName"></td>
+            <td ng-bind="returnList.monthIncome | number:2"></td>
+            <td ng-bind="returnList.qualify | degree"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="content-part4">
+       
+      </div>
+    </div>
+  </div>
+<!-- content部分结束 -->

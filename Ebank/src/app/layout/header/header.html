@@ -1,0 +1,65 @@
+<div ng-controller="HomeController as vm">
+    <div class="header-box" ng-show="$root.hideTopMenu">
+        <div class="header">
+            <div class="logo"></div>
+            <ul class="link">
+                <li><a href="#"><i class="glyphicon glyphicon-menu-right"></i>安全指引</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-menu-right"></i>常见问题</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-menu-right"></i>登录演示</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-menu-right"></i>网银助手</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="header-box" ng-show="$root.hideFooter">
+        <div class="header-bar-box">
+            <div class="header-bar">
+                <div class="message"><span><b>张先生</b>,欢迎您 ! 您有新消息</span><a href="#"><i class="glyphicon glyphicon-envelope"></i>12</a> !<a ng-click="vm.personOverviewPage();"><i class="glyphicon glyphicon-menu-down"></i></a>
+                </div>
+                <ul class="header-bar-btn">
+                	<li><a ui-sref="quotedPrice"><i class="glyphicon glyphicon-list-alt"></i>报价</a></li>
+                    <li><a ui-sref="demand"><i class="glyphicon glyphicon-list-alt"></i>需求</a></li>
+                    <li><a ui-sref="myOrder"><i class="glyphicon glyphicon-list-alt"></i>我的订单</a></li>
+                    <li><a href="javascript:;" ng-click="vm.logout()"><i class="glyphicon glyphicon-share"></i>安全退出</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="header">
+            <div class="logo"></div>
+            <div class="top-car" ng-controller="sideBarController as vm" ng-mouseenter="vm.carMouseenterFun();" ng-mouseleave="vm.carMouseleaveFun();">
+                <div class="top-car-btn"><i class="glyphicon glyphicon-shopping-cart"></i>
+                    <span>购物车</span><b ng-bind="length"></b><i class="glyphicon glyphicon-menu-down"></i>
+                </div>
+                <div class="top-car-box">
+                    <div class="top-car-title">我的购物车</div>
+                    <div class="top-car-list">
+                        <div class="list" ng-if="vm.products" ng-repeat="product in vm.products">
+                            <div class="ico"><i class="glyphicon glyphicon-yen"></i></div>
+                            <div class="title">
+                                <span ng-bind="product.productId"></span>
+                                <span ng-bind="product.productName"></span>
+                                <!-- <span ng-bind="product.prodName"></span> -->
+                            </div>
+                            <div class="money">
+                                <p><b ng-bind="product.tradeData.displayPrice|currency:'¥'"></b>x<b ng-bind="product.productAmount"></b></p>
+                                <p class="tool" ng-click="vm.productDelete($index,product)">删除</p>
+                            </div>
+                        </div>
+                        <div class="list" ng-if="!vm.products">
+                            购物车中还没有商品，赶紧选购吧！
+                        </div>
+                    </div>
+                    <div class="top-car-info">
+                        <div class="top-car-total"></div>
+                        <div class="top-car-info-btn" ng-show="vm.products.length > 0">
+                            <button type="button" class="btn btn-primary" ng-click="vm.compareBlockHidden()">清空购物车</button>
+                            <button type="button" class="btn btn-primary" ng-click="vm.goCompare()">结算</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-box">
+            <ebank-tree list="vm.treeMenuList"></ebank-tree>
+        </div>
+    </div>
+</div>

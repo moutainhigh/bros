@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- demo用例 -->
+<formats>
+	<xmlRel rel="head"/>
+	<xmlField dataName="tempHead" message="${CECO000000001}"/>
+	<xmlList dataName="list1" message="${CECO000000001}">
+		<xmlFiled dataName="tempHead1" message="${CECO000000001}"/>
+	</xmlList>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlList dataName="list" message="${CECO000000001}">
+				<xmlField variable="cstNoBody" dataName="cstNoBody" message="${CECO000000001}"/>
+				<xmlField dataName="nameBody" message="${CECO000000001}"/>
+				<xmlRel rel="head" />
+				<xmlTag dataName="tempMap" message="${CECO000000001}">
+					<xmlTag dataName="temp1Map" message="${CECO000000001}">
+						<xmlField dataName="cstNoBodyTemp1" message="${CECO000000001}"/>
+					</xmlTag>
+					<xmlField dataName="cstNoBodyTemp2" message="${CECO000000001}"/>
+					<xmlRel rel="head"/>
+				</xmlTag>
+		</xmlList>
+	</xmlTag>
+</formats>

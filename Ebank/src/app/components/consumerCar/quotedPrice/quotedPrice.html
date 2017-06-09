@@ -1,0 +1,38 @@
+<div class="main-box">
+    <div class="titile-step">
+        <div class="title">报价历史记录</div>
+    </div>
+
+    
+    <div class="financial-trade">
+        <table rules="rows">
+            <thead>
+                <tr>
+                    <th width="15%">请求编号</th>
+                    <th width="35%">名称</th>
+                    <th width="30%">描述</th>
+                    <th width="20%">状态</th>
+                    <th width="20%">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in vm.quoteList" ng-if="vm.quoteList">
+                    <td ng-bind="item.quoteId"></td>
+                    <td ng-bind="item.quoteName"></td>
+                    <td ng-bind="item.description"></td>
+                    <td ng-bind="item.status"></td>
+                    <td><button type="button" class="btn btn-default" ng-click="vm.showDetailInfo(item);">
+                    <i class="fa fa-fw fa-newspaper-o text-light-blue"></i> 详情</button>
+                    </td>
+                </tr>
+                <tr ng-if="vm.quoteList.length==0">
+                    <td colspan="4" style="text-align: center">暂无相关记录</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+   <!--  <paging class="small" page="vm.page.currentPage" page-size="vm.page.pageSize" total="vm.page.total" adjacent="{{vm.page.adjacent}}" dots="{{vm.page.dots}}" scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="vm.DoCtrlPagingAct('Paging Clicked', page, pageSize, total)">
+    </paging> -->
+
+</div>

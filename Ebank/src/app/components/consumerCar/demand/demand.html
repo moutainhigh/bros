@@ -1,0 +1,56 @@
+<div class="main-box">
+    <div class="titile-step">
+        <div class="title">需求</div>
+    </div>
+     <div class="trading-one-box">
+        <div class="ebank-input-box">
+            <div class="row">
+                <table class="table table-bordered no-margin">
+                    <tbody>
+                        <tr>
+                            <td class="td-title-bg" style="width:100px;">
+                                <div class="form-group">
+                                    <label for="txt_name" class="col-sm-12 control-label" align="right" >
+                                        <span class="red">*</span>名称：
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="col-sm-12"> 
+                                        <input type="text" required id="txt_name" name="txt_name" ng-model="vm.model.name" class="form-control ess-input"   placeholder="请输入名称">
+                                    </div>
+                                    <div class="col-sm-4 error" ng-messages="vm.regFormSubmit.txt_name.$error">
+                                        <span class="help-block" ng-message="required">请输入名称</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td-title-bg">
+                                <div class="form-group">
+                                    <label for="txt_describe" class="col-sm-12 control-label" align="right">
+                                        描述：
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <div class="col-sm-12"> 
+                                         <textarea  ng-model="vm.model.describe" class="form-control ess-input"  rows="10"   placeholder="请输入描述"></textarea>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8 btn-box-big">
+                        <button type="button" class="btn btn-primary btn-lg" ng-click="vm.submitgo();">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+

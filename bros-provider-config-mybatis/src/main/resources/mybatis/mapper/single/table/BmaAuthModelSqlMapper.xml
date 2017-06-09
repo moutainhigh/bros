@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.bmaauthmodel">
+	<resultMap id="bmaAuthModelMap" type="java.util.HashMap">
+		<result property="authorizeId" column="BAM_ID"/><!-- 模型编号 -->
+		<result property="name" column="BAM_NAME"/><!-- 授权模型名称-->
+		<result property="orderly" column="BAM_ORDERLY"/><!-- 授权顺序（0：无序授权，1：有序授权）-->
+		<result property="state" column="BAM_STATE"/><!-- 状态（0：停用；1：正常）-->
+		<result property="authRole" column="BAM_AUTHROLEREL"/><!-- 用于存放临柜指定授权时指定的角色 -->
+		<result property="channel" column="BAM_CHANNEL"/><!--渠道编码 -->
+		<result property="legalId" column="BAM_LEGALID"/>
+		<result property="authMode" column="BAM_AUTHMODE"/><!-- 授权方式（0：额度，1：强制，2：条件）-->
+		<result property="authType" column="BAM_AUTHTYPE"/><!-- 授权类型 0：即时生效，无需授权 1：互为授权  2：指定授权-->
+		<result property="authShape" column="BAM_AUTHSHAPE"/><!--授权形式 0：审核式 1：临柜 	-->
+		<result property="authLevel" column="BAM_AUTHLEVEL"/><!--授权级别（0：单人；1：多人） 	-->
+	</resultMap>
+	
+	<sql id="bma_auth_model_param">
+			BAM_ID,
+			BAM_NAME,
+			BAM_ORDERLY,
+			BAM_STATE,
+			BAM_AUTHROLEREL,
+			BAM_CHANNEL,
+			BAM_LEGALID,
+			BAM_AUTHMODE,
+			BAM_AUTHTYPE,
+			BAM_AUTHSHAPE,
+			BAM_AUTHLEVEL
+    </sql>
+    
+	<!-- 保存授权模型  -->
+	<insert id="insertBmaAuthModel" parameterType="java.util.HashMap">
+		insert into BMA_AUTH_MODEL(
+			<include refid="bma_auth_model_param"/>  
+		) values(
+			<![CDATA[ 
+				#{authorizeId},
+				#{name},
+				#{orderly},
+				#{state},
+				#{authRole},
+				#{channel},
+				#{legalId},
+				#{authMode},
+				#{authType},
+				#{authShape},
+				#{authLevel}
+	       	]]> 
+		)
+	</insert>
+	
+	<!-- 修改授权模型 -->
+	<update id="updateBmaAuthModel" parameterType="java.util.HashMap">
+	    <![CDATA[
+			update BMA_AUTH_MODEL
+			   set  
+					BAM_NAME = #{name},
+					BAM_ORDERLY = #{orderly},
+					BAM_STATE = #{state},
+					BAM_AUTHMODE = #{authMode},
+					BAM_AUTHTYPE  = #{authType},
+					BAM_AUTHSHAPE  = #{authShape},
+				    BAM_AUTHROLEREL = #{authRole},
+				    BAM_AUTHLEVEL = #{authLevel}
+			   where BAM_ID=#{authorizeId}
+			        AND  BAM_CHANNEL = #{channel}
+			    	AND  BAM_LEGALID = #{legalId}
+		]]> 
+	</update>
+	
+	<!-- 根据授权模型编号删除授权模型-->
+	<delete id="deleteBmaAuthModelByAuthorizeId" parameterType="java.util.HashMap">
+		<![CDATA[
+			DELETE FROM BMA_AUTH_MODEL 
+			  WHERE BAM_ID=#{authorizeId}
+			    AND BAM_CHANNEL=#{channel}
+			    AND BAM_LEGALID=#{legalId}
+		]]>    
+	</delete>
+	
+	<!-- 根据指定条件查询授权模型列表 -->
+	<select id="queryBmaAuthModel" resultMap="bmaAuthModelMap" parameterType="java.util.HashMap">
+		select  <include refid="bma_auth_model_param"/>  
+		   from BMA_AUTH_MODEL 
+		      where BAM_CHANNEL=#{channel}
+		            and BAM_LEGALID=#{legalId}
+		        <if test="authRole != null and authRole!=''">
+					and BAM_AUTHROLEREL=#{authRole}
+				</if>
+				<if test="name != null and name!=''">
+					and BAM_NAME=#{name}
+				</if>
+				<if test="orderly != null and orderly!=''">
+					and BAM_ORDERLY=#{orderly}
+				</if>
+				<if test="state != null and state!=''">
+					and BAM_STATE=#{state}
+				</if>
+				<if test="authMode != null and authMode!=''">
+					and BAM_AUTHMODE=#{authMode}
+				</if>
+				<if test="authType != null and authType!=''">
+					and BAM_AUTHTYPE=#{authType}
+				</if>
+				<if test="authShape != null and authShape!=''">
+					and BAM_AUTHSHAPE=#{authType}
+				</if>
+				<if test="authLevel != null and authLevel!=''">
+					and BAM_AUTHLEVEL=#{authLevel}
+				</if>
+	</select>
+	
+	<!-- 根据指定条件统计满足条件总记录数 -->
+	<select id="queryBmaAuthModelTotalNum" resultType="int"  parameterType="java.util.HashMap">
+		select  count(1)  
+		   from BMA_AUTH_MODEL 
+		        where BAM_CHANNEL=#{channel}
+		            and BAM_LEGALID=#{legalId}
+				 <if test="authRole != null and authRole !=''">
+					and BAM_AUTHROLEREL=#{authRole}
+				</if>
+				<if test="name != null and name!=''">
+					and BAM_NAME=#{name}
+				</if>
+				<if test="orderly != null and orderly!=''">
+					and BAM_ORDERLY=#{orderly}
+				</if>
+				<if test="state != null and state!=''">
+					and BAM_STATE=#{state}
+				</if>
+				<if test="authMode != null and authMode!=''">
+					and BAM_AUTHMODE=#{authMode}
+				</if>
+				<if test="authType != null and authType!=''">
+					and BAM_AUTHTYPE=#{authType}
+				</if>
+				<if test="authShape != null and authShape!=''">
+					and BAM_AUTHSHAPE=#{authType}
+				</if>
+				<if test="authLevel != null and authLevel!=''">
+					and BAM_AUTHLEVEL=#{authLevel}
+				</if>
+	</select>
+	
+	<!-- 根据授权模型名称查询授权模型信息 -->
+	<select id="queryBmaAuthModelByName" resultMap="bmaAuthModelMap" parameterType="java.util.HashMap">
+       select  <include refid="bma_auth_model_param"/>  
+	   <![CDATA[      
+	      from BMA_AUTH_MODEL 
+		        where BAM_CHANNEL=#{channel}
+			        and BAM_LEGALID=#{legalId}
+					and BAM_NAME=#{name}
+	   ]]>  
+	</select>
+	
+	<!-- 根据授权模型编号查询指定法人授权模型信息 -->
+	<select id="queryBmaAuthModelById" resultMap="bmaAuthModelMap" parameterType="java.util.HashMap">
+       select  <include refid="bma_auth_model_param"/>  
+	   <![CDATA[      
+	      from BMA_AUTH_MODEL 
+		        where BAM_ID=#{authorizeId}
+			        and BAM_LEGALID=#{legalId}
+					and BAM_CHANNEL=#{channel}
+	   ]]>  
+	</select>
+	
+</mapper>

@@ -1,0 +1,312 @@
+<div ng-repeat="itemShelFcodeList in shelfcodelist.returnList.children">
+
+    <!--借记卡-->
+    <div class="main-box" ng-repeat="accountList in list" ng-if="itemShelFcodeList.itemValue.shelfCode == vm.SD0101 && accountList.acctype == vm.ACCTYPE01">
+        <div class="account-list-box">
+            <div class="account-list-title">
+                <div class="card-box">
+                    <div class="card">
+                        <div class="card-img card2">
+                            <div class="card-number" ng-bind="accountList.accnum | cardCiper"></div>
+                        </div>
+                    </div>
+                    <div class="card-mask"><span ng-bind="itemShelFcodeList.itemValue.shelfName"></span></div>
+                </div>
+                <div class="card-info">
+                    <dl>
+                        <dd>账户别名</dd>
+                        <dt ng-bind="accountList.accname"></dt>
+                    </dl>
+                    <dl>
+                        <dd>账户余额(元)</dd>
+                        <dt ng-bind="accountList.acclance |currency:'¥'"></dt>
+                    </dl>
+                    <dl>
+                        <dd>账户状态</dd>
+                        <dt ng-bind="accountList.acctype"></dt>
+                    </dl>
+                </div>
+                <div class="card-btn">
+                    <button type="button" class="btn btn-primary btn-sm" ng-repeat="prdTypecodeList in itemShelFcodeList.children" ui-sref="{{prdTypecodeList.itemValue.bmfUrl}}">{{prdTypecodeList.itemValue.bmfName}}</button>
+                </div>
+            </div>
+            <div class="account-opne-btn"><span ng-click="vm.getSubAccount();">查看子账户</span><i class="glyphicon glyphicon-menu-up"></i></div>
+            <div class="account-list-detail-shadow"></div>
+            <div class="account-list-detail" style="display:">
+                <div class="tableList">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>子账户号</th>
+                                <th>币种</th>
+                                <th>钞／汇</th>
+                                <th>账户余额</th>
+                                <th>储种</th>
+                                <th>利率</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="subAccountList in vm.subAccountList">
+                                <td ng-bind="subAccountList.subAccountNumber"></td>
+                                <td ng-bind="subAccountList.currency"></td>
+                                <td ng-bind="subAccountList.notesFlag"></td>
+                                <td ng-bind="subAccountList.accountBalance"></td>
+                                <td ng-bind="subAccountList.kindFlag"></td>
+                                <td ng-bind="subAccountList.interestRate"></td>
+                                <td ng-bind="subAccountList.accountState"></td>
+                                <td><a href="">详情</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 翻页 开始 -->
+                <div class="pageDiv">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--定期一本通-->
+    <div class="main-box" ng-repeat="accountList in list" ng-if="itemShelFcodeList.itemValue.shelfCode == vm.SD0102 && accountList.acctype == vm.ACCTYPE02">
+        <div class="account-list-box">
+            <div class="account-list-title">
+                <div class="card-box">
+                    <div class="card">
+                        <div class="card-img card3">
+                            <div class="card-number" ng-bind="accountList.accnum | cardCiper"></div>
+                        </div>
+                    </div>
+                    <div class="card-mask"><span ng-bind="itemShelFcodeList.itemValue.shelfName"></span></div>
+                </div>
+                <div class="card-info">
+                    <dl>
+                        <dd>账户别名</dd>
+                        <dt ng-bind="accountList.accname"></dt>
+                    </dl>
+                    <dl>
+                        <dd>账户余额(元)</dd>
+                        <dt ng-bind="accountList.acclance |currency:'¥'"></dt>
+                    </dl>
+                    <dl>
+                        <dd>账户状态</dd>
+                        <dt ng-bind="accountList.acctype"></dt>
+                    </dl>
+                </div>
+                <div class="card-btn">
+                    <button type="button" class="btn btn-primary btn-sm" ng-repeat="prdTypecodeList in itemShelFcodeList.children" ui-sref="{{prdTypecodeList.itemValue.bmfUrl}}">{{prdTypecodeList.itemValue.bmfName}}</button>
+                </div>
+            </div>
+            <div class="account-opne-btn"><span ng-click="vm.getSubAccount();">查看子账户</span><i class="glyphicon glyphicon-menu-up"></i></div>
+            <div class="account-list-detail-shadow"></div>
+            <div class="account-list-detail" style="display:">
+                <div class="tableList">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>子账户号</th>
+                                <th>币种</th>
+                                <th>钞／汇</th>
+                                <th>账户余额</th>
+                                <th>储种</th>
+                                <th>利率</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="subAccountList in vm.subAccountList">
+                                <td ng-bind="subAccountList.subAccountNumber"></td>
+                                <td ng-bind="subAccountList.currency"></td>
+                                <td ng-bind="subAccountList.notesFlag"></td>
+                                <td ng-bind="subAccountList.accountBalance"></td>
+                                <td ng-bind="subAccountList.kindFlag"></td>
+                                <td ng-bind="subAccountList.interestRate"></td>
+                                <td ng-bind="subAccountList.accountState"></td>
+                                <td><a href="">详情</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 翻页 开始 -->
+                <div class="pageDiv">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--活期一本通-->
+    <div class="main-box" ng-repeat="accountList in list" ng-if="itemShelFcodeList.itemValue.shelfCode == vm.SD0103 && accountList.acctype == vm.ACCTYPE03">
+        <div class="account-list-box">
+            <div class="account-list-title">
+                <div class="card-box">
+                    <div class="card">
+                        <div class="card-img card2">
+                            <div class="card-number" ng-bind="accountList.accnum | cardCiper"></div>
+                        </div>
+                    </div>
+                    <div class="card-mask"><span ng-bind="itemShelFcodeList.itemValue.shelfName"></span></div>
+                </div>
+                <div class="card-info">
+                    <dl>
+                        <dd>账户别名</dd>
+                        <dt ng-bind="accountList.accname"></dt>
+                    </dl>
+                    <dl>
+                        <dd>账户余额(元)</dd>
+                        <dt ng-bind="accountList.acclance |currency:'¥'"></dt>
+                    </dl>
+                    <dl>
+                        <dd>账户状态</dd>
+                        <dt ng-bind="accountList.acctype"></dt>
+                    </dl>
+                </div>
+                <div class="card-btn">
+                    <button type="button" class="btn btn-primary btn-sm"  ng-repeat="prdTypecodeList in itemShelFcodeList.children" ui-sref = "{{prdTypecodeList.itemValue.bmfUrl}}">{{prdTypecodeList.itemValue.bmfName}}</button>
+                </div>
+            </div>
+            <div class="account-opne-btn"><span ng-click="vm.getSubAccount();">查看子账户</span><i class="glyphicon glyphicon-menu-up"></i></div>
+            <div class="account-list-detail-shadow"></div>
+            <div class="account-list-detail" style="display:">
+                <div class="tableList">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>子账户号</th>
+                                <th>币种</th>
+                                <th>钞／汇</th>
+                                <th>账户余额</th>
+                                <th>储种</th>
+                                <th>利率</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="subAccountList in vm.subAccountList">
+                                <td ng-bind="subAccountList.subAccountNumber"></td>
+                                <td ng-bind="subAccountList.currency"></td>
+                                <td ng-bind="subAccountList.notesFlag"></td>
+                                <td ng-bind="subAccountList.accountBalance"></td>
+                                <td ng-bind="subAccountList.kindFlag"></td>
+                                <td ng-bind="subAccountList.interestRate"></td>
+                                <td ng-bind="subAccountList.accountState"></td>
+                                <td><a href="">详情</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 翻页 开始 -->
+                <div class="pageDiv">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!--存单-->
+    <div class="main-box" ng-repeat="accountList in list" ng-if="itemShelFcodeList.itemValue.shelfCode == vm.SD0104 && accountList.acctype == vm.ACCTYPE04">
+        <div class="account-list-box">
+            <div class="account-list-title">
+                <div class="card-box">
+                    <div class="card">
+                        <div class="card-img card2">
+                            <div class="card-number" ng-bind="accountList.accnum | cardCiper"></div>
+                        </div>
+                    </div>
+                    <div class="card-mask"><span ng-bind="itemShelFcodeList.itemValue.shelfName"></span></div>
+                </div>
+                <div class="card-info">
+                    <dl>
+                        <dd>账户别名</dd>
+                        <dt ng-bind="accountList.accname"></dt>
+                    </dl>
+                    <dl>
+                        <dd>账户余额(元)</dd>
+                        <dt ng-bind="accountList.acclance |currency:'¥'"></dt>
+                    </dl>
+                    <dl>
+                        <dd>账户状态</dd>
+                        <dt ng-bind="accountList.acctype"></dt>
+                    </dl>
+                </div>
+                <div class="card-btn">
+                    <button type="button" class="btn btn-primary btn-sm" ng-repeat="prdTypecodeList in itemShelFcodeList.children" ui-sref="{{prdTypecodeList.itemValue.bmfUrl}}">{{prdTypecodeList.itemValue.bmfName}}</button>
+                </div>
+            </div>
+            <div class="account-opne-btn"><span ng-click="vm.getSubAccount();">查看子账户</span><i class="glyphicon glyphicon-menu-up"></i></div>
+            <div class="account-list-detail-shadow"></div>
+            <div class="account-list-detail" style="display:">
+                <div class="tableList">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                                <th>子账户号</th>
+                                <th>币种</th>
+                                <th>钞／汇</th>
+                                <th>账户余额</th>
+                                <th>储种</th>
+                                <th>利率</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="subAccountList in vm.subAccountList">
+                                <td ng-bind="subAccountList.subAccountNumber"></td>
+                                <td ng-bind="subAccountList.currency"></td>
+                                <td ng-bind="subAccountList.notesFlag"></td>
+                                <td ng-bind="subAccountList.accountBalance"></td>
+                                <td ng-bind="subAccountList.kindFlag"></td>
+                                <td ng-bind="subAccountList.interestRate"></td>
+                                <td ng-bind="subAccountList.accountState"></td>
+                                <td><a href="">详情</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 翻页 开始 -->
+                <div class="pageDiv">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

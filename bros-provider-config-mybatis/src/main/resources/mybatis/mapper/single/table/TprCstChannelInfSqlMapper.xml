@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.tprcstchannelinf">
+	
+	<resultMap id="tprCstChannelInfResultMap" type="java.util.HashMap">
+		<result property="cstId" column="TCCI_CSTID"/>
+		<result property="cstType" column="TCCI_CSTTYPE"/>
+		<result property="channel" column="TCCI_CHANNEL"/>
+		<result property="alias" column="TCCI_ALIAS"/>
+		<result property="password" column="TCCI_PASSWORD"/>
+		<result property="accProtect" column="TCCI_ACC_PROTECT"/>
+		<result property="pretentInfo" column="TCCI_PRETENTINFO"/>
+		<result property="branchNo" column="TCCI_BRANCHNO"/>
+		<result property="stt" column="TCCI_STT"/>
+		<result property="pwdReSet" column="TCCI_PWD_RESET"/>
+		<result property="pqReSet" column="TCCI_PQ_RESET"/>
+		<result property="pwdTime" column="TCCI_PWD_TIME"/>
+		<result property="timeOut" column="TCCI_TIME_OUT"/>
+		<result property="style" column="TCCI_STYLE"/>
+		<result property="picture" column="TCCI_PICTURE"/>
+		<result property="machineCode1" column="TCCI_MACHINE_CODE1"/>
+		<result property="machineCode2" column="TCCI_MACHINE_CODE2"/>
+		<result property="machineCode3" column="TCCI_MACHINE_CODE3"/>
+	</resultMap>
+	
+	<sql id="tpr_cst_channel_inf_param">
+		TCCI_CSTID,
+		TCCI_CSTTYPE,
+		TCCI_CHANNEL,
+		TCCI_ALIAS,
+		TCCI_PASSWORD,
+		TCCI_ACC_PROTECT,
+		TCCI_PRETENTINFO,
+		TCCI_BRANCHNO,
+		TCCI_STT,
+		TCCI_PWD_RESET,
+		TCCI_PQ_RESET,
+		TCCI_PWD_TIME,
+		TCCI_TIME_OUT,
+		TCCI_STYLE,
+		TCCI_PICTURE,
+		TCCI_MACHINE_CODE1,
+		TCCI_MACHINE_CODE2,
+		TCCI_MACHINE_CODE3
+    </sql>    
+	
+	<!-- 根据法人ID+渠道编号+别名查询个人客户渠道信息 -->
+	<select id="queryTprCstChannelInfByAlias" resultMap="tprCstChannelInfResultMap">		  
+	      select <include refid="tpr_cst_channel_inf_param"/>
+			 from TPR_CST_CHANNEL_INF, TPR_CST_INFO 
+		  <![CDATA[	     
+		        where TCCI_ALIAS = #{alias}
+		           and TCCI_CHANNEL = #{channel}
+		           and TCI_LEGALID = #{legalId}
+		           and TCCI_CSTID = TCI_CSTID
+	      ]]>
+	</select>
+	
+	<!-- 根据法人ID+渠道编号+手机号查询个人客户渠道信息 -->
+	<select id="queryTprCstChannelInfByMachineCode" resultMap="tprCstChannelInfResultMap">		  
+	      select <include refid="tpr_cst_channel_inf_param"/>
+			 from TPR_CST_CHANNEL_INF, TPR_CST_INFO 
+		  <![CDATA[	     
+		        where TCCI_CHANNEL = #{channel}
+		           and TCI_LEGALID = #{legalId}
+		           and TCCI_CSTID = TCI_CSTID
+		           and (TCCI_MACHINE_CODE1=#{machineCode} or TCCI_MACHINE_CODE2=#{machineCode} or TCCI_MACHINE_CODE3=#{machineCode})
+	      ]]>
+	</select>
+	
+	<!-- 根据客户标识查询个人客户渠道信息 -->
+	<select id="queryTprCstChannelInfByCstIdAndChannel" resultMap="tprCstChannelInfResultMap">		  
+	      select <include refid="tpr_cst_channel_inf_param"/>
+			 from TPR_CST_CHANNEL_INF
+		  <![CDATA[	     
+		        where TCCI_CSTID = #{cstId}
+		          and TCCI_CHANNEL = #{channel}
+	      ]]>
+	</select>
+
+    <!-- 更新个人客户渠道状态 -->
+    <update id="updateTprCstChannelSttByCstIdAndChannel" parameterType="java.util.HashMap">
+		<![CDATA[
+			update TPR_CST_CHANNEL_INF
+				set 
+					TCCI_STT=#{stt}
+				 where TCCI_CSTID=#{cstId}
+				    and TCCI_CHANNEL=#{channel}
+		 ]]> 
+	</update>
+	
+	<!-- 根据客户昵称查询个人客户渠道信息 -->
+	<select id="checkAliasIsExist" resultMap="tprCstChannelInfResultMap">		  
+	      select <include refid="tpr_cst_channel_inf_param"/>
+			 from TPR_CST_CHANNEL_INF
+		  <![CDATA[	     
+		        where TCCI_ALIAS = #{alias}
+	      ]]>
+	</select>
+	
+	<!-- 更新个人客户昵称和登录密码 -->
+    <update id="updateTprCstChannelAliasAndPwdByCstIdAndChannel" parameterType="java.util.HashMap">
+		<![CDATA[
+			update TPR_CST_CHANNEL_INF
+				set 
+					TCCI_ALIAS=#{alias},
+					TCCI_PASSWORD=#{newPassword},
+					TCCI_PWD_TIME=#{pwdTime}
+				 where TCCI_CSTID=#{cstId}
+				    and TCCI_CHANNEL=#{channel}
+				    and TCCI_PASSWORD=#{oldPassword}
+		 ]]> 
+	</update>
+	
+	<!-- 更新个人客户登录密码 -->
+    <update id="updateTprCstChannelPwdByKey" parameterType="java.util.HashMap">
+		<![CDATA[
+			update TPR_CST_CHANNEL_INF
+				set 
+					TCCI_PASSWORD=#{newPassword},
+					TCCI_PWD_TIME=#{pwdTime}
+				 where TCCI_CSTID=#{cstId}
+				    and TCCI_CHANNEL=#{channel}
+				    and TCCI_PASSWORD=#{oldPassword}
+		 ]]> 
+	</update>
+	<!-- 条件查询渠道客户信息-渠道  -->
+	<select id="queryTprCstChannelInfByCstNo" resultMap="tprCstChannelInfResultMap" parameterType="java.util.HashMap">
+		select  <include refid="tpr_cst_channel_inf_param"/>
+		 from TPR_CST_CHANNEL_INF, TPR_CST_INFO
+		 where TCCI_CHANNEL=#{channel} 
+		 and TCCI_STT!='5' 
+		 and TCI_LEGALID = #{legalId}
+		 and TCCI_CSTID = TCI_CSTID
+	</select>
+	<!-- 修改渠道客户信息-预留信息 -->
+	<update id="updateTprCstChannelInfo" parameterType="java.util.HashMap">
+	    update TPR_CST_CHANNEL_INF
+	    <set>
+	       TCCI_PRETENTINFO=#{pretentInfo}
+	    </set>
+	    where TCCI_CSTID = #{cstId} 
+	</update>
+	<!-- 条件查询渠道客户信息-客户号+渠道  -->
+	<select id="queryTprCstChannelInfo" resultMap="tprCstChannelInfResultMap" parameterType="java.util.HashMap">
+		select * from TPR_CST_CHANNEL_INF, TPR_CST_INFO
+		 where TCI_CSTNO=#{cstNo} 
+		 and TCCI_CHANNEL=#{channel} 
+		 and TCCI_STT!='5' 
+		 and TCI_LEGALID = #{legalId}
+		 and TCCI_CSTID = TCI_CSTID
+	</select>
+</mapper>

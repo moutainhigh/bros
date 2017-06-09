@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.puberrcode">
+	<sql id="pub_errcode_param">
+		pee_errcode,
+		pee_language,
+		pee_showmsg,
+		pee_type
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="pubErrCodeResult">
+    	<result property="errCode" column="pee_errcode"/><!-- 错误代码 -->
+    	<result property="language" column="pee_language"/><!-- 错误信息语种 -->
+    	<result property="showMsg" column="pee_showmsg"/><!-- 错误显示信息 -->
+    	<result property="type" column="pee_type"/><!-- 错误信息类型 -->
+    </resultMap>
+    
+    <!-- 查询错误码定义表 -->
+    <select id="queryPubErrCode" resultMap="pubErrCodeResult">
+       select
+       	<include refid="pub_errcode_param"/>
+       from pub_errcode
+    </select>
+    
+    <select id="selectCountMonitorApplicationAlive" resultType="int" parameterType="java.util.HashMap">
+    	select count(1) from pub_errcode
+    </select>
+    
+</mapper>

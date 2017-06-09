@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.tprapprove">
+	<sql id="tpr_approve_param">
+		TAE_ID,
+		TAE_CHLFLOWNO,
+		TAE_FLOWNO,
+		TAE_CHANNEL,
+		TAE_CSTNO,
+		TAE_CSTTYPE,
+		TAE_SENDAGENCY,
+		TAE_BSNCODE,
+		TAE_TRANSTYPE,
+		TAE_SCENECODE,
+		TAE_NOWTURNFLAG,
+		TAE_AUTELLERNO,
+		TAE_BATCHNO,
+		TAE_LEGALID,
+		TAE_PAYACCNO,
+		TAE_PAYACCNAME,
+		TAE_PAYBRANCHNO,
+		TAE_PAYBRANCHNAME,
+		TAE_TRANSAMT,
+		TAE_CURRENCY,
+		TAE_TRANSTIME,
+		TAE_RESIVEACCNO,
+		TAE_RESIVEACCNAME,
+		TAE_RESIVEBANKNAME,
+		TAE_RESIVEBANKNO,
+		TAE_FEEAMT,
+		TAE_PURPOSE,
+		TAE_SENDMSGFLAG,
+		TAE_SENDMSGMOBILE,
+		TAE_APPROVESTAT,
+		TAE_APPROVETIME,
+		TAE_APPROVEOPINION,
+		TAE_APPROVEREMARK,
+		TAE_BRANCHID,
+		TAE_TELLERNO,
+		TAE_NOTE1,
+		TAE_NOTE2	
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="approveResult">
+    	<result property="id" column="TAE_ID"/><!-- 唯一ID -->
+		<result property="chlFlowNo" column="TAE_CHLFLOWNO"/><!-- 渠道流水号 -->
+		<result property="flowNo" column="TAE_FLOWNO"/><!-- 原交易流水号 -->
+		<result property="channel" column="TAE_CHANNEL"/><!-- 渠道 -->
+		<result property="cstNo" column="TAE_CSTNO"/><!-- 客户号 -->
+		<result property="cstType" column="TAE_CSTTYPE"/><!-- 客户类型 -->
+		<result property="sendAgency" column="TAE_SENDAGENCY"/><!-- 发送机构 -->
+		<result property="bsnCode" column="TAE_BSNCODE"/><!-- 业务编码 -->
+		<result property="transType" column="TAE_TRANSTYPE"/><!-- 转账类型 -->
+		<result property="sceneCode" column="TAE_SCENECODE"/><!-- 场景编码 -->
+		<result property="nowTurnFlag" column="TAE_NOWTURNFLAG"/><!-- 现转标志 -->
+		<result property="autellerNo" column="TAE_AUTELLERNO"/><!-- 授权员 -->
+		<result property="batchNo" column="TAE_BATCHNO"/><!-- 批次号 -->
+		<result property="legalId" column="TAE_LEGALID"/><!-- 法人唯一标识 -->
+		<result property="payAccNo" column="TAE_PAYACCNO"/><!-- 付款账号 -->
+		<result property="payAccName" column="TAE_PAYACCNAME"/><!-- 付款户名 -->
+		<result property="payBranchNo" column="TAE_PAYBRANCHNO"/><!-- 付款行行号 -->
+		<result property="payBranchName" column="TAE_PAYBRANCHNAME"/><!-- 付款行行名 -->
+		<result property="transAmt" column="TAE_TRANSAMT"/><!-- 交易金额 -->
+		<result property="currency" column="TAE_CURRENCY"/><!-- 币种 -->
+		<result property="transTime" column="TAE_TRANSTIME"/><!-- 交易时间 -->
+		<result property="resiveAccNo" column="TAE_RESIVEACCNO"/><!-- 收款账号 -->
+		<result property="resiveAccName" column="TAE_RESIVEACCNAME"/><!-- 收款户名 -->
+		<result property="resiveBankName" column="TAE_RESIVEBANKNAME"/><!-- 收款账号开户行名称 -->
+		<result property="resiveBankNo" column="TAE_RESIVEBANKNO"/><!-- 收款账号开户行行号 -->
+		<result property="feeAmt" column="TAE_FEEAMT"/><!-- 手续费 -->
+		<result property="purpose" column="TAE_PURPOSE"/><!-- 附言 -->
+		<result property="sendMsgFlag" column="TAE_SENDMSGFLAG"/><!-- 是否发送短信通知 -->
+		<result property="sendMsgMobile" column="TAE_SENDMSGMOBILE"/><!-- 发送短信手机号 -->
+		<result property="approveStat" column="TAE_APPROVESTAT"/><!-- 审批状态 -->
+		<result property="approveTime" column="TAE_APPROVETIME"/><!-- 审批时间 -->
+		<result property="approveOpinion" column="TAE_APPROVEOPINION"/><!-- 审批意见 -->
+		<result property="approveRemark" column="TAE_APPROVEREMARK"/><!-- 审批附言 -->
+		<result property="branchId" column="TAE_BRANCHID"/><!-- 操作机构 -->
+		<result property="tellerNo" column="TAE_TELLERNO"/><!-- 操作员 -->
+		<result property="note1" column="TAE_NOTE1"/><!-- 预留字段1-->
+		<result property="note2" column="TAE_NOTE2"/><!-- 预留字段2-->
+    </resultMap>
+   
+       <!-- 查询落地限额审批信息 -->
+	<select id="queryApproveByStat" resultMap="approveResult" parameterType="java.util.HashMap">
+		select 
+		<include refid="tpr_approve_param" />
+		 from TPR_APPROVE where 1=1
+		<if test="payBranchNo != null and payBranchNo != '' ">
+			and TAE_PAYBRANCHNO=#{payBranchNo}
+		</if>
+		<if test="approveStat != null and approveStat != '' ">
+			and TAE_APPROVESTAT=#{approveStat}
+		</if>
+		<if test="cstNo != null and cstNo != '' ">
+			and TAE_CSTNO=#{cstNo}
+		</if>
+		<if test="tellerNo != null and tellerNo != '' ">
+			and TAE_TELLERNO=#{tellerNo}
+		</if>
+		<if test="cstType != null and cstType !='' ">
+			and TAT_CSTTYPE=#{cstType}
+		</if>
+		<if test="channel != null and channel != '' ">
+			and TAE_CHANNEL=#{channel}
+		</if>
+		<if test="legalId != null and legalId != '' ">
+			and TAE_LEGALID=#{legalId}
+		</if>
+		<if test="payAccNo != null and payAccNo != '' ">
+			and TAE_PAYACCNO=#{payAccNo}
+		</if>
+		<if test="resiveAccNo != null and resiveAccNo != '' ">
+			and TAE_RESIVEACCNO=#{resiveAccNo}
+		</if>
+		<if test="approveStat == '01' ">
+			order by TAE_TRANSTIME DESC
+		</if>
+		<if test="approveStat =='02' or approveStat=='03'">
+			order by TAE_APPROVETIME ASC
+		</if>
+		<if test="approveStat==null or approveStat==''">
+			order by TAE_TRANSTIME DESC
+		</if>
+	</select>
+	
+	<!-- 查询落地限额审批信息总记录数 -->
+	<select id="queryApproveByStatTotalNum" resultType="java.lang.Integer">
+		 select count(*) from TPR_APPROVE where 1=1
+		<if test="payBranchNo != null and payBranchNo != '' ">
+			and TAE_PAYBRANCHNO=#{payBranchNo}
+		</if>
+		<if test="approveStat != null and approveStat != '' ">
+			and TAE_APPROVESTAT=#{approveStat}
+		</if>
+		<if test="cstNo != null and cstNo != '' ">
+			and TAE_CSTNO=#{cstNo}
+		</if>
+		<if test="tellerNo != null and tellerNo != '' ">
+			and TAE_TELLERNO=#{tellerNo}
+		</if>
+		<if test="cstType != null and cstType !='' ">
+			and TAT_CSTTYPE=#{cstType}
+		</if>
+		<if test="channel != null and channel != '' ">
+			and TAE_CHANNEL=#{channel}
+		</if>
+		<if test="legalId != null and legalId != '' ">
+			and TAE_LEGALID=#{legalId}
+		</if>
+		<if test="payAccNo != null and payAccNo != '' ">
+			and TAE_PAYACCNO=#{payAccNo}
+		</if>
+		<if test="resiveAccNo != null and resiveAccNo != '' ">
+			and TAE_RESIVEACCNO=#{resiveAccNo}
+		</if>
+	</select>
+	<!-- 更新审批信息 -->
+	<update id="updateApproveInfo" parameterType="java.util.HashMap">
+		update TPR_APPROVE 
+		set
+			TAE_APPROVESTAT = #{approveStat},
+			TAE_APPROVEOPINION =#{approveOpinion},
+			TAE_APPROVETIME = #{approveTime}
+			<if test="postscript != null and postscript != '' ">
+				,TAE_APPROVEREMARK=#{postscript}
+			</if>
+		where TAE_ID = #{objectId}
+	</update>
+	<!-- 根据审批记录编号查询落地限额审批信息 -->
+	<select id="queryApproveByObjectId" resultMap="approveResult" parameterType="java.util.HashMap">
+		select 
+		<include refid="tpr_approve_param" />
+		 from TPR_APPROVE where TAE_ID=#{objectId}
+	</select>
+</mapper>

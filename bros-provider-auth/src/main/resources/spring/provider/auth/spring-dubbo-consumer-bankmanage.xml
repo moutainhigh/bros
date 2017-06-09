@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!-- 机构管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpbranchManageServiceFacade" interface="bros.p.bankmanage.facade.service.IPBranchManageServiceFacade" />
+	<!-- 柜员管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackptellerServiceFacade" interface="bros.p.bankmanage.facade.service.IPTellerServiceFacade" />
+	<!-- 柜员角色管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackptellerRoleServiceFacade" interface="bros.p.bankmanage.facade.service.IPTellerRoleServiceFacade" />
+	<!-- 菜单管理 --> 
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpmenudefServiceFacade" interface="bros.p.bankmanage.facade.service.IPMenudefServiceFacade"/>
+	<!-- 法人管理 --> 
+	<dubbo:reference check="false" version="1.0.0"  id="callbackplegalServiceFacade" interface="bros.p.bankmanage.facade.service.IPLegalServiceFacade"/>
+	<!-- 产品分类管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpproductTypeServiceFacade" interface="bros.p.bankmanage.facade.service.IPProductTypeServiceFacade"/>
+	<!-- 产品服务管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpproductServiceServiceFacade" interface="bros.p.bankmanage.facade.service.IPProductServiceServiceFacade"/>
+	<!-- 产品目录管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpproductCateServiceFacade" interface="bros.p.bankmanage.facade.service.IPProductCateServiceFacade"/>
+	<!-- 产品信息管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpproductInformationServiceFacade" interface="bros.p.bankmanage.facade.service.IPProductInformationServiceFacade"/>
+		
+	<!-- 渠道分组管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpchannelSysGroupServiceFacade" interface="bros.p.bankmanage.facade.service.IPChannelSysGroupServiceFacade" />
+	<!-- 渠道系统信息管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpchannelSysInfoServiceFacade" interface="bros.p.bankmanage.facade.service.IPChannelSysInfoServiceFacade" />
+	<!--商城管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpmallInfoServiceFacade" interface="bros.p.bankmanage.facade.service.IPMallInfoServiceFacade" />
+	<!--货架管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpshelfInfoServiceFacade" interface="bros.p.bankmanage.facade.service.IPShelfInfoServiceFacade" />
+	
+	<!-- 菜单与货架商品关联关系管理 -->	
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpmenuProRelServiceFacade" interface="bros.p.bankmanage.facade.service.IPMenuProRelServiceFacade"/>
+	<!--前端展示菜单调用接口管理 -->	
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpfrontShelfMenuRelServiceFacade" interface="bros.p.bankmanage.facade.service.IPFrontShelfMenuRelServiceFacade"/>
+	
+	<!-- 对内授权管理-->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpbmaAuthModelSerivceFacade" interface="bros.p.bankmanage.facade.service.IPBmaAuthModelSerivceFacade"/>
+	
+	<!-- 渠道客户信息管理-->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpcstManageServiceFacade" interface="bros.p.cst.facade.service.IPCstManageServiceFacade"/>
+	
+     
+</beans>  

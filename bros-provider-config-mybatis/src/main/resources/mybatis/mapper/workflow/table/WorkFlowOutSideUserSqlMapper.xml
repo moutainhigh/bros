@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.relational.table.outsideworkflowuser">
+
+	<resultMap type="java.util.HashMap" id="userResult">
+    	<result property="userId" column="TURR_USERID"/>
+    </resultMap>
+    <resultMap type="java.util.HashMap" id="cstResult">
+    	<result property="manage" column="tcic_manage"/>
+    </resultMap>
+   
+	<!-- 查询企业客户下有管理权限的状态正常操作员id列表-->
+    <select id="queryManageUserList"  parameterType="java.util.HashMap" resultMap="userResult">
+	    select d.turr_userid from ttp_user_role_rel d,ttp_user_inf_channel e where d.turr_userid in(
+		select c.tre_id from ttp_role c where c.tre_cstno=(
+		select tci_cstid from ttp_cst_inf a,ttp_cst_inf_channel b where a.tci_legalid=#{legalId} and a.tci_cstno=#{cstNo} and a.tci_cstid=b.tcic_cstid
+		and b.tcic_stt=#{userState})
+		and substr(c.tre_type,3,1)='1')
+		and d.turr_userid=e.tuin_id and e.tuin_stt=#{operatorState} and d.turr_userid!=#{userId}
+    </select>
+    <!-- 根据企业角色编号id查询状态正常的操作员 -->
+    <select id="queryUserList"  parameterType="java.util.HashMap" resultMap="userResult">
+	    select a.turr_userid from ttp_user_role_rel a,ttp_user_inf_channel b
+		where a.turr_roleid=#{roleId} and a.turr_userid=b.tuin_id
+		and b.tuin_stt=#{operatorState} and a.turr_userid!=#{userId}
+    </select>
+    <!-- 查询操作员id -->
+    <select id="queryUserIdByNo"  parameterType="java.util.HashMap" resultMap="userResult">
+	    select a.tui_id from ttp_user_inf where tui_cstno=(
+			select tci_cstid from ttp_cst_inf where tci_legalid=#{legalId} and tci_cstno=#{cstNo})
+		and tui_userno=#{operatorNo}
+    </select>
+    <!-- 查询渠道客户信息 -->
+    <select id="queryCstManage"  parameterType="java.util.HashMap" resultMap="cstResult">
+	    select tcic_manage from ttp_cst_inf_channel
+		where tcic_cstid=(select tci_cstid from ttp_cst_inf where tci_cstno=#{cstNo} and tci_legalid=#{legalId})
+    </select>
+</mapper>

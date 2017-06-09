@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<!-- 修改货架商品信息 -->
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="shelfCode" message="${CECO000000001}"/><!-- 货架编码 -->
+		<xmlField dataName="goodsCode" message="${CECO000000001}"/><!-- 商品编号 -->
+		<xmlField dataName="goodStatus" message="${CECO000000001}"/><!-- 商品状态 -->
+		<xmlField dataName="goodsFlag" message="${CECO000000001}"/><!-- 商品标志 -->
+    </xmlTag>
+</formats>

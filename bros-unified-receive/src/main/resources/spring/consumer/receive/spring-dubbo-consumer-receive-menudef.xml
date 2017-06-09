@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 菜单与货架商品关联关系管理  ================================================-->
+	<!-- 新增菜单与货架商品关系服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addMenuProRelAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMenuProRelServiceFacade">
+		<dubbo:method name="addMenuProRelMethod"/>
+	</dubbo:reference>
+	<!-- 修改菜单与货架商品关系服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateMenuProRelAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMenuProRelServiceFacade">
+		<dubbo:method name="updateMenuProRelMethod"/>
+	</dubbo:reference>
+	<!-- 删除菜单与货架商品关系服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="deleteMenuProRelAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMenuProRelServiceFacade">
+		<dubbo:method name="deleteMenuProRelMethod"/>
+	</dubbo:reference>
+	<!-- 查询菜单与货架商品关系服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryMenuProRelAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMenuProRelServiceFacade">
+		<dubbo:method name="queryMenuProRelMethod"/>
+	</dubbo:reference>
+	<!--================================================  前端登录查询菜单管理  ================================================-->
+	<!-- 查询个人网银柜员登录时展示的菜单信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryPbankLoginMenuAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICFrontShelfMenuRelServiceFacade">
+		<dubbo:method name="queryPbankLoginMenuMethod"/>
+	</dubbo:reference>
+	<!-- 查询柜面柜员登录时展示的菜单信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryFrontLoginMenuAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICFrontShelfMenuRelServiceFacade">
+		<dubbo:method name="queryFrontLoginMenuMethod"/>
+	</dubbo:reference>
+	<!-- 查询企业网银柜员登录时展示的菜单信息服务 
+	<dubbo:reference check="false" version="1.0.0"  id="queryCbankLoginMenuAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICFrontShelfMenuRelServiceFacade">
+		<dubbo:method name="queryCbankLoginMenuMethod"/>
+	</dubbo:reference>-->
+	<!-- 根据货架编号查询货架商品及菜单信息,适用于各个渠道服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryAllChlShelfGoodsByShelfCodeAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICFrontShelfMenuRelServiceFacade">
+		<dubbo:method name="queryAllChlShelfGoodsByShelfCodeMethod"/>
+	</dubbo:reference>
+	<!-- 根据货架编号查询子货架信息及货架上的商品、菜单信息,适用于各个渠道服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryShelfGoodsMenuRelByShelfCodeAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICFrontShelfMenuRelServiceFacade">
+		<dubbo:method name="queryShelfAndShelfGoodsMenuByShelfCodeMethod"/>
+	</dubbo:reference>
+	
+</beans>  

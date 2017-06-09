@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.relational.table.ttprole-ttpuserrolerel">
+	<sql id="ttprolettpuserrolerel">
+		tre_id,
+		tre_cstno,
+		tre_name,
+		tre_desc,
+		tre_createtime,
+		tre_createuser,
+		tre_moditime,
+		tre_modiuser,
+		tre_state,
+		tre_type
+<!-- 		tbf_bsncode, -->
+<!-- 		tbf_name -->
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="ttprolettpuserrolerelResult">
+    	<result property="treId" column="tre_id"/>
+		<result property="treCstno" column="tre_cstno"/>
+		<result property="treName" column="tre_name"/>
+		<result property="treDesc" column="tre_desc"/>
+		<result property="treCreatetime" column="tre_createtime"/>
+		<result property="treCreateuser" column="tre_createuser"/>
+		<result property="treModitime" column="tre_moditime"/>
+		<result property="treModiuser" column="tre_modiuser"/>
+		<result property="treState" column="tre_state"/>
+		<result property="treType" column="tre_type"/>
+<!-- 		<result property="tbfBsncode" column="tbf_bsncode"/> -->
+<!-- 		<result property="tbfName" column="tbf_name"/> -->
+    </resultMap>
+
+    <!-- 根据流水号查询明细表信息 -->
+	<select id="queryRoleListByOperatorId" resultMap="ttprolettpuserrolerelResult">
+		SELECT <include refid="ttprolettpuserrolerel"/>
+		FROM ttp_role r,ttp_user_role_rel trbr
+		WHERE r.tre_id = trbr.turr_roleid
+		and   trbr.turr_USERID = #{operatorId}
+    </select>
+</mapper>

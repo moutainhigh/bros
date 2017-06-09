@@ -1,0 +1,47 @@
+<div class="bank-list-box" ng-controller="bankListController as vm">
+    <div class="bank-title">选择开户行</div>
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">热门银行</a></li>
+        <li role="presentation"><a href="#">ABCDE</a></li>
+        <li role="presentation"><a href="#">FGHI</a></li>
+        <li role="presentation"><a href="#">JKLMN</a></li>
+        <li role="presentation"><a href="#">TWXYZ</a></li>
+    </ul>
+  <!--   <div class="bank-list clearfix">
+        <ul>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+            <li>中国工商银行</li>
+        </ul>
+    </div> ng-repeat="bank in vm.bankList | limitTo: vm.showLimit" ng-if="bank.bankCode != '401'"-->
+
+
+    <div class="bank-list clearfix">
+        <div   ng-repeat="bank in vm.bankList | limitTo: vm.showLimit">
+            <ul>
+                <li ng-click="vm.selectBank(bank.bankCode)"><span ng-bind="bank.bankName"></span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="bank-list clearfix" ng-if="vm.showMore">
+        <span class="show-more-btn" ng-click="vm.showMore()">显示更多</span>
+    </div>
+
+</div>

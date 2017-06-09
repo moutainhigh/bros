@@ -1,0 +1,33 @@
+{
+    RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+	"signCustomerNum": "1",
+	"tokenNo": "1234567890-=",
+	"custIdentiType": "1",
+	"custIdentiName": "个人客户",
+	"userName": "李伟",
+	"accountNo": "62261701066998541",
+	"operatorNum": "1",
+	"signAppCode": "1",
+	"tokenStatus": "1"
+}

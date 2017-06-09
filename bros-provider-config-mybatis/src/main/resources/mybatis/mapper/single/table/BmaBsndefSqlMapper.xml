@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.bmabsndef">
+	<sql id="pub_bsndef_par">
+		bbf_id,
+        bbf_bsncode,
+        bbf_name,
+        bbf_alias,
+        bbf_desc,
+        bbf_type,
+        bbf_bsnlv
+        bbf_group,
+        bbf_userlv,
+        bbf_stt,
+        bbf_url,
+        bbf_requireauth,
+        bbf_channel,
+        bbf_canbatch,
+        bbf_model
+	</sql>
+	<sql id="pub_bsnRelMenu_par">
+		BURL_BSNID,
+        burl_menueid
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="bmaBsndefResult">
+    	<result property="bbfId" column="bbf_id"/>						<!-- bbfId -->
+    	<result property="bbfBsnCode" column="bbf_bsncode"/>			<!-- 业务编码 -->
+    	<result property="bbfName" column="bbf_name"/>					<!-- 业务名称 -->
+    	<result property="bbfAlias" column="bbf_alias"/>				<!-- 业务别名 -->
+    	<result property="bbfDesc" column="bbf_desc"/>					<!-- 业务描述 -->
+    	<result property="bbfType" column="bbf_type"/>					<!-- 业务类型（0：普通交易；1：网银查询交易；2：付款录入交易；3：授权交易；4：代理业务录入交易；5：维护类交易；6：申请录入类交易；9：管理台交易；10：交易发送 ；S为系统交易） -->
+    	<result property="bbfBsnlv" column="bbf_bsnlv"/>				<!-- 业务级别（0：默认开通交易；1：需申请交易） -->
+    	<result property="bbfGroup" column="bbf_group"/>				<!-- 是否为集团客户专有交易（0：普通交易；1：集团交易） -->
+    	<result property="bbfUserlv" column="bbf_userlv"/>				<!-- 用户级别（0：密码用户专有；1：证书用户专有；2：公有） -->
+    	<result property="bbfStt" column="bbf_stt"/>					<!-- 交易状态（0：正常；1：冻结） -->
+    	<result property="bbfUrl" column="bbf_url"/>					<!-- 指向明细查询URL -->
+    	<result property="bbfRequireAuth" column="bbf_requireauth"/>	<!-- 是否需要授权（0:无需授权、1:金额相关、2:金额无关、3:管理类授权） -->
+    	<result property="bbfChannel" column="bbf_channel"/>			<!-- 渠道唯一标识 -->
+    	<result property="bbfCanbatch" column="bbf_canbatch"/>			<!-- 是否可以批量授权（0：否 ,1：是） -->
+    	<result property="bbfModel" column="bbf_model"/>				<!-- 授权详情页面模板名称 -->
+    	<result property="burlBsnCode" column="BURL_BSNID"/>				<!-- 业务编号 -->
+    	<result property="burlMenueId" column="burl_menueid"/>				<!-- 菜单编号 -->
+    </resultMap>
+    
+      <select id="queryBsnFunByAll" resultMap="bmaBsndefResult">
+       select
+       	<include refid="pub_bsndef_par"/> 
+       from bma_bsndef where 1=1 
+       <if test="bbfId !='' and bbfId != null">
+        and bbf_id = #{bbfId}
+       </if>
+       <if test="bbfBsnCode !='' and bbfBsnCode != null">
+        and bbf_bsncode = #{bbfBsnCode}
+       </if>
+       <if test="bbfChannel !='' and bbfChannel != null">
+        and bbf_channel = #{bbfChannel}
+       </if>
+       <if test="bbfType !='' and bbfType != null">
+        and bbf_type = #{bbfType}
+       </if>
+    </select>
+    <select id="queryBsnFunRelMenudef" resultMap="bmaBsndefResult">
+       SELECT a.BURL_BSNID,a.burl_menueid from bma_menu_bsndef_rel a,bma_bsndef b where
+        a.BURL_BSNID=b.bbf_id
+ 		and b.bbf_channel=#{bbfChannel} 
+ 		and a.burl_menueid=#{burlMenueId}
+ 	   <if test="bbfType !='' and bbfType != null">
+        and b.bbf_type = #{bbfType}
+       </if>
+       <if test="bbfId !='' and bbfId != null">
+        and a.BURL_BSNID = #{bbfId}
+       </if>
+    </select>
+    <!-- 添加业务功能与菜单关联 -->
+    <insert id="insertBsnRelMenu" parameterType="java.util.HashMap">
+    	<foreach collection="list" item="item" index="index" separator=";" >
+	        insert into bma_menu_bsndef_rel(
+	    		<include refid="pub_bsnRelMenu_par"/>
+	    	)values(
+	    	<![CDATA[ 
+				#{item.burlBsnCode},
+				#{item.burlMenueId}
+				)
+		    ]]>
+		 </foreach>
+    </insert>
+     <!--更新业务菜单关联表  -->
+<!--     <update id="updateBsnRelMenu" parameterType="java.util.HashMap"> -->
+<!-- 	    <foreach collection="list" item="item" index="index" separator=";" > -->
+<!-- 	         	UPDATE bma_menu_bsndef_rel  -->
+<!-- 	         	  SET  BURL_BSNID=#{item.burlBsnCode}, -->
+<!-- 	         	       burl_menueid=#{item.burlMenueId} -->
+<!-- 				WHERE    BURL_BSNID=#{item.burlBsnCode} -->
+<!-- 					AND  burl_menueid=#{item.burlMenueId} -->
+<!-- 	     </foreach>   -->
+<!-- 	</update> -->
+	<!-- 删除菜单 -->
+	<delete id="deleteBsnRelMenu" parameterType="java.util.HashMap">
+		<foreach collection="list" item="item" index="index" separator=";" >
+			delete from bma_menu_bsndef_rel
+				 <![CDATA[ 
+					where BURL_BSNID=#{item.burlBsnCode}
+					AND  burl_menueid=#{item.burlMenueId}
+				 ]]>
+		</foreach>
+	</delete> 
+	<!-- 根据条件查询业务菜单关联笔数 -->	
+    <select id="queryBsnRelMenuNum"  parameterType="java.util.HashMap" resultType="java.lang.Integer">
+	       SELECT  count(*)
+	              FROM bma_menu_bsndef_rel
+	       WHERE  BURL_BSNID=#{item.burlBsnCode}
+					AND  burl_menueid=#{item.burlMenueId}
+    </select>
+    <!-- 单笔新增业务功能信息 -->
+    <insert id="insertOneBsndef" parameterType="java.util.HashMap">
+   		 insert into bma_bsndef ( <include refid="pub_bsndef_par"/>) 
+	    <![CDATA[ 
+		    values(
+		   		#{bbfId},
+		   		#{bbfBsnCode},
+				#{bbfName},
+				#{bbfAlias},
+				#{bbfDesc},
+				#{bbfType},
+				#{bbfBsnlv},
+				#{bbfGroup},
+				#{bbfUserlv},
+				#{bbfStt},
+				#{bbfUrl},
+				#{bbfRequireAuth},
+				#{bbfChannel},
+				#{bbfCanbatch},
+				#{bbfModel}
+		       )
+	    ]]>  
+    </insert>
+    <!-- 单笔修改业务功能信息 -->
+	<update id="updateOneBsndef" parameterType="java.util.HashMap">
+		update bma_bsndef
+				 <![CDATA[ 
+					set
+						bbf_name = #{bbfName},
+						bbf_alias = #{bbfAlias},
+						bbf_desc = #{bbfDesc},
+						bbf_type = #{bbfType},
+						bbf_bsnlv = #{bbfBsnlv},
+						bbf_group = #{bbfGroup},
+						bbf_userlv = #{bbfUserlv},
+						bbf_stt = #{bbfStt},
+						bbf_url = #{bbfUrl},
+						bbf_requireauth = #{bbfRequireAuth},
+						bbf_channel = #{bbfChannel},
+						bbf_canbatch = #{bbfCanbatch},
+						bbf_model = #{bbfCanbatch}
+					where  bbf_id = #{bbfId}
+				 ]]>
+	</update>
+	<!-- 单笔删除业务功能信息 -->
+	<delete id="deleteOneBsndef" parameterType="java.util.HashMap">
+		delete from bma_bsndef
+				 <![CDATA[ 
+					where bbf_id = #{bbfId}
+				 ]]>
+	</delete>
+	
+    
+    <!-- 根据functionId查询functionName -->
+	<select id="queryFunctionNameByFunctionId" resultMap="bmaBsndefResult" parameterType="java.util.HashMap">
+			SELECT b.bbf_name
+			FROM bma_bsndef b 
+			WHERE b.bbf_id=#{bbfId}
+	</select>
+	
+		<!-- 根据角色编号列表查询角色信息列表 -->
+	<select id="queryTtpRoleByRoleIdList" resultMap="bmaBsndefResult" parameterType="java.util.HashMap">
+	    select <include refid="pub_bsndef_par"/>
+	      from bma_bsndef 
+	        where bbf_id in
+			<foreach item="item" index="index" collection="funcIdArray" open="(" separator="," close=")">  
+			     <![CDATA[#{item}]]>
+			</foreach>
+	</select>
+</mapper>

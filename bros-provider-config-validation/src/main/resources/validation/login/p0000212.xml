@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="questionNo" message="${CECO000000001}"><!-- 私密问题编号 -->
+		   <validator class="IsRamdomLength" min="36" symbol="e" message="${CECO000000004}"/>
+		</xmlField>
+		<xmlField dataName="customerAnswer" message="${CECO000000001}"><!-- 私密问题答案 -->
+		   <validator class="IsRamdomLength" min="1" max="150" symbol="r" message="${CECO000000007}"/>
+		</xmlField>
+	</xmlTag>
+</formats>

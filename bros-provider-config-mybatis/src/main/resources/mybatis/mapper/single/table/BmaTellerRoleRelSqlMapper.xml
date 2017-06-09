@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.single.table.bmatellerrolerel">
+
+    <resultMap type="java.util.HashMap" id="bmaTellerRolesetResultMap">
+    	<result property="tellerId" column="BURL_TELLERID"/><!-- 柜员编号 -->
+		<result property="roleId" column="burl_roleid"/><!-- 角色编号-->
+		<result property="note1" column="burl_note1"/><!-- 备用字段1 -->
+		<result property="note2" column="burl_note2"/><!-- 备用字段2 -->
+
+    </resultMap>
+
+	<sql id="bma_tellerrole_set">
+	    BURL_TELLERID,
+		burl_roleid,
+		burl_note1,
+		burl_note2
+	</sql>
+   
+	<!-- 设置柜员角色关联 -->
+    <insert id="setTellerRole" parameterType="java.util.HashMap">
+   		 insert into bma_teller_role_rel ( <include refid="bma_tellerrole_set"/>) 
+		values
+		   <foreach collection="list" item="item" index="index" separator="," >
+			  (
+			  	#{item.tellerId},
+				#{item.roleId},
+				#{item.note1},
+				#{item.note2}
+			  )
+		   </foreach> 
+    </insert>
+    <!-- 删除柜员角色关联 -->
+	<delete id="deleteTellerRolerel" parameterType="java.util.HashMap">
+		delete from bma_teller_role_rel
+				 <![CDATA[ 
+					where BURL_TELLERID = #{tellerId}
+				 ]]>
+	</delete>
+</mapper>

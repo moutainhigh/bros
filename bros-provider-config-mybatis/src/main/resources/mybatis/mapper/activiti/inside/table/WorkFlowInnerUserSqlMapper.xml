@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.activiti.inside.table.workflowinneruser">
+
+    <resultMap id="userResult" type="java.util.HashMap">
+		<result property="userId" column="BTR_ID"/><!-- 柜员id -->
+		<result property="roleId" column="BURL_ROLEID"/><!-- 角色id -->
+		<result property="branchCode" column="BTR_BRANCHCODE"/><!-- 机构编号 -->
+		<result property="tellerCode" column="BTR_CODE"/><!-- 柜员编号 -->
+		<result property="tellerName" column="BTR_NAME"/><!-- 柜员名称 -->
+	</resultMap>
+	<resultMap id="userRoleResult" type="java.util.HashMap">
+		<result property="userId" column="btr_id"/><!-- 柜员id -->
+		<result property="branchCode" column="BTR_BRANCHCODE"/><!-- 机构号 -->
+		<result property="tellerCode" column="btr_code"/><!-- 柜员编号 -->
+		<result property="tellerName" column="btr_name"/><!-- 柜员名称 -->
+		<result property="roleName" column="bre_name"/><!-- 柜员角色名称 -->
+	</resultMap>
+	
+	<sql id="tellerParam">
+		btr_id,
+		BTR_BRANCHCODE,
+		btr_code,
+		btr_name
+	</sql>
+	
+	<sql id="tellerRoleParam">
+		btr_id,
+		BTR_BRANCHCODE,
+		btr_code,
+		btr_name,
+		bre_name
+	</sql>
+	<!-- 根据柜员id查询柜员信息（多个）-->
+    <select id="queryTellerInfoById"  parameterType="java.util.HashMap" resultMap="userResult">
+	       SELECT <include refid="tellerParam"/>
+	              FROM BMA_TELLER
+	       WHERE  BTR_ID in
+	       <foreach collection="userIdList" index="index" item="userId" open="(" separator="," close=")">
+   				#{userId}
+  		   </foreach>
+    </select>
+	<!-- 根据法人id+柜员id查询柜员信息（单个）-->
+    <select id="queryTellerInfoByIdOne"  parameterType="java.util.HashMap" resultMap="userResult">
+	       SELECT <include refid="tellerParam"/>
+	              FROM BMA_TELLER
+	       WHERE BTR_LEGAL=#{legalId} AND BTR_ID=#{userId}
+    </select>
+    
+	<!-- 根据法人id+柜员编号查询柜员信息（单个）-->
+    <select id="queryTellerInfoByUserNoOne"  parameterType="java.util.HashMap" resultMap="userResult">
+	       SELECT <include refid="tellerParam"/>
+	              FROM BMA_TELLER
+	       WHERE BTR_LEGAL=#{legalId} AND BTR_CODE=#{userNo}
+    </select>
+    
+	<!-- 根据法人,柜员号查询柜员id-->
+    <select id="queryTellerIdByCode"  parameterType="java.util.HashMap" resultMap="userResult">
+	       SELECT <include refid="tellerParam"/>
+	              FROM BMA_TELLER
+	       WHERE  BTR_LEGAL=#{legalId}
+		   AND  BTR_CODE=#{tellerCode}
+    </select>
+    
+    <!-- 根据柜员号id查询柜员角色id-->
+    <select id="queryTellerRoleByTellerId"  parameterType="java.util.HashMap" resultMap="userResult">
+	       SELECT BURL_ROLEID
+	              FROM BMA_TELLER_ROLE_REL
+	       WHERE  BURL_TELLERID=#{tellerId}
+    </select>
+    
+     <!-- 根据柜员id、法人id,机构号，查询该机构下与该柜员角色相同的柜员列表-->
+    <select id="querySameRoleTellerListByTellerIdAndBranchNo"  parameterType="java.util.HashMap" resultMap="userResult">
+	       SELECT a.BTR_ID
+	              FROM BMA_TELLER a,BMA_TELLER_ROLE_REL b
+	       WHERE  a.BTR_BRANCHCODE=#{branchNo} and b.BURL_TELLERID=a.BTR_ID and a.BTR_ID!=#{userId}
+	       and b.BURL_ROLEID=(
+	       SELECT BURL_ROLEID from BMA_TELLER_ROLE_REL where BURL_TELLERID=#{userId})
+	       and a.BTR_LEGAL=#{legalId}
+    </select>
+    
+    
+    <!-- 根据柜员id查询柜员和角色信息（多个）-->
+    <select id="queryTellerRoleInfoById"  parameterType="java.util.HashMap" resultMap="userRoleResult">
+		    select 
+				<include refid="tellerRoleParam"/>
+			from bma_teller a left join (
+				select BURL_TELLERID,bre_name 
+				from bma_teller_role_rel b, bma_role c  
+				where b.burl_roleid=c.bre_id and c.bre_legal=#{legalId}
+			) e on a.btr_id=e.BURL_TELLERID where a.btr_id in 
+		    <foreach collection="tellerIdList" index="index" item="userId" open="(" separator="," close=")">
+					#{userId}
+		    </foreach>
+    </select>
+</mapper>

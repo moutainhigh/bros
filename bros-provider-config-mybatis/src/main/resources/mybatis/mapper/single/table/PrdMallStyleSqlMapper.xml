@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.prdmallstyle">
+	<sql id="mall_style_param">
+		PMS_MAILLID,
+		PMS_STYLEID
+	</sql>
+
+	<resultMap type="java.util.HashMap" id="mallStyleMap">
+		<result property="mallId" column="PMS_MAILLID" />
+        <result property="styleId" column="PMS_STYLEID" />
+	</resultMap>
+
+	<!--根据商城ID查询商城样式 -->
+	<select id="queryMallStyleByMallId" resultMap="mallStyleMap">
+		select
+		<include refid="mall_style_param" />
+		from PRD_MALL_STYLE
+	      	 <![CDATA[ 
+	     		where PMS_MAILLID = #{mallId}
+	     	]]>
+	</select>
+	<!--根据商城ID、样式名称查询商城样式是否存在 -->
+	<select id="queryMallStyleByStyleIdAndMallId" resultMap="mallStyleMap">
+		select
+		<include refid="mall_style_param" />
+		from PRD_MALL_STYLE
+	      	 <![CDATA[ 
+	     		where PMS_MAILLID = #{mallId} and PMS_STYLEID = #{styleId}
+	     	]]>
+	</select>
+
+	<!-- 新增商城样式-->
+	<insert id="insertMallStyle" parameterType="java.util.HashMap">
+		insert into PRD_MALL_STYLE (
+		<include refid="mall_style_param" />) 
+	    <![CDATA[ 
+		    values(
+		   		 #{mallId},
+		   		 #{styleId}
+		       )
+	    ]]>
+	</insert>
+    <!-- 删除商城样式-->
+	<delete id="deleteMallStyle" parameterType="java.util.HashMap">
+		delete from PRD_MALL_STYLE 
+	    <![CDATA[ 
+	     where PMS_MAILLID = #{mallId} and PMS_STYLEID = #{styleId}
+	    ]]>
+	</delete>
+	<!--根据商城ID查询商城样式 总条数-->
+	<select id="queryMallStyleTotalNumByMallId" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from PRD_MALL_STYLE
+	      	 <![CDATA[ 
+	     		where PMS_MAILLID = #{mallId}
+	     	]]>
+	</select>
+</mapper>

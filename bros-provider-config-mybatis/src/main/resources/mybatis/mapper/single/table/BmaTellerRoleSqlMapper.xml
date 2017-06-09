@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.single.table.bmatellerrole">
+
+    <resultMap type="java.util.HashMap" id="bmaTellerRoleResultMap">
+    	<result property="breId" column="bre_id"/><!-- 角色编号主键 -->
+		<result property="breLegal" column="bre_legal"/><!-- 法人ID（对应法人表CMA_LEGAL中的CLL_ID字段）-->
+		<result property="breName" column="bre_name"/><!-- 角色名称 -->
+		<result property="breDesc" column="bre_desc"/><!-- 角色描述 -->
+		<result property="breLevel" column="bre_level"/><!-- 角色级别 -->
+		<result property="breBranchid" column="bre_branchid"/><!-- 机构编号 -->
+		<result property="breCategory" column="bre_category"/><!-- 角色类型 -->
+		<result property="brePrivilege" column="bre_privilege"/><!-- 角色权限 0：指定机构 1：指定机构及下属 2：指定级别   -->
+		<result property="breModitime" column="bre_moditime"/><!-- 最后修改时间 -->
+		<result property="breModiuser" column="bre_modiuser"/><!-- 最后修改人 -->
+		<result property="breAddbranch" column="bre_addbranch"/><!-- 角色的创建机构 -->
+		<result property="breChannel" column="bre_channel"/><!-- 系统标识：1001：柜面 1002：内管 -->
+		<result property="breCode" column="bre_note1"/><!-- 备用字段 角色码 -->
+		<result property="breNote2" column="bre_note2"/><!-- 备用字段-->
+
+    </resultMap>
+
+    <sql id="bma_tellerrole_queryall">
+	    bre_id,
+		bre_legal,
+		bre_name,
+		bre_desc,
+		bre_level,
+		bre_branchid,
+		bre_category,
+		bre_privilege,
+		bre_moditime,
+		bre_modiuser,
+		bre_addbranch,
+		bre_channel,
+		bre_note1,
+		bre_note2
+	</sql>
+
+    <!-- 查询柜员角色信息 -->
+    <select id="queryTellerRole" resultMap="bmaTellerRoleResultMap">
+       select
+       	<include refid="bma_tellerrole_queryall"/>
+       from bma_role
+       			<![CDATA[ 
+	     		 	where  bre_legal = #{breLegal}
+	       		 ]]> 
+	       		 <if test="breCode != null and breCode != ''">
+			        and   bre_note1 = #{breCode}
+				</if>
+     			<if test="breBranchid != null and breBranchid != ''">
+			        and   bre_branchid = #{breBranchid}
+				</if> 
+	       		<if test="breChannel != null and breChannel != ''">
+			        and   bre_channel = #{breChannel}
+				</if>
+    </select>
+    <!-- 查询柜员角色信息总条数 -->
+    <select id="queryTellerRoleNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    	select count(*) from bma_role
+    			<![CDATA[ 
+	     		 	where  bre_legal = #{breLegal}
+	       		 ]]> 
+	       		<if test="breCode != null and breCode != ''">
+			        and   bre_note1 = #{breCode}
+				</if>
+     			<if test="breBranchid != null and breBranchid != ''">
+			        and   bre_branchid = #{breBranchid}
+				</if> 
+	       		<if test="breChannel != null and breChannel != ''">
+			        and   bre_channel = #{breChannel}
+				</if>
+    </select>
+    <!-- 新增柜员角色 -->
+    <insert id="insertTellerRole" parameterType="java.util.HashMap">
+   		 insert into bma_role ( <include refid="bma_tellerrole_queryall"/>) 
+	    <![CDATA[ 
+		    values(
+		   		#{breId},
+				#{breLegal},
+				#{breName},
+				#{breDesc},
+				#{breLevel},
+				#{breBranchid},
+				#{breCategory},
+				#{brePrivilege},
+				#{breModitime},
+				#{breModiuser},
+				#{breAddbranch},
+				#{breChannel},
+				#{breCode},
+				#{breNote2}
+		       )
+	    ]]>  
+    </insert>
+     <!-- 更新柜员角色信息 -->
+	<update id="updateTellerRole" parameterType="java.util.HashMap">
+		update bma_role
+				 <![CDATA[ 
+					set
+						bre_name = #{breName},
+						bre_desc = #{breDesc},
+						bre_moditime = #{breModitime},
+						bre_modiuser = #{breModiuser}
+					where bre_legal = #{breLegal}
+						and   bre_id = #{breId}
+				 ]]>
+	</update>
+	<!-- 删除柜员角色信息 -->
+	<delete id="deleteTellerRole" parameterType="java.util.HashMap">
+		delete from bma_role
+				 <![CDATA[ 
+					where bre_legal = #{breLegal}
+						and   bre_id = #{breId}
+				 ]]>
+	</delete>
+	<!-- 查询柜员已分配角色信息 -->
+    <select id="querySetTellerRole" resultMap="bmaTellerRoleResultMap">
+       select
+       	<include refid="bma_tellerrole_queryall"/>
+       from bma_role
+       			<![CDATA[ 
+	     		 	where bre_legal = #{breLegal} 
+	     		 	and bre_id in (
+	     		 	select burl_roleid from 
+	     		 		bma_teller_role_rel 
+	     		 			where BURL_TELLERID=#{tellerId} 
+	     		 			);
+	       		 ]]> 
+    </select>
+</mapper>

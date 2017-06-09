@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.activiti.outside.table.bmabsndef">
+	
+	<resultMap id="bmaBsnResultMap" type="java.util.HashMap">
+		<result property="id" column="BBF_ID"/>
+		<result property="bsnCode" column="BBF_BSNCODE"/>
+		<result property="bsnName" column="BBF_NAME"/>
+		<result property="alias" column="BBF_ALIAS"/>
+		<result property="desc" column="BBF_DESC"/>
+		<result property="type" column="BBF_TYPE"/>
+		<result property="bsnLv" column="BBF_BSNLV"/>
+		<result property="group" column="BBF_GROUP"/>
+		<result property="stt" column="BBF_STT"/>
+		<result property="url" column="BBF_URL"/>
+		<result property="requireAuth" column="BBF_REQUIREAUTH"/>
+		<result property="channel" column="BBF_CHANNEL"/>
+		<result property="canBatch" column="BBF_CANBATCH"/>
+	</resultMap>
+	
+	<sql id="bma_bsn_def_param">
+		BBF_ID,
+		BBF_BSNCODE,
+		BBF_NAME,
+		BBF_ALIAS,
+		BBF_DESC,
+		BBF_TYPE,
+		BBF_BSNLV,
+		BBF_GROUP,
+		BBF_USERLV,
+		BBF_STT,
+		BBF_URL,
+		BBF_REQUIREAUTH,
+		BBF_CHANNEL,
+		BBF_CANBATCH
+    </sql>
+    
+	<!-- 根据业务编号列表查询业务定义信息列表 -->
+	<select id="queryBmaBsnDefListByBsnCode" resultMap="bmaBsnResultMap">  
+		  select  <include refid="bma_bsn_def_param"/>
+			  from BMA_BSNDEF 
+			     where BBF_CHANNEL=#{channel}
+			     and BBF_BSNCODE in  
+		  <foreach item="item" index="index" collection="bsnCodeArray" open="(" separator="," close=")">  
+		      <![CDATA[#{item}]]>
+		  </foreach> 
+	</select>
+
+</mapper>

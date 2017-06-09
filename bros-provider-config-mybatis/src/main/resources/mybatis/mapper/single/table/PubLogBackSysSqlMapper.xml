@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.publogbacksys">
+	<sql id="pub_log_backsys_param">
+		PLS_FLOWSEQ,
+		PLS_BACKFLOWSEQ,
+		PLS_GLOBALFLOWSEQ,
+		PLS_RELATIVEFLOWSEQ,
+		PLS_CHANNEL,
+		PLS_BACKERRCODE,
+		PLS_BACKERRMSG,
+		PLS_TRANSTARTTIME,
+		PLS_TRANENDTIME
+	</sql>
+	
+	<!-- 调用BIP服务日志插入 -->
+	<insert id="insertPubLogBackSys" parameterType="java.util.HashMap">
+		insert into PUB_LOGBACKSYS (
+				<include refid="pub_log_backsys_param" />) 
+	    values(
+	         #{flowSeq},
+	   		 #{backFlowSeq},
+	   		 #{globalFlowSeq},
+	   		 #{relativeFlowSeq},
+	         #{channel},
+	         #{backErrCode},
+	         #{backErrMsg},
+	         #{tranStartTime},
+	         #{tranEndTime}
+	       )
+
+	</insert>
+	
+	<!-- 调用BIP服务日志更新 -->
+	<update id="updatePubLogBackSys" parameterType="java.util.HashMap">
+		update PUB_LOGBACKSYS
+		<set>
+			<if test="backFlowSeq !='' and backFlowSeq != null">
+				PLS_BACKFLOWSEQ = #{backFlowSeq},
+			</if>
+			
+			<if test="backErrCode !='' and backErrCode != null">
+				PLS_BACKERRCODE = #{backErrCode},
+			</if>
+			<if test="backErrMsg !='' and backErrMsg != null">
+				PLS_BACKERRMSG = #{backErrMsg},
+			</if>
+			<if test="tranEndTime !='' and tranEndTime != null">
+				PLS_TRANENDTIME = #{tranEndTime},
+			</if>
+		</set>
+		where PLS_FLOWSEQ = #{flowSeq} 
+	</update>
+
+</mapper>

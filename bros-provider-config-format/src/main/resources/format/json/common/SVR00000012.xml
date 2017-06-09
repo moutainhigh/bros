@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000012SendFmt">										   <!-- 需求提交 -->
+			<xmlRel rel="SendFmt" />
+			<xmlField tagName="partyId" dataName="partyId" />                  <!-- 当事人标识 -->
+			<xmlField tagName="listName" dataName="listName" />                <!-- 列名 -->
+			<xmlField tagName="productStoreId" dataName="productStoreId" />    <!-- 店铺标识 -->
+			<xmlField tagName="description" dataName="description" />      	   <!-- 描述 -->
+			<xmlField tagName="currencyUom" dataName="currencyUom" />      	   <!-- 币种 -->
+			<xmlList tagName="inputList" dataName="inputList">                 <!--输入列表-->
+		 		<xmlTag>
+                     <xmlField tagName="productId" dataName="productId"/>      <!--产品标识-->
+                     <xmlField tagName="custRequestItemSeqId" dataName="custRequestItemSeqId"/><!--客户请求明细序号标识-->
+                     <xmlField tagName="quantity" dataName="quantity"/>        <!--数量-->
+                </xmlTag>
+	         </xmlList>
+	</fmtDef>
+	<fmtDef id="SVR00000012RecFmt">
+			<xmlRel rel="RecFmt" />
+			<xmlField tagName="custRequestId" dataName="custRequestId" /><!--客户请求标识 -->
+			<xmlField tagName="productId" dataName="productId" />		<!--产品标识 -->
+			<xmlField tagName="seqId" dataName="seqId"/>	            <!--序号标识-->
+			<xmlField tagName="quantity" dataName="quantity"/>          <!--数量 -->
+			<xmlField tagName="configId" dataName="configId"/>         	<!--配置项标识 -->
+	</fmtDef>
+</formats>

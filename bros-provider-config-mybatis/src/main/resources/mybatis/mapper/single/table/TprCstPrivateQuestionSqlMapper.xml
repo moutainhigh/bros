@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.tprcstprivatequestion">
+	
+	<resultMap id="tprCstPrivateQuestionResultMap" type="java.util.HashMap">
+		<result property="pqId" column="TCPQ_PQID"/>
+		<result property="cstId" column="TCPQ_CSTID"/>
+		<result property="answer" column="TCPQ_ANSWER"/>
+	</resultMap>
+	
+	<sql id="tpr_cst_private_question_param">
+	    TCPQ_PQID,
+		TCPQ_CSTID,
+		TCPQ_ANSWER
+    </sql>
+    
+	<!-- 根据主键查询指定私密问题答案 -->
+	<select id="queryTprCstPrivateQuestionByKey" resultMap="tprCstPrivateQuestionResultMap">		  
+	      select <include refid="tpr_cst_private_question_param"/>
+			 from TPR_CST_PRIVATE_QUESTION
+		  <![CDATA[	     
+		        where TCPQ_PQID = #{pqId}
+		          and TCPQ_CSTID = #{cstId}
+	      ]]>
+	</select>
+	
+	<!-- 根据客户标识查询私密问题关联列表 -->
+	<select id="queryTprCstPrivateQuestionListByCstId" resultMap="tprCstPrivateQuestionResultMap">		  
+	      select <include refid="tpr_cst_private_question_param"/>
+			 from TPR_CST_PRIVATE_QUESTION
+		  <![CDATA[	     
+		        where TCPQ_CSTID = #{cstId}
+	      ]]>
+	</select>
+	
+	<!-- 保存个人客户与私密问题关系信息 -->
+    <insert id="insertTprCstPrivateQuestion" parameterType="java.util.HashMap">
+        insert into TPR_CST_PRIVATE_QUESTION(
+    		<include refid="tpr_cst_private_question_param"/>
+    	)values(
+    	    <![CDATA[ 
+		    	#{pqId},
+				#{cstId},
+				#{answer}
+			]]>
+    </insert>
+
+</mapper>

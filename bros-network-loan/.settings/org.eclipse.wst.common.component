@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="bros-network-loan">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="bros-network-config-dev-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-network-config/bros-network-config">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-network-config-mybatis-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-network-config-mybatis/bros-network-config-mybatis">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-network-config-validation-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-network-config-validation/bros-network-config-validation">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-common-core-validation-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-common-core-validation/bros-common-core-validation">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-common-core-comm-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-common-core-comm/bros-common-core-comm">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-pre-common-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-pre-common/bros-pre-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-network-parent-account-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-network-parent-account/bros-network-parent-account">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-network-parent-loan-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-network-parent-loan/bros-network-parent-loan">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-network-parent-manage-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-network-parent-manage/bros-network-parent-manage">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-network-parent-product-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-network-parent-product/bros-network-parent-product">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="bros-network-parent-transfer-1.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/bros-network-parent-transfer/bros-network-parent-transfer">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="bros-network-loan"/>
+        <property name="java-output-path" value="/bros-network-loan/target/classes"/>
+    </wb-module>
+</project-modules>

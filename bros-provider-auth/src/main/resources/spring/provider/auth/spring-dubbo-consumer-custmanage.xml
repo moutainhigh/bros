@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!-- 对客授权管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpttpAuthModelSerivceFacade" interface="bros.p.custmanage.facade.service.IPTtpAuthModelSerivceFacade"/>
+	
+	<!--操作员管理  -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpoperatorManageServiceFacade" interface="bros.p.custmanage.facade.service.IPOperatorManageServiceFacade"/>
+	<!--角色管理  -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackproleManageServiceFacade" interface="bros.p.custmanage.facade.service.IPRoleManageServiceFacade" />
+	
+	<!--购物车  -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpshoppingCartServiceFacade" interface="bros.p.common.facade.service.IPShoppingCartServiceFacade" />
+
+	
+	<!--客户之声  -->
+	<dubbo:reference check="false" version="1.0.0"  id="callbackpcustomervoiceServiceFacade" interface="bros.p.custmanage.facade.service.IPCustomervoiceServiceFacade" />
+</beans>  

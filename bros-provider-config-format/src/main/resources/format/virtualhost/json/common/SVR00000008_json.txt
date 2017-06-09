@@ -1,0 +1,191 @@
+{
+	RspSvcHeader: {
+        channelDate: "",
+        acctDate: "",
+        tranTime: "",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20170214",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "",
+        langCode: "",
+        BackendSeqNo: "02021702140000000000094602",
+        globalSeqNo: "",
+        TranTime: "142911634",
+        backendSysId: "",
+        ReturnMsg: "交易成功"
+    },
+    
+    errorMessage: "",
+    responseMessage: "success",
+
+    productPromos: [
+            {
+                "contentImg": "/images/products/MODEL10001_Image_L/promo.jpg",
+                "productIdList": [
+                    {
+                        "price": "0.000",
+                        "requireAmount": "N",
+                        "chargeShipping": "Y",
+                        "imageAdress": "/images/products/CARD_0521_10000-01/small.jpg",
+                        "productConfigOptionList": [
+                            {
+                                "configOptionId": "CARD_0521_10010",
+                                "configOptionName": "人民币活期开户",
+                                "configOptionPrice": "5.000"
+                            }
+                        ],
+                        "textData": "<h3>产品特点</h3><p>1.人民币和多种外币存取款及<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9299182\">通存通兑</a>业务。外币包括：美元、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">欧元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">日元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">港币</a>、英镑、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">加拿大元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">澳大利亚元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">瑞士法郎</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">新加坡元和澳门元</a>(仅限广东省)；</p><p>2.本人、他人之间转账；（外币见相关网页）</p><p>3.境内、境外<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">汇款</a>、自动入账；</p><p>4.预留密码方可通存通兑（下同）</p><h3>结算功能（限于个人结算账户）</h3><p>1.办理和使用<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"681305\">借记卡</a>；</p><p>2.开通<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2219528\">电话银行</a>、网上银行等<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5410435\">电子渠道</a>服务；</p><p>3.办理<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">外汇宝</a>、基金、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">国债</a>、保险、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">银证转账</a>、银券通等投资理财业务；</p><p>4.代发工资、代发养老保险金等；</p><p>5.代缴纳电话、手机、水电煤气等各种<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9209991\">公用事业收费</a>；</p><p>6.ATM取现、商户消费等。</p><h3>适用对象</h3><p>中国居民、港澳台居民、居住在中国境内外的外国人、外籍华人和华侨，均可凭实名制认可的<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5039723\">有效身份证件</a>在<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"245376\">中国银行</a>开立活期储蓄存款账户；另外主要采用活期存折、信用卡（银联卡等）等。</p><h3>办理流程</h3><p>携相关<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">证件</a>到各银行商业网点柜台办理 。</p><p><strong>提交证件</strong></p><p>1.中国公民</p><p>16岁以上中国公民，应出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2080960\">居民身份证</a>/<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"973253\">临时身份证</a>。</p><p>军人、武装警察尚未申领居民身份证的，可出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"373161\">军人身份证</a>、武装警察身份证。</p><p>居住在境内或境外的中国籍华侨,可出具中国护照。</p><p>2.港澳台居民</p><p>往来内地通行证/台湾居民/来往大陆通行证/或其他有效旅行证件。</p><p>3.外国公民（外国人、外籍华人和华侨）</p><p>护照/华侨持中国护照/外国人居留许可证。</p><p>4.16岁之前的未成年人</p><p>如果有身份证，要在监护人的监护下办理，且只能办理存折（<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"921064\">中国民生银行</a>除外），没有身份证的，可用居民户口簿</p><p>温馨提示：</p><p>1.个人每日存款外币现钞不得超过<em><strong>5000</strong></em>美元（其他外币折合等值5000美元）；</p><p>2.个人每日取款外币现钞不得超过<em><strong>10,000</strong></em>美元（其他外币折合等值10,000美元）；</p><p>3.个人每日到柜台提取人民币现金超过<em><strong>50000</strong></em>元，需提前预约；</p><p>4.开户起存金额 1元人民币或100元人民币的等值外币。</p>",
+                        "productCategoryList": [
+                            {
+                                "thirdProductCategoryId": "",
+                                "rootProductCategoryId": "MODEL-FPSC-BL",
+                                "parentProductCategoryId": "MODEL-FPSC-DP02001"
+                            },
+                            {
+                                "thirdProductCategoryId": "",
+                                "rootProductCategoryId": "MODEL-FPSC-DP",
+                                "parentProductCategoryId": "DFD-BEST-SELL"
+                            }
+                        ],
+                        "productName": "润和鼎元卡个人人民币活期",
+                        "productId": "CARD_0521_10000-01"
+                    },
+                    {
+                        "price": "0.000",
+                        "requireAmount": "N",
+                        "chargeShipping": "Y",
+                        "imageAdress": "/images/products/CARD_0521_10000-01/small.jpg",
+                        "productConfigOptionList": [
+                            {
+                                "configOptionId": "CARD_0521_10010",
+                                "configOptionName": "人民币活期开户",
+                                "configOptionPrice": "5.000"
+                            }
+                        ],
+                        "textData": "<h3>产品特点</h3><p>1.人民币和多种外币存取款及<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9299182\">通存通兑</a>业务。外币包括：美元、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">欧元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">日元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">港币</a>、英镑、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">加拿大元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">澳大利亚元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">瑞士法郎</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">新加坡元和澳门元</a>(仅限广东省)；</p><p>2.本人、他人之间转账；（外币见相关网页）</p><p>3.境内、境外<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">汇款</a>、自动入账；</p><p>4.预留密码方可通存通兑（下同）</p><h3>结算功能（限于个人结算账户）</h3><p>1.办理和使用<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"681305\">借记卡</a>；</p><p>2.开通<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2219528\">电话银行</a>、网上银行等<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5410435\">电子渠道</a>服务；</p><p>3.办理<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">外汇宝</a>、基金、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">国债</a>、保险、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">银证转账</a>、银券通等投资理财业务；</p><p>4.代发工资、代发养老保险金等；</p><p>5.代缴纳电话、手机、水电煤气等各种<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9209991\">公用事业收费</a>；</p><p>6.ATM取现、商户消费等。</p><h3>适用对象</h3><p>中国居民、港澳台居民、居住在中国境内外的外国人、外籍华人和华侨，均可凭实名制认可的<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5039723\">有效身份证件</a>在<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"245376\">中国银行</a>开立活期储蓄存款账户；另外主要采用活期存折、信用卡（银联卡等）等。</p><h3>办理流程</h3><p>携相关<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">证件</a>到各银行商业网点柜台办理 。</p><p><strong>提交证件</strong></p><p>1.中国公民</p><p>16岁以上中国公民，应出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2080960\">居民身份证</a>/<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"973253\">临时身份证</a>。</p><p>军人、武装警察尚未申领居民身份证的，可出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"373161\">军人身份证</a>、武装警察身份证。</p><p>居住在境内或境外的中国籍华侨,可出具中国护照。</p><p>2.港澳台居民</p><p>往来内地通行证/台湾居民/来往大陆通行证/或其他有效旅行证件。</p><p>3.外国公民（外国人、外籍华人和华侨）</p><p>护照/华侨持中国护照/外国人居留许可证。</p><p>4.16岁之前的未成年人</p><p>如果有身份证，要在监护人的监护下办理，且只能办理存折（<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"921064\">中国民生银行</a>除外），没有身份证的，可用居民户口簿</p><p>温馨提示：</p><p>1.个人每日存款外币现钞不得超过<em><strong>5000</strong></em>美元（其他外币折合等值5000美元）；</p><p>2.个人每日取款外币现钞不得超过<em><strong>10,000</strong></em>美元（其他外币折合等值10,000美元）；</p><p>3.个人每日到柜台提取人民币现金超过<em><strong>50000</strong></em>元，需提前预约；</p><p>4.开户起存金额 1元人民币或100元人民币的等值外币。</p>",
+                        "productCategoryList": [
+                            {
+                                "thirdProductCategoryId": "",
+                                "rootProductCategoryId": "MODEL-FPSC-BL",
+                                "parentProductCategoryId": "MODEL-FPSC-DP02001"
+                            },
+                            {
+                                "thirdProductCategoryId": "",
+                                "rootProductCategoryId": "MODEL-FPSC-DP",
+                                "parentProductCategoryId": "DFD-BEST-SELL"
+                            }
+                        ],
+                        "productName": "润和鼎元卡个人人民币活期",
+                        "productId": "CARD_0521_10000-01"
+                    }
+                ],
+                "promoText": "现在开通润个人借记卡，可以免除工本费、手续费，快加入润和大家庭吧！！",
+                "productPromoId": "MODEL10001"
+            },
+            {
+                "contentImg": "/images/products/MODEL10001_Image_L/promo.jpg",
+                "productIdList": [
+                    {
+                        "price": "0.000",
+                        "requireAmount": "N",
+                        "chargeShipping": "Y",
+                        "imageAdress": "/images/products/CARD_0521_10000-01/small.jpg",
+                        "productConfigOptionList": [
+                            {
+                                "configOptionId": "CARD_0521_10010",
+                                "configOptionName": "人民币活期开户",
+                                "configOptionPrice": "5.000"
+                            }
+                        ],
+                        "textData": "<h3>产品特点</h3><p>1.人民币和多种外币存取款及<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9299182\">通存通兑</a>业务。外币包括：美元、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">欧元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">日元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">港币</a>、英镑、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">加拿大元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">澳大利亚元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">瑞士法郎</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">新加坡元和澳门元</a>(仅限广东省)；</p><p>2.本人、他人之间转账；（外币见相关网页）</p><p>3.境内、境外<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">汇款</a>、自动入账；</p><p>4.预留密码方可通存通兑（下同）</p><h3>结算功能（限于个人结算账户）</h3><p>1.办理和使用<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"681305\">借记卡</a>；</p><p>2.开通<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2219528\">电话银行</a>、网上银行等<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5410435\">电子渠道</a>服务；</p><p>3.办理<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">外汇宝</a>、基金、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">国债</a>、保险、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">银证转账</a>、银券通等投资理财业务；</p><p>4.代发工资、代发养老保险金等；</p><p>5.代缴纳电话、手机、水电煤气等各种<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9209991\">公用事业收费</a>；</p><p>6.ATM取现、商户消费等。</p><h3>适用对象</h3><p>中国居民、港澳台居民、居住在中国境内外的外国人、外籍华人和华侨，均可凭实名制认可的<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5039723\">有效身份证件</a>在<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"245376\">中国银行</a>开立活期储蓄存款账户；另外主要采用活期存折、信用卡（银联卡等）等。</p><h3>办理流程</h3><p>携相关<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">证件</a>到各银行商业网点柜台办理 。</p><p><strong>提交证件</strong></p><p>1.中国公民</p><p>16岁以上中国公民，应出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2080960\">居民身份证</a>/<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"973253\">临时身份证</a>。</p><p>军人、武装警察尚未申领居民身份证的，可出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"373161\">军人身份证</a>、武装警察身份证。</p><p>居住在境内或境外的中国籍华侨,可出具中国护照。</p><p>2.港澳台居民</p><p>往来内地通行证/台湾居民/来往大陆通行证/或其他有效旅行证件。</p><p>3.外国公民（外国人、外籍华人和华侨）</p><p>护照/华侨持中国护照/外国人居留许可证。</p><p>4.16岁之前的未成年人</p><p>如果有身份证，要在监护人的监护下办理，且只能办理存折（<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"921064\">中国民生银行</a>除外），没有身份证的，可用居民户口簿</p><p>温馨提示：</p><p>1.个人每日存款外币现钞不得超过<em><strong>5000</strong></em>美元（其他外币折合等值5000美元）；</p><p>2.个人每日取款外币现钞不得超过<em><strong>10,000</strong></em>美元（其他外币折合等值10,000美元）；</p><p>3.个人每日到柜台提取人民币现金超过<em><strong>50000</strong></em>元，需提前预约；</p><p>4.开户起存金额 1元人民币或100元人民币的等值外币。</p>",
+                        "productCategoryList": [
+                            {
+                                "thirdProductCategoryId": "",
+                                "rootProductCategoryId": "MODEL-FPSC-BL",
+                                "parentProductCategoryId": "MODEL-FPSC-DP02001"
+                            },
+                            {
+                                "thirdProductCategoryId": "",
+                                "rootProductCategoryId": "MODEL-FPSC-DP",
+                                "parentProductCategoryId": "DFD-BEST-SELL"
+                            }
+                        ],
+                        "productName": "润和鼎元卡个人人民币活期",
+                        "productId": "CARD_0521_10000-01"
+                    },
+                    {
+                        "price": "0.000",
+                        "requireAmount": "N",
+                        "chargeShipping": "Y",
+                        "imageAdress": "/images/products/CARD_0521_10000-01/small.jpg",
+                        "productConfigOptionList": [
+                            {
+                                "configOptionId": "CARD_0521_10010",
+                                "configOptionName": "人民币活期开户",
+                                "configOptionPrice": "5.000"
+                            }
+                        ],
+                        "textData": "<h3>产品特点</h3><p>1.人民币和多种外币存取款及<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9299182\">通存通兑</a>业务。外币包括：美元、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">欧元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">日元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">港币</a>、英镑、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">加拿大元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">澳大利亚元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">瑞士法郎</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">新加坡元和澳门元</a>(仅限广东省)；</p><p>2.本人、他人之间转账；（外币见相关网页）</p><p>3.境内、境外<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">汇款</a>、自动入账；</p><p>4.预留密码方可通存通兑（下同）</p><h3>结算功能（限于个人结算账户）</h3><p>1.办理和使用<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"681305\">借记卡</a>；</p><p>2.开通<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2219528\">电话银行</a>、网上银行等<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5410435\">电子渠道</a>服务；</p><p>3.办理<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">外汇宝</a>、基金、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">国债</a>、保险、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">银证转账</a>、银券通等投资理财业务；</p><p>4.代发工资、代发养老保险金等；</p><p>5.代缴纳电话、手机、水电煤气等各种<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9209991\">公用事业收费</a>；</p><p>6.ATM取现、商户消费等。</p><h3>适用对象</h3><p>中国居民、港澳台居民、居住在中国境内外的外国人、外籍华人和华侨，均可凭实名制认可的<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5039723\">有效身份证件</a>在<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"245376\">中国银行</a>开立活期储蓄存款账户；另外主要采用活期存折、信用卡（银联卡等）等。</p><h3>办理流程</h3><p>携相关<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">证件</a>到各银行商业网点柜台办理 。</p><p><strong>提交证件</strong></p><p>1.中国公民</p><p>16岁以上中国公民，应出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2080960\">居民身份证</a>/<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"973253\">临时身份证</a>。</p><p>军人、武装警察尚未申领居民身份证的，可出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"373161\">军人身份证</a>、武装警察身份证。</p><p>居住在境内或境外的中国籍华侨,可出具中国护照。</p><p>2.港澳台居民</p><p>往来内地通行证/台湾居民/来往大陆通行证/或其他有效旅行证件。</p><p>3.外国公民（外国人、外籍华人和华侨）</p><p>护照/华侨持中国护照/外国人居留许可证。</p><p>4.16岁之前的未成年人</p><p>如果有身份证，要在监护人的监护下办理，且只能办理存折（<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"921064\">中国民生银行</a>除外），没有身份证的，可用居民户口簿</p><p>温馨提示：</p><p>1.个人每日存款外币现钞不得超过<em><strong>5000</strong></em>美元（其他外币折合等值5000美元）；</p><p>2.个人每日取款外币现钞不得超过<em><strong>10,000</strong></em>美元（其他外币折合等值10,000美元）；</p><p>3.个人每日到柜台提取人民币现金超过<em><strong>50000</strong></em>元，需提前预约；</p><p>4.开户起存金额 1元人民币或100元人民币的等值外币。</p>",
+                        "productCategoryList": [
+                            {
+                                "thirdProductCategoryId": "",
+                                "rootProductCategoryId": "MODEL-FPSC-BL",
+                                "parentProductCategoryId": "MODEL-FPSC-DP02001"
+                            },
+                            {
+                                "thirdProductCategoryId": "",
+                                "rootProductCategoryId": "MODEL-FPSC-DP",
+                                "parentProductCategoryId": "DFD-BEST-SELL"
+                            }
+                        ],
+                        "productName": "润和鼎元卡个人人民币活期",
+                        "productId": "CARD_0521_10000-01"
+                    }
+                ],
+                "promoText": "现在开通润个人借记卡，可以免除工本费、手续费，快加入润和大家庭吧！！",
+                "productPromoId": "MODEL10001"
+            },
+            {
+                "contentImg": "/images/products/MODEL10002_Image_L/promo.jpg",
+                "productIdList": [
+                    {
+                        "price": "1.000",
+                        "requireAmount": "Y",
+                        "chargeShipping": "Y",
+                        "imageAdress": "/ecom/images/personalRMBLump13.png",
+                        "productConfigOptionList": [
+                            {
+                                "configOptionId": "DP_0523_10001",
+                                "configOptionName": "个人整存整取开户",
+                                "configOptionPrice": "5.000"
+                            }
+                        ],
+                        "textData": "<p><strong>一、定义：</strong></p><p>　　整存整取存款是指开户时约定存期，本金一次存入，到期一次支取本息的定期存款。整存整取存款到期可按原存期自动转存。人民币起存金额为50元。存款期限分为分为3个月、半年、1年、2年、3年、5年。</p><p><strong>二、特点：</strong></p><p>　　1．较高的稳定收入：利率较高，利率大小与期限长短成正比，但受时间限制，如果提前支取，利息损失较大。</p><p>　　2．省心方便：具备整存整取存款到期后自动转存功能和约定转存功能，储户可以根据需求灵活的管理整存整取存款的本息、存期、存款形式等；</p><p>　　3．资金灵活：在需要资金周转而整存整取存款未到期时，可部分提前支取一次或者全部提前结清，提前支取部分将按支取当日挂牌活期存款利率计息，还可以办理质押贷款；</p><p>　　4．起存金额低：人民币50元；</p><p>　　5.．存期选择多：人民币存期选择：三个月、六个月、一年、二年、三年和五年。</p><p><strong>三、适用对象：</strong></p><p>　　事先预知使用的资金或长时间动不用的资金。</p>",
+                        "productCategoryList": [
+                            {
+                                "thirdProductCategoryId": "",
+                                "rootProductCategoryId": "MODEL-FPSC-BL",
+                                "parentProductCategoryId": "BL-BEST-SELL"
+                            },
+                            {
+                                "thirdProductCategoryId": "",
+                                "rootProductCategoryId": "MODEL-FPSC-BL",
+                                "parentProductCategoryId": "MODEL-FPSC-DP01001"
+                            }
+                        ],
+                        "productName": "个人人民币整存整取",
+                        "productId": "DP_0523_10000-01"
+                    }
+                ],
+                "promoText": "即日起办理100,000￥以上整存整取，赠送第五套人民币纪念册！",
+                "productPromoId": "MODEL10002"
+            }
+        ]
+}

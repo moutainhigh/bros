@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--限额接口对外公布 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="plimitServiceFacade" interface="bros.p.limit.facade.service.IPLimitServiceFacade"/>
+	
+	<!--个人安全接口对外公布 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pPersonSecurityServiceFacade" interface="bros.p.security.facade.service.IPPersonSecurityServiceFacade"/>
+	
+	<!--个人私密问题接口对外公布 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pPersonPrivateQuestionServiceFacade" interface="bros.p.security.facade.service.IPPersonPrivateQuestionServiceFacade"/>
+	
+	<!--当前模块是否存活 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="papplicationAliveMonitorSecurityServiceFacade" interface="bros.p.monitor.service.IPApplicationAliveMonitorSecurityServiceFacade"/>
+
+</beans>  

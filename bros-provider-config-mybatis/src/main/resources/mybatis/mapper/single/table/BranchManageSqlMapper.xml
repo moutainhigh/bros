@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--银行机构信息表 -->
+<mapper namespace="mybatis.mapper.single.table.branchmanage">
+	<!-- 公共出参 -->
+	<resultMap id="branchManageResultMap" type="java.util.HashMap">
+		<result property="branchId" column="BBH_ID" />
+		<result property="branchLegal" column="BBH_LEGAL" />
+		<result property="branchCode" column="BBH_CODE" />
+		<result property="branchName" column="BBH_NAME" />
+		<result property="branchShortname" column="BBH_SHORTNAME" />
+		<result property="branchStt" column="BBH_STT" />
+		<result property="branchParentid" column="BBH_PARENTID" />
+		<result property="branchDesc" column="BBH_DESC" />
+		<result property="branchAddress" column="BBH_ADDRESS" />
+		<result property="branchContact" column="BBH_CONTACT" />
+		<result property="branchPhone" column="BBH_PHONE" />
+		<result property="branchTeller" column="BBH_TELLER" />
+		<result property="branchLevel" column="BBH_LEVEL" />
+		<result property="branchSign_in_time" column="BBH_SIGN_IN_TIME" />
+		<result property="branchSign_out_time" column="BBH_SIGN_OUT_TIME" />
+	</resultMap>
+	
+		<!-- 公共出参 -->
+	<resultMap id="branchManageManyResultMap" type="java.util.HashMap">
+		<result property="branchId" column="BBH_ID" />
+		<result property="branchLegal" column="BBH_LEGAL" />
+		<result property="branchCode" column="BBH_CODE" />
+		<result property="branchName" column="BBH_NAME" />
+		<result property="branchShortname" column="BBH_SHORTNAME" />
+		<result property="branchStt" column="BBH_STT" />
+		<result property="branchParentid" column="BBH_PARENTID" />
+		<result property="branchDesc" column="BBH_DESC" />
+		<result property="branchAddress" column="BBH_ADDRESS" />
+		<result property="branchContact" column="BBH_CONTACT" />
+		<result property="branchPhone" column="BBH_PHONE" />
+		<result property="branchTeller" column="BBH_TELLER" />
+		<result property="branchLevel" column="BBH_LEVEL" />
+		<result property="branchSign_in_time" column="BBH_SIGN_IN_TIME" />
+		<result property="branchSign_out_time" column="BBH_SIGN_OUT_TIME" />
+		<result property="parentBranchCode" column="PARENTBBH_CODE" />
+	</resultMap>
+	
+	<!-- 公共入参 -->
+	<sql id="inputbranch_par">
+		BBH_ID,
+		BBH_LEGAL,
+		BBH_CODE,
+		BBH_NAME,
+		BBH_SHORTNAME,
+		BBH_STT,
+		BBH_PARENTID,
+		BBH_DESC,
+		BBH_ADDRESS,
+		BBH_CONTACT,
+		BBH_PHONE,
+		BBH_TELLER,
+		BBH_LEVEL,
+		BBH_SIGN_IN_TIME,
+		BBH_SIGN_OUT_TIME
+    </sql>
+    
+    
+    <!--创建机构 -->
+	<insert id="insertbranch" parameterType="java.util.HashMap">
+		insert into BMA_BRANCH(
+		<include refid="inputbranch_par" />
+		) values(
+		#{branchId},
+		#{branchLegal},
+		#{branchCode},
+		#{branchName},
+		#{branchShortname},
+		#{branchStt},
+		#{branchParentid},
+		#{branchDesc},
+		#{branchAddress},
+		#{branchContact},
+		#{branchPhone},
+		#{branchTeller},
+		#{branchLevel},
+		#{branchSign_in_time},
+		#{branchSign_out_time}
+		)
+	</insert>
+	
+	<!--根据机构编号查询所有机构 -->
+	<select id="queryAllBranchByObjectId" resultMap="branchManageResultMap" parameterType="java.util.HashMap">
+		select 
+		<include refid="inputbranch_par"/>
+		 from BMA_BRANCH where 1=1 
+		<if test="branchLegal!=null and branchLegal!=''">
+			and BBH_LEGAL = #{branchLegal}
+		</if>
+		<if test="branchCode!=null and branchCode!=''">
+			and BBH_CODE = #{branchCode}
+		</if>
+		<if test="branchStt!=null and branchStt!=''">
+			and BBH_STT = #{branchStt}
+		</if>
+		<if test="branchParentid !=null and branchParentid !=''">
+			and BBH_PARENTID = #{branchParentid}
+		</if>
+	</select>
+	
+		<!--根据机构编号查询所有机构 -->
+	<select id="queryAllBranchTreeByObjectId" resultMap="branchManageManyResultMap" parameterType="java.util.HashMap">
+		with RECURSIVE cte as 
+		( 
+			select a.* from (
+				select m.*,n.bbh_code as parentbbh_code from bma_branch m left join bma_branch n on m.bbh_parentid=n.bbh_id
+			) a  where 1=1 
+			<if test="parentid!=null and parentid!=''">
+				and BBH_PARENTID = #{parentid}
+			</if>
+			<if test="parentid==null or parentid==''">
+				and BBH_PARENTID = ''
+			</if>
+			<if test="branchLegal!=null and branchLegal!=''">
+				and BBH_LEGAL = #{branchLegal}
+			</if>
+			<if test="branchCode!=null and branchCode!=''">
+				and BBH_CODE = #{branchCode}
+			</if>
+			<if test="branchStt!=null and branchStt!=''">
+				and BBH_STT = #{branchStt}
+			</if>
+			<if test="branchParentid !=null and branchParentid !=''">
+				and BBH_PARENTID = #{branchParentid}
+			</if>
+			union all  
+			select k.*  from (
+				select m.*,n.bbh_code as parentbbh_code from bma_branch m left join bma_branch n on m.bbh_parentid=n.bbh_id
+			) k inner join cte c on c.bbh_id = k.bbh_parentid 
+		)select cte.* from cte;
+	</select>
+	
+	<!--根据机构编号查询所有机构条数 -->
+	<select id="queryAllBranchByObjectIdnum" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		select count(*) from BMA_BRANCH where 1=1 
+		<if test="branchLegal!=null and branchLegal!=''">
+			and BBH_LEGAL = #{branchLegal}
+		</if>
+		<if test="branchCode!=null and branchCode!=''">
+			and BBH_CODE = #{branchCode}
+		</if>
+		<if test="branchStt!=null and branchStt!=''">
+			and BBH_STT = #{branchStt}
+		</if>
+		<if test="branchParentid !=null and branchParentid !=''">
+			and BBH_PARENTID = #{branchParentid}
+		</if>
+	</select>
+	
+	<!--修改机构信息 -->
+	<update id="updatebranch" parameterType="java.util.HashMap">
+		update BMA_BRANCH
+		<set>
+		<if test="branchName!=null and branchName!=''">
+				BBH_NAME = #{branchName},
+		</if>
+		<if test="branchShortname!=null and branchShortname!=''">
+				BBH_SHORTNAME = #{branchShortname},
+		</if>
+		<if test="branchStt!=null and branchStt!=''">
+				BBH_STT = #{branchStt},
+		</if>
+		<if test="branchDesc!=null and branchDesc!=''">
+				BBH_DESC = #{branchDesc},
+		</if>
+		<if test="branchAddress!=null and branchAddress!=''">
+				BBH_ADDRESS = #{branchAddress},
+		</if>
+		<if test="branchContact!=null and branchContact!=''">
+				BBH_CONTACT = #{branchContact},
+		</if>
+		<if test="branchPhone!=null and branchPhone!=''">
+				BBH_PHONE = #{branchPhone},
+		</if>
+		<if test="branchTeller!=null and branchTeller!=''">
+				BBH_TELLER = #{branchTeller},
+		</if>
+		</set>
+		where BBH_LEGAL = #{branchLegal} and BBH_CODE = #{branchCode}
+	</update>
+	
+	<!--删除机构  -->
+	<update id="deleteBranchByBranchId"  parameterType="java.util.HashMap">
+	  	update BMA_BRANCH
+	  		<![CDATA[ 
+					set
+						BBH_STT = #{branchStt}
+						
+					where BBH_LEGAL = #{branchLegal} and BBH_CODE = #{branchCode}
+				 ]]>
+	</update>
+</mapper>

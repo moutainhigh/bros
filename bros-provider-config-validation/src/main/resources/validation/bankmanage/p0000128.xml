@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+<!-- 修改渠道系统状态 -->
+	<xmlTag dataName="paramMap" message="${CECO000000001}">
+		<xmlField dataName="chlFlag" message="${CECO000000001}"/><!-- 渠道状态 -->
+	</xmlTag>
+</formats>

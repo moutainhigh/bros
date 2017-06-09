@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+           http://www.springframework.org/schema/beans/spring-beans.xsd    
+           http://www.springframework.org/schema/context    
+           http://www.springframework.org/schema/context/spring-context.xsd  
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd  
+           http://www.springframework.org/schema/aop    
+           http://www.springframework.org/schema/aop/spring-aop.xsd    
+           ">
+	<!-- 公共bean定义配置位置 -->
+	<!-- token生成工具 -->
+	<bean id="tokenUtil" class="bros.common.core.util.TokenUtil">
+		<property name="aesKey" value="${sys.token.aesKey}" /> <!-- Aes加密主密钥   长度必须为16位-->
+		<property name="desKey" value="${sys.token.desKey}" /> <!-- Des加密主密钥 -->
+		<property name="xorKey" value="${sys.token.xorKey}" /> <!-- Xor加密主密钥 -->
+		<property name="mdKey" value="${sys.token.mdKey}"/><!-- md5加密主密钥 -->
+		<property name="sessionManager" ref="sessionManager"/><!-- session共享 -->
+	</bean>
+	
+
+	<!-- ftp服务bean定义 -->
+	<bean id="ftpClientServer" class="bros.common.core.ftp.service.impl.FtpServiceImpl">
+ 		<property name="host" value="${sys.ftp.host}"/><!--ip地址 -->
+ 		<property name="port" value="${sys.ftp.port}"/><!--端口 -->
+ 		<property name="userName" value="${sys.ftp.userName}"/><!--用户名 -->
+ 		<property name="password" value="${sys.ftp.password}"/><!--密码 -->
+ 		<property name="srcCharset" value="${sys.ftp.srcCharset}"/><!--原文件编码 -->
+ 		<property name="desCharset" value="${sys.ftp.desCharset}"/><!--目标文件编码 -->
+	</bean>
+	
+	<!-- sftp服务bean定义 -->
+	<bean id="sftpClientServer" class="bros.common.core.ftp.service.impl.SftpServiceImpl">
+ 		<property name="host" value="${sys.sftp.host}"/><!--ip地址 -->
+ 		<property name="port" value="${sys.sftp.port}"/><!--端口 -->
+ 		<property name="userName" value="${sys.sftp.userName}"/><!--用户名 -->
+ 		<property name="password" value="${sys.sftp.password}"/><!--密码 -->
+ 		<property name="srcCharset" value="${sys.sftp.srcCharset}"/><!--原文件编码 -->
+ 		<property name="desCharset" value="${sys.sftp.desCharset}"/><!--目标文件编码 -->
+	</bean>
+
+</beans>

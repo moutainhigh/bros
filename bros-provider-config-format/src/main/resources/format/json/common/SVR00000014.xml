@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000014SendFmt">
+	     <xmlRel rel="SendFmt"/>
+		 <xmlField tagName="partyId" dataName="partyId"/><!--客户号  -->
+		 <xmlField tagName="partyTypeId" dataName="partyTypeId"/><!--客户类型  -->
+		 <xmlField tagName="propertyType" dataName="propertyType"/><!--资产类型  -->
+	</fmtDef>
+	<fmtDef id="SVR00000014RecFmt">
+        <xmlRel rel="RecFmt"/>
+        <xmlTag tagName="custPropertyDetailQry" dataName="custPropertyDetailQry"><!-- 客户资产明细查询	 -->
+        	<xmlList tagName="depositDetailInfo" dataName="depositDetailInfo"><!--存款类明细List -->
+               <xmlTag>
+           		   <xmlField tagName="productName" dataName="productName"/><!--存款产品名称 -->
+	               <xmlField tagName="accountNum" dataName="accountNum"/><!--账号-->
+	               <xmlField tagName="currency" dataName="currency"/><!--币种 -->
+	               <xmlField tagName="amount" dataName="amount"/><!--金额-->
+               </xmlTag>
+           	</xmlList>
+           	<xmlList tagName="loanDetailInfo" dataName="loanDetailInfo"><!--贷款类明细List -->
+               <xmlTag>
+           		   <xmlField tagName="loanNo" dataName="loanNo"/><!--贷款合约号 -->
+	               <xmlField tagName="productName" dataName="productName"/><!--贷款产品名称-->
+	               <xmlField tagName="currency" dataName="currency"/><!--币种 -->
+	               <xmlField tagName="loanAmount" dataName="loanAmount"/><!--贷款金额-->
+	               <xmlField tagName="deadline" dataName="deadline"/><!--期限 -->
+	               <xmlField tagName="loanBalance" dataName="loanBalance"/><!--贷款余额-->
+	               <xmlField tagName="expireDate" dataName="expireDate"/><!--到期日期 -->
+	               <xmlField tagName="loanStatus" dataName="loanStatus"/><!--贷款状态 -->
+               </xmlTag>
+           	</xmlList>
+           	<xmlList tagName="investDetailInfo" dataName="investDetailInfo"><!--投资类明细List -->
+               <xmlTag>
+           		   <xmlField tagName="accountNum" dataName="accountNum"/><!--账号 -->
+	               <xmlField tagName="productName" dataName="productName"/><!--投资产品名称-->
+	               <xmlField tagName="currency" dataName="currency"/><!--币种 -->
+	               <xmlField tagName="principal" dataName="principal"/><!--本金-->
+               </xmlTag>
+           	</xmlList>
+           	<xmlList tagName="signDetailInfo" dataName="signDetailInfo"><!--签约类明细List -->
+               <xmlTag>
+           		   <xmlField tagName="productName" dataName="productName"/><!--签约产品名称 -->
+	               <xmlField tagName="cardNo" dataName="cardNo"/><!--签约卡号-->
+	               <xmlField tagName="org" dataName="org"/><!--签约机构 -->
+	               <xmlField tagName="date" dataName="date"/><!--签约日期-->
+               </xmlTag>
+           	</xmlList>
+           	<xmlList tagName="creditCardDetailInfo" dataName="creditCardDetailInfo"><!--信用卡明细List -->
+               <xmlTag>
+           		   <xmlField tagName="cardNo" dataName="cardNo"/><!--卡号 -->
+	               <xmlField tagName="issueDate" dataName="issueDate"/><!--开卡日期-->
+	               <xmlField tagName="issueOrg" dataName="issueOrg"/><!--开卡机构 -->
+               </xmlTag>
+           	</xmlList>
+         </xmlTag>
+	</fmtDef>
+</formats>

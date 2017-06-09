@@ -1,0 +1,69 @@
+<div class="main-box">
+
+    <div class="titile-step">
+        <div class="title">我的订单</div>
+    </div>
+    <div class="trading-one-box" style="height: 120px">
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="input_afficheClass" class="col-sm-5 control-label">订单类型</label>
+                    <div class="col-sm-7">
+                        <select class="form-control ess-input" id="input_afficheClass" name="input_afficheClass" ng-model="vm.orderTypeId">
+                            <option value=>请选择</option>
+                            <option value="PURCHASE_ORDER">采购订单</option>
+                            <option value="SALES_ORDER">销售订单</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="input_bmfCode" class="col-sm-5 control-label">渠道分类</label>
+                    <div class="col-sm-7">
+                        <select class="form-control ess-input select2" id="input_operChannel" name="operChannel" ng-model="vm.salesChannelEnumId" placeholder="">
+                             <option value>请选择</option>
+                            <option value="WEB_SALES_CHANNEL">网站渠道</option>
+                            <option value="POS_SALES_CHANNEL">POS渠道</option>
+                            <option value="ATM_SALES_CHANNEL">自助设备</option>
+                            <option value="PHONE_SALES_CHANNEL">电话渠道</option>
+                            <option value="RS_SALES_CHANNEL">实体网点</option>
+                            <option value="APP_SALES_CHANNEL">APP渠道</option>
+                            <option value="AFFIL_SALES_CHANNEL">合作渠道</option>
+                            <option value="UNKNWN_SALES_CHANNEL">未知渠道</option>
+                        </select>
+                    </div>
+                </div>
+                 <div class="form-group col-md-6">
+                    <label for="input_bmfCode" class="col-sm-5 control-label">开始日期</label>
+                    <div class="col-sm-7">
+                      <div class="startDate">
+                          <ui-calendar time="vm.startDate">
+                      </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="input_bmfCode" class="col-sm-5 control-label">结束日期</label>
+                    <div class="col-sm-7">
+                      <div class="endDate">
+                          <ui-calendar time="vm.endDate">
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer mT-15">
+            <div class="center" style="margin-left: 418px;">
+                <button type="submit" class="btn btn-primary" ng-click="vm.queryOrderList(vm.type);">查询</button>
+                <button type="submit" class="btn btn-default" ng-click="vm.resetInfo();">重置</button>
+            </div>
+        </div>
+        <custom-tab items="vm.items" index="vm.tabIndex">
+            <div class="financial-content">
+                <financial-trade-item type="vm.type" list="vm.tradeList"></financial-trade-item>
+            </div>
+        </custom-tab>
+        <paging class="small" page="vm.page.currentPage" page-size="vm.page.pageSize" total="vm.page.total" adjacent="{{vm.page.adjacent}}" dots="{{vm.page.dots}}" scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="vm.DoCtrlPagingAct('Paging Clicked', page, pageSize, total)">
+            </paging>
+
+
+    <div browsehistory></div>
+</div>
+

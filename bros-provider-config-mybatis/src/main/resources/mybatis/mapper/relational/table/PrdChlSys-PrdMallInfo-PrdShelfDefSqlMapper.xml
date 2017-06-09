@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.relational.table.prdchlsys-prdmallinfo-prdshelfdef">
+	<sql id="shelf_info_param">
+		PSF_SHELFCODE,
+		PSF_SHELFNAME,
+		PSF_SHELFDESC,
+		PSF_PARENTSHELF,
+		PSF_MALLID,
+		PSF_SHELFFLAG
+	</sql>
+	<sql id="mall_info_param">
+		PMI_MAILLID,
+		PMI_MALLCODE,
+		PMI_MALLNAME,
+		PMI_MALLDESC,
+		PMI_CHLID,
+		PMI_BRANCHNO,
+		PMI_PAGENAME
+	</sql>
+	<sql id="shelf_goods_param">
+		PSS_SHELFCODE,
+		PSS_GOODSCODE,
+		PSS_GOODSTATUS,
+		PSS_GOODSNAME,
+		PSS_PRDTYPECODE,
+		PSS_DESCRIPTION,
+		PSS_GOODSTYPE,
+		PSS_GOODSFLAG
+	</sql>
+	<resultMap type="java.util.HashMap" id="shelfInfoMap">
+		<result property="shelfCode" column="PSF_SHELFCODE" />
+        <result property="shelfName" column="PSF_SHELFNAME" />
+		<result property="shelfDesc" column="PSF_SHELFDESC" />
+		<result property="parentShelf" column="PSF_PARENTSHELF" />
+		<result property="mallId" column="PSF_MALLID" />
+		<result property="shelfFlag" column="PSF_SHELFFLAG" />
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="mallInfoMap">
+		<result property="mallId" column="PMI_MAILLID" />
+        <result property="mallCode" column="PMI_MALLCODE" />
+		<result property="mallName" column="PMI_MALLNAME" />
+		<result property="mallDesc" column="PMI_MALLDESC" />
+		<result property="chlId" column="PMI_CHLID" />
+		<result property="branchNo" column="PMI_BRANCHNO" />
+		<result property="pageName" column="PMI_PAGENAME" />
+	</resultMap>
+	<resultMap type="java.util.HashMap" id="shelfGoodsMap">
+			<result property="shelfCode" column="PSS_SHELFCODE" />
+			<result property="goodsCode" column="PSS_GOODSCODE" />
+			<result property="goodStatus" column="PSS_GOODSTATUS" />
+			<result property="goodsName" column="PSS_GOODSNAME" />
+			<result property="prdTypeCode" column="PSS_PRDTYPECODE" />
+			<result property="description" column="PSS_DESCRIPTION" />
+			<result property="goodsType" column="PSS_GOODSTYPE" />
+			<result property="goodsFlag" column="PSS_GOODSFLAG" />
+		</resultMap>
+	<!--根据法人id、渠道号、机构号等信息查询已上架的货架信息 -->
+	<select id="queryShowShelfInfo" resultMap="shelfInfoMap">
+		select
+		<include refid="shelf_info_param" />
+		from PRD_SHELFDEF sd  
+		<![CDATA[ 
+			where sd.PSF_MALLID = (select ml.PMI_MAILLID from PRD_MALL_INFO ml where 
+         ml.PMI_CHLID = (select cl.PCS_CHLID from PRD_CHLSYS cl where cl.PCS_LEGALID = #{legalPersonId} and cl.PCS_CHLCODE = #{chlCode} and cl.PCS_CHLFLAG = '1')
+         and ml.PMI_BRANCHNO = #{branchNo}) and sd.PSF_SHELFFLAG = '00' 
+       	]]>
+	</select>
+	
+	<!--根据法人id、渠道编码、机构号等信息查询商城信息 -->
+	<select id="queryMallDetailInfo" resultMap="mallInfoMap">
+		select   
+		<include refid="mall_info_param" />
+		from PRD_MALL_INFO ml 
+		<![CDATA[ 
+			where  ml.PMI_CHLID = (select PCS_CHLID from PRD_CHLSYS cl where cl.PCS_LEGALID = #{legalPersonId} and cl.PCS_CHLCODE = #{chlCode} and cl.PCS_CHLFLAG = '1')
+            and    ml.PMI_BRANCHNO = #{branchNo}
+       	]]>
+	</select>
+	<!--根据法人id、渠道号、机构号、商城编码等信息查询已上架的商品信息 -->
+	<select id="queryShowShelfGoodsInfo" resultMap="shelfGoodsMap">
+		select
+		<include refid="shelf_goods_param" />
+		from prd_shelfgoods   
+		<![CDATA[ 
+		where pss_shelfcode in(
+			select sd.psf_shelfcode from PRD_SHELFDEF sd  where sd.PSF_MALLID = (select ml.PMI_MAILLID from PRD_MALL_INFO ml,PRD_CHLSYS cl where ml.PMI_CHLID  = cl.PCS_CHLID and ml.pmi_mallcode = #{mallCode} and
+           cl.PCS_LEGALID = #{legalPersonId} and cl.PCS_CHLCODE = #{chlCode} and cl.PCS_CHLFLAG = '1' 
+         and ml.PMI_BRANCHNO = #{branchNo}) and sd.PSF_SHELFFLAG = '00' 
+		)
+       	]]>
+       	<if test="goodStatus != null and goodStatus != ''">
+		   		and pss_goodstatus = #{goodStatus}
+		</if>
+		<if test="goodsType != null and goodsType != ''">
+		   		and pss_goodstype = #{goodsType}
+		</if>
+		<if test="goodsFlag != null and goodsFlag != ''">
+		   		and pss_goodsflag = #{goodsFlag}
+		</if>
+		<if test="shelfCode != null and shelfCode != ''">
+		   		and pss_shelfcode = #{shelfCode}
+		</if>
+	</select>
+</mapper>

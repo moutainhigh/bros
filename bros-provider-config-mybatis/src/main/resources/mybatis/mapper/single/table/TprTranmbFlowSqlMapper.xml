@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.tprtranmbflow">
+	<sql id="tpr_tprTranmbFlow_param">
+		ttmf_gblflowseq,
+		ttmf_bsncode,
+		ttmf_channel,
+		ttmf_cstno,
+		ttmf_nowTurnFlag,
+		ttmf_payaccno,
+		ttmf_payaccname,
+		ttmf_paybankno,
+		ttmf_paybankname,
+		ttmf_resiveaccno,
+		ttmf_resiveaccname,
+		ttmf_resivebankno,
+		ttmf_resivebankname,
+		ttmf_currency,
+		ttmf_transamt,
+		ttmf_feeamt,
+		ttmf_purpose,
+		ttmf_scenecode,
+		ttmf_transstarttime,
+		ttmf_transendtime,
+		ttmf_branchid,
+		ttmf_legalcode,
+		ttmf_tellerno,
+		ttmf_autellerno,
+		ttmf_transtt,
+		ttmf_batchno,
+		ttmf_returncode,
+		ttmf_returnmsg,
+		ttmf_note1,
+		ttmf_note2,
+		ttmf_note3,
+		ttmf_note4,
+		ttmf_note5,
+		ttmf_note6,
+		ttmf_note7
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="tprTranmbFlowResult">
+    	<result property="gblflowSeq" column="ttmf_gblflowseq"/><!-- 30位全局流水号 -->
+    	<result property="bsnCode" column="ttmf_bsncode"/><!-- 业务编码 -->
+    	<result property="channel" column="ttmf_channel"/><!-- 渠道编号 -->
+    	<result property="cstNo" column="ttmf_cstno"/><!-- 客户号 -->
+    	<result property="nowTurnFlag" column="ttmf_nowTurnFlag"/><!-- 现转标志 -->
+    	<result property="payAccNo" column="ttmf_payaccno"/><!-- 付款账号 -->
+    	<result property="payAccName" column="ttmf_payaccname"/><!-- 付款名称户名 -->
+    	<result property="payBankNo" column="ttmf_paybankno"/><!-- 付款行行号 -->
+    	<result property="payBankName" column="ttmf_paybankname"/><!-- 付款行行名 -->
+    	<result property="resiveAccNo" column="ttmf_resiveaccno"/><!-- 收款账号 -->
+    	<result property="resiveAccName" column="ttmf_resiveaccname"/><!-- 收款名称户名 -->
+    	<result property="resiveBankNo" column="ttmf_resivebankno"/><!-- 收款行行号 -->
+    	<result property="resiveBankName" column="ttmf_resivebankname"/><!-- 收款行行名 -->
+    	<result property="currency" column="ttmf_currency"/><!-- 币种 -->
+    	<result property="transAmt" column="ttmf_transamt"/><!-- 业务金额 -->
+    	<result property="feeAmt" column="ttmf_feeamt"/><!-- 手续费金额 -->
+    	<result property="purpose" column="ttmf_purpose"/><!-- 用途 -->
+    	<result property="sceneCode" column="ttmf_scenecode"/><!-- 场景编码 -->
+    	<result property="transStartTime" column="ttmf_transstarttime"/><!-- 交易提交时间 -->
+    	<result property="transEndTime" column="ttmf_transendtime"/><!-- 交易结束时间 -->
+    	<result property="branchId" column="ttmf_branchid"/><!-- 操作机构 -->
+    	<result property="legalCode" column="ttmf_legalcode"/><!-- 法人 -->
+    	<result property="tellerNo" column="ttmf_tellerno"/><!-- 操作员 -->
+    	<result property="autellerNo" column="ttmf_autellerno"/><!-- 授权员 -->
+    	<result property="transtt" column="ttmf_transtt"/><!-- 00成功   01失败   02处理中 03待查 -->
+    	<result property="batchNo" column="ttmf_batchno"/><!-- 批次号 -->
+    	<result property="returnCode" column="ttmf_returncode"/><!-- 返回码 -->
+    	<result property="returnMsg" column="ttmf_returnmsg"/><!-- 返回信息 -->
+    	<result property="detailBizData" column="ttdf_detailbizdata"/><!-- 明细信息 -->
+    	<result property="note1" column="ttmf_note1"/><!-- 预留字段 -->
+    	<result property="note2" column="ttmf_note2"/><!-- 预留字段 -->
+    	<result property="note3" column="ttmf_note3"/><!-- 预留字段 -->
+    	<result property="note4" column="ttmf_note4"/><!-- 预留字段 -->
+    	<result property="note5" column="ttmf_note5"/><!-- 预留字段 -->
+    	<result property="note6" column="ttmf_note6"/><!-- 预留字段 -->
+    	<result property="note7" column="ttmf_note7"/><!-- 预留字段 -->
+    </resultMap>
+   
+    <!-- 插入主流水表数据定义 -->
+    <insert id="insertTprTranmbFlow" parameterType="java.util.HashMap">
+       insert into tpr_tranmb_flow(
+    		<include refid="tpr_tprTranmbFlow_param"/>
+    	)values(
+	    	<![CDATA[ 
+		    	#{gblflowSeq},
+				#{bsnCode},
+				#{channel},
+				#{cstNo},
+				#{nowTurnFlag},
+				#{payAccNo},
+				#{payAccName},
+				#{payBankNo},
+				#{payBankName},
+				#{resiveAccNo},
+				#{resiveAccName},
+				#{resiveBankNo},
+				#{resiveBankName},
+				#{currency},
+				#{transAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+				#{feeAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+				#{purpose},
+				#{sceneCode},
+				#{transStartTime},
+				#{transEndTime},
+				#{branchId},
+				#{legalCode},
+				#{tellerNo},
+				#{autellerNo},
+				#{transtt},
+				#{batchNo},
+				#{returnCode},
+				#{returnMsg},
+				#{note1},
+				#{note2},
+				#{note3},
+				#{note4},
+				#{note5},
+				#{note6},
+				#{note7}
+				)
+			]]>
+    </insert>
+  
+    <!-- 根据流水号更新主流水表业务信息 -->
+    <update id="updateTprTranmbFlowForMsg" parameterType="java.util.HashMap">
+		<![CDATA[
+			update tpr_tranmb_flow
+				set ttmf_bsncode=#{bsnCode},
+					ttmf_channel=#{channel},
+					ttmf_cstno=#{cstNo},
+					ttmf_nowTurnFlag=#{nowTurnFlag},
+					ttmf_payaccno=#{payAccNo},
+					ttmf_payaccname=#{payAccName},
+					ttmf_paybankno=#{payBankNo},
+					ttmf_paybankname=#{payBankName},
+					ttmf_resiveaccno=#{resiveAccNo},
+					ttmf_resiveaccname=#{resiveAccName},
+					ttmf_resivebankno=#{resiveBankNo},
+					ttmf_resivebankname=#{resiveBankName},
+					ttmf_currency=#{currency},
+					ttmf_transamt=#{transAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+					ttmf_feeamt=#{feeAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+					ttmf_purpose=#{purpose},
+					ttmf_scenecode=#{sceneCode},
+					ttmf_transstarttime=#{transStartTime},
+					ttmf_transendtime=#{transEndTime},
+					ttmf_branchid=#{branchId},
+					ttmf_legalcode=#{legalCode},
+					ttmf_tellerno=#{tellerNo},
+					ttmf_autellerno=#{autellerNo},
+					ttmf_transtt=#{transtt},
+					ttmf_batchno=#{batchNo},
+					ttmf_returncode=#{returnCode},
+					ttmf_returnmsg=#{returnMsg}	
+				 where ttmf_gblflowseq=#{gblflowSeq}
+		 ]]> 
+	</update>
+	
+	<!-- 根据流水号更新主流水表业务状态 -->
+    <update id="updateTprTranmbFlowForState" parameterType="java.util.HashMap">
+		<![CDATA[
+			update tpr_tranmb_flow
+				set 
+					ttmf_transtt=#{transtt},
+					ttmf_returncode=#{returnCode},
+					ttmf_returnmsg=#{returnMsg}
+				where ttmf_gblflowseq=#{gblflowSeq}
+		 ]]> 
+	</update>
+	
+	<!-- 根据流水号查询主流水表记录-->
+	<select id="queryTprTranmbFlowByOne" resultMap="tprTranmbFlowResult">
+       select 
+       <include refid="tpr_tprTranmbFlow_param"/>
+       from tpr_tranmb_flow 
+       where ttmf_gblflowseq=#{gblflowSeq}
+    </select>
+   
+   <!-- 根据流水号更新主流水表业务状态和批次号-->
+    <update id="updateTprTranmbFlowForStateAndBatchNo" parameterType="java.util.HashMap">
+		update tpr_tranmb_flow
+			set ttmf_gblflowseq=#{gblflowSeq}
+		<if test="transtt!=null and transtt!=''">
+			,ttmf_transtt=#{transtt}
+		</if>
+		<if test="batchNo!=null and batchNo!=''">
+			,ttmf_batchno=#{batchNo}
+		</if>
+		<if test="returnMsg!=null and returnMsg!=''">
+			,ttmf_returnmsg=#{returnMsg}
+		</if>
+		where ttmf_gblflowseq=#{gblflowSeq}
+	</update>
+	
+	<!-- 根据批次号查询全局流水号 -->
+    <select id="queryGblFlowSeqByBatchNo" resultMap="tprTranmbFlowResult" parameterType="java.util.HashMap">
+		<![CDATA[
+			select ttmf_gblflowseq
+				from tpr_tranmb_flow
+				    where ttmf_batchno=#{batchNo}
+		]]>
+	</select>
+	<!-- 根据法人id、渠道编号，客户号，收款人账号，收款人户名，交易状态查询20分钟内的交易流水条数-->
+	<select id="queryTprTranmbFlowByConditions" resultType="java.lang.Integer">
+       select count(*)
+       from tpr_tranmb_flow where 
+       	  ttmf_legalcode = #{legalId} and 
+       	  ttmf_bsncode = #{bsnCode} and 
+          ttmf_channel=#{channel} and 
+          ttmf_cstno = #{cstNo} and 
+          ttmf_resiveaccno = #{subPayAccount} and 
+          ttmf_resiveaccname = #{subPayAccountName} and 
+          ttmf_transtt != '91' and 
+          ttmf_transamt = #{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler} and 
+          ttmf_transstarttime ::numeric > <![CDATA[ (select to_char((current_timestamp - interval '20 minutes'),'YYYYMMDDHH24MISS') ::numeric as aa  from current_user)]]>
+    </select>
+    <!-- 根据账号查询流水信息-->
+    <select id="queryFlowByConditions" resultMap="tprTranmbFlowResult" parameterType="java.util.HashMap">
+		select <include refid="tpr_tprTranmbFlow_param"/> from tpr_tranmb_flow where 1=1 
+			<if test="channel!=null and channel!=''">
+			 and ttmf_channel=#{channel}
+			</if>
+			<if test="cstNo!=null and cstNo!=''">
+			 and ttmf_cstno=#{cstNo}
+			</if>
+			<if test="bsnCode!=null and bsnCode!=''">
+			 and ttmf_bsncode=#{bsnCode}
+			</if>
+			<if test="payAccNo!=null and payAccNo!=''">
+			 and ttmf_payaccno=#{payAccNo}
+			</if>
+			<if test="payAccName!=null and payAccName!=''">
+			 and ttmf_payaccname=#{payAccName}
+			</if>
+			<if test="resiveAccNo!=null and resiveAccNo!=''">
+			 and ttmf_resiveaccno=#{resiveAccNo}
+			</if>
+			<if test="resiveAccName!=null and resiveAccName!=''">
+			 and ttmf_resiveaccname=#{resiveAccName}
+			</if>
+			<if test="transBankType!=null and transBankType==0">
+			 and ttmf_note1='08'
+			</if>
+			<if test="transBankType!=null and transBankType==1">
+			 and ttmf_note1!='08'
+			</if>
+			<if test="transtt!=null and transtt!=''">
+			 and ttmf_transtt=#{transtt}
+			</if>
+			<if test="transAmt!=null and transAmt!=''">
+			 and ttmf_transamt = #{transAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+			</if>
+			<if test="transStartTime!=null and transStartTime!=''">
+			 <![CDATA[and ttmf_transstarttime >= #{transStartTime}]]>
+			</if>
+			<if test="transEndTime!=null and transEndTime!=''">
+			 <![CDATA[and ttmf_transendtime <= #{transEndTime}]]>
+			</if>
+			<if test="sortType!=null and sortType==1">
+			 order by ttmf_transstarttime desc
+			</if>
+			<if test="sortType!=null and sortType==0">
+			 order by ttmf_transstarttime asc
+			</if>		    
+	</select>
+	<!-- 根据账号查询流水笔数-->
+    <select id="queryFlowNumByConditions" resultType="java.lang.Integer">
+			select count(*) from tpr_tranmb_flow where 1=1 
+			<if test="channel!=null and channel!=''">
+			 and ttmf_channel=#{channel}
+			</if>
+			<if test="cstNo!=null and cstNo!=''">
+			 and ttmf_cstno=#{cstNo}
+			</if>
+			<if test="bsnCode!=null and bsnCode!=''">
+			 and ttmf_bsncode=#{bsnCode}
+			</if>
+			<if test="payAccNo!=null and payAccNo!=''">
+			 and ttmf_payaccno=#{payAccNo}
+			</if>
+			<if test="payAccName!=null and payAccName!=''">
+			 and ttmf_payaccname=#{payAccName}
+			</if>
+			<if test="resiveAccNo!=null and resiveAccNo!=''">
+			 and ttmf_resiveaccno=#{resiveAccNo}
+			</if>
+			<if test="resiveAccName!=null and resiveAccName!=''">
+			 and ttmf_resiveaccname=#{resiveAccName}
+			</if>
+			<if test="transBankType!=null and transBankType==0">
+			 and ttmf_note1='08'
+			</if>
+			<if test="transBankType!=null and transBankType==1">
+			 and ttmf_note1!='08'
+			</if>
+			<if test="transtt!=null and transtt!=''">
+			 and ttmf_transtt=#{transtt}
+			</if>
+			<if test="transAmt!=null and transAmt!=''">
+			 and ttmf_transamt = #{transAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+			</if>
+			<if test="transStartTime!=null and transStartTime!=''">
+			 <![CDATA[and ttmf_transstarttime >= #{transStartTime}]]>
+			</if>
+			<if test="transEndTime!=null and transEndTime!=''">
+			 <![CDATA[and ttmf_transendtime <= #{transEndTime}]]>
+			</if>
+			
+	</select>
+</mapper>

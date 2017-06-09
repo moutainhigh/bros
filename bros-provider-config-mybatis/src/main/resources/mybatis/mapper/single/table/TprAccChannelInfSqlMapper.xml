@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.tpraccchannelinfo">
+	
+	<resultMap id="tprAccChannelInfoResultMap" type="java.util.HashMap">
+		<result property="id" column="TACI_ID"/>
+		<result property="cstId" column="TACI_CSTID"/>
+		<result property="accNo" column="TACI_ACCNO"/>
+		<result property="registNode" column="TACI_REGISTNODE"/>
+		<result property="stt" column="TACI_STT"/>
+		<result property="signFlag" column="TACI_SIGNFLAG"/>
+		<result property="channel" column="TACI_CHANNEL"/>
+		<result property="lastTime" column="TACI_LASTTIME"/>
+		<result property="isFeeType" column="TACI_ISFEETYPE"/>
+	</resultMap>
+	
+	<sql id="tpr_acc_channel_info_param">
+		TACI_ID,
+		TACI_CSTID,
+		TACI_ACCNO,
+		TACI_REGISTNODE,
+		TACI_STT,
+		TACI_SIGNFLAG,
+		TACI_CHANNEL,
+		TACI_LASTTIME,
+		TACI_ISFEETYPE
+    </sql>    
+	
+	<!-- 根据法人ID+渠道编号+账号查询个人账户渠道信息 -->
+	<select id="queryTprAccChannelInfoByAccNo" resultMap="tprAccChannelInfoResultMap">		  
+	      select <include refid="tpr_acc_channel_info_param"/>
+			 from TPR_ACC_CHANNEL_INFO, TPR_CST_INFO 
+		  <![CDATA[	     
+		        where TACI_ACCNO = #{accNo}
+		           and TACI_CHANNEL = #{channel}
+		           and TCI_LEGALID = #{legalId}
+		           and TACI_CSTID = TCI_CSTID
+	      ]]>
+	</select>
+	<!-- 条件查询账户渠道信息-账号 -->
+	<select id="queryPbAccInfChannelByAccNo" resultMap="tprAccChannelInfoResultMap" parameterType="java.util.HashMap">
+		select <include refid="tpr_acc_channel_info_param"/>
+		 from TPR_ACC_CHANNEL_INFO 
+		where 
+			TACI_ACCNO = #{accNo} and TACI_STT = '0'
+	</select>
+	<!-- 根据账号和客户标识删除TPR_ACC_CHANNEL_INFO -->
+	<delete id="deleteTprAccChannelInfoByCstIdAndAccNo" parameterType="java.util.HashMap">
+		delete from TPR_ACC_CHANNEL_INFO
+			where TACI_CSTID = #{cstId} 
+			 and  TACI_ACCNO = #{accNo} 
+	</delete>
+</mapper>

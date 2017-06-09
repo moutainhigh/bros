@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="paramMap" message="${CECO000000001}">
+		<xmlField dataName="legalPersonId" message="${CECO000000001}"/><!-- 法人id -->
+	</xmlTag>
+</formats>

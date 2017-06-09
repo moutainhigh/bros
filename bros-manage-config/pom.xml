@@ -1,0 +1,283 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>lczr.dzqd.bros.common</groupId>
+		<artifactId>bros-common-parent</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../bros-common-parent</relativePath>
+	</parent>
+
+	<artifactId>bros-manage-config</artifactId>
+	<version>${env}-${bros-manage-config.version}</version>
+	<packaging>jar</packaging>
+
+	<name>bros-manage-config</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<dependencies>
+		<!-- 验证包 -->
+		<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+		</dependency>
+		<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+		</dependency>
+		<!-- Servlet Dependency Begin -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<!-- Servlet Dependency End -->
+			
+		<!-- Spring Dependency Begin -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-instrument</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+		<!-- Spring Dependency End -->
+		<dependency>
+		    <groupId>jaxen</groupId>
+		    <artifactId>jaxen</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.4.2</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+		</dependency>
+			
+	    <dependency>  
+		    <groupId>giantstone.common.util</groupId>  
+		    <artifactId>giantstone-common-util</artifactId>
+		</dependency>
+
+		<!-- dubbo required jars start -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss.netty</groupId> -->
+<!-- 			<artifactId>netty</artifactId> -->
+<!-- 		</dependency> -->
+			<dependency>
+			    <groupId>io.netty</groupId>
+			    <artifactId>netty-all</artifactId>
+			</dependency>
+			<dependency>
+			    <groupId>io.netty</groupId>
+			    <artifactId>netty-example</artifactId>
+			</dependency>
+			
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+		</dependency>
+		<!-- dubbo required jars end -->
+		
+		<!-- MyBatis Dependency Begin -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
+		<!-- MyBatis Dependency End -->
+		<!-- Pgsql Driver Begin -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+		<!-- Pgsql Driver End -->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+		</dependency>
+		<!-- shiro jar into begin -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+		</dependency>
+		<!-- shiro jar into end -->
+			
+		<!-- redis jar into begin --> 
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>    
+	    </dependency>			
+		<!-- redis jar into end -->
+		<!-- 测试依赖包    开始 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+		<!-- 测试依赖包   结束 -->
+		<!-- ftp协议jar -->
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>    
+	    </dependency>
+	    <!-- sftp协议jar -->
+	    <dependency>
+				 <groupId>com.jcraft</groupId>
+			    <artifactId>jsch</artifactId>
+	    </dependency>
+		
+		<!-- json jar into begin -->
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<classifier>jdk15</classifier>
+			<scope>compile</scope>
+		</dependency>
+		<!-- json jar into end -->
+		
+		<!-- hibernate jar into begin -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		</dependency>
+		<!-- hibernate jar into end -->
+		<!-- Pgsql Driver Begin -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+		<!-- Pgsql Driver End -->
+		<!-- redisson分布式锁 -->
+		<dependency>
+		   <groupId>org.redisson</groupId>
+		   <artifactId>redisson</artifactId>
+		</dependency>
+		<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			    <groupId>com.sdicons.jsontools</groupId>
+			    <artifactId>jsontools-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<finalName>bros-manage-config</finalName>
+		<resources>
+			<!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<targetPath>${project.build.directory}/classes</targetPath>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<!-- 根据env部署环境值，把对应环境的配置文件拷贝到classes目录 -->
+			<resource>
+			    <targetPath>${project.build.directory}/classes</targetPath>
+				<directory>config/${env}</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+
+</project>

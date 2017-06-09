@@ -1,0 +1,67 @@
+<div class="main-box">
+    <div class="titile-step">
+        <div class="title" ng-bind="vm.productdetitle"></div>
+    </div>
+    <div class="trading-one-box">
+        <div class="product-detail-box clearfix">
+            <div class="product-detail-img clearfix"><img src="../assets{{vm.imageAdress}}" alt=""></div>
+            <ul class="product-detail-info clearfix">
+                <li class="title" style="padding-left:110px" ng-bind="vm.productname"></li>
+                <li><span>产品ID:</span> {{vm.goodsCode}}</li>
+                <!--  <li><span>投资风险：</span>{{vm.productrisk}}</li> -->
+                <li><span>价格:</span>{{vm.productpice|currency:'¥'}}</li>
+                <!-- <li><span>产品简介：</span>{{vm.productdesc}}</li> -->
+            </ul>
+            <ul class="product-detail-input clearfix">
+                <li ng-if="vm.requireAmount=='Y'"><span class="title">金额：</span>
+                    <amt-input afield="vm.model.bankBalance"></amt-input>
+                    <span>元</span></li>
+                <li><span class="title"></span>
+                    <button type="button" class="btn btn-primary btn-lg" ng-click="vm.addcar(vm.model.bankBalance)">添加购物车</button>
+                   <!--  <button type="button" class="btn btn-warning btn-lg" ng-click="vm.nowbay(vm.model.bankBalance)">立即购买</button> -->
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--  <div class="product-detail-discount">
+        <div shoppingtwo-cardirson list="vm.listcar"></div>
+    </div> -->
+    <div class="product-detail-list">
+        <!-- <div class="titile-step">
+            <div class="title">产品说明</div>
+        </div> -->
+        <custom-tab items="vm.items" index="vm.tabIndex">
+            <div class="financial-content">
+                <product-type-manage type="vm.type"></product-type-manage>
+            </div>
+            <div class="col-md-6 col-sm-8"></div>
+        </custom-tab>
+        <div class="trading-one-box" ng-show="vm.productInfomsg1">
+            <p><b id="textDateID"></b></p>
+        </div>
+        <div class="trading-one-box" ng-show="vm.productInfomsg2">
+            <div class="pay-list-box" ng-if="vm.productId">
+                <div class="payAdd-list ">
+                    <ul ng-repeat="(key, value)  in vm.configOptionIdMap">
+                        <li>
+                            <div class="payment-item online-payment" id="address0000{{$index}}" name="address" ng-click="vm.selectConfigOptionFun('address','address0000'+$index,key);"><b></b><span ng-bind="value"></span></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pay-list-box" ng-if="!vm.productId">
+                <div class="payAdd-list ">
+                    <ul>
+                        <li>
+                            <div class="payment-item online-payment" id="address0000{{$index}}" name="address" ng-click="vm.selectConfigOptionFun('address','address0000'+$index,vm.configOptionId);"><b></b><span ng-bind="vm.configOptionName"></span></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+
+            
+        </div>
+         <div browsehistory></div>
+    </div>
+</div>

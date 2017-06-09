@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="bros-provider-bankmanage" default="auto-build" basedir=".">
+	<property name="desDir" value="D:/package/provider" /><!--文件拷贝目录路径-->
+	
+	
+	<target name="auto-build">
+		<!--拷贝文件-->
+		<copy file="target/bros-provider-bankmanage.jar" todir="${desDir}"/>
+		<!--拷贝目录-->
+		<copy todir="${desDir}/lib">
+			 <fileset dir="target/lib"/>
+		</copy>
+        
+		<!--删除配置文件-->
+		<delete file="${desDir}/lib/bros-provider-config-format-1.0-SNAPSHOT.jar"/>
+		<delete file="${desDir}/lib/bros-provider-config-main-1.0-SNAPSHOT.jar"/>
+		<delete file="${desDir}/lib/bros-provider-config-mybatis-1.0-SNAPSHOT.jar"/>
+		<delete file="${desDir}/lib/bros-provider-config-validation-1.0-SNAPSHOT.jar"/>
+		
+		<!--拷贝目录-->
+		<copy todir="${desDir}">
+			 <fileset dir="../bros-provider-config/target/classes"/>
+		</copy>
+		<copy todir="${desDir}">
+			 <fileset dir="../bros-provider-config-format/target/classes"/>
+		</copy>
+		<copy todir="${desDir}">
+			 <fileset dir="../bros-provider-config-mybatis/target/classes"/>
+		</copy>
+		<copy todir="${desDir}">
+			 <fileset dir="../bros-provider-config-validation/target/classes"/>
+		</copy>
+	</target>
+</project>	

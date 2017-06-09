@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.activiti.inside.table.teller-role-branch">
+
+    <resultMap type="java.util.HashMap" id="tellerRoleBranchResult">
+    	<result property="userId" column="btr_id"/>
+    	<result property="userId" column="BURL_TELLERID"/>
+    </resultMap>
+    <!-- 根据机构号a,角色列表list,柜员编号b,查询a及其上级机构中，角色满足list的柜员编号，同时柜员编号不能为b -->
+    <select id="queryTellerByRoleAndBranch" resultMap="tellerRoleBranchResult" parameterType="java.util.HashMap">
+        select tel.btr_id from bma_teller tel,bma_teller_role_rel trr 
+        where tel.btr_legal=#{legal} and tel.btr_code!=#{tellerCode}
+	    and tel.btr_id=trr.BURL_TELLERID
+	   <if test="sttList!=null and sttList.size()>0">
+	    	and
+	        <foreach collection="sttList" item="stt" index="index"
+	            open="(" separator="or" close=")" >
+	            tel.btr_stt=#{stt}
+	        </foreach>
+        </if>
+	    <if test="roleIdList!=null and roleIdList.size()>0">
+	    	and
+	    	<foreach collection="roleIdList" index="index" item="roleId" open="(" separator="or" close=")">
+   				trr.burl_roleid=#{roleId}
+  			</foreach>
+	    </if>
+		and tel.BTR_BRANCHCODE in
+		(with RECURSIVE branch(bbh_code,bbh_id,bbh_parentid) as
+			(select bbh_code,bbh_id,bbh_parentid from bma_branch where bbh_code=#{branchNo} union all 
+			select a.bbh_code,a.bbh_id,a.bbh_parentid from bma_branch a,branch b where a.bbh_id=b.bbh_parentid)
+			select bbh_code from branch
+		)
+    </select>
+    <!-- 根据机构号，角色编号，柜员号，查询非本柜员的柜员信息 -->
+    <select id="queryTellerByRoleAndOneBranch" resultMap="tellerRoleBranchResult" parameterType="java.util.HashMap">
+        select BURL_TELLERID from bma_teller_role_rel where BURL_TELLERID = (select btr_id from bma_teller where btr_legal=#{legal} and BTR_BRANCHCODE=#{branchNo} and btr_code!=#{tellerNo} and btr_stt=#{stt})
+		and burl_roleid = (select burl_roleid from bma_teller_role_rel where BURL_TELLERID = (select btr_id from bma_teller where btr_legal=#{legal} and BTR_BRANCHCODE=#{branchNo} and btr_code=#{tellerNo}))
+    </select>
+    
+    <select id="selectCountMonitorApplicationAlive" resultType="int" parameterType="java.util.HashMap">
+    	select count(1) from act_id_user
+    </select>
+</mapper>

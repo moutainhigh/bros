@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!-- 登录 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="ploginServiceFacade" interface="bros.p.login.facade.service.IPLoginServiceFacade" />
+	
+	<!-- 网银登录 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pebloginServiceFacade" interface="bros.p.login.facade.service.IPEBLoginServiceFacade" />
+	
+	<!-- 个人登录服务 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pPersonLoginServiceFacade" interface="bros.p.login.facade.service.IPPersonLoginServiceFacade" />
+	
+	<!-- 监控当前服务是否存活 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="papplicationAliveMonitorLoginServiceFacade" interface="bros.p.monitor.service.IPApplicationAliveMonitorLoginServiceFacade" />
+	
+</beans>  

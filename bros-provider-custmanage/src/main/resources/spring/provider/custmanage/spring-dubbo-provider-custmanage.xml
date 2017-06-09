@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="${dubbo.application.provider.name}"/>
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" />
+
+	<dubbo:protocol name="dubbo" port="${dubbo.protocol.provider.custmanage.port}" />
+	
+	<!-- 监控中心配置，protocol="registry"，表示从注册中心发现监控中心地址 -->
+	<dubbo:monitor protocol="registry"/>
+	
+	<!-- 当ProtocolConfig和ServiceConfig某属性没有配置时,采用此缺省值 -->
+	<dubbo:provider timeout="60000" threadpool="fixed" threads="100" accepts="1000" version="1.0.0"/>
+	
+	
+	<!-- 账户管理 -->
+	<dubbo:service retries="0"  interface="bros.p.custmanage.facade.service.IPAccountManageServiceFacade" ref="paccountManageServiceFacade" />
+	<!-- 授权模型管理 -->
+    <dubbo:service retries="0"  interface="bros.p.custmanage.facade.service.IPTtpAuthModelSerivceFacade" ref="pttpAuthModelSerivceFacade" />
+    <!--角色管理-->
+    <dubbo:service retries="0"  interface="bros.p.custmanage.facade.service.IPRoleManageServiceFacade" ref="proleManageServiceFacade" />
+	<!-- 操作员管理 -->
+	<dubbo:service retries="0"  interface="bros.p.custmanage.facade.service.IPOperatorManageServiceFacade" ref="poperatorManageServiceFacade" />
+
+	<!-- 客户之声 -->
+	<dubbo:service retries="0"  interface="bros.p.custmanage.facade.service.IPCustomervoiceServiceFacade" ref="pcustomervoiceServiceFacade" />
+	<!-- 安保服务 -->
+	<dubbo:service retries="0"  interface="bros.p.custmanage.facade.service.IPSecurityServiceFacade" ref="psecurityServiceFacade" />
+	<!-- 收款人名册维护 -->
+	<dubbo:service retries="0"  interface="bros.p.custmanage.facade.service.IPRecvPersonInfoServiceFacade" ref="precvPersonInfoServiceFacade" />
+	<!-- 转账汇款 -->
+	<dubbo:service retries="0"  interface="bros.p.custmanage.facade.service.IPTransServiceFacade" ref="ptransServiceFacade" />
+	<!-- 储蓄服务 -->
+	<dubbo:service retries="0"  interface="bros.p.custmanage.facade.service.IPSavingsAcountServiceFacade" ref="psavingsAcountServiceFacade" />
+	<!-- 客户总览服务 -->
+	<dubbo:service retries="0"  interface="bros.p.custmanage.facade.service.IPPersonOverviewServiceFacade" ref="personOverviewServiceFacade" />
+	
+	<!-- 监控当前模块是否存活 -->
+	<dubbo:service retries="0"  interface="bros.p.monitor.service.IPApplicationAliveMonitorCustmanageServiceFacade" ref="papplicationAliveMonitorCustmanageServiceFacade" />
+	<!-- 投资理财 -->
+	<dubbo:service retries="0"  interface="bros.p.custmanage.facade.service.IPFinanceInvestmentServiceFacade" ref="pfinanceInvestmentServiceFacade" />
+</beans>  

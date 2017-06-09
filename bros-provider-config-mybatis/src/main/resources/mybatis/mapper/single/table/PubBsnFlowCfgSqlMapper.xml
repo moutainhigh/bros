@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.pubbsnflowcfg">
+	
+	<sql id="pub_pubbsnflowcfg_param">
+		PBC_BSNID,
+		PBC_UPDATERBEANID,
+		PBC_PROVIDERBEANID,
+		PBC_YRNLSH,
+		PBC_DESCRIBE
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="pubBsnFlowCfgResult">
+    	<result property="bsnId" column="PBC_BSNID"/><!-- 业务编码 -->
+    	<result property="updaterBeanId" column="PBC_UPDATERBEANID"/><!-- 指令处理器标识 -->
+    	<result property="providerBeanId" column="PBC_PROVIDERBEANID"/><!-- SQL提供器标识 -->
+    	<result property="yrnlsh" column="PBC_YRNLSH"/><!-- 是否记录流水表：0-否，1-是 -->
+    	<result property="describe" column="PBC_DESCRIBE"/><!-- 是否记录流水表：0-否，1-是 -->
+    </resultMap>
+    
+    <!-- 查询系统参数定义表 -->
+    <select id="queryPubBsnFlowCfg" resultMap="pubBsnFlowCfgResult">
+       select
+       <include refid="pub_pubbsnflowcfg_param"/>
+       from bma_bsndef, pub_bsnflow_cfg
+       where bbf_bsncode=#{bsnCode}
+          and bbf_channel=#{channel}
+          and bbf_id=pbc_bsnid
+    </select>
+    
+</mapper>

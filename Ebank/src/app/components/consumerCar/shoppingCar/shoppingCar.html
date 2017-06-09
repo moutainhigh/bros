@@ -1,0 +1,107 @@
+<div class="main-box">
+    <div class="shopping-car-box">
+        <div class="cart-title">
+            <div class="title-big">购物车</div>
+            <div class="link"><a ui-sref="index">继续购物</a></div>
+        </div>
+
+        <div class="cart-list">
+            <div class="tableList">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" id="carTable">
+                <colgroup>
+                   <col width="10%">
+                   <col width="15%"/>
+                   <col width="10%"/>
+                   <col width="10%"/>
+                   <col width="10%"/>
+                   <col width="10%"/>
+                   <col width="10%"/>
+                   <col width="10%"/>
+                   <col width="5%"/>
+                </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="choice">
+                                <input type="checkbox" id="allisSelectedtableRow" name="allisSelected" ng-click="vm.checkedCart('tableHead','allisSelected');"> 全选</th>
+                            <th class="title">名称</th>
+                            <th style="text-align:center">数量</th>
+                            <th class="money">单价(元)</th>
+                            <th class="money">优惠价格(元)</th>
+                            <th class="money">小计(元)</th>
+                            <th class="tool">操作</th>
+                            <th class="tool" ng-hide=true>id</th>
+                        </tr>
+                    </thead>
+                    <tbody  ng-repeat="list in vm.productDetail" >
+                        <tr>
+                            <td class="choice">
+                                <input type="checkbox"  name="allisSelected" ng-bind="list" ng-click="vm.checkedCart('tableRow','allisSelected');">
+                                <p ng-bind="list.productId" ng-hide=true></p>
+                                <p ng-bind="list.tradeData.prodCatalogId" ng-hide=true></p>
+                                <p ng-bind="list.tradeData.configOptionId" ng-hide=true></p>
+                                <p ng-bind="list.tradeData.bankBalance" ng-hide=true></p>
+                                <p ng-bind="list.tradeData.requireAmount" ng-hide=true></p>
+                                <p ng-bind="list.id" ng-hide=true></p>
+                            </td>
+                            <td class="title">
+                                <p ng-bind="list.productId + list.productName" ng-click="vm.shopcarproduct(list)"></p>
+                            </td>
+                          
+                            <td align="center">
+                                <button ng-click="vm.numberchange(list,'minus',$event);" ng-disabled="1==list.productAmount||'Y'==list.tradeData.requireAmount">-</button>
+                                <input style="width:50px" type="text" ng-value="list.productAmount"  ng-disabled="'Y'==list.tradeData.requireAmount"  ng-blur="vm.datanumerchange(list,$event);"/>
+                                <button ng-click="vm.numberchange(list,'add',$event);" ng-disabled=" 'Y'==list.tradeData.requireAmount">+</button>
+                            </td>
+                             
+                            <td class="money">
+                                <p ng-bind="list.tradeData.displayPrice|currency:'¥'"></p>
+                            </td>
+                             <td class="money">
+                                <p ng-bind="list.tradeData.otherAdjustments|currency:'¥'"></p>
+                            </td>
+                             <td class="money">
+                                <p ng-bind="list.tradeData.displayItemSubTotal|currency:'¥'"></p>
+                            </td>
+
+                            <td class="tool"><a  ng-click="vm.clickdelect($index,list)">删除</a></td>
+                            <td class="tool" ng-hide=true ng-bind="list.id"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="shopping-car-bar">
+            <div class="bar-delete"><input type="checkbox" id="allisSelectedTableSelect" name="allisSelected" ng-click="vm.checkedCart('tableSelect','allisSelected');"> <span>全选</span><i ng-click="vm.gopayOrDeleteSelectCart('delete');">删除选中</i></div>
+            <div class="bar-info"><span>已选择<b ng-bind="length"></b>个产品</span><span>总价<b ng-bind="vm.totalamt|currency:'¥'"></b>元</span></div>
+            <button class="bar-btn" ng-click="vm.gopayOrDeleteSelectCart('gopay')">结算</button>
+        </div>
+    </div>
+<div class="pay-box" >
+            <div class="pay-title">
+                <div class="title-big">购物车使用促销</div>
+            </div>
+            <div class="pay-list-box">
+                <div class="payAdd-list ">
+                    <ul ng-repeat="returnList in vm.cartLinesList">
+                        <li>
+                            <div>产品：<span ng-bind="returnList.productId"></span>
+                            已使用促销数量：<span ng-bind="returnList.promoQuantityUsed"></span>
+                            数量：<span ng-bind="returnList.quantity"></span>
+                            可使用促销数量：<span ng-bind="returnList.promoQuantityAvailable"></span>
+                            </div>
+                            <ul ng-repeat="childList in returnList.quantityUsedPerPromoActualList">
+                            <li>
+                                 <div>促销产品：<span ng-bind="childList.productName"></span>
+                                 实际使用数量：<span ng-bind="childList.actualQuantityUsed"></span>
+                                 促销名称：<span ng-bind="childList.promoName"></span>
+                                 促销规则：<span ng-bind="childList.promoText"></span>
+                            </div>
+                            </li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    <div browsehistory></div>
+
+
+</div>

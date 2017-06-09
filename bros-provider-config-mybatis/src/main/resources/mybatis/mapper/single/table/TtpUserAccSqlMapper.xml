@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.ttpuseracc">
+	<sql id="ttp_user_acc">
+		tua_id,
+		tua_legalid,
+		tua_cstno,
+		tua_operatorid,
+		tua_accno,
+		tua_stt
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="ttpUserAccResult">
+    	<result property="operatorAccId" column="tua_id"/><!-- UUID -->
+    	<result property="legalId" column="tua_legalid"/><!-- 法人Id -->
+    	<result property="cstNo" column="tua_cstno"/><!-- 客户号 -->
+    	<result property="operatorId" column="tua_operatorid"/><!-- 操作员CODE -->
+    	<result property="operatorAccNo" column="tua_accno"/><!-- 操作员可操作账号 -->
+    	<result property="operatorAccAuth" column="tua_stt"/><!-- 账户权限 0：查询；1：转账 -->
+    </resultMap>
+    <!-- 查询全部角色 -->
+    <select id="queryAllTtpUserAcc" resultMap="ttpUserAccResult">
+       select
+       	<include refid="ttp_user_acc"/> 
+       from ttp_user_acc 
+    </select>
+    <!-- 添加操作员用户信息 -->
+	<insert id="insertTtpUserAcc" parameterType="java.util.HashMap">
+		insert into ttp_user_acc(
+			<include refid="ttp_user_acc"/>  
+		) values(
+			<![CDATA[ 
+				#{operatorAccId,jdbcType=VARCHAR},
+				#{legalId,jdbcType=VARCHAR},
+				#{cstNo,jdbcType=VARCHAR},
+				#{operatorId,jdbcType=VARCHAR},
+				#{operatorAccNo,jdbcType=VARCHAR},
+				#{operatorAccAuth,jdbcType=VARCHAR}
+	       	]]> 
+		)
+	</insert>
+	<!-- 删除操作员下可操作账户-->
+	<delete id="deleteTtpUserAccByTuiId"  parameterType="java.util.HashMap">
+		delete from ttp_user_acc where tua_operatorid=#{operatorId}
+	</delete>
+	
+	<!-- 查询操作员下可操作账户 -->
+    <select id="queryAccByUserAcc" resultMap="ttpUserAccResult">
+       select
+       	<include refid="ttp_user_acc"/> 
+       from ttp_user_acc 
+       where 
+       tua_cstno = #{cstNo,jdbcType=VARCHAR}
+       and tua_operatorid = #{operatorId,jdbcType=VARCHAR}
+       and tua_legalid = #{legalId,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlList dataName="privateQuestionList" message="${CECO000000001}"><!-- 私密问题列表 -->
+			<xmlTag message="${CECO000000001}">
+				<xmlField dataName="pqGroupId" message="${CECO000000001}"><!-- 问题分组编号 -->
+					<validator class="IsRamdomLength" min="36" symbol="e" message="${CECO000000004}"/>
+				</xmlField>
+				<xmlField dataName="answer" message="${CECO000000001}"><!-- 问题答案 -->
+					<validator class="IsRamdomLength" min="1" max="150" symbol="r" message="${CECO000000007}"/>
+				</xmlField>
+			</xmlTag>
+		</xmlList>
+	</xmlTag>
+</formats>

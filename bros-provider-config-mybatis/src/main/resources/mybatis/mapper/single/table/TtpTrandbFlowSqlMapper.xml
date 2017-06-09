@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.ttptrandbflow">
+	
+    <resultMap type="java.util.HashMap" id="ttpTrandbFlowResult">
+    	<result property="gblflowSeq" column="ttdf_gblflowseq"/><!-- 30位全局流水号 -->
+    	<result property="detailBizData" column="ttdf_detailbizdata"/><!-- 明细信息 -->
+    </resultMap>
+
+    <!-- 插入明细流水表数据定义 -->
+    <insert id="insertTtpTrandbFlow" parameterType="java.util.HashMap">
+       insert into ttp_trandb_flow(
+           ttdf_gblflowseq,
+    	   ttdf_detailbizdata
+    	)values(
+    	<![CDATA[
+			#{gblflowSeq},
+			#{detailBizData})
+		]]>
+    </insert>
+	
+    <!-- 根据流水号查询明细表信息 -->
+	<select id="queryTtpTrandbFlowByOne" resultMap="ttpTrandbFlowResult">
+	   <![CDATA[
+              select ttdf_gblflowseq,
+	    	         ttdf_detailbizdata 
+                 from ttp_trandb_flow 
+                    where ttdf_gblflowseq=#{gblflowSeq}
+       ]]>
+    </select>
+</mapper>

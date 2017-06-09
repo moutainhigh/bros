@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="tradeChannel" message="${CECO000000001}"/>
+		<xmlField dataName="tradeLegalId" message="${CECO000000001}"/>
+		<xmlField dataName="singleMax" message="${CECO000000001}"/>
+		<xmlField dataName="dayMax" message="${CECO000000001}"/>
+	</xmlTag>
+</formats>

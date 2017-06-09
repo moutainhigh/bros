@@ -1,0 +1,13 @@
+<div class="product-list" >
+    <div class="list">
+        <div class="img" ui-sref="productdetail({productCode:product.financialcode})"><img src="{{product.producturl}}" alt=""></div>
+        <ul class="product-info">
+            <li class="product-title" ng-bind="product.productname" ui-sref="productdetail({productCode:product.financialcode})"></li>
+            <li class="product-tag" ng-repeat="producttag in product.producttags"><span ng-bind="producttag.producttag"></li>
+            <li>贷款利率：<b class="big-font" ng-bind="product.productrate"></b><span>%</span></li>
+            <li class="product-but">
+                <button type="button" class="btn btn-primary" ui-sref="loanapplication({productname:product.productname})" >加入购物车</button>
+            </li>
+        </ul>
+    </div>
+</div>

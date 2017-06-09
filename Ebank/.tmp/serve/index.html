@@ -1,0 +1,189 @@
+<!doctype html>
+<html ng-app="EBankProject">
+
+<head>
+    <meta charset="utf-8">
+    <title>网上银行</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <script type="text/javascript" src='config.js'></script>
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.css" />
+    <link rel="stylesheet" href="../bower_components/components-font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="../bower_components/angular-loading-bar/build/loading-bar.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="app/index.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+
+<body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div cheader></div>
+    <div class="wrapper" ui-view></div>
+    <div cfooter></div>
+    <div sidebar></div>
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="../bower_components/angular-touch/angular-touch.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../bower_components/malarkey/dist/malarkey.min.js"></script>
+    <script src="../bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="../bower_components/moment/moment.js"></script>
+    <script src="../bower_components/angular-promise-tracker/promise-tracker.js"></script>
+    <script src="../bower_components/angular-flash/dist/angular-flash.js"></script>
+    <script src="../bower_components/highchart-ng/dist/highcharts-ng.js"></script>
+    <script src="../bower_components/highstock-release/highstock.js"></script>
+    <script src="../bower_components/highstock-release/highcharts-more.js"></script>
+    <script src="../bower_components/highstock-release/modules/exporting.js"></script>
+    <script src="../bower_components/mockjs/dist/mock.js"></script>
+    <script src="../bower_components/mockjs/dist/mock.angular.js"></script>
+    <script src="../bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="../bower_components/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
+    <script src="../bower_components/echarts/dist/echarts.js"></script>
+    <script src="../bower_components/patternLock/patternLock.js"></script>
+    <script src="../bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="../bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+    <!-- inject:js -->
+    <script src="app/index.module.js"></script>
+    <script src="app/components/consumerLogin/selfRegistration/setAccountInfoPwd/setAccountInfoPwd.controller.js"></script>
+    <script src="app/components/consumerLogin/selfRegistration/registTitile/registTielt.directive.js"></script>
+    <script src="app/components/consumerLogin/selfRegistration/registAccountInfor/registAccountInfor.controller.js"></script>
+    <script src="app/components/consumerLogin/selfRegistration/getAccountInfo/getAccountInfo.controller.js"></script>
+    <script src="app/components/consumerLogin/forgetPassword/setPasswordSucc/setPasswordSucc.control.js"></script>
+    <script src="app/components/consumerLogin/forgetPassword/setPassword/setPassword.control.js"></script>
+    <script src="app/components/consumerLogin/forgetPassword/forgetPasswordState/forgetPasswordState.directive.js"></script>
+    <script src="app/components/consumerLogin/forgetPassword/forgetPassword/forgetPassword.control.js"></script>
+    <script src="app/components/consumerAccount/fixedTransfer/title/fixedTransferTitle.directive.js"></script>
+    <script src="app/components/consumerAccount/fixedTransfer/success/fixedTransferSuccess.controller.js"></script>
+    <script src="app/components/consumerAccount/fixedTransfer/input/fixedTransfer.controller.js"></script>
+    <script src="app/components/consumerAccount/fixedTransfer/confirm/fixedTransferConfirm.controller.js"></script>
+    <script src="app/layout/modalBlock/modalWindowTemplate/modalWindowTemplate.controller.js"></script>
+    <script src="app/layout/modalBlock/browseHistory/browseHistory.directive.js"></script>
+    <script src="app/layout/modalBlock/browseHistory/browseHistory.controller.js"></script>
+    <script src="app/directives/shoppingCar/shoppingcarson2/shoppingCardirson2.directive.js"></script>
+    <script src="app/directives/shoppingCar/shoppingcarson2/shoppingCardir2.controller.js"></script>
+    <script src="app/directives/shoppingCar/shoppingcarson/shoppingCardirson.directive.js"></script>
+    <script src="app/directives/shoppingCar/shoppingcarson/shoppingCardir.controller.js"></script>
+    <script src="app/directives/myOrder/notcompletedorderitem/notcompletedorderitem.directive.js"></script>
+    <script src="app/directives/myOrder/completedorderitem/completedorderitem.directive.js"></script>
+    <script src="app/directives/consumerLoan/myLoan/myLoandir.directive.js"></script>
+    <script src="app/directives/consumerLoan/loanService/loanServicedir.directive.js"></script>
+    <script src="app/directives/commonDiretives/tabs/tab.directive.js"></script>
+    <script src="app/directives/commonDiretives/softKeyboard/softKeyboard.directive.js"></script>
+    <script src="app/directives/commonDiretives/pwdEye/pwdEye.directive.js"></script>
+    <script src="app/directives/commonDiretives/pwCheck/pwCheck.directive.js"></script>
+    <script src="app/directives/commonDiretives/passwordStrength/passwordStrength.directive.js"></script>
+    <script src="app/directives/commonDiretives/paging/paging.directive.js"></script>
+    <script src="app/directives/commonDiretives/highlight/highlight.directive.js"></script>
+    <script src="app/directives/commonDiretives/eChart/eChart.directive.js"></script>
+    <script src="app/directives/commonDiretives/customValidator/customPattern.directive.js"></script>
+    <script src="app/directives/commonDiretives/calendar/calendar.js"></script>
+    <script src="app/directives/commonDiretives/amtInput/amtInput.diretive.js"></script>
+    <script src="app/components/templatePage/fixedClown/fixedClown.controller.js"></script>
+    <script src="app/components/consumerTransfer/transferService/transferService.controller.js"></script>
+    <script src="app/components/consumerTransfer/transferService/discoverPromotionsList.controller.js"></script>
+    <script src="app/components/consumerTransfer/transferDefaultSucc/transferDefaultSucc.controller.js"></script>
+    <script src="app/components/consumerTransfer/transferDefaultState/transferDefaultState.directive.js"></script>
+    <script src="app/components/consumerTransfer/transferDefaultService/transferDefaultService.controller.js"></script>
+    <script src="app/components/consumerTransfer/transferDefaultInput/transferDefaultInput.controller.js"></script>
+    <script src="app/components/consumerTransfer/transferDefaultInput/contactsList.control.js"></script>
+    <script src="app/components/consumerTransfer/transferDefaultInput/bankListSearch.control.js"></script>
+    <script src="app/components/consumerTransfer/transferDefaultInput/bankList.controller.js"></script>
+    <script src="app/components/consumerLogin/login/login.controller.js"></script>
+    <script src="app/components/consumerLoan/myLoan/myLoanquery.controller.js"></script>
+    <script src="app/components/consumerLoan/myLoan/myLoaninfo.controller.js"></script>
+    <script src="app/components/consumerLoan/myLoan/myLoan.controller.js"></script>
+    <script src="app/components/consumerLoan/loanhead/loanhead.directive.js"></script>
+    <script src="app/components/consumerLoan/loanService/loanService.controller.js"></script>
+    <script src="app/components/consumerLoan/loanApplication/loanApplication.controller.js"></script>
+    <script src="app/components/consumerFinancial/productdetails/productdetail.controller.js"></script>
+    <script src="app/components/consumerCar/tradeOrderDetail/tradeOrderDetail.controller.js"></script>
+    <script src="app/components/consumerCar/showQuotedPriceDetail/showQuotedPriceDetail.controller.js"></script>
+    <script src="app/components/consumerCar/shoppingCar/shoppingCar.controller.js"></script>
+    <script src="app/components/consumerCar/settlementShoppingCar/settlementShoppingCar.controller.js"></script>
+    <script src="app/components/consumerCar/quotedPriceDetail/quotedPriceDetail.controller.js"></script>
+    <script src="app/components/consumerCar/quotedPrice/quotedPrice.controller.js"></script>
+    <script src="app/components/consumerCar/myOrder/myOrder.controller.js"></script>
+    <script src="app/components/consumerCar/demand/demandController.controller.js"></script>
+    <script src="app/components/consumerAccount/productView/productView.controller.js"></script>
+    <script src="app/components/consumerAccount/accountManagement/accountManagement.controller.js"></script>
+    <script src="app/layout/sideBar/sidebar.directive.js"></script>
+    <script src="app/layout/sideBar/sideBar.controller.js"></script>
+    <script src="app/layout/showmsg/showmessage.controller.js"></script>
+    <script src="app/layout/productDetail/productDetailShow.controller.js"></script>
+    <script src="app/layout/header/header.directive.js"></script>
+    <script src="app/layout/footer/footer.directive.js"></script>
+    <script src="app/directives/tree/tree.directive.js"></script>
+    <script src="app/directives/transferService/transferProduct.dirctive.js"></script>
+    <script src="app/directives/shoppingCar/shoppingCardir.directive.js"></script>
+    <script src="app/directives/productView/productView.directive.js"></script>
+    <script src="app/directives/myOrder/myOrder.directive.js"></script>
+    <script src="app/directives/consumerLoan/consumerLoan.directive.js"></script>
+    <script src="app/directives/accountManagementDir/accountManagement.directive.js"></script>
+    <script src="app/components/personOverview/personOverviewController.controller.js"></script>
+    <script src="app/components/personOverview/custPropertyDetailController.controller.js"></script>
+    <script src="app/components/home/home.controller.js"></script>
+    <script src="app/components/consumerFinancial/consumerFinancial.controller.js"></script>
+    <script src="app/services/validation.service.js"></script>
+    <script src="app/services/user.service.js"></script>
+    <script src="app/services/modal.service.js"></script>
+    <script src="app/services/http.service.js"></script>
+    <script src="app/services/http.Interceptor.js"></script>
+    <script src="app/services/file.service.js"></script>
+    <script src="app/services/eventBus.service.js"></script>
+    <script src="app/services/common.service.js"></script>
+    <script src="app/services/circularList.service.js"></script>
+    <script src="app/mockData/tree.mokc.js"></script>
+    <script src="app/mockData/queryloandetail.mock .js"></script>
+    <script src="app/mockData/browsehis.mock .js"></script>
+    <script src="app/filters/separator.js"></script>
+    <script src="app/filters/relationShipType.filters.js"></script>
+    <script src="app/filters/profession.filters.js"></script>
+    <script src="app/filters/paymentMethodTypeId.js"></script>
+    <script src="app/filters/loanStatus.filters.js"></script>
+    <script src="app/filters/intercept.filters.js"></script>
+    <script src="app/filters/idCardType.filters.js"></script>
+    <script src="app/filters/gender.filters.js"></script>
+    <script src="app/filters/degree.filters.js"></script>
+    <script src="app/filters/dateFormat.js"></script>
+    <script src="app/filters/currencyFormat.js"></script>
+    <script src="app/filters/currency.filters.js"></script>
+    <script src="app/filters/chineseCost.js"></script>
+    <script src="app/filters/cardNoCiper.js"></script>
+    <script src="app/filters/bankLogo.js"></script>
+    <script src="app/filters/bankAccount.js"></script>
+    <script src="app/filters/addPlus.js"></script>
+    <script src="app/mobile.util.js"></script>
+    <script src="app/index.run.js"></script>
+    <script src="app/index.route.js"></script>
+    <script src="app/index.constants.js"></script>
+    <script src="app/index.config.js"></script>
+    <!-- endinject -->
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+    <!-- <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b4d827493303d1d249c99f444d37573d"></script> -->
+</body>
+
+</html>

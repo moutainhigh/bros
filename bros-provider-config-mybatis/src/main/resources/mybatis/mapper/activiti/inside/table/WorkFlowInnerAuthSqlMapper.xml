@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="mybatis.mapper.relational.table.workflowauth"> -->
+<mapper namespace="mybatis.mapper.activiti.inside.table.workflowinnerauth">
+
+    <resultMap id="authModelMap" type="java.util.HashMap">
+		<result property="authorizeId" column="BAM_ID"/><!-- 模型编号 -->
+		<result property="name" column="BAM_NAME"/><!-- 授权模型名称-->
+		<result property="orderly" column="BAM_ORDERLY"/><!-- 授权顺序（0：无序授权，1：有序授权）-->
+		<result property="state" column="BAM_STATE"/><!-- 状态（0：停用；1：正常）-->
+		<result property="authRoleRel" column="BAM_AUTHROLEREL"/><!-- 用于存放临柜指定授权时指定的角色 对应角色关联表-->
+		<result property="channel" column="BAM_CHANNEL"/><!--渠道编码 -->
+		<result property="legalId" column="BAM_LEGALID"/>
+		<result property="authMode" column="BAM_AUTHMODE"/><!-- 授权方式（0：额度，1：强制，2：条件）-->
+		<result property="authType" column="BAM_AUTHTYPE"/><!-- 授权类型 0：即时生效，无需授权 1：互为授权  2：指定授权-->
+		<result property="authShape" column="BAM_AUTHSHAPE"/><!--授权形式 0：审核式 1：临柜 	-->
+		<result property="authLevel" column="BAM_AUTHLEVEL"/><!--授权级别 0：单人 1：双人 	-->
+	</resultMap>
+	<resultMap type="java.util.HashMap" id="bsnAuthResult">
+    	<result property="bsnCode" column="BBA_BSNID"/>
+    	<result property="channel" column="BBA_CHANNEL"/>
+    	<result property="legalId" column="BBA_LEGALID"/>
+    	<result property="authFlag" column="BBA_AUTHFLAG"/>
+    	<result property="authModelFk" column="BBA_AUTHMODELFK"/>
+    	<result property="procDefId" column="BBA_PROCDEFID"/>
+    </resultMap>
+    <resultMap id="authRuleResult" type="java.util.HashMap">
+			<result property="argId" column="BAMR_ID"/><!--"规则编号  -->
+			<result property="authModelId" column="BAMR_AUTHMODELID"/><!--"授权模型编号-->
+			<result property="authRnrole1" column="BAMR_AUTHRNROLE1"/><!--"角色1编号-->
+			<result property="authRnrole2" column="BAMR_AUTHRNROLE2"/><!--"角色2编号-->
+			<result property="authRnrole3" column="BAMR_AUTHRNROLE3"/><!--"角色3编号-->
+			<result property="authRnrole4" column="BAMR_AUTHRNROLE4"/><!--"角色4编号-->
+			<result property="authRnrole5" column="BAMR_AUTHRNROLE5"/><!--"角色5编号 -->
+			<result property="roleNumber1" column="BAMR_ROLENUMBER1" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色1人数-->
+			<result property="roleNumber2" column="BAMR_ROLENUMBER2" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色2人数-->
+			<result property="roleNumber3" column="BAMR_ROLENUMBER3" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色3人数-->
+			<result property="roleNumber4" column="BAMR_ROLENUMBER4" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色4人数-->
+			<result property="roleNumber5" column="BAMR_ROLENUMBER5" javaType="java.lang.String" jdbcType="INTEGER"/><!--"角色5人数-->
+			<result property="minAmount" column="BAMR_MINAMOUNT"     javaType="java.lang.String" jdbcType="DECIMAL"/><!--"规则起始金额  -->
+			<result property="maxAmount" column="BAMR_MAXAMOUNT"     javaType="java.lang.String" jdbcType="DECIMAL"/><!--"规则结束金额  -->
+			<result property="argRanking" column="BAMR_RANKING"      javaType="java.lang.String" jdbcType="INTEGER"/> <!--"规则所在授权模型序号（从1开始）-->
+	</resultMap>
+	<sql id="bma_auth_model_param">
+			BAM_ID,
+			BAM_NAME,
+			BAM_ORDERLY,
+			BAM_STATE,
+			BAM_LEGALID,
+			BAM_CHANNEL,
+			BAM_AUTHMODE,
+			BAM_AUTHTYPE,
+			BAM_AUTHSHAPE,
+			BAM_AUTHROLEREL,
+			BAM_AUTHLEVEL
+    </sql>
+    <sql id="bma_bsn_auth_param">
+		BBA_BSNID,
+		BBA_CHANNEL,
+		BBA_LEGALID,
+		BBA_AUTHFLAG,
+		BBA_AUTHMODELFK,
+		BBA_PROCDEFID
+	</sql>
+	<sql id="authRuleParam">
+			BAMR_ID,
+			BAMR_AUTHMODELID,
+			BAMR_AUTHRNROLE1,
+			BAMR_AUTHRNROLE2,
+			BAMR_AUTHRNROLE3,
+			BAMR_AUTHRNROLE4,
+			BAMR_AUTHRNROLE5,
+			BAMR_ROLENUMBER1,
+			BAMR_ROLENUMBER2,
+			BAMR_ROLENUMBER3,
+			BAMR_ROLENUMBER4,
+			BAMR_ROLENUMBER5,
+			BAMR_MINAMOUNT,
+			BAMR_MAXAMOUNT,
+			BAMR_RANKING
+    </sql>
+	<!-- 根据法人渠道业务编号查询授权配置信息-->
+    <select id="queryBsnAuthInfo"  parameterType="java.util.HashMap" resultMap="bsnAuthResult">
+	       SELECT <include refid="bma_bsn_auth_param"/>
+	              FROM BMA_BSN_AUTH
+	       WHERE  BBA_LEGALID=#{legalId}
+		   AND  BBA_BSNID=#{bsnCode}
+		   AND  BBA_CHANNEL=#{channel}
+    </select>
+    <!-- 根据授权模型id查询授权模型-->
+	<select id="queryBmaAuthModelByByModelId" resultMap="authModelMap" parameterType="java.util.HashMap">
+		select  <include refid="bma_auth_model_param"/>
+		        from BMA_AUTH_MODEL 
+		        where BAM_ID=#{authModelFk}
+	</select>
+	
+	<!-- 根据授权模型ID或者金额查询授权规则 -->
+	 <select id="queryAuthModelRuleByAuthModelIdAndAmount"  parameterType="java.util.HashMap" resultMap="authRuleResult">
+		SELECT <include refid="authRuleParam"/>
+				  FROM BMA_AUTH_MODEL_RULEGP  
+				   where BAMR_AUTHMODELID=#{authModelFk}
+			 <if test="tranAmt!=null and tranAmt!=''">
+				 <![CDATA[
+				 and  BAMR_MINAMOUNT <= #{tranAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				 and  BAMR_MAXAMOUNT >= #{tranAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				 ]]>
+			 </if>
+	</select>
+</mapper>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<!-- 渠道分组信息查询 -->
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="legalPersonId" message="${CECO000000001}"/><!-- 法人ID -->
+	</xmlTag>
+</formats>

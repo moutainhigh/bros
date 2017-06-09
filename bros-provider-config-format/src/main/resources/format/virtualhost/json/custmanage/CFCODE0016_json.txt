@@ -1,0 +1,60 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+	"totalRecord":"总记录数",
+	"totalList": [
+        {
+			"agreeStatus":"PS00",
+			"protocalNo":"授权支付协议号",
+			"externalBranchNo":"第三方机构号",
+			"custNo":"客户号（第三方）",
+			"payAccount":"62251234567890",
+			"payAccountName":"付款人户名",
+			"paymentAccType":"付款人账户类型",
+			"payOpenBranchName":"付款人开户行名称",
+			"payBankNo":"付款人开户行所属网银系统行号",
+			"paymentTelephone":"付款人联系电话",
+			"subPayAccount":"收款人账号123313",
+			"subPayAccountName":"收款人户名hh",
+			"rcvOpenBranchName":"收款人开户行名称",
+			"rcvOpenBranchNo":"收款人开户行所属网银系统行号",
+			"rcvCstNo":"客户服务号（收款人）",
+			"athtctnPmtCtgy":"授权支付的业务类型",
+			"ptcFctvData":"协议生效日期",
+			"ptcIfctvData":"协议失效日期",
+			"currency":"币种",
+			"singleQuota":"单笔金额上限",
+			"dayBizNumQuota":"日累计业务笔数上限",
+			"dayQuota":"日累计金额上限",
+			"monthBizNumQuota":"月累计业务笔数上限",
+			"monthQuota":"月累计金额上限",
+			"dayBizNumTotal":"日累计业务笔数",
+			"dayAmountTotal":"日累计金额",
+			"monthBizNumTotal":"月累计业务笔数",
+			"monthAmountTotal":"月累计金额",
+			"remark":"备注",
+			"signDate":"签约日期",
+			"terminatDate":"解约日期"
+        }
+    ]
+}

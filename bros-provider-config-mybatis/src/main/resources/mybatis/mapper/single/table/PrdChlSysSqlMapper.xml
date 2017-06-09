@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.prdchlsys">
+	<sql id="fornt_chl_param">
+		PCS_CHLID,
+		PCS_CHLCODE,
+		PCS_LEGALID,
+		PCS_CHLNAME,
+		PCS_CHLDESC,
+		PCS_CHLSYSCODE,
+		PCS_CHLFLAG
+	</sql>
+
+	<resultMap type="java.util.HashMap" id="chlInfoMap">
+		<result property="chlId" column="PCS_CHLID" />
+		<result property="chlCode" column="PCS_CHLCODE" />
+		<result property="legalPersonId" column="PCS_LEGALID" />
+		<result property="chlName" column="PCS_CHLNAME" />
+		<result property="chlDesc" column="PCS_CHLDESC" />
+		<result property="chlSysCode" column="PCS_CHLSYSCODE" />
+		<result property="chlFlag" column="PCS_CHLFLAG" />
+	</resultMap>
+
+	<!--根据渠道唯一标识、渠道编号、法人ID、系统分组编号查询渠道系统信息 -->
+	<select id="queryChlInfo" resultMap="chlInfoMap">
+		select
+		<include refid="fornt_chl_param" />
+		from PRD_CHLSYS
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="chlId != null and chlId != '' ">
+			and PCS_CHLID = #{chlId}
+		</if>
+		<if test="chlCode != null and chlCode != '' ">
+			and PCS_CHLCODE = #{chlCode}
+		</if>
+		<if test="legalPersonId != null and legalPersonId != '' ">
+			and PCS_LEGALID = #{legalPersonId}
+		</if>
+		<if test="chlSysCode != null and chlSysCode != '' ">
+			and PCS_CHLSYSCODE = #{chlSysCode}
+		</if>
+		<if test="chlFlag != null and chlFlag != '' ">
+			and PCS_CHLFLAG = #{chlFlag}
+		</if>
+	</select>
+<!--根据渠道唯一标识、渠道编号、法人ID、系统分组编号查询渠道系统信息 -->
+	<select id="queryChlInfoTotalNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from PRD_CHLSYS
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="chlId != null and chlId != '' ">
+			and PCS_CHLID = #{chlId}
+		</if>
+		<if test="chlCode != null and chlCode != '' ">
+			and PCS_CHLCODE = #{chlCode}
+		</if>
+		<if test="legalPersonId != null and legalPersonId != '' ">
+			and PCS_LEGALID = #{legalPersonId}
+		</if>
+		<if test="chlSysCode != null and chlSysCode != '' ">
+			and PCS_CHLSYSCODE = #{chlSysCode}
+		</if>
+		<if test="chlFlag != null and chlFlag != '' ">
+			and PCS_CHLFLAG = #{chlFlag}
+		</if>
+	</select>
+	<!-- 更新渠道系统分组信息 -->
+	<update id="updateChlInfo" parameterType="java.util.HashMap">
+		update PRD_CHLSYS 
+      		<![CDATA[ 
+		       	set  PCS_CHLNAME = #{chlName},PCS_CHLDESC = #{chlDesc},PCS_CHLFLAG = #{chlFlag}
+			   where 1 = 1
+       		]]>
+		<if test="chlId != null and chlId != '' ">
+			and PCS_CHLID = #{chlId}
+		</if>
+		<if test="chlCode != null and chlCode != '' ">
+			and PCS_CHLCODE = #{chlCode}
+		</if>
+		<if test="legalPersonId != null and legalPersonId != '' ">
+			and PCS_LEGALID = #{legalPersonId}
+		</if>
+		<if test="chlSysCode != null and chlSysCode != '' ">
+			and PCS_CHLSYSCODE = #{chlSysCode}
+		</if>
+		
+	</update>
+	
+	<!-- 更新渠道系统状态信息 -->
+	<update id="updateChlStatus" parameterType="java.util.HashMap">
+		update PRD_CHLSYS 
+      		<![CDATA[ 
+		       	set  PCS_CHLFLAG = #{chlFlag}
+			   where 1 = 1
+       		]]>
+		<if test="chlId != null and chlId != '' ">
+			and PCS_CHLID = #{chlId}
+		</if>
+		<if test="chlCode != null and chlCode != '' ">
+			and PCS_CHLCODE = #{chlCode}
+		</if>
+		<if test="legalPersonId != null and legalPersonId != '' ">
+			and PCS_LEGALID = #{legalPersonId}
+		</if>
+		<if test="chlSysCode != null and chlSysCode != '' ">
+			and PCS_CHLSYSCODE = #{chlSysCode}
+		</if>
+		
+	</update>
+
+	<!-- 新增渠道系统信息-->
+	<insert id="insertChlInfo" parameterType="java.util.HashMap">
+		insert into PRD_CHLSYS (
+		<include refid="fornt_chl_param" />) 
+	    <![CDATA[ 
+		    values(
+		   		 #{chlId},
+		   		 #{chlCode},
+		   		 #{legalPersonId},
+		   		 #{chlName},
+		   		 #{chlDesc},
+		   		 #{chlSysCode},
+		   		 #{chlFlag}
+		       )
+	    ]]>
+	</insert>
+    <!-- 删除渠道系统信息-->
+	<delete id="deleteChlInfo" parameterType="java.util.HashMap">
+		delete from PRD_CHLSYS 
+	    <![CDATA[ 
+	     		 where  1 = 1
+	     ]]>
+		<if test="chlId != null and chlId != '' ">
+			and PCS_CHLID = #{chlId}
+		</if>
+		<if test="chlCode != null and chlCode != '' ">
+			and PCS_CHLCODE = #{chlCode}
+		</if>
+		<if test="legalPersonId != null and legalPersonId != '' ">
+			and PCS_LEGALID = #{legalPersonId}
+		</if>
+		<if test="chlSysCode != null and chlSysCode != '' ">
+			and PCS_CHLSYSCODE = #{chlSysCode}
+		</if>
+	</delete>
+</mapper>

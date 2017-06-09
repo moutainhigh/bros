@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.relational.table.tpraccfunc-tprfunclassbsnrel">
+
+    <sql id="tpr_accFunc_param">
+		TAF_ID,
+		TAF_CSTID,
+		TAF_ACCNO,
+		TAF_CLASSNO,
+		TAF_CHANNEL
+	</sql>
+    
+    <resultMap type="java.util.HashMap" id="tprAccFunclassBsnRelResult">
+    	<result property="id" column="TAF_ID"/><!-- 唯一标识 -->
+    	<result property="cstId" column="TAF_CSTID"/><!-- 客户号 -->
+    	<result property="accNo" column="TAF_ACCNO"/><!-- 账号 -->
+    	<result property="classNo" column="TAF_CLASSNO"/><!-- 分类编号 -->
+    	<result property="channel" column="TAF_CHANNEL"/><!-- 渠道号 -->
+    </resultMap>
+	
+    <!-- 根据法人id，客户号，业务编码查询客户操作权限  -->
+	<select id="queryAccFunclassCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+       select count(*) from TPR_ACC_FUNC a,TPR_FUNCLASS_BSN_REL b
+       where a.TAF_CLASSNO = b.TFBR_CLASSNO
+       and a.TAF_CSTID = #{cstNo} and b.TFBR_BSNCODE = #{bsnCode} 
+    </select>
+</mapper>

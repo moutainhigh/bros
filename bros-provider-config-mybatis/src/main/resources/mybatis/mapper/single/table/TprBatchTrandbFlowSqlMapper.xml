@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.tprbatchtrandbflow">
+	<sql id="tpr_tprBatchTrandbFlow_param">
+		tbdf_id,
+		tbdf_gblflowseq,
+		tbdf_batchno,
+		tbdf_resiveaccno,
+		tbdf_resiveaccname,
+		tbdf_resivebankno,
+		tbdf_resivebankname,
+		tbdf_currency,
+		tbdf_resiveamt,
+		tbdf_purpose
+	</sql>
+	
+     <resultMap type="java.util.HashMap" id="tprBatchTrandbFlowResult">
+     	<result property="id" column="tbdf_id"/><!-- 记录唯一标识 -->
+    	<result property="gblflowSeq" column="tbdf_gblflowseq"/><!-- 30位全局流水号 -->
+    	<result property="batchNo" column="tbdf_batchno"/><!-- 批次号 -->
+    	<result property="resiveAccNo" column="tbdf_resiveaccno"/><!-- 收款账号 -->
+    	<result property="resiveAccName" column="tbdf_resiveaccname"/><!-- 收款名称户名 -->
+    	<result property="resiveBankNo" column="tbdf_resivebankno"/><!-- 收款行行号 -->
+    	<result property="resiveBankName" column="tbdf_resivebankname"/><!-- 收款行行名 -->
+    	<result property="currency" column="tbdf_currency"/><!-- 币种 -->
+    	<result property="resiveAmt" column="tbdf_resiveamt"/><!-- 金额 -->
+    	<result property="purpose" column="tbdf_purpose"/><!-- 用途 -->
+    	<result property="note1" column="tbdf_note1"/><!-- 预留字段 -->
+    	<result property="note2" column="tbdf_note2"/><!-- 预留字段 -->
+    	<result property="note3" column="tbdf_note3"/><!-- 预留字段 -->
+    	<result property="note4" column="tbdf_note4"/><!-- 预留字段 -->
+    	<result property="note5" column="tbdf_note5"/><!-- 预留字段 -->
+    	<result property="note6" column="tbdf_note6"/><!-- 预留字段 -->
+    	<result property="note7" column="tbdf_note7"/><!-- 预留字段 -->
+    </resultMap>
+   
+    <!-- 插入明细流水表数据定义 -->
+    <insert id="insertTprBatchTrandbFlow" parameterType="java.util.List">
+       insert into tpr_batch_trandb_flow(
+    		<include refid="tpr_tprBatchTrandbFlow_param"/>
+    	)values
+    	<foreach collection="list" item="item" index="index" separator="," >
+    	(
+	    	#{item.id},
+			#{item.gblflowSeq},
+			#{item.batchNo},
+			#{item.resiveAccNo},
+			#{item.resiveAccName},
+			#{item.resiveBankNo},
+			#{item.resiveBankName},
+			#{item.currency},
+			#{item.resiveAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			#{item.purpose}
+		)
+		</foreach> 
+    </insert>
+   
+    <!-- 根据流水号查询明细表信息 -->
+	<select id="queryTprBatchTrandbFlowList" resultMap="tprBatchTrandbFlowResult">
+       select 
+       <include refid="tpr_tprBatchTrandbFlow_param"/>
+       from tpr_batch_trandb_flow 
+          where tbdf_gblflowseq=#{gblflowSeq}
+    </select>
+</mapper>

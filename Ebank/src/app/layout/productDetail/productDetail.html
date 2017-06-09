@@ -1,0 +1,35 @@
+<div class="main-box" ng-controller="productDetailShowController as vm">
+    <div class="titile-step">
+        <div class="title" ng-bind="vm.productrec.productname"></div>
+    </div>
+    <div class="trading-one-box">
+        <div class="product-detail-box clearfix">
+            <div class="product-detail-img clearfix"><img src="{{vm.productrec.producturl}}"></div>
+            <ul class="product-detail-info clearfix">
+                <li class="title" ng-bind="vm.productrec.productname"></li>
+                <li><span>历史投资回报率：</span><b class="big-font" ng-bind="vm.productrec.productrate"></b><b class="big-font"><i>%</i></b></li>
+                <li><span>投资风险：</span>{{vm.productrec.producttype}}</li>
+                <li><span>产品简介：</span>{{vm.productrec.productdesc}}</li>
+            </ul>
+            <ul class="product-detail-input clearfix">
+                <li><span class="title">金额：</span>
+                    <input type="text" class="form-control" ng-model="vm.model.bankBalance" ng-blur="vm.blured()"><span>元</span></li>
+                <li><span class="title"></span>
+                    <button type="button" class="btn btn-primary btn-lg" ng-click="vm.addcar()">添加至购物车</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="product-detail-list2">
+        <div class="titile-step">
+            <div class="title">产品说明</div>
+        </div>
+        <div class="trading-one-box">
+            <div class="product-detail-content2" ng-repeat="productde in vm.productrec.productdetitle">
+                <p><b ng-bind="productde.smatitle"></b></p>
+                <p ng-bind="productde.productdeta"> </p>
+            </div>
+        </div>
+    </div>
+</div>

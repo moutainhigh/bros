@@ -1,0 +1,68 @@
+<div class="main-box">
+    
+<div class="titile-step">
+    <div class="title" ng-bind="vm.productdetail.goodsName"></div>
+</div>
+
+    <div class="trading-one-box">
+
+        <div class="ebank-input-box">
+            <div class="ebank-input-title">请输入产品调查要素</div>
+            <form class="form-horizontal"  ng-submit="vm.addRecordShopCart()" name="vm.regForm" >
+              <div  ng-repeat="list in vm.enumQuestionList" >
+              <div ng-if="list.enumTypeId.length==0">
+              <div class="form-group" ng-if="list.question.indexOf('密码')<0">
+                    <label for="txt_custAccount" class="col-sm-4  control-label">
+                        <span class="red">*</span>
+                         <span ng-bind="list.question" style="color: #231b1b"></span>
+                    </label>
+                    <div class="col-sm-4 ">
+                        <input type="text"  required  class="form-control" id="txt_custAccount" name="list.descption" ng-model = 'vm.model.descption[$index]' >
+                    </div>
+                    <div class="col-sm-4  error" ng-messages="vm.regForm.txt_custAccount.$error">
+                        <span class="help-block" ng-message="required">请输入您的<span ng-bind="list.question"></span></span>
+                    </div>
+                </div>
+             <div class="form-group" ng-if="list.question.indexOf('密码')>0">
+                    <label for="txt_cardpassword" class="col-sm-4 control-label">
+                        <span class="red">*</span>
+                       <span ng-bind="list.question" style="color: #231b1b"></span>
+                    </label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" required id="txt_cardpassword"
+                         name="txt_cardpassword" keyboard ng-model = 'vm.model.descption[$index]'></div>
+                    <div class="col-sm-4  error" ng-messages="vm.regForm.txt_cardpassword.$error">
+                        <span class="help-block" ng-message="required">请输入您的<span ng-bind="list.question"></span></span>
+                    </div>
+                </div>
+                </div>
+                <div ng-if="list.enumTypeId.length!=0">
+                <div class="form-group">
+                    <label for="txt_answers" class="col-sm-4 control-label">
+                        <span class="red">*</span>
+                       <span style="color: #231b1b" ng-bind="list.question"></span>
+                    </label>
+                    <div class="col-sm-4">
+                       <select class="form-control" required  id="txt_answers" name="txt_answers" ng-model="vm.model.descption[$index]"   ng-change="vm.selectChange();">
+                    <option ng-repeat="qlist in list.enumList" value="{{qlist.enumId}}">
+                       {{qlist.descption}}
+                     </option>
+                 </select>
+                    </div>
+                    <div class="col-sm-4 error" ng-messages="vm.regForm.txt_answers.$error">
+                        <span class="help-block" ng-message="required">请选择 <span  ng-bind="list.question"></span></span>
+                    </div>
+                </div> 
+                </div>
+            </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8 btn-box-big ">
+                        <button type="submit" class="btn btn-primary btn-lg">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.ttpfuncauth">
+	<sql id="ttp_func_auth_param">
+		TFA_ID,
+		TFA_LEGAL,
+		TFA_CSTNO,
+		TFA_FUNCID,
+		TFA_AUTHMODELFK
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="ttpFuncAuthResult">
+    	<result property="id" column="TFA_ID"/>
+    	<result property="legalId" column="TFA_LEGAL"/>
+    	<result property="cstNo" column="TFA_CSTNO"/>
+    	<result property="funcId" column="TFA_FUNCID"/>
+    	<result property="authModel" column="TFA_AUTHMODELFK"/>
+    </resultMap>
+    
+     <!-- 根据条件查询授权模型ID -->	
+    <select id="queryModeId"    parameterType="java.util.HashMap" resultMap="ttpFuncAuthResult">
+	       SELECT TFA_AUTHMODELFK
+	              FROM TTP_FUNC_AUTH
+	       WHERE    TFA_CSTNO=#{cstNo}
+					AND  TFA_LEGAL=#{legalId}
+					AND  TFA_FUNCID=#{funcId}
+    </select>	
+    
+    <!--更新配置表  -->
+    <update id="updateBathchTtpFuncAuth" parameterType="java.util.HashMap">
+	    <foreach collection="list" item="item" index="index" separator=";" >
+	         	UPDATE TTP_FUNC_AUTH 
+	         	  SET  TFA_AUTHMODELFK=#{item.authModel} 
+				WHERE    TFA_CSTNO=#{item.cstNo}
+					AND  TFA_LEGAL=#{item.legalId}
+					AND  TFA_FUNCID=#{item.bsnCode}
+	     </foreach>  
+	</update> 
+	
+	<!-- 根据条件查询授权模型ID -->	
+    <select id="queryTtpFuncAuthByCstNoAndLegalId"  parameterType="java.util.HashMap" resultMap="ttpFuncAuthResult">
+	       SELECT <include refid="ttp_func_auth_param"/>
+	          FROM TTP_FUNC_AUTH
+	             WHERE TFA_CSTNO=#{cstNo}
+						AND TFA_LEGAL=#{legalId}
+    </select>	
+    
+    <!-- 根据客户号查询功能编号-->
+	<select id="queryTtpFuncAuthListByCondition" resultMap="ttpFuncAuthResult" parameterType="java.util.HashMap">
+		select tfa_funcid 
+		  from ttp_func_auth 
+		    where tfa_cstno=#{cstNo}
+			  and tfa_legal=#{legalId}
+			  and tfa_authmodelfk=#{authorizeId}
+	</select>
+	
+	<!-- 根据客户号+法人id删除功能与授权模型分配列表失败-->
+	<delete id="deleteTtpFuncAuthListByLegalIdAndCstNo"  parameterType="java.util.HashMap" >
+		<![CDATA[ 
+		     delete from ttp_func_auth  
+		       where tfa_legal=#{legalId}
+		         and tfa_cstno=#{cstNo}
+		 ]]> 
+	</delete>
+	
+	<!-- 批量插入功能与授权模型分配列表 -->
+    <insert id="addTtpFuncAuthList" parameterType="java.util.HashMap">
+        insert into ttp_func_auth(
+    		<include refid="ttp_func_auth_param"/>
+    	)values(
+    	    <![CDATA[ 
+		    	#{id},
+				#{legalId},
+				#{cstNo},
+				#{funcId},
+				#{authModel}
+			]]>
+    </insert>
+    
+    
+    <!-- 保存授权模型  -->
+	<insert id="insertTtpFunAuth" parameterType="java.util.HashMap">
+		<foreach collection="list" item="item" index="index" separator=";" >
+		insert into TTP_FUNC_AUTH(
+			<include refid="ttp_func_auth_param"/>  
+		) values(
+			<![CDATA[ 
+				#{item.id},
+				#{item.legalId},
+				#{item.cstNo},
+				#{item.bsnCode},
+				#{item.authModel}
+	       	]]> 
+		)
+		</foreach>
+	</insert> 
+	<!-- 根据条件查询授权模型信息笔数 -->	
+    <select id="queryTtpFunAuthNum"  parameterType="java.util.HashMap" resultType="java.lang.Integer">
+	       SELECT  count(*)
+	              FROM TTP_FUNC_AUTH
+	       WHERE  TFA_CSTNO=#{cstNo}
+					AND  TFA_LEGAL=#{legalId}
+					AND  TFA_FUNCID=#{bsnCode}
+    </select>	
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!-- 机构管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pbranchManageServiceFacade" interface="bros.p.bankmanage.facade.service.IPBranchManageServiceFacade" />
+	<!-- 柜员管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="ptellerServiceFacade" interface="bros.p.bankmanage.facade.service.IPTellerServiceFacade" />
+	<!-- 柜员角色管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="ptellerRoleServiceFacade" interface="bros.p.bankmanage.facade.service.IPTellerRoleServiceFacade" />
+	<!-- 菜单管理 --> 
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pmenudefServiceFacade" interface="bros.p.bankmanage.facade.service.IPMenudefServiceFacade"/>
+	<!-- 业务功能管理 --> 
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pbusinessFunctionServiceFacade" interface="bros.p.bankmanage.facade.service.IPBusinessFunctionServiceFacade"/>
+	<!-- 法人管理 --> 
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="plegalServiceFacade" interface="bros.p.bankmanage.facade.service.IPLegalServiceFacade"/>
+	<!-- 产品分类管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pproductTypeServiceFacade" interface="bros.p.bankmanage.facade.service.IPProductTypeServiceFacade"/>
+	<!-- 产品服务管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pproductServiceServiceFacade" interface="bros.p.bankmanage.facade.service.IPProductServiceServiceFacade"/>
+	<!-- 产品目录管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pproductCateServiceFacade" interface="bros.p.bankmanage.facade.service.IPProductCateServiceFacade"/>
+	<!-- 产品信息管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pproductInformationServiceFacade" interface="bros.p.bankmanage.facade.service.IPProductInformationServiceFacade"/>
+		
+	<!-- 渠道分组管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pchannelSysGroupServiceFacade" interface="bros.p.bankmanage.facade.service.IPChannelSysGroupServiceFacade" />
+	<!-- 渠道系统信息管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pchannelSysInfoServiceFacade" interface="bros.p.bankmanage.facade.service.IPChannelSysInfoServiceFacade" />
+	<!--商城管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pmallInfoServiceFacade" interface="bros.p.bankmanage.facade.service.IPMallInfoServiceFacade" />
+	<!--货架管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pshelfInfoServiceFacade" interface="bros.p.bankmanage.facade.service.IPShelfInfoServiceFacade" />
+	
+	<!-- 菜单与货架商品关联关系管理 -->	
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pmenuProRelServiceFacade" interface="bros.p.bankmanage.facade.service.IPMenuProRelServiceFacade"/>
+	<!--前端展示菜单调用接口管理 -->	
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pfrontShelfMenuRelServiceFacade" interface="bros.p.bankmanage.facade.service.IPFrontShelfMenuRelServiceFacade"/>
+	
+	<!-- 客户之声-->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pleaveWordTranServiceFacade" interface="bros.p.leavewodtran.facade.service.IPLeaveWordTranServiceFacade"/>
+	<!-- 银行资讯-->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pbankNoticeServiceFacade" interface="bros.p.leavewodtran.facade.service.IPBankNoticeServiceFacade"/>
+	<!-- 公告管理-->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pnoticeServiceFacade" interface="bros.p.leavewodtran.facade.service.IPNoticeServiceFacade"/>
+	<!-- 对内授权管理-->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pbmaAuthModelSerivceFacade" interface="bros.p.bankmanage.facade.service.IPBmaAuthModelSerivceFacade"/>
+	
+	<!-- 广告栏管理-->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pbannerinfoServiceFacade" interface="bros.p.bankmanage.facade.service.IPBannerinfoServiceFacade"/>
+     
+	<!-- 渠道客户信息管理-->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pcstManageServiceFacade" interface="bros.p.cst.facade.service.IPCstManageServiceFacade"/>
+	
+	<!-- 安全工具信息管理-->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="psecurityToolServiceFacade" interface="bros.p.securitytoolmanage.facade.service.IPSecurityToolServiceFacade"/>
+	
+	<!-- 监控bros-provider-bankmanage模块是否存活-->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="papplicationAliveMonitorBankmanageServiceFacade" interface="bros.p.monitor.service.IPApplicationAliveMonitorBankmanageServiceFacade"/>
+	
+	
+     
+</beans>  

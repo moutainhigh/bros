@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 投资理财服务  ================================================-->
+	<!--购买理财产品查询 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryFinancialProductListAction_1.0.0" interface="bros.c.custmanage.facade.service.ICFinanceInvestmentServiceFacade">
+		<dubbo:method name="queryFinancialProductList"/>
+	</dubbo:reference>
+	<!--理财产品购买 -->
+	<dubbo:reference check="false" version="1.0.0"  id="ProductsBuyResultAction_1.0.0" interface="bros.c.custmanage.facade.service.ICFinanceInvestmentServiceFacade">
+		<dubbo:method name="financialProductsPurchased"/>
+	</dubbo:reference>
+	<!--查询顾客持有的理财产品 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryCustomerHoldingProductAction_1.0.0" interface="bros.c.custmanage.facade.service.ICFinanceInvestmentServiceFacade">
+		<dubbo:method name="queryCustomerHoldingProduct"/>
+	</dubbo:reference>
+	<!--查询理财产品明细 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryProductsTradeDetailListAction_1.0.0" interface="bros.c.custmanage.facade.service.ICFinanceInvestmentServiceFacade">
+		<dubbo:method name="queryProductsTradeDetailList"/>
+	</dubbo:reference>
+	<!--理财产品撤单-->
+	<dubbo:reference check="false" version="1.0.0"  id="productsCancleAction_1.0.0" interface="bros.c.custmanage.facade.service.ICFinanceInvestmentServiceFacade">
+		<dubbo:method name="productsCancle"/>
+	</dubbo:reference>
+	
+</beans>  

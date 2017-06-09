@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	 <xmlField dataName="accType" label="账号类型" type="text" template="text00001" title="测试模板编写" />
+	 <xmlField dataName="accType1" label="账号类型1" type="text" template="text00001" />
+	 <xmlField dataName="accType2" label="账号类型2" type="text" template="text00001" categroy="cateAccType"/>
+	 <xmlTag title="账号明显表" type="table" template="table00001">
+	 			<xmlTag type="thead">
+	 						<xmlField label="序号"/>
+	 						<xmlField label="账号类型"/>
+	 						<xmlField label="账号"/>
+	 						<xmlField label="手续费"/>
+	 			</xmlTag>
+	 			<xmlTag type="tbody">
+	 						<xmlList dataName="detail" tagName="allData">
+	 							<xmlTag>
+	 									<xmlField dataName="serialNo"/>
+				 						<xmlField dataName="accType" categroy="cateAccType"/>
+				 						<xmlField dataName="acc"/>
+				 						<xmlField dataName="fee"/>
+				 				</xmlTag>
+	 						</xmlList>
+	 						<xmlTag dataName="selectDetail2" selectFlag="No">
+	 							<xmlList dataName="selectDetail" tagName="selectData"/>
+	 						</xmlTag>
+	 						<xmlList dataName="oldDetail" tagName="oldData"/>
+	 			</xmlTag>	
+	 </xmlTag>
+	 <xmlTag title="菜单" type="tree" template="tree00001">
+	 			<xmlTag type="tbody">
+						<xmlList dataName="menu"  tagName="allData">
+								<xmlTag>
+	 									<xmlField dataName="menuCode"/>
+				 						<xmlField dataName="menuType" categroy="cateMenuType"/>
+				 						<xmlField dataName="menuName"/>
+	 							</xmlTag>
+						</xmlList>
+						<xmlList dataName="selectDetail" tagName="selectData"/>
+	 					<xmlList dataName="oldDetail" tagName="oldData"/>
+	 			</xmlTag>	
+	 </xmlTag>
+	 <xmlTag title="机构" type="tableTree" template="tableTree00001">
+	 			<xmlTag type="thead">
+	 					  <xmlField label="机构号"/>
+	 						<xmlField label="机构名称"/>
+	 						<xmlField label="机构类型"/>
+	 			</xmlTag>
+	 			<xmlTag type="tbody">
+	 					<xmlTag dataName="branch" tagName="allData">
+	 							<xmlList dataName="branchList">
+	 									<xmlTag>
+				 									<xmlField dataName="branchNo"/>
+							 						<xmlField dataName="branchName"/>
+							 						<xmlField dataName="branchType" categroy="cateBranchType"/>
+				 						</xmlTag>
+	 							</xmlList>
+	 					</xmlTag>	
+	 					<xmlList dataName="selectDetail" tagName="selectData"/>
+	 					<xmlList dataName="oldDetail" tagName="oldData"/>
+	 			</xmlTag>	
+	 </xmlTag>
+</formats>

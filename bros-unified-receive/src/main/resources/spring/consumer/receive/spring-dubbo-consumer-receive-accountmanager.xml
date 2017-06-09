@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 账户管理  ================================================-->
+	<!--签约账户列表(卡折)查询服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryAccountInfoListAction_1.0.0" interface="bros.c.custmanage.facade.service.ICAccountManageServiceFacade" >
+		<dubbo:method name="queryAccountInfoListMethod"/>
+	</dubbo:reference>
+	 <!--动账交易明细查询,交易明细查询服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryAccDetailListAction_1.0.0" interface="bros.c.custmanage.facade.service.ICAccountManageServiceFacade" >
+		<dubbo:method name="queryAccDetailListMethod"/>
+	</dubbo:reference>
+	<!--账户挂失服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateSuspendAccountAction_1.0.0" interface="bros.c.custmanage.facade.service.ICAccountManageServiceFacade" >
+		<dubbo:method name="suspendAccountMethod"/>
+	</dubbo:reference>
+	<!--账户加挂服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addAccountInfoAction_1.0.0" interface="bros.c.custmanage.facade.service.ICAccountManageServiceFacade" >
+		<dubbo:method name="addAccountInfoMethod"/>
+	</dubbo:reference>
+	<!--账户解挂服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="deleteAccountInfoAction_1.0.0" interface="bros.c.custmanage.facade.service.ICAccountManageServiceFacade" >
+		<dubbo:method name="deleteAccountInfoMethod"/>
+	</dubbo:reference>
+	<!--账户别名设置服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addSetAccountAliasAction_1.0.0" interface="bros.c.custmanage.facade.service.ICAccountManageServiceFacade" >
+		<dubbo:method name="setAccountAliasMethod"/>
+	</dubbo:reference>
+	<!--默认账户修改服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateDefaultAccountInfoAction_1.0.0" interface="bros.c.custmanage.facade.service.ICAccountManageServiceFacade" >
+		<dubbo:method name="updateDefaultAccountInfoMethod"/>
+	</dubbo:reference>
+	<!--账户信息查询服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryAccountInfoAction_1.0.0" interface="bros.c.custmanage.facade.service.ICAccountManageServiceFacade" >
+		<dubbo:method name="queryAccountInfoMethod"/>
+	</dubbo:reference>
+</beans>  

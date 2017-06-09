@@ -1,0 +1,25 @@
+<table width="100%" class="table table-striped" border="0" cellspacing="0" cellpadding="0" >
+    <thead>
+        <tr>
+            <th class="center">贷款编号</th>
+            <th class="center">贷款品种</th>
+            <th class="center">放款日</th>
+            <th class="right">到期日</th>
+            <th class="right">贷款金额</th>
+            <th class="center">贷款状态</th>
+            <th class="center">操作</th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="product in product">
+        <tr>
+            <td><a ui-sref="myloaninfo({loannum:product.loannum})" ng-bind="product.loannum"></a></td>
+            <td ng-bind="product.loantype"></td>
+            <td class="center" ng-bind="product.loanstart|dateFormat:{symbol:'yyyy-mm-dd'}"></td>
+            <td class="center" ng-bind="product.loanend|dateFormat:{symbol:'yyyy-mm-dd'}"></td>
+            <td class="right" ng-bind="product.loanamt|currency:'¥'"></td>
+            <td class="center" ng-bind="product.loanflag"></td>
+            <td class="center"><a ui-sref="myloanquery({loannum:product.loannum,loanstart:product.loanstart,loanend:product.loanend})">还款计划表</a> <a ui-sref="myloanquery({loannum:product.loannum})">还款历史</a> <a ui-sref="myloanquery({loannum:product.loannum})">逾期明细</a></td>
+            </tr>
+
+    </tbody>
+</table>

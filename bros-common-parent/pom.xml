@@ -1,0 +1,1114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>lczr.dzqd.bros.common</groupId>
+	<artifactId>bros-common-parent</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+	<name>bros-common-parent</name>
+	<url>http://maven.apache.org</url>
+
+	<!-- 全局属性配置 -->
+	<profiles>
+		<!-- 开发环境 -->
+		<profile>
+			<id>dev</id>
+			<properties>
+				<!-- 部署环境(对应配置文件版本) -->
+				<env>dev</env>
+				<maven.test.skip>true</maven.test.skip>
+			</properties>
+			<!-- 设置默认环境 -->
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<!-- 测试环境 -->
+		<profile>
+			<id>uat</id>
+			<properties>
+				<!-- 部署环境(对应配置文件版本) -->
+				<env>uat</env>
+			</properties>
+		</profile>
+
+		<!-- 生产环境 -->
+		<profile>
+			<id>pro</id>
+			<properties>
+				<!-- 部署环境(对应配置文件版本) -->
+				<env>pro</env>
+			</properties>
+		</profile>
+	</profiles>
+	<!-- 从私服下载第三方jar包 -->
+	<repositories>
+		<repository>
+			<id>nexus-public</id>
+			<name>Nexus Public Repository</name>
+			<url>http://10.10.10.131:8888/nexus/content/groups/public/</url>
+<!-- 			<url>http://maven.rd.hoperun.com:8081/nexus/content/groups/public/</url> -->
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<!-- 将maven代码打包上传到私服 -->
+<!-- 	<distributionManagement> -->
+<!-- 		<repository> -->
+<!-- 			<id>nexus-releases</id> -->
+<!-- 			<name>Nexus Release Repository</name> -->
+<!-- 			<url>http://10.10.10.131:8888/nexus/content/repositories/releases/</url> -->
+<!-- 			<uniqueVersion>true</uniqueVersion> -->
+<!-- 		</repository> -->
+<!-- 		<snapshotRepository> -->
+<!-- 			<id>nexus-snapshots</id> -->
+<!-- 			<name>Nexus Snapshot Repository</name> -->
+<!-- 			<url>http://10.10.10.131:8888/nexus/content/repositories/snapshots/</url> -->
+<!-- 			<uniqueVersion>true</uniqueVersion> -->
+<!-- 		</snapshotRepository> -->
+<!-- 	</distributionManagement> -->
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 一个可以接受含有语法描述的语言描述符并且生成程序能够识别这些语言所产生的句子版本号 -->
+		<antlr.version>2.7.6</antlr.version>
+		<!-- spring切面Bean所需要的包 -->
+		<aopalliance.version>1.0</aopalliance.version>
+		<!-- spring切面包 -->
+		<org.aspectj.version>1.7.3</org.aspectj.version>
+		<!-- cglib动态代理 -->
+		<cglib.version>2.2.2</cglib.version>
+		<!-- 动态生成字节码文件 -->
+		<asm.version>3.3.1</asm.version>
+		<!-- json包 -->
+		<net.sf.json-lib.version>2.4</net.sf.json-lib.version>
+		<!-- 轻易转换JSON核心包 -->
+		<org.codehaus.jackson.core>1.9.13</org.codehaus.jackson.core>
+		<!-- 轻易转换JSON映射包 -->
+		<org.codehaus.jackson.mapper>1.9.13</org.codehaus.jackson.mapper>
+		<!-- 正则表达式依赖包 -->
+		<oro.version>2.0.8</oro.version>
+		<!-- 提供了对于JavaBean进行各种操作 -->
+		<commons-beanutils.version>1.8.0</commons-beanutils.version>
+		<!-- 用于编码解码 -->
+		<commons-codec.version>1.8</commons-codec.version>
+		<!-- 各种集合类和集合工具类的封装 -->
+		<commons-collections.version>3.2</commons-collections.version>
+		<!-- xml解析工具 -->
+		<commons-digester.version>2.0</commons-digester.version>
+		<!-- 文件上传 -->
+		<commons-fileupload.version>1.3.1</commons-fileupload.version>
+		<!-- io流工具 -->
+		<commons-io.version>2.0.1</commons-io.version>
+		<!-- 协议工具 -->
+		<commons-net.version>3.3</commons-net.version>
+		<!-- 常用工具类，用于对jdk的补充 -->
+		<commons-lang.version>2.5</commons-lang.version>
+		<!-- json lib的依赖包 -->
+		<org.apache.commons.version>3.3</org.apache.commons.version>
+		<!-- 日志工具 -->
+		<commons-logging.version>1.1.3</commons-logging.version>
+		<!-- 通用验证 -->
+		<commons-validator.version>1.1.4</commons-validator.version>
+		<!-- 解析命令行输入的工具包 -->
+		<commons-cli.version>1.2</commons-cli.version>
+		<!-- Java的XML API -->
+		<dom4j.version>1.6.1</dom4j.version>
+		<!--简单java包 对象转换 -->
+		<net.sf.ezmorph.version>1.0.6</net.sf.ezmorph.version>
+		<!-- 一个开源的分析、编辑和创建Java字节码的类库 -->
+		<javassist.version>3.12.1.GA</javassist.version>
+		<!-- jsp标签库 -->
+		<jstl.version>1.2</jstl.version>
+		<!-- 事务API -->
+		<javax.transaction.version>1.1</javax.transaction.version>
+		<!-- 日志工具 -->
+		<log4j.version>1.2.17</log4j.version>
+		<!-- 日志依赖包 -->
+		<org.slf4j.api.version>1.7.5</org.slf4j.api.version>
+		<!-- 日志依赖包 -->
+		<org.slf4j.slf4j-log4j12.version>1.7.5</org.slf4j.slf4j-log4j12.version>
+		<!-- excel工具包 -->
+		<net.sourceforge.jexcelapi.version>2.6.12</net.sourceforge.jexcelapi.version>
+		<!-- xml解析或者创建xml文档 -->
+		<org.jdom.version></org.jdom.version>
+		<!-- dubbo的spring -->
+		<com.alibaba.external.spring.version>2.0.1</com.alibaba.external.spring.version>
+		<!-- dubbo的连接池 -->
+		<com.alibaba.external.poolg.version>1.3</com.alibaba.external.poolg.version>
+		<!-- dubbo的核心包 -->
+		<com.alibaba.version>2.5.3</com.alibaba.version>
+		<!-- redis缓存客户端 -->
+		<redis.clients.version>2.8.1</redis.clients.version>
+		<!-- 分布式锁 -->
+		<redisson.version>2.1.0</redisson.version>
+		<!-- mybatis核心包 -->
+		<org.mybatis.mybatis.version>3.2.2</org.mybatis.mybatis.version>
+		<!-- mybatis与spring整合包 -->
+		<org.mybatis.mybatis-spring.version>1.2.0</org.mybatis.mybatis-spring.version>
+		<!-- pgsql数据驱动 -->
+		<!-- <org.apache.tajo.version>0.11.2</org.apache.tajo.version> -->
+		<postgresql.version>9.1-901.jdbc4</postgresql.version>
+		<!-- tomcat的servlet的api -->
+		<org.apache.tomcat.servlet-api.version>6.0.37</org.apache.tomcat.servlet-api.version>
+		<!-- tomcat的jsp的api -->
+		<org.apache.tomcat.jsp-api.version>6.0.37</org.apache.tomcat.jsp-api.version>
+		<!-- 模板引擎 -->
+		<org.freemarker.version>2.3.19</org.freemarker.version>
+		<!-- jdbc数据源实现 -->
+		<!-- <com.alibaba.druid.version>0.2.23</com.alibaba.druid.version> -->
+		<c3p0.version>0.9.1.2</c3p0.version>
+		<!-- JSON处理器（JSON解析器+ JSON生成器） -->
+		<com.alibaba.fastjson.version>1.1.41</com.alibaba.fastjson.version>
+		<!-- Apache httpcomponents客户端 -->
+		<org.apache.httpcomponents.version>4.3.3</org.apache.httpcomponents.version>
+		<!-- netty -->
+		<!-- <org.jboss.netty.version>3.2.5.Final</org.jboss.netty.version> -->
+		<netty-all.version>5.0.0.Alpha1</netty-all.version>
+		<!-- activemq all -->
+		<org.apache.activemq.all.version>5.8.0</org.apache.activemq.all.version>
+		<!-- activemq pool -->
+		<org.apache.activemq.pool.version>5.8.0</org.apache.activemq.pool.version>
+		<!-- HTML解析器 -->
+		<org.jsoup.version>1.7.3</org.jsoup.version>
+		<!-- 任务调度 -->
+		<quartz.version>1.5.2</quartz.version>
+		<!-- 一个iso-8583基础金融交易库/框架 -->
+		<jpos.version>1.9.8</jpos.version>
+		<!-- 编译包的接口和类 -->
+		<org.osgi.version>4.3.1</org.osgi.version>
+		<!-- 单元测试版本号 -->
+		<junit.version>4.11</junit.version>
+		<!-- -->
+		<com.jcraft.jsch.version>0.1.25</com.jcraft.jsch.version>
+		<!-- spring版本号 -->
+		<!-- <org.springframework.version>3.2.4.RELEASE</org.springframework.version> -->
+		<org.springframework.version>4.2.6.RELEASE</org.springframework.version>
+		<spring.security.core.version>4.1.3.RELEASE</spring.security.core.version>
+		<!-- zookeeper服务端版本号 -->
+		<org.apache.zookeeper.version>3.4.5</org.apache.zookeeper.version>
+		<!-- zookeeper客户端版本号 -->
+		<com.101tec.version>0.3</com.101tec.version>
+		<!-- json和json+互转工具类版本号 -->
+		<giantstone-common-util.version>1.0</giantstone-common-util.version>
+		<!-- shiro core 版本号 -->
+		<shiro.version>1.2.1</shiro.version>
+		<!-- spring mvc验证 -->
+		<validation-api.version>1.1.0.Final</validation-api.version>
+		<!-- hibernate 校验 -->
+		<hibernate-validator.version>5.0.2.Final</hibernate-validator.version>
+		<hibernate-validator-annotation-processor.version>5.0.2.Final</hibernate-validator-annotation-processor.version>
+		<hibernate-validator-cdi.version>5.1.3.Final</hibernate-validator-cdi.version>
+		<!-- hibernate core -->
+		<hibernate-core.version>5.1.0.Final</hibernate-core.version>
+		<javax.el-api.version>3.0.0</javax.el-api.version>
+		<jackson-core.version>2.3.2</jackson-core.version>
+		<jackson-databind.version>2.3.0</jackson-databind.version>
+		<jackson-annotations.version>2.7.5</jackson-annotations.version>
+		<!-- <jaxb-api.version>2.2.5</jaxb-api.version> 
+		<jaxb-impl.version>2.2.6</jaxb-impl.version> 
+		<jaxb-xjc.version>2.2.5</jaxb-xjc.version> 
+		<jaxrpc.version>1.1</jaxrpc.version> -->
+		<xstream.version>1.4.7</xstream.version>
+		<!-- redis jar -->
+		<spring-data-redis.version>1.0.2.RELEASE</spring-data-redis.version>
+		<!-- activiti -->
+		<org.activiti.version>5.21.0</org.activiti.version>
+		<!-- json工具类 -->
+		<jsontools-core.version>1.7</jsontools-core.version>
+		
+		<jaxen.version>1.1.6</jaxen.version>
+		<!-- SVN版本管理 -->
+		<org.tmatesoft.svnkit.version>1.8.10</org.tmatesoft.svnkit.version>
+		<!-- 移动端JSON工具 -->
+		<org.json.version>20131018</org.json.version>
+		<!-- 移动端ZIP打包工具 -->
+		<net.lingala.zip4j.version>1.3.1</net.lingala.zip4j.version>
+		
+		<!-- 渠道集成平台工程配置版本 -->
+		<bros-common-core.version>1.0.0</bros-common-core.version><!-- core核心jar包，是消费端和服务提供方所有的依赖 -->
+		<bros-common-core-mvc.version>1.0.0</bros-common-core-mvc.version><!-- spring mvc jar包，消费端使用 -->
+		<bros-common-core-limit.version>1.0.0</bros-common-core-limit.version><!-- 限额jar包 服务端使用 -->
+		<bros-common-core-flow.version>1.0.0</bros-common-core-flow.version><!-- 业务流水记录服务端使用 -->
+		<bros-common-core-activiti.version>1.0.0</bros-common-core-activiti.version><!-- 授权服务端使用 -->
+		<bros-common-core-generator.version>1.0.0</bros-common-core-generator.version><!-- id生成器 -->
+		<bros-common-core-comm.version>1.0.0</bros-common-core-comm.version><!-- 通信模块 -->
+		<bros-common-core-redis.version>1.0.0</bros-common-core-redis.version><!-- redis模块 -->
+		<bros-common-core-shiro.version>1.0.0</bros-common-core-shiro.version><!-- shiro缓存共享模块 -->
+		<bros-common-core-validation.version>1.0.0</bros-common-core-validation.version><!-- 校验模板模块 -->
+		<bros-common-core-jwt.version>1.0.0</bros-common-core-jwt.version><!-- JSON Web Token模块 -->
+		<bros-common-core-init.version>1.0.0</bros-common-core-init.version><!-- 初始化业务公共模块 -->
+		<bros-common-core-format.version>1.0.0</bros-common-core-format.version><!-- 格式化服务模块 -->
+
+		<!-- 渠道集成平台服务提供方工程 -->
+		<bros-provider-config.version>1.0.0</bros-provider-config.version><!-- 服务提供方配置文件jar包 -->
+		<bros-provider-config-validation.version>1.0.0</bros-provider-config-validation.version><!-- 服务提供方校验配置文件jar包 -->
+		<bros-provider-config-mybatis.version>1.0.0</bros-provider-config-mybatis.version><!-- 服务提供方mybatis文件存放位置jar包 -->
+		<bros-provider-config-format.version>1.0.0</bros-provider-config-format.version><!-- 服务提供方报文模板jar包 -->
+		<bros-provider-init.version>1.0.0</bros-provider-init.version><!-- 服务提供方初始化工程 -->
+		<bros-provider-transfer.version>1.0.0</bros-provider-transfer.version><!-- 服务提供方转账工程 -->
+		<bros-provider-login.version>1.0.0</bros-provider-login.version><!-- 服务提供方登录工程 -->
+		<bros-provider-account.version>1.0.0</bros-provider-account.version><!-- 服务提供方账户工程 -->
+		<bros-provider-netbank.version>1.0.0</bros-provider-netbank.version><!-- 服务提供方网银互联工程 -->
+		<bros-provider-financial.version>1.0.0</bros-provider-financial.version><!-- 服务提供方理财工程 -->
+		<bros-provider-customer.version>1.0.0</bros-provider-customer.version><!-- 服务提供方客户工程 -->
+		<bros-provider-security.version>1.0.0</bros-provider-security.version><!-- 服务提供方安全工程 -->
+		<bros-provider-auth.version>1.0.0</bros-provider-auth.version><!-- 服务提供方授权工程 -->
+		<bros-provider-common.version>1.0.0</bros-provider-common.version><!-- 服务提供方公共工程 -->
+		<bros-provider-custmanage.version>1.0.0</bros-provider-custmanage.version><!-- 服务提供方客户管理工程 -->
+		<bros-provider-bankmanage.version>1.0.0</bros-provider-bankmanage.version><!-- 服务提供方行内管理工程 -->
+		<bros-provider-api.version>1.0.0</bros-provider-api.version><!-- 服务提供api接口 -->
+		<bros-provider-timetask.version>1.0.0</bros-provider-timetask.version><!-- 服务提供方分布式任务调度工程 -->
+
+		<!-- 渠道集成平台消费者工程 -->
+		<bros-consumer-config.version>1.0.0</bros-consumer-config.version><!-- 消费者配置工程 -->
+		<bros-consumer-api.version>1.0.0</bros-consumer-api.version><!-- 消费者提供接口 -->
+		<bros-consumer-config-mybatis.version>1.0.0</bros-consumer-config-mybatis.version><!-- 消费者mybatis文件存放位置jar包 -->
+		<bros-consumer-config-validation.version>1.0.0</bros-consumer-config-validation.version><!-- 消费者校验配置文件jar包 -->
+		<bros-consumer-init.version>1.0.0</bros-consumer-init.version><!-- 消费者初始化工程 -->
+		<bros-consumer-bankmanage.version>1.0.0</bros-consumer-bankmanage.version><!-- 消费者银行管理工程 -->
+		<bros-consumer-custmanage.version>1.0.0</bros-consumer-custmanage.version><!-- 消费者客户管理工程 -->
+		<bros-consumer-common.version>1.0.0</bros-consumer-common.version><!-- 消费者公共工程 -->
+		<bros-consumer-auth.version>1.0.0</bros-consumer-auth.version><!-- 消费者授权工程 -->
+		<bros-unified-receive.version>1.0.0</bros-unified-receive.version><!-- jar包统一接入工程 -->
+		<bros-unified-receive-container.version>1.0.0</bros-unified-receive-container.version><!-- 容器统一接入工程 -->
+		<bros-consumer-login.version>1.0.0</bros-consumer-login.version><!-- 消费者登录模块工程 -->
+		<bros-consumer-security.version>1.0.0</bros-consumer-security.version><!-- 消费者安全模块工程 -->
+
+		<!-- 前置公共工程 -->
+		<bros-pre-common.version>1.0.0</bros-pre-common.version><!-- 所有前置公共工程 -->
+
+		<!-- 网银前置工程 -->
+		<bros-network-config.version>1.0.0</bros-network-config.version><!-- 网银前置配置工程 -->
+		<bros-network-config-mybatis.version>1.0.0</bros-network-config-mybatis.version><!-- 网银前置sql映射配置工程 -->
+		<bros-network-config-validation.version>1.0.0</bros-network-config-validation.version><!-- 网银前置校验模板配置工程 -->
+		<bros-network-config-template.version>1.0.0</bros-network-config-template.version><!-- 网银前置授权详情展示模板jar包 -->
+		<bros-network-product.version>1.0.0</bros-network-product.version><!-- 网银前置产品、商城、货架模块工程 -->
+		<bros-network-account.version>1.0.0</bros-network-account.version><!-- 网银前置账户模块工程） -->
+		<bros-network-transfer.version>1.0.0</bros-network-transfer.version><!-- 网银前置转账模块工程） -->
+		<bros-network-loan.version>1.0.0</bros-network-loan.version><!-- 网银前置贷款模块工程） -->
+		<bros-network-manage.version>1.0.0</bros-network-manage.version><!-- 网银前置管理模块工程） -->
+		<bros-network-init.version>1.0.0</bros-network-init.version><!-- 网银前置初始化模块工程） -->
+
+		<!-- 管理端前置工程 -->
+		<bros-manage-config.version>1.0.0</bros-manage-config.version><!-- 管理端前置配置工程 -->
+		<bros-manage-config-mybatis.version>1.0.0</bros-manage-config-mybatis.version><!-- 管理端sql映射配置工程 -->
+		<bros-manage-config-validation.version>1.0.0</bros-manage-config-validation.version><!-- 管理端校验模板配置工程 -->
+		<bros-manage-config-template.version>1.0.0</bros-manage-config-template.version><!-- 管理端前置授权详情展示模板jar包 -->
+		<bros-manage-auth.version>1.0.0</bros-manage-auth.version><!-- 管理端授权模块工程 -->
+		<bros-manage-bankmanage.version>1.0.0</bros-manage-bankmanage.version><!-- 管理端行内管理模块工程 -->
+		<bros-manage-common.version>1.0.0</bros-manage-common.version><!-- 管理端通用模块工程 -->
+		<bros-manage-product.version>1.0.0</bros-manage-product.version><!-- 管理端产品、商城、货架模块工程 -->
+		<bros-manage-init.version>1.0.0</bros-manage-init.version><!-- 管理端前置初始化模块工程 -->
+
+		<!-- 移动端工程配置版本 -->
+        <bros-common-mobile-core.version>1.0.0</bros-common-mobile-core.version><!-- 移动端基础模块 -->
+        <bros-common-mobile-core-mvc.version>1.0.0</bros-common-mobile-core-mvc.version><!-- 移动端MVC模块 -->
+        <bros-common-mobile-core-security.version>1.0.0</bros-common-mobile-core-security.version><!-- 移动端安全模块 -->
+        <bros-common-mobile-core-svn.version>1.0.0</bros-common-mobile-core-svn.version><!-- SVN版本管理模块 -->
+        
+        <!-- 移动端前置工程配置版本 -->
+        <bros-mobile-personal-system.version>1.0.0</bros-mobile-personal-system.version><!-- 个人移动端前置工程系统模块 -->
+        <bros-mobile-personal-account.version>1.0.0</bros-mobile-personal-account.version><!-- 个人移动端前置工程账户模块 -->
+        <bros-mobile-personal-config.version>1.0.0</bros-mobile-personal-config.version><!-- 个人移动端前置配置工程 -->
+        <bros-mobile-personal-config-mybatis.version>1.0.0</bros-mobile-personal-config-mybatis.version><!-- 个人移动端前置SQL映射配置工程 -->
+        <bros-mobile-personal-config-validation.version>1.0.0</bros-mobile-personal-config-validation.version><!-- 个人移动端校验模板配置工程 -->
+        <bros-mobile-plugin-zip.version>1.0.0</bros-mobile-plugin-zip.version><!-- 移动端插件前置下载工程 -->
+        <bros-mobile-plugin-manage.version>1.0.0</bros-mobile-plugin-manage.version><!-- 移动端插件前置管理工程 -->
+        <bros-mobile-plugin-config.version>1.0.0</bros-mobile-plugin-config.version><!-- 移动端插件前置配置工程 -->
+        <bros-mobile-plugin-config-mybatis.version>1.0.0</bros-mobile-plugin-config-mybatis.version><!-- 移动端插件前置sqlMapper映射工程 -->
+        <bros-mobile-plugin-config-validation.version>1.0.0</bros-mobile-plugin-config-validation.version><!-- 移动端插件前置校验模块工程 -->
+	</properties>
+
+	<dependencies>
+		<!-- 测试依赖包 开始 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+		<!-- 测试依赖包 结束 -->
+	</dependencies>
+	
+	<dependencyManagement>
+		<dependencies>
+			<!-- Common Dependency Begin -->
+			<dependency>
+				<groupId>antlr</groupId>
+				<artifactId>antlr</artifactId>
+				<version>${antlr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>aopalliance</groupId>
+				<artifactId>aopalliance</artifactId>
+				<version>${aopalliance.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${org.aspectj.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>${cglib.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>asm</groupId>
+				<artifactId>asm</artifactId>
+				<version>${asm.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<version>${net.sf.json-lib.version}</version>
+				<classifier>jdk15</classifier>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-core-asl</artifactId>
+				<version>${org.codehaus.jackson.core}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${org.codehaus.jackson.mapper}</version>
+			</dependency>
+			<dependency>
+				<groupId>oro</groupId>
+				<artifactId>oro</artifactId>
+				<version>${oro.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-net</groupId>
+				<artifactId>commons-net</artifactId>
+				<version>${commons-net.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>${commons-beanutils.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons-codec.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>${commons-collections.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-digester</groupId>
+				<artifactId>commons-digester</artifactId>
+				<version>${commons-digester.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons-fileupload.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${commons-lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${org.apache.commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons-logging.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-validator</groupId>
+				<artifactId>commons-validator</artifactId>
+				<version>${commons-validator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-cli</groupId>
+				<artifactId>commons-cli</artifactId>
+				<version>${commons-cli.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>${dom4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.ezmorph</groupId>
+				<artifactId>ezmorph</artifactId>
+				<version>${net.sf.ezmorph.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>${javassist.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>${jstl.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.transaction</groupId>
+				<artifactId>jta</artifactId>
+				<version>${javax.transaction.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${org.slf4j.api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${org.slf4j.slf4j-log4j12.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sourceforge.jexcelapi</groupId>
+				<artifactId>jxl</artifactId>
+				<version>${net.sourceforge.jexcelapi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.external</groupId>
+				<artifactId>sourceforge.spring</artifactId>
+				<version>${com.alibaba.external.spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.external</groupId>
+				<artifactId>jakarta.commons.poolg</artifactId>
+				<version>${com.alibaba.external.poolg.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jdom</groupId>
+				<artifactId>jdom</artifactId>
+				<version>${org.jdom.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>${com.alibaba.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>${redis.clients.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-redis</artifactId>
+				<version>${spring-data-redis.version}</version>
+			</dependency>
+			<!-- Common Dependency End -->
+
+			<!-- Zookeeper 用于分布式服务管理 -->
+			<dependency>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+				<version>${org.apache.zookeeper.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.101tec</groupId>
+				<artifactId>zkclient</artifactId>
+				<version>${com.101tec.version}</version>
+			</dependency>
+			<!-- Zookeeper 用于分布式服务管理 end -->
+
+			<!-- Spring Dependency Begin -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-instrument</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-instrument-tomcat</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jms</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-oxm</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${org.springframework.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc-portlet</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+				<version>${spring.security.core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${validation-api.version}</version>
+			</dependency>
+			<!-- Spring Dependency End -->
+
+			<!-- MyBatis Dependency Begin -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${org.mybatis.mybatis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>${org.mybatis.mybatis-spring.version}</version>
+			</dependency>
+			<!-- MyBatis Dependency End -->
+
+			<!-- Mysql Driver Begin -->
+			<!-- <dependency> -->
+			<!-- <groupId>mysql</groupId> -->
+			<!-- <artifactId>mysql-connector-java</artifactId> -->
+			<!-- <version>5.1.32</version> -->
+			<!-- </dependency> -->
+			<!-- Mysql Driver End -->
+			<!-- Pgsql Driver Begin -->
+			<!-- <dependency> -->
+			<!-- <groupId>org.apache.tajo</groupId> -->
+			<!-- <artifactId>tajo-storage-pgsql</artifactId> -->
+			<!-- <version>${org.apache.tajo.version}</version> -->
+			<!-- </dependency> -->
+			<dependency>
+				<groupId>postgresql</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>${postgresql.version}</version>
+			</dependency>
+			<!-- Pgsql Driver End -->
+
+			<!-- Others Begin -->
+			<!-- Web kaptcha生成引擎 -->
+			<!-- <dependency> -->
+			<!-- <groupId>google.code</groupId> -->
+			<!-- <artifactId>kaptcha</artifactId> -->
+			<!-- <version>2.3.2</version> -->
+			<!-- </dependency> -->
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>${org.apache.tomcat.servlet-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>jsp-api</artifactId>
+				<version>${org.apache.tomcat.jsp-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.freemarker</groupId>
+				<artifactId>freemarker</artifactId>
+				<version>${org.freemarker.version}</version>
+			</dependency>
+			<!-- <dependency> -->
+			<!-- <groupId>com.alibaba</groupId> -->
+			<!-- <artifactId>druid</artifactId> -->
+			<!-- <version>${com.alibaba.druid.version}</version> -->
+			<!-- </dependency> -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${com.alibaba.fastjson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${org.apache.httpcomponents.version}</version>
+			</dependency>
+			<!-- <dependency> -->
+			<!-- <groupId>org.jboss.netty</groupId> -->
+			<!-- <artifactId>netty</artifactId> -->
+			<!-- <version>${org.jboss.netty.version}</version> -->
+			<!-- </dependency> -->
+			<dependency>
+				<groupId>io.netty</groupId>
+				<artifactId>netty-all</artifactId>
+				<version>${netty-all.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.netty</groupId>
+				<artifactId>netty-example</artifactId>
+				<version>${netty-all.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-all</artifactId>
+				<version>${org.apache.activemq.all.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-pool</artifactId>
+				<version>${org.apache.activemq.pool.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jsoup</groupId>
+				<artifactId>jsoup</artifactId>
+				<version>${org.jsoup.version}</version>
+			</dependency>
+			<!-- 分布式文件系统 -->
+			<!-- <dependency> -->
+			<!-- <groupId>org.csource</groupId> -->
+			<!-- <artifactId>fastdfs_client</artifactId> -->
+			<!-- <version>1.24</version> -->
+			<!-- </dependency> -->
+			<dependency>
+				<groupId>quartz</groupId>
+				<artifactId>quartz</artifactId>
+				<version>${quartz.version}</version>
+			</dependency>
+			<!-- Others End -->
+
+			<!-- JPOS Begin -->
+			<dependency>
+				<groupId>org.jpos</groupId>
+				<artifactId>jpos</artifactId>
+				<version>${jpos.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.osgi</groupId>
+				<artifactId>org.osgi.core</artifactId>
+				<version>${org.osgi.version}</version>
+			</dependency>
+			<!-- JPOS End -->
+			<dependency>
+				<groupId>c3p0</groupId>
+				<artifactId>c3p0</artifactId>
+				<version>${c3p0.version}</version>
+			</dependency>
+
+			<!-- json和json+互转工具类 -->
+			<dependency>
+				<groupId>giantstone.common.util</groupId>
+				<artifactId>giantstone-common-util</artifactId>
+				<version>${giantstone-common-util.version}</version>
+			</dependency>
+			<!-- hibernate 校验 start -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate-validator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator-annotation-processor</artifactId>
+				<version>${hibernate-validator-annotation-processor.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator-cdi</artifactId>
+				<version>${hibernate-validator-cdi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.el</groupId>
+				<artifactId>javax.el-api</artifactId>
+				<version>${javax.el-api.version}</version>
+			</dependency>
+			<!-- hibernate 校验 end -->
+			<!-- hibernate start -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate-core.version}</version>
+			</dependency>
+			<!-- hibernate end -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson-databind.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson-annotations.version}</version>
+			</dependency>
+			<!-- 
+			<dependency> 
+				<groupId>javax.xml.bind</groupId> 
+				<artifactId>jaxb-api</artifactId> 
+				<version>${jaxb-api.version}</version> 
+			</dependency> 
+			<dependency> 
+				<groupId>com.sun.xml.bind</groupId> 
+				<artifactId>jaxb-impl</artifactId> 
+				<version>${jaxb-impl.version}</version> 
+			</dependency> 
+			<dependency> 
+				<groupId>com.sun.xml.bind</groupId> 
+				<artifactId>jaxb-xjc</artifactId> 
+				<version>${jaxb-xjc.version}</version> 
+			</dependency> 
+			<dependency> 
+				<groupId>javax.xml</groupId> 
+				<artifactId>jaxrpc</artifactId> 
+				<version>${jaxrpc.version}</version> 
+			</dependency> 
+			-->
+			<dependency>
+				<groupId>com.thoughtworks.xstream</groupId>
+				<artifactId>xstream</artifactId>
+				<version>${xstream.version}</version>
+			</dependency>
+
+			<!-- shiro core -->
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-core</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+
+			<!-- com.jcraft.jsch -->
+			<dependency>
+				<groupId>com.jcraft</groupId>
+				<artifactId>jsch</artifactId>
+				<version>${com.jcraft.jsch.version}</version>
+			</dependency>
+
+			<!-- activiti -->
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-engine</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-spring</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-bpmn-model</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-bpmn-converter</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-bpmn-layout</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-json-converter</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-image-generator</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-common-rest</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-rest</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-process-validation</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-modeler</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-diagram-rest</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-ldap</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.activiti</groupId>
+				<artifactId>activiti-crystalball</artifactId>
+				<version>${org.activiti.version}</version>
+			</dependency>
+			<!-- json工具类 -->
+			<dependency>
+				<groupId>com.sdicons.jsontools</groupId>
+				<artifactId>jsontools-core</artifactId>
+				<version>${jsontools-core.version}</version>
+			</dependency>
+			
+			<!-- hudson持续集成 start -->
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.10</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.shared</groupId>
+				<artifactId>maven-shared-io</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<!-- hudson持续集成 end -->
+			
+			<!-- 分布式锁 单节点 -->
+			<dependency>
+				<groupId>org.redisson</groupId>
+				<artifactId>redisson</artifactId>
+				<version>${redisson.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>io.netty</groupId>
+						<artifactId>netty-buffer</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>io.netty</groupId>
+						<artifactId>netty-common</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>io.netty</groupId>
+						<artifactId>netty-transport</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>io.netty</groupId>
+						<artifactId>netty-handler</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>io.netty</groupId>
+						<artifactId>netty-codec-http</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>io.netty</groupId>
+						<artifactId>netty-codec</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			
+			<dependency>
+			    <groupId>jaxen</groupId>
+			    <artifactId>jaxen</artifactId>
+			    <version>${jaxen.version}</version>
+			</dependency>
+
+			<!-- 单元测试覆盖率 start -->
+			<dependency>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+			</dependency>
+			<!-- 单元测试覆盖率 end -->
+			
+			<!-- SVN版本管理 start -->
+			<dependency>
+				<groupId>org.tmatesoft.svnkit</groupId>
+				<artifactId>svnkit</artifactId>
+				<version>${org.tmatesoft.svnkit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.tmatesoft.svnkit</groupId>
+				<artifactId>svnkit-cli</artifactId>
+				<version>${org.tmatesoft.svnkit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.tmatesoft.svnkit</groupId>
+				<artifactId>svnkit-javahl16</artifactId>
+				<version>${org.tmatesoft.svnkit.version}</version>
+			</dependency>
+			<!-- SVN版本管理 end -->
+			
+			<!-- 移动端JSON工具 start -->
+			<dependency>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>${org.json.version}</version>
+			</dependency>
+			<!-- 移动端JSON工具 end -->
+			
+			<!-- 移动端ZIP打包工具 start -->
+			<dependency>
+				<groupId>net.lingala.zip4j</groupId>
+				<artifactId>zip4j</artifactId>
+				<version>${net.lingala.zip4j.version}</version>
+			</dependency>
+			<!-- 移动端ZIP打包工具 end -->
+		</dependencies>
+	</dependencyManagement>
+
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<uniqueVersion>false</uniqueVersion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.8</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<failOnError>true</failOnError>
+					<verbose>true</verbose>
+					<fork>true</fork>
+					<compilerArgument>-nowarn</compilerArgument>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<showSuccess>false</showSuccess>
+				</configuration>
+			</plugin>
+			<!-- 生成javadoc文档包的插件 
+			<plugin> 
+				<groupId>org.apache.maven.plugins</groupId> 
+				<artifactId>maven-javadoc-plugin</artifactId> 
+				<version>2.7</version> 
+				<executions> 
+					<execution> 
+						<id>attach-javadocs</id> 
+						<goals> 
+							<goal>jar</goal> 
+						</goals> 
+					</execution> 
+				</executions> 
+			</plugin> 
+			-->
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-source-plugin</artifactId> -->
+			<!-- <version>2.1.2</version> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <id>attach-sources</id> -->
+			<!-- <goals> -->
+			<!-- <goal>jar</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
+		</plugins>
+	</build>
+
+</project>

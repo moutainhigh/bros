@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.activiti.outside.table.ttprole">
+	
+	<resultMap id="ttpRoleResultMap" type="java.util.HashMap">
+		<result property="id" column="TRE_ID"/>
+		<result property="legalId" column="TRE_LEGALID"/>
+		<result property="cstNo" column="TRE_CSTNO"/>
+		<result property="name" column="TRE_NAME"/>
+		<result property="desc" column="TRE_DESC"/>
+		<result property="createTime" column="TRE_CREATETIME"/>
+		<result property="createUser" column="TRE_CREATEUSER"/>
+		<result property="modiTime" column="TRE_MODITIME"/>
+		<result property="modiUser" column="TRE_MODIUSER"/>
+		<result property="state" column="TRE_STATE"/>
+		<result property="type" column="TRE_TYPE"/>
+	</resultMap>
+	
+	<sql id="ttp_role_param">
+		TRE_ID,
+		TRE_LEGALID,
+		TRE_CSTNO,
+		TRE_NAME,
+		TRE_DESC,
+		TRE_CREATETIME,
+		TRE_CREATEUSER,
+		TRE_MODITIME,
+		TRE_MODIUSER,
+		TRE_STATE,
+		TRE_TYPE
+    </sql>
+	
+	<!-- 根据角色编号查询操作员角色信息 -->
+	<select id="queryOutSideRoleListByRoleId" resultMap="ttpRoleResultMap">  
+		  select  <include refid="ttp_role_param"/>
+		  from TTP_ROLE 
+		  where TRE_ID in  
+		  <foreach item="item" index="index" collection="roleIdArray" open="(" separator="," close=")">  
+		      <![CDATA[#{item}]]>
+		  </foreach> 
+	</select>
+
+</mapper>

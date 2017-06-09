@@ -1,0 +1,134 @@
+
+    <div ng-controller="tradeOrderDetail as vm">
+      <div class="max_inner">
+        <div class="box1">
+          <header class="header">
+            <h6>销售订单 # <span ng-bind="vm.orderDetail.orderInfo.orderId"></span></h6>
+          </header><!-- /header -->
+
+          <table class="table1" >
+            <tr>
+              <td class="color">历史状态</td>
+              <td class="right">
+                
+                  <div class="td">
+                    当前状态:<span ng-bind="vm.orderDetail.orderInfo.orderCurrentStatus"></span>
+                  </div>
+                  <span ng-repeat="status in vm.orderDetail.orderInfo.orderStatusList">
+                       <span ng-bind="status.status"></span>-<span ng-bind="status.statusDatetime"></span> </br>
+                  </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="color">订货日期</td>
+              <td class="right"><span ng-bind="vm.orderDetail.orderInfo.orderDate"></span></td>
+            </tr>
+            <tr>
+              <td class="color">货币</td>
+              <td class="right">CNY</td>
+            </tr>
+            <tr>
+              <td class="color">销售渠道</td>
+              <td class="right"><span ng-bind="vm.orderDetail.orderInfo.channelName"></span></td>
+            </tr>
+            <tr>
+              <td class="color">货品仓库</td>
+              <td class="right">润和云总行
+                <div class="fillet">(MODEL-FP-OL-STORE)</div>
+              </td>
+            </tr>
+            <tr>
+              <td class="color">创建者</td>
+              <td class="right">
+                <div class="fillet1"><span ng-bind="vm.orderDetail.orderInfo.createdBy"></span></div>
+              </td>
+            </tr>
+          </table>
+        
+        </div>
+        <div class="box2">
+          <header class="header">
+            <h6>订单联络信息</h6>
+          </header><!-- /header -->
+          <table class="table1">
+           <tr>
+              <td class="color">客户名称</td>
+              <td class="right"><span ng-bind="vm.orderDetail.orderContactInfoMap.fullName"></span></td>
+            </tr>
+            <tr>
+              <td class="color">下订单客户的编号</td>
+              <td class="right"><span ng-bind="vm.orderDetail.orderContactInfoMap.partyId"></span></td>
+            </tr>
+            <tr>
+              <td class="color">货运地址</td>
+              <td class="right"><span ng-repeat="addstr in vm.orderDetail.orderContactInfoMap.postalAddressList"> 
+                       收货人 <span ng-bind="addstr.toName"></span>
+                       地址：<span ng-bind="addstr.countryName"></span>-<span ng-bind="addstr.stateProvinceName"></span>-<span ng-bind="addstr.city"></span> - <span ng-bind="addstr.address1"></span></br>
+                  </span></td>
+            </tr>
+          </table>
+        </div>
+           <div class="box3">
+          <header class="header">
+            <h6>订单价格</h6>
+          </header><!-- /header -->
+          <table class="table1">
+           <tr>
+              <td class="color">项目小计</td>
+              <td class="right"><span ng-bind="vm.orderDetail.orderItemsMap.orderSubTotal"></span>（元）</td>
+            </tr>
+            <tr>
+              <td class="color">其他调整总计</td>
+              <td class="right"><span ng-bind="vm.orderDetail.orderItemsMap.otherAdjAmount"></span>（元）</td>
+            </tr>
+            <tr>
+              <td class="color">货运及处理总计</td>
+              <td class="right"><span ng-bind="vm.orderDetail.orderItemsMap.shippingAmount"></span>（元）</td>
+            </tr>
+             <tr>
+              <td class="color">销售税总额</td>
+              <td class="right"><span ng-bind="vm.orderDetail.orderItemsMap.taxAmount"></span>（元）</td>
+            </tr>
+            <tr>
+              <td class="color">应付总计</td>
+              <td class="right"><span ng-bind="vm.orderDetail.orderItemsMap.grandTotal"></span>（元）</td>
+            </tr>
+            
+          </table>
+        
+    </div><div class="box3">
+          <header class="header">
+            <h6>订单列表</h6>
+          </header><!-- /header -->
+          <table class="tableList">
+          <thead>
+              <tr >
+                  <th class="title">名称</th>
+                  <th style="text-align:center">数量</th>
+                  <th class="money">原价(元)</th>
+                  <th class="money">调整金额(元)</th>
+                  <th class="money">小计</th>
+                  <th class="title">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in vm.orderDetail.orderItemsMap.orderItemLists">
+                    <td class="title">
+                        <p ng-bind="x.productMap.productId + x.productMap.productName" ng-click="vm.shopcarproduct(x)"></p>
+                    </td>
+                    <td align="center" ng-bind="x.quantityMap.quantity|number"></td>
+                    <td class="money" ng-bind="x.unitPriceMap.unitPrice|currency:'¥'"></td>
+                    <td class="money" ng-bind="x.adjustMentMap.adjustMent|currency:'¥'"></td>
+                    <td class="money" ng-bind="x.subTotalMap.subTotal|currency:'¥'"></td>
+                    <td>
+                     <button type="button" class="btn btn-default" ng-click="vm.addRecordShopCartFun(x);">
+                       <i class="glyphicon glyphicon-shopping-cart"></i> 加入购物车</button>
+                       </td>
+                </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>

@@ -1,0 +1,43 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+    "coreCustNo":"10000981",
+	"openNode":"700001",
+	"accountOpenBank":"700001",	
+	"accountNo":"6099009129012",	
+	"custName":"北京联创智融信息技术有限公司",	
+	"custNameEn":"beijing",	
+	"companyAddr":"雍和宫航星园和平里东街",	
+	"orgNo":"38019901",
+	"zipCode":"100010",	
+	"legalPerson":"张三",	
+	"certType":"Z",	
+	"certNo":"8101920912",	
+	"contact":"李四",	
+	"contactTelephone":"13698992781",	
+	"email":"beij@126.com",
+	"fax":"1091901"
+}
+
+
+

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.tpreletosingle">
+	<sql id="tpr_eletosingle_param">
+		TEE_ID,            
+		TEE_FLOWNO,        
+		TEE_CSTNO,         
+		TEE_CHANNEL,       
+		TEE_LEGALID,       
+		TEE_PAYACCNO,      
+		TEE_PAYACCNAME,    
+		TEE_PAYBRANCHNO,   
+		TEE_RESIVEACCNO,   
+		TEE_RESIVEACCNAME, 
+		TEE_RESIVEBANKNO,  
+		TEE_RESIVEBANKNAME,
+		TEE_TRANSTYPE,     
+		TEE_CURRENCY,      
+		TEE_TRANSAMT,      
+		TEE_FEEAMT,        
+		TEE_SECURITY,      
+		TEE_TRANSTIME,     
+		TEE_TRANSTT,       
+		TEE_PURPOSE,      
+		TEE_PRINTNUM,      
+		TEE_AUTHCODE,      
+		TEE_NOTE1,
+		TEE_NOTE2		 	
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="eletoReceiptResult">
+    	<result property="id" column="TEE_ID"/><!--唯一ID-->
+		<result property="flowNo" column="TEE_FLOWNO"/><!--业务流水号-->
+		<result property="cstNo" column="TEE_CSTNO "/><!--客户号-->
+		<result property="channel" column="TEE_CHANNEL "/><!--渠道编号-->
+		<result property="legalId" column="TEE_LEGALID "/><!--法人id-->
+		<result property="payAccNo" column="TEE_PAYACCNO"/><!--付款人账号-->
+		<result property="payAccName" column="TEE_PAYACCNAME"/><!--付款人名称-->
+		<result property="payBranchNo" column="TEE_PAYBRANCHNO "/><!--付款行行号-->
+		<result property="resiveAccNo" column="TEE_RESIVEACCNO "/><!--收款人账号-->
+		<result property="resiveAccName" column="TEE_RESIVEACCNAME "/><!--收款人名称-->
+		<result property="resiveBankNo" column="TEE_RESIVEBANKNO"/><!--收款行行号-->
+		<result property="resiveBankName" column="TEE_RESIVEBANKNAME"/><!--收款行行名-->
+		<result property="transType" column="TEE_TRANSTYPE "/><!--转账类型-->
+		<result property="currency" column="TEE_CURRENCY"/><!--币种-->
+		<result property="transAmt" column="TEE_TRANSAMT"  javaType="Object" jdbcType="DECIMAL" typeHandler="bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler"/><!--交易金额-->
+		<result property="feeAmt" column="TEE_FEEAMT"  javaType="Object" jdbcType="DECIMAL" typeHandler="bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler"/><!--手续费-->
+		<result property="security" column="TEE_SECURITY"/><!--安全工具-->
+		<result property="transTime" column="TEE_TRANSTIME "/><!--交易时间-->
+		<result property="tranStt" column="TEE_TRANSTT "/><!--交易状态-->
+		<result property="purpose" column="TEE_PURPOSE "/><!--摘要-->
+		<result property="printNum" column="TEE_PRINTNUM"/><!--打印次数-->
+		<result property="authCode" column="TEE_AUTHCODE"/><!--验证码-->
+		<result property="note1" column="TEE_NOTE1 "/><!--预留字段1-->
+		<result property="note2" column="TEE_NOTE2 "/><!--预留字段2-->
+    </resultMap>
+   
+     <!-- 添加电子回单 -->
+	<insert id="insertEletoSingle" parameterType="java.util.HashMap">
+		insert into TPR_ELETOSINGLE(
+		       <include refid="tpr_eletosingle_param"/>
+		) values(
+		#{id},  
+		#{flowNo},        
+		#{cstNo},         
+		#{channel},       
+		#{legalId},       
+		#{payAccNo},      
+		#{payAccName},    
+		#{payBranchNo},   
+		#{resiveAccNo},  
+		#{resiveAccName}, 
+		#{resiveBankNo},  
+		#{resiveBankName},
+		#{transType},     
+		#{currency},      
+		#{transAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},      
+		#{feeAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},        
+		#{security},      
+		#{transTime},     
+		#{tranStt},       
+		#{purpose},       
+		#{printNum},      
+		#{authCode},      
+		#{note1},         
+		#{note2}
+		) 
+	</insert>
+	<!-- 电子回单查询  -->
+	<select id="queryEleToSingleinfo" resultMap="eletoReceiptResult" parameterType="java.util.HashMap">
+		select 
+		<include refid="tpr_eletosingle_param"/>
+		 from TPR_ELETOSINGLE where 1=1
+		    <if test="cstNo != null and cstNo != '' ">
+				and TEE_CSTNO=#{cstNo}
+			</if>
+			<if test="legalId != null and legalId != '' ">
+				and TEE_LEGALID=#{legalId}
+			</if>
+			<if test="eleReceiptNo != null and eleReceiptNo != '' ">
+				and	TEE_FLOWNO = #{eleReceiptNo}
+			</if>
+			<if test="authCode != null and authCode != '' "> 
+				and TEE_AUTHCODE = #{authCode}
+			</if>
+			<if test="transTimestamp != null and transTimestamp != '' "> 
+				and  TEE_TRANSTIME LIKE '%'||#{transTimestamp}||'%'
+			</if>
+			<if test="payAccNo != null and payAccNo != '' "> 
+				and TEE_PAYACCNO = #{payAccNo}
+			</if>
+		 
+	</select>
+	<!-- 更新电子回单打印次数 -->
+	<update id="updateEletoSinglePrintNumByObjectId" parameterType="java.util.HashMap"> 
+		update TPR_ELETOSINGLE 
+		   <set> 
+		   TEE_PRINTNUM=TEE_PRINTNUM+1
+		   </set>
+		where TEE_ID = #{objectId}
+	</update>
+</mapper>

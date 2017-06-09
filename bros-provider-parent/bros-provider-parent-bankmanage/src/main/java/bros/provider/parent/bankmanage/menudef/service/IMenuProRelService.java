@@ -1,0 +1,92 @@
+package bros.provider.parent.bankmanage.menudef.service;
+
+import java.util.Map;
+
+import bros.common.core.exception.ServiceException;
+
+/**
+ * 
+ * @ClassName: IMenuProRelService 
+ * @Description: 菜单与货架商品关联
+ * @author gaoyongjing 
+ * @date 2016年7月11日 下午15:35:28 
+ * @version 1.0
+ */
+public interface IMenuProRelService {
+	/**
+	 * 
+	 * @Title: addMenuProRelMethod
+	 * @Description: 新增菜单与货架商品关系
+	 * @param headMap  头信息
+	 * @param paramMap  上送信息，包括以下
+	 * @param menuCode 菜单编码
+	 * @param shelfCode 货架编码
+	 * @param goodsCode 商品编号
+	 * @param prdTypeCode 产品分类编号
+	 * @return ResponseEntity 返回对象信息
+	 * @throws ServiceException
+	 */
+	public void addMenuProRelMethod(Map<String, Object> paramMap) throws ServiceException;
+	/**
+	 * 
+	 * @Title: updateMenuProRelMethod
+	 * @Description: 修改菜单与货架商品关系
+	 * @param headMap  头信息
+	 * @param paramMap  上送信息，包括以下
+	 * @param menuCode 菜单编码
+	 * @param oldShelfCode 修改前货架编码
+	 * @param shelfCode 货架编码
+	 * @param oldGoodsCode 修改前商品编码
+	 * @param goodsCode 商品编号
+	 * @param oldPrdTypeCode 修改前产品分类编码
+	 * @param prdTypeCode 产品分类编号
+	 * @return ResponseEntity 返回对象信息
+	 * @throws ServiceException
+	 */
+	public void updateMenuProRelMethod(Map<String, Object> paramMap) throws ServiceException;
+	/**
+	 * 
+	 * @Title: deleteMenuProRelMethod
+	 * @Description: 删除菜单与货架商品关系
+	 * @param headMap  头信息
+	 * @param paramMap  上送信息，包括以下
+	 * @param menuCode 菜单编码
+	 * @param shelfCode 货架编码
+	 * @param goodsCode 商品编号
+	 * @param prdTypeCode 产品分类编号
+	 * @return ResponseEntity 返回对象信息
+	 * @throws ServiceException
+	 */
+	public void deleteMenuProRelMethod (Map<String, Object> paramMap)throws ServiceException;
+	
+	/**
+	 * 
+	 * @Title: queryMenuProRelMethod
+	 * @Description: 查询菜单与货架商品关系
+	 * @param headMap  头信息
+	 * @param paramMap  上送信息，包括以下
+	 * @param menuCode 菜单编码
+	 * @param shelfCode 货架编码
+	 * @param goodsCode 商品编号
+	 * @param prdTypeCode 产品分类编号
+	 * @param pageNo 页码
+	 * @param pageSize 每页记录数
+	 * @return ResponseEntity Map<String,Object> returnList菜单与货架、商品信息列表 totalNum 总条数
+	 * @throws ServiceException
+	 */
+	public Map<String,Object> queryMenuProRelMethod (Map<String, Object> paramMap)throws ServiceException;
+	/**
+	 * 
+	 * @Title: queryMenuProRelByObjectIdMethod
+	 * @Description: 查询菜单与货架、商品关系，单笔
+	 * @param headMap  头信息
+	 * @param paramMap  上送信息，包括以下
+	 * @param menuCode 菜单编码
+	 * @param shelfCode 货架编码
+	 * @param goodsCode 商品编号
+	 * @param prdTypeCode 产品分类编号
+	 * @return Map<String,Object>菜单与货架、商品信息列表  
+	 * @throws ServiceException
+	 */
+	public Map<String,Object> queryMenuProRelByObjectIdMethod (Map<String, Object> paramMap)throws ServiceException;
+}

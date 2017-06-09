@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>lczr.dzqd.bros.common</groupId>
+		<artifactId>bros-common-parent</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../bros-common-parent</relativePath>
+	</parent>
+
+	<artifactId>bros-provider-parent</artifactId>
+	<packaging>pom</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<log4j.leve>debug</log4j.leve>
+		<log4j.ale>debug</log4j.ale>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core</artifactId>
+			<version>${bros-common-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-redis</artifactId>
+			<version>${bros-common-core-redis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-shiro</artifactId>
+			<version>${bros-common-core-shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-validation</artifactId>
+			<version>${bros-common-core-validation.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-activiti</artifactId>
+			<version>${bros-common-core-activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-flow</artifactId>
+			<version>${bros-common-core-flow.version}</version>
+		</dependency>
+	</dependencies>
+
+	<modules>
+		<module>bros-provider-parent-cache</module>
+		<module>bros-provider-parent-security</module>
+		<module>bros-provider-parent-product</module>
+		<module>bros-provider-parent-bankmanage</module>
+		<module>bros-provider-parent-custmanage</module>
+		<module>bros-provider-parent-account</module>
+		<!--南京控制 <module>bros-provider-parent-auth</module>-->
+		<module>bros-provider-parent-auth</module>
+		<module>bros-provider-parent-customer</module>
+		<module>bros-provider-parent-financial</module>
+		<module>bros-provider-parent-login</module>
+		<module>bros-provider-parent-netbank</module>
+		<module>bros-provider-parent-transfer</module>
+		<!--南京控制 <module>bros-provider-parent-activiti</module>-->
+		 <module>bros-provider-parent-activiti</module>
+    	<module>bros-provider-parent-sys</module>
+  </modules>
+</project>

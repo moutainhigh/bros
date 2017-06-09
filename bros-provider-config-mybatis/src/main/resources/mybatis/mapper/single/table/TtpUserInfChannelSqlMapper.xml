@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.TtpUserInfChannelSqlMapper">
+	<sql id="ttp_user_inf_channel">
+		tuin_id,
+		tuin_alias,
+		tuin_opandate,
+		tuin_closedate,
+		tuin_opennode,
+		tuin_lasedate,
+		tuin_password,
+		tuin_stt,
+		tuin_channel
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="ttpUserInfChannelResult">
+    	<result property="operatorId" column="tuin_id"/>
+    	<result property="operatorAlias" column="tuin_alias"/>
+    	<result property="operatorOpandate" column="tuin_opandate"/>
+    	<result property="operatorClosedate" column="tuin_closedate"/>
+    	<result property="operatorOpennode" column="tuin_opennode"/>
+    	<result property="operatorLasedate" column="tuin_lasedate"/>
+    	<result property="operatorPassword" column="tuin_password"/>
+    	<result property="operatorStt" column="tuin_stt"/>
+    	<result property="operatorChannel" column="tuin_channel"/>
+    </resultMap>
+    <!-- 查询全部角色 -->
+    <select id="queryTtpUserInfChannel" resultMap="ttpUserInfChannelResult">
+       select
+       	<include refid="ttp_user_inf_channel"/> 
+       from ttp_user_inf_channel
+    </select>
+    
+    <!-- 添加操作员渠道信息 -->
+	<insert id="insertTtpUserInfChannel" parameterType="java.util.HashMap">
+		insert into ttp_user_inf_channel(
+			<include refid="ttp_user_inf_channel"/>  
+		) values(
+			<![CDATA[ 
+				#{operatorId,jdbcType=VARCHAR},
+				#{operatorAlias,jdbcType=VARCHAR},
+				#{operatorOpandate,jdbcType=VARCHAR},
+				#{operatorClosedate,jdbcType=VARCHAR},
+				#{operatorOpennode,jdbcType=VARCHAR},
+				#{operatorLasedate,jdbcType=VARCHAR},
+				#{operatorPassword,jdbcType=VARCHAR},
+				#{operatorStt},
+				#{operatorChannel}
+	       	]]> 
+		)
+	</insert>    
+		<!-- 修改操作员信息 -->
+	<update id="updateTtpUserInfChannelByOperatorId" parameterType="java.util.HashMap">
+		UPDATE ttp_user_inf_channel
+		SET 	
+			tuin_lasedate=#{operatorLasedate},
+			tuin_stt=#{operatorStt}
+		WHERE tuin_id=#{operatorId}
+	
+	</update>
+</mapper>

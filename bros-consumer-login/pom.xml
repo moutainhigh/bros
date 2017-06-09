@@ -1,0 +1,182 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>lczr.dzqd.bros.common</groupId>
+		<artifactId>bros-common-parent</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../bros-common-parent</relativePath>
+	</parent>
+
+	<artifactId>bros-consumer-login</artifactId>
+	<version>${bros-consumer-login.version}</version>
+	<packaging>jar</packaging>
+
+	<name>bros-consumer-login</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<log4j.leve>debug</log4j.leve>
+		<log4j.ale>debug</log4j.ale>
+	</properties>
+
+	<dependencies>
+		<!-- 服务消费方调用服务提供方的api接口 -->
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-provider-api</artifactId>
+			<version>${bros-provider-api.version}</version>
+		</dependency>
+		<!-- 统一接入调用服务消费方api接口 -->
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-consumer-api</artifactId>
+			<version>${bros-consumer-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-consumer-config</artifactId>
+			<version>${env}-${bros-consumer-config.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-consumer-config-mybatis</artifactId>
+			<version>${bros-consumer-config-mybatis.version}</version>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>lczr.dzqd.bros.common</groupId> -->
+<!-- 			<artifactId>bros-consumer-config-validation</artifactId> -->
+<!-- 			<version>${bros-consumer-config-validation.version}</version> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core</artifactId>
+			<version>${bros-common-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-redis</artifactId>
+			<version>${bros-common-core-redis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-shiro</artifactId>
+			<version>${bros-common-core-shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-validation</artifactId>
+			<version>${bros-common-core-validation.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>lczr.dzqd.bros.common</groupId>
+			<artifactId>bros-common-core-generator</artifactId>
+			<version>${bros-common-core-generator.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>bros-consumer-login</finalName>
+		<resources>
+			<resource>
+				<targetPath>${project.build.directory}/classes</targetPath>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+			<resource>
+			    <targetPath>${project.build.directory}/classes</targetPath>
+				<directory>config/${env}</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<targetPath>${project.build.directory}/classes/META-INF/spring</targetPath>
+				<directory>src/main/resources/spring</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>spring-context.xml</include>
+				</includes>
+			</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[2.0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<classesDirectory>target/classes/</classesDirectory>
+					<archive>
+						<manifest>
+							<mainClass>com.alibaba.dubbo.container.Main</mainClass>
+							<!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
+							<useUniqueVersions>false</useUniqueVersions>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+						<manifestEntries>
+							<Class-Path>.</Class-Path>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<type>jar</type>
+							<includeTypes>jar</includeTypes>
+							<outputDirectory>
+								${project.build.directory}/lib
+							</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

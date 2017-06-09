@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!--账户管理  -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="paccountManageServiceFacade" interface="bros.p.custmanage.facade.service.IPAccountManageServiceFacade"/>
+	
+	<!-- 对客授权管理 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pttpAuthModelSerivceFacade" interface="bros.p.custmanage.facade.service.IPTtpAuthModelSerivceFacade"/>
+	
+	<!--操作员管理  -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="poperatorManageServiceFacade" interface="bros.p.custmanage.facade.service.IPOperatorManageServiceFacade"/>
+	<!--角色管理  -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="proleManageServiceFacade" interface="bros.p.custmanage.facade.service.IPRoleManageServiceFacade" />
+	
+	<!--客户之声  -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pcustomervoiceServiceFacade" interface="bros.p.custmanage.facade.service.IPCustomervoiceServiceFacade" />
+	<!--安保服务  -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="psecurityServiceFacade" interface="bros.p.custmanage.facade.service.IPSecurityServiceFacade" />
+	<!-- 收款人名册维护 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="precvPersonInfoServiceFacade" interface="bros.p.custmanage.facade.service.IPRecvPersonInfoServiceFacade" />
+	<!-- 转账汇款 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="ptransServiceFacade" interface="bros.p.custmanage.facade.service.IPTransServiceFacade" />
+	<!-- 储蓄服务 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="psavingsAcountServiceFacade" interface="bros.p.custmanage.facade.service.IPSavingsAcountServiceFacade"/>
+	<!-- 查询客户总览服务 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="personOverviewServiceFacade" interface="bros.p.custmanage.facade.service.IPPersonOverviewServiceFacade"/>
+	
+	<!-- 监听当前模块是否存活 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="papplicationAliveMonitorCustmanageServiceFacade" interface="bros.p.monitor.service.IPApplicationAliveMonitorCustmanageServiceFacade"/>
+	<!-- 投资理财 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pfinanceInvestmentServiceFacade" interface="bros.p.custmanage.facade.service.IPFinanceInvestmentServiceFacade"/>
+	
+</beans>  

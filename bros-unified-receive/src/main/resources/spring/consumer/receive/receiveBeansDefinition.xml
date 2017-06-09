@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="  
+    http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/mvc  
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd  
+    http://www.springframework.org/schema/tx    
+    http://www.springframework.org/schema/tx/spring-tx.xsd  
+    http://www.springframework.org/schema/cache    
+	http://www.springframework.org/schema/cache/spring-cache.xsd">
+    
+    	<!-- 支持缓存注解   暂时不使用缓存配置-->
+<!-- 	<cache:annotation-driven cache-manager="cacheManager" />    -->
+	      
+	<!-- 业务处理实现 -->
+    <bean id="businessProcessService" class="bros.unified.receive.business.detail.impl.BusinessProcessServiceImpl"/>
+    <!-- 编码解码器 -->
+    <bean id="jsonFormatService" class="bros.common.core.comm.format.impl.JsonFormatServiceImpl"/>
+    
+    <!-- tcp定长报文配置开始 -->
+	<!-- 定长报文解析配置文件 -->
+	<bean id="fixedAppConfig" class="bros.common.core.comm.netty.config.AppConfig">
+		<property name="port" value="${receive.tcp.server.port}"/><!-- 监听端口 -->
+		<property name="tcpNoDelay" value="${receive.tcp.server.tcpNoDelay}"/><!-- 是否延迟 -->
+		<property name="soKeepAlive" value="${receive.tcp.server.soKeepAlive}"/><!-- 是否保持长连接 -->
+		<property name="headLength" value="${receive.tcp.server.headLength}"/><!-- 报文头长度 -->
+		<property name="fillRightStr" value="${comm.fillRightStr}"/><!-- 接力系统初始顺序流水号 -->
+		<property name="mdKey" value="${comm.md5key}"/><!-- 校验位加密主密钥 -->
+		<property name="flowProductFlag"><!-- 流水是否由统一接入生成，如果由统一接入生成的话，就需要配置渠道标识,否则不需要配置 -->
+			<map>
+<!-- 				<entry key="1" value="1111" /> -->
+<!-- 				<entry key="2" value="2222"/> -->
+			</map>
+		</property>
+		<!-- <property name="applicationAliveMonitorServiceName" value="applicationAliveMonitor.servlet"/> shaoxu 2017/06/05  检查应用是否存活的服务名 -->
+	</bean>
+	<!-- tcp定长报文配置结束 -->
+	
+	
+	<!-- http报文配置开始 -->
+	<!-- http报文消息配置文件 -->
+	<bean id="httpAppConfig" class="bros.common.core.comm.netty.config.AppConfig">
+		<property name="port" value="${receive.http.server.port}"/><!-- 监听端口 -->
+		<property name="tcpNoDelay" value="${receive.http.server.tcpNoDelay}"/><!-- 是否延迟 -->
+		<property name="soKeepAlive" value="${receive.http.server.soKeepAlive}"/><!-- 是否保持长连接 -->
+		<property name="fillRightStr" value="${comm.fillRightStr}"/><!-- 接力系统初始顺序流水号 -->
+		<property name="mdKey" value="${comm.md5key}"/><!-- 校验位加密主密钥 -->
+		<property name="flowProductFlag"><!-- 流水是否由统一接入生成，如果由统一接入生成的话，就需要配置渠道标识,否则不需要配置 -->
+			<map>
+<!-- 				<entry key="1" value="1111" /> -->
+<!-- 				<entry key="2" value="2222"/> -->
+			</map>
+		</property>
+		<!--<property name="applicationAliveMonitorServiceName" value="applicationAliveMonitor.servlet"/> shaoxu 2017/06/05  检查应用是否存活的服务名 -->
+	</bean>
+	<!-- http报文配置结束 -->
+	
+	
+	
+	
+	<!-- =======================spring+redis缓存配置开始=============================== -->
+	<!-- 缓存管理器 -->
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+		<property name="caches">
+			<set>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="default" p:expireTime="1800" >
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="1"/><!-- cache集群类型   单机或者集群（0：单机     1：集群） -->
+				</bean>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="redisCache" p:expireTime="3600">
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="1"/>
+				</bean>
+				<bean class="bros.common.core.redis.cluster.RedisCache" p:name="BmaVersionConfigCacheInfo" p:expireTime="7200">
+					<property name="redisClusterDao" ref="redisDao"/>
+					<property name="cacheType" value="1"/>
+				</bean>
+			</set>
+		</property>
+	</bean>
+</beans>

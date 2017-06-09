@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+  
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd    
+           http://www.springframework.org/schema/context    
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+           http://www.springframework.org/schema/aop    
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	
+	<!-- 错误码初始化到缓存工具类 -->
+	<bean id="initErrorCodeService" class="bros.common.core.init.service.impl.InitErrorCodeServiceImpl">
+		<property name="errorRedisDao" ref="redisDao"/><!-- 缓存操作 -->
+		<property name="myBatisDaoSysDao" ref="myBatisDaoSysDao"/><!-- 数据库操作 -->
+	</bean>
+	
+	<!-- 转义数据初始化到缓存工具类 -->
+	<bean id="initAppParService" class="bros.common.core.init.service.impl.InitAppParServiceImpl">
+		<property name="appParRedisDao" ref="redisDao"/><!-- 缓存操作 -->
+		<property name="myBatisDaoSysDao" ref="myBatisDaoSysDao"/><!-- 数据库操作 -->
+	</bean>
+	
+	<!-- 初始化properties文件工具类 -->
+	<bean id="initPropertiesService" class="bros.common.core.init.service.impl.InitPropertiesServiceImpl">
+	    <property name="propertiesRedisDao" ref="redisDao"/><!-- 缓存操作 -->
+		<!-- <property name="propertiesPackage" value="${sys.bros.consumer.properties.cache.package}"/> -->
+		<!-- shaoxu 2017/06/05<property name="jarDependencePath" value="${sys.bros.consumer.properties.config.jar.path}"/>jar包初始化properties绝对路径的绝对路径 -->
+		<property name="propertiesPackage" value="${sys.bros.consumer.properties.config.jar.path}"/>
+	</bean>
+	
+	<!-- 初始化消费者验证模板文件工具类 -->
+	<bean id="initValidationService" class="bros.common.core.init.service.impl.InitValidationServiceImpl">
+	    <property name="validationRedisDao" ref="redisDao"/><!-- 缓存操作 -->
+		<property name="head" value="${sys.bros.validation.head}"/><!-- 校验文件头 -->
+		<!-- <property name="jarDependencePath" value="${sys.bros.consumer.properties.validation.jar.path}"/>jar包初始化验证模板绝对路径的绝对路径 -->
+		<property name="validationPackage" value="${sys.bros.consumer.properties.validation.jar.path}"/>
+	</bean>
+	
+	<!-- 获取缓存数据工具类 -->
+	<bean id="getCacheConfigService" class="bros.common.core.init.service.impl.GetCacheConfigServiceImpl"/>
+	<!-- 初始化所有配置工具类 -->
+	<bean id="initAllConfigService" class="bros.common.core.init.service.impl.InitAllConfigServiceImpl"/>
+	
+	
+    <!-- 菜单组件 -->
+    <bean id="menuCompnent" class="bros.consumer.init.entity.MenuCompnent"/>
+</beans>

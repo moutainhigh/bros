@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.activiti.outside.table.ttpuserinf">
+	
+	<resultMap id="ttpUserInfResultMap" type="java.util.HashMap">
+		<result property="id" column="TUI_ID"/>
+		<result property="legalId" column="TUI_LEGALID"/>
+		<result property="cstNo" column="TUI_CSTNO"/>
+		<result property="userNo" column="TUI_USERNO"/>
+		<result property="userName" column="TUI_USERNAME"/>
+		<result property="userNameEN" column="TUI_USERNAMEEN"/>
+		<result property="ctfType" column="TUI_CTFTYPE"/>
+		<result property="ctfNo" column="TUI_CTFNO"/>
+		<result property="department" column="TUI_DEPARTMENT"/>
+		<result property="jobTitle" column="TUI_JOBTITLE"/>
+		<result property="mobile" column="TUI_MOBILE"/>
+		<result property="email" column="TUI_EMAIL"/>
+	</resultMap>
+	
+	<sql id="ttp_user_inf_param">
+		TUI_ID,
+		TUI_LEGALID,
+		TUI_CSTNO,
+		TUI_USERNO,
+		TUI_USERNAME,
+		TUI_USERNAMEEN,
+		TUI_CTFTYPE,
+		TUI_CTFNO,
+		TUI_DEPARTMENT,
+		TUI_JOBTITLE,
+		TUI_MOBILE,
+		TUI_EMAIL
+    </sql>
+	
+	<!-- 根据操作员编号列表查询操作员基本信息 -->
+	<select id="queryTtpUserInfListByUserNo" resultMap="ttpUserInfResultMap">  
+		  select  <include refid="ttp_user_inf_param"/>
+			  from TTP_USER_INF 
+			     where TUI_LEGALID=#{legalId}
+			     and TUI_CSTNO=#{cstNo}
+			     and TUI_USERNO in  
+		  <foreach item="item" index="index" collection="userNoArray" open="(" separator="," close=")">  
+		      <![CDATA[#{item}]]>
+		  </foreach> 
+	</select>
+	
+	<!-- 根据法人记录唯一标识+客户编号+操作员编号查询操作员基本信息 -->
+	<select id="queryTtpUserIdByCondition" resultMap="ttpUserInfResultMap">		  
+	      select  <include refid="ttp_user_inf_param"/>
+				  from TTP_USER_INF 
+		  <![CDATA[	     
+		            where TUI_LEGALID=#{legalId}
+					   and TUI_CSTNO=#{cstNo}
+					   and TUI_USERNO=#{userNo}
+	      ]]>
+	</select>
+	<!-- 根据法人记录唯一标识+客户编号+操作员Id查询操作员基本信息 -->
+	<select id="queryTtpUserIdByUserIdCondition" resultMap="ttpUserInfResultMap">		  
+	      select  <include refid="ttp_user_inf_param"/>
+				  from TTP_USER_INF 
+		  <![CDATA[	     
+		            where TUI_LEGALID=#{legalId}
+					   and TUI_CSTNO=#{cstNo}
+					   and TUI_ID=#{userId}
+	      ]]>
+	</select>
+
+</mapper>

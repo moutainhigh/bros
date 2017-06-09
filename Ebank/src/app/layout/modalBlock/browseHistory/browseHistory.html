@@ -1,0 +1,15 @@
+<div class="product-list-two">
+    <div class="recommend-box" ng-controller="browseHistoryController as vm">
+        <div class="title-bar">
+                <div class="title">推荐产品</div>
+                <div class="bar" ng-if="vm.recommendMore=='0'">
+                    <a href="" ng-click="vm.recommendMorePro();">更多</a>
+                </div>
+            </div>
+            <div class="product-list-box">
+                <div class="product-list" ng-repeat="product in vm.homeShowProductIdList">
+                    <transfer-product compare="vm.addcar(product);" product="product"></transfer-product>
+                </div>
+            </div>
+    </div>
+</div>

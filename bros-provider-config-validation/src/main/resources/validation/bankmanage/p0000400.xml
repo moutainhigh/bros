@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- 新增广告栏信息 -->
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="bannerCode" message="${CECO000000001}"/><!-- 广告栏编码 -->
+		<xmlField dataName="bannerName" message="${CECO000000001}"/><!-- 广告栏名称 -->
+		<xmlField dataName="bannerStus" message="${CECO000000001}"/><!-- 广告栏状态 0-已停止适用1-正在适用 -->
+		<xmlField dataName="loginFlag" message="${CECO000000001}"/><!--是否需要登陆 -->
+		<xmlField dataName="bannerChannel" message="${CECO000000001}"/><!--渠道号 -->
+		<xmlField dataName="bannerLegal" message="${CECO000000001}"/><!-- 法人id -->
+	</xmlTag>
+</formats>

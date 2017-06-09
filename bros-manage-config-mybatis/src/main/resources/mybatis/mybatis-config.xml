@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+	    <!-- 配置日志打印查询数据库的sql语句、变量和查询结果，方便定位问题 -->
+		<setting name="logImpl" value="STDOUT_LOGGING"/>
+	</settings>
+	<typeHandlers>
+        <typeHandler javaType="String" jdbcType="VARBINARY" handler="bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler"/>
+        <typeHandler javaType="Object" jdbcType="DECIMAL" handler="bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler"/>
+    </typeHandlers>
+	
+	<mappers>
+		<!--初始化-->
+		<mapper resource="mybatis/mapper/single/table/PubAppParSqlMapper.xml" /><!-- 转义字典 -->
+		<mapper resource="mybatis/mapper/single/table/PubErrCodeSqlMapper.xml" /><!-- 错误码 -->
+		<mapper resource="mybatis/mapper/single/table/PubSystemParSqlMapper.xml" /><!-- 系统几班配置信息 -->
+	</mappers>
+</configuration>

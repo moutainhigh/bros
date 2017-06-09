@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 安保服务管理  ================================================-->
+	<!--查询客户安全工具列表服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="querySafetyToolListAction_1.0.0" interface="bros.c.custmanage.facade.service.ICSecurityServiceFacade" >
+		<dubbo:method name="querySafetyToolListMethod"/>
+	</dubbo:reference>
+	<!--生成挑战码服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="createChallengeCodeAction_1.0.0" interface="bros.c.custmanage.facade.service.ICSecurityServiceFacade" >
+		<dubbo:method name="createChallengeCodeMethod"/>
+	</dubbo:reference>
+	<!--发送短信验证码服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="sendMessageCodeAction_1.0.0" interface="bros.c.custmanage.facade.service.ICSecurityServiceFacade" >
+		<dubbo:method name="sendMessageCodeMethod"/>
+	</dubbo:reference>
+	<!--验证短信验证码服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="validateMessageCodeAction_1.0.0" interface="bros.c.custmanage.facade.service.ICSecurityServiceFacade" >
+		<dubbo:method name="validateMessageCodeMethod"/>
+	</dubbo:reference>
+	
+	<!-- 个人客户修改登录密码服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="personModifyPasswordAction_1.0.0" interface="bros.c.security.facade.service.ICPersonSecurityServiceFacade" >
+		<dubbo:method name="modifyPassword"/>
+	</dubbo:reference>
+	
+	<!-- 个人客户重置私密问题服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="personResetPrivateQuestionAction_1.0.0" interface="bros.c.security.facade.service.ICPersonSecurityServiceFacade" >
+		<dubbo:method name="resetPrivateQuestion"/>
+	</dubbo:reference>
+	
+	<!-- 查询个人私密问题分组列表服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryPrivateQuestionGroupListAction_1.0.0" interface="bros.c.security.facade.service.ICPersonPrivateQuestionServiceFacade" >
+		<dubbo:method name="queryPrivateQuestionGroupList"/>
+	</dubbo:reference>
+	
+	<!-- 筛选个人私密问题服务  -->
+	<dubbo:reference check="false" version="1.0.0"  id="filterPrivateQuestionAction_1.0.0" interface="bros.c.security.facade.service.ICPersonPrivateQuestionServiceFacade" >
+		<dubbo:method name="filterPrivateQuestion"/>
+	</dubbo:reference>
+	
+	<!-- 根据分组编号查询个人私密问题列表服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryPrivateQuestionListAction_1.0.0" interface="bros.c.security.facade.service.ICPersonPrivateQuestionServiceFacade" >
+		<dubbo:method name="queryPrivateQuestionList"/>
+	</dubbo:reference>
+</beans>  

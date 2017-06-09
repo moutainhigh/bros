@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.bmamserviceflow">
+	<sql id="bma_BmamServiceFlow_param">
+		bmw_gblflowseq,
+		bmw_bsncode,
+		bmw_channel,
+		bmw_scenecode,
+		bmw_transstarttime,
+		bmw_transendtime,
+		bmw_branchid,
+		bmw_legalcode,
+		bmw_tellerno,
+		bmw_autellerno,
+		bmw_transtt,
+		bmw_batchno,
+		bmw_returncode,
+		bmw_returnmsg
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="bmamServiceFlowResult">
+    	<result property="gblflowSeq" column="bmw_gblflowseq"/><!-- 30位业务流水号 -->
+    	<result property="bsnCode" column="bmw_bsncode"/><!-- 业务编码 -->
+    	<result property="channel" column="bmw_channel"/><!-- 渠道编号 -->
+    	<result property="sceneCode" column="bmw_scenecode"/><!-- 场景编码 -->
+    	<result property="transStartTime" column="bmw_transstarttime"/><!-- 交易提交时间 -->
+    	<result property="transEndTime" column="bmw_transendtime"/><!-- 交易结束时间 -->
+    	<result property="branchId" column="bmw_branchid"/><!-- 操作机构 -->
+    	<result property="legalCode" column="bmw_legalcode"/><!-- 法人 -->
+    	<result property="tellerNo" column="bmw_tellerno"/><!-- 操作员 -->
+    	<result property="autellerNo" column="bmw_autellerno"/><!-- 授权员 -->
+    	<result property="transtt" column="bmw_transtt"/><!-- 交易状态 -->
+    	<result property="batchNo" column="bmw_batchno"/><!-- 批次号-->
+    	<result property="returnCode" column="bmw_returncode"/><!-- 返回码 -->
+    	<result property="returnMsg" column="bmw_returnmsg"/><!-- 返回信息 -->
+    	<result property="note1" column="bmw_note1"/><!-- 预留字段 -->
+    	<result property="note2" column="bmw_note2"/><!-- 预留字段 -->
+    	<result property="note3" column="bmw_note3"/><!-- 预留字段 -->
+    	<result property="note4" column="bmw_note4"/><!-- 预留字段 -->
+    	<result property="note5" column="bmw_note5"/><!-- 预留字段 -->
+    	<result property="note6" column="bmw_note6"/><!-- 预留字段 -->
+    	<result property="note7" column="bmw_note7"/><!-- 预留字段 -->
+    </resultMap>
+   
+    <!-- 插入主流水表数据定义 -->
+    <insert id="insertBmamServiceFlow" parameterType="java.util.HashMap">
+       insert into bma_mserviceflow(
+    		<include refid="bma_BmamServiceFlow_param"/>
+    	)values(
+	    	#{gblflowSeq},
+			#{bsnCode},
+			#{channel},
+			#{sceneCode},
+			#{transStarTime},
+			#{transEndTime},
+			#{branchId},
+			#{legalCode},
+			#{tellerNo},
+			#{autellerNo},
+			#{transtt},
+			#{batchNo},
+			#{returnCode},
+			#{returnMsg})
+    </insert>
+    
+    <!-- 根据流水号更新主流水表业务信息 -->
+    <update id="updateBmamServiceFlowForMsg" parameterType="java.util.HashMap">
+		<![CDATA[ 
+			update bma_mserviceflow
+				set 
+					bmw_bsncode=#{bsnCode},
+					bmw_channel=#{channel},
+					bmw_scenecode=#{sceneCode},
+					bmw_transstarttime=#{transStartTime},
+					bmw_transendtime=#{transendTime},
+					bmw_branchid=#{branchId},
+					bmw_legalcode=#{legalCode},
+					bmw_tellerno=#{tellerNo},
+					bmw_autellerno=#{autellerNo},
+					bmw_transtt=#{transtt},
+					bmw_batchno=#{batchNo},
+					bmw_returncode=#{returnCode},
+					bmw_returnmsg=#{returnMsg}
+			     where bmw_gblflowseq=#{gblflowSeq} 
+		 ]]>
+	</update>
+	
+	<!-- 根据流水号更新主流水表业务状态 -->
+    <update id="updateBmamServiceFlowForState" parameterType="java.util.HashMap">
+		<![CDATA[ 
+			update bma_mserviceflow
+				set 
+					bmw_transtt=#{transtt},
+					bmw_returncode=#{returnCode},
+					bmw_returnmsg=#{returnMsg}
+				 where bmw_gblflowseq=#{gblflowSeq} 
+		 ]]>
+	</update>
+	
+	<!-- 根据流水号查询主流水表记录-->
+	<select id="queryBmamServiceFlowByOne" resultMap="bmamServiceFlowResult">
+       select 
+           <include refid="bma_BmamServiceFlow_param"/>
+           from bma_mserviceflow 
+              where bmw_gblflowseq=#{gblflowSeq}
+    </select>
+   
+   <!-- 根据流水号更新主流水表业务状态或者批次号 -->
+    <update id="updateBmamServiceFlowForStateAndBatchNo" parameterType="java.util.HashMap">
+		update bma_mserviceflow
+		set bmw_gblflowseq=#{gblflowSeq}
+		<if test="transtt!=null and transtt!=''">
+				,bmw_transtt=#{transtt}
+		</if>
+		<if test="batchNo!=null and batchNo!=''">
+				,bmw_batchno=#{batchNo}
+		</if>
+		<if test="returnMsg!=null and returnMsg!=''">
+				,bmw_returnmsg=#{returnMsg}
+		</if>
+		where bmw_gblflowseq=#{gblflowSeq}
+	</update>
+	
+	<!-- 根据批次号查询全局流水号 -->
+    <select id="queryGblFlowSeqByBatchNo" resultMap="bmamServiceFlowResult" parameterType="java.util.HashMap">
+        <![CDATA[ 
+			select bmw_gblflowseq
+				from bma_mserviceflow
+				   where bmw_batchno=#{batchNo}
+		]]>
+	</select>
+</mapper>

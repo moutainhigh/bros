@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.prdchlsystem">
+	<sql id="fornt_system_param">
+		PCM_LEGALID,
+		PCM_CHLSYSCODE,
+		PCM_CHLSYSNAME,
+		PCM_CHLSYSDESC
+	</sql>
+
+	<resultMap type="java.util.HashMap" id="chlSysGroupMap">
+		<result property="legalPersonId" column="PCM_LEGALID" />
+		<result property="chlSysCode" column="PCM_CHLSYSCODE" />
+		<result property="chlSysName" column="PCM_CHLSYSNAME" />
+		<result property="chlSysDesc" column="PCM_CHLSYSDESC" />
+	</resultMap>
+
+	<!--根据法人ID查询渠道系统分组信息 -->
+	<select id="queryChlSysGroup" resultMap="chlSysGroupMap">
+		select
+		<include refid="fornt_system_param" />
+		from PRD_CHLSYSTEM
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="legalPersonId != null and legalPersonId != '' ">
+			and PCM_LEGALID = #{legalPersonId}
+		</if>
+		<if test="chlSysCode != null and frontSysCode != '' ">
+			and PCM_CHLSYSCODE = #{chlSysCode}
+		</if>
+	</select>
+	<!--查询渠道系统分组总条数 -->
+	<select id="queryChlSysGroupTotalNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from PRD_CHLSYSTEM
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="legalPersonId != null and legalPersonId != '' ">
+			and PCM_LEGALID = #{legalPersonId}
+		</if>
+		<if test="chlSysCode != null and frontSysCode != '' ">
+			and PCM_CHLSYSCODE = #{chlSysCode}
+		</if>
+	</select>
+	<!-- 更新渠道系统分组信息 -->
+	<update id="updateChlSysGroup" parameterType="java.util.HashMap">
+		update PRD_CHLSYSTEM 
+      		<![CDATA[ 
+		       	set     PCM_CHLSYSNAME = #{chlSysName},PCM_CHLSYSDESC = #{chlSysDesc}
+			   where    PCM_LEGALID = #{legalPersonId}
+				 and	PCM_CHLSYSCODE = #{chlSysCode} 
+       		]]>
+	</update>
+
+	<!-- 新增渠道系统分组信息-->
+	<insert id="insertChlSysGroup" parameterType="java.util.HashMap">
+		insert into PRD_CHLSYSTEM (
+		<include refid="fornt_system_param" />) 
+	    <![CDATA[ 
+		    values(
+		   		 #{legalPersonId},
+		   		 #{chlSysCode},
+		   		 #{chlSysName},
+		   		 #{chlSysDesc}
+		       )
+	    ]]>
+	</insert>
+    <!-- 删除渠道系统分组信息-->
+	<delete id="deleteChlSysGroup" parameterType="java.util.HashMap">
+		delete from PRD_CHLSYSTEM 
+	    <![CDATA[ 
+	     where PCM_LEGALID = #{legalPersonId}
+	      and  PCM_CHLSYSCODE = #{chlSysCode} 
+	    ]]>
+	</delete>
+</mapper>

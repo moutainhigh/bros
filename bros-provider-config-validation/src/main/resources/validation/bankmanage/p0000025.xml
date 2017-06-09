@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><!--删除菜单与货架商品关系 -->
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="shelfCode" message="${CECO000000001}"/><!-- 货架编码 -->
+		<xmlField dataName="menuCode" message="${CECO000000001}"/><!-- 菜单编号 -->
+	</xmlTag>
+</formats>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.workflowrolerel">
+
+    <resultMap id="roleRelResult" type="java.util.HashMap">
+		<result property="relId" column="PAR_ID"/><!-- 记录id -->
+		<result property="roleId" column="PAR_ROLEID"/><!-- 角色ID -->
+	</resultMap>
+	
+	<!-- 角色关联id查询角色id-->
+    <select id="queryRelRole"  parameterType="java.util.HashMap" resultMap="roleRelResult">
+	       SELECT PAR_ROLEID
+	              FROM PUB_ACT_ROLEREL
+	       WHERE  PAR_ID=#{relId}
+    </select>
+   
+   
+</mapper>

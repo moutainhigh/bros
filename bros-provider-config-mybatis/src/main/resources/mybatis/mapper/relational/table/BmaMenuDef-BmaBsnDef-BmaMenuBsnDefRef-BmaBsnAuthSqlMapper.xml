@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.relational.table.bmamenudef-bmabsndef-bmamenubsndefrel-bmabsnauth">
+
+    <resultMap type="java.util.HashMap" id="menu_bsndef_bmaResult">
+        <result property="bmfId" column="BMF_ID"/><!-- 菜单ID -->
+    	<result property="bmfCode" column="BMF_CODE"/><!-- 菜单编码 -->
+    	<result property="bmfName" column="BMF_NAME"/><!-- 菜单名称 -->
+    	<result property="bmfSeqno" column="BMF_SEQNO"/><!-- 菜单级别 -->
+        <result property="bmfParentid" column="bmf_parentid"/><!-- 菜单级别 -->
+    	<result property="bsnCode" column="BBF_ID"/><!-- 功能编号 -->
+    	<result property="bsnName" column="BBF_NAME"/><!-- 功能名称 -->
+    	<result property="authModelId" column="BBA_AUTHMODELFK"/><!-- 授权名称 -->
+    </resultMap>
+	
+	<!-- 查询菜单关联功能信息-->
+	<select id="queryBmaFunctionMenu" resultMap="menu_bsndef_bmaResult">
+		<![CDATA[  
+				SELECT
+				    T2.BMF_ID,
+					T2.BMF_CODE,
+					T2.BMF_NAME,
+					T2.BMF_SEQNO,
+					T2.BMF_PARENTID,
+					T1.BBF_ID,
+					T1.BBF_NAME,
+					T4.BBA_AUTHMODELFK
+				FROM
+					BMA_BSNDEF T1
+				    LEFT JOIN BMA_BSN_AUTH T4 ON T1.BBF_ID = T4.BBA_BSNID
+					AND T4.BBA_CHANNEL = #{channel}
+					AND T4.BBA_LEGALID = #{legalId},
+				 BMA_MENUDEF T2,
+				 BMA_MENU_BSNDEF_REL T3
+				WHERE
+					T1.BBF_ID = T3.BURL_BSNID
+				AND T2.BMF_ID = T3.BURL_MENUEID
+				AND T1.BBF_STT != '1'
+				AND T1.BBF_REQUIREAUTH != '0'
+				AND T1.BBF_TYPE NOT IN ('1', '3', '9','S')
+				AND T1.BBF_CHANNEL = #{channel}
+				AND T2.BMF_CHANNEL = #{channel}
+				AND T2.BMF_LEGAL = #{legalId}
+			]]>
+    </select>
+    <resultMap type="java.util.HashMap" id="menudef_bsndef_Result">
+        <result property="bmfId" column="bmf_id" javaType="String"/><!-- 唯一标识ID -->
+        <result property="bmfCode" column="bmf_code" javaType="String"/><!-- 菜单编号 -->
+        <result property="bmfName" column="bmf_name" javaType="String"/><!-- 菜单名称 -->
+        <result property="bmfParentid" column="bmf_parentid" javaType="String"/><!-- 父菜单ID -->
+    	<result property="bsnId" column="bbf_id"/><!-- 业务功能id -->
+    	<result property="bsnCode" column="bbf_bsncode"/><!-- 业务功能编码 -->
+    	<result property="bsnName" column="bbf_name"/><!-- 业务功能名称 -->
+    	<result property="baBsnId" column="BBA_BSNID"/><!-- 业务功能id -->
+        <result property="authModelId" column="bba_authmodelfk"/><!-- 授权模型id -->
+    </resultMap>
+    <!-- 查询业务功能及菜单信息-->
+	<select id="queryBsnDefAndMenuDefMessage" resultMap="menudef_bsndef_Result">
+		<![CDATA[  
+		WITH RECURSIVE r AS ( 
+       SELECT * FROM bma_menudef WHERE bmf_id in(SELECT DISTINCT burl_menueid from bma_menu_bsndef_rel) 
+       and bmf_legal=#{legalId} and bmf_channel=#{channel}
+     union   ALL 
+       SELECT  bma_menudef.* FROM bma_menudef, r WHERE bma_menudef.bmf_id = r.bmf_parentid 
+     ) 
+	SELECT DISTINCT r.bmf_id, r.bmf_code,r.bmf_name,r.bmf_parentid ,g.bbf_id,g.bbf_bsncode,g.bbf_name FROM r left join 
+	 (WITH RECURSIVE h AS (select b.burl_menueid,a.* from bma_bsndef a,bma_menu_bsndef_rel b,bma_menudef c where
+	 a.bbf_id=b.BURL_BSNID and b.burl_menueid=c.bmf_id and c.bmf_legal=#{legalId} 
+	 and c.bmf_channel=a.bbf_channel and a.bbf_channel=#{channel}) SELECT * from h) as g on r.bmf_id=g.burl_menueid
+	 ORDER BY bmf_id;
+			]]>
+    </select>
+    <!-- 查询授权模型分配信息-->
+	<select id="queryBsnAuthMessage" resultMap="menudef_bsndef_Result">
+		<![CDATA[  
+		select BBA_BSNID,bba_authmodelfk from bma_bsn_auth where
+		 bba_channel=#{channel} and bba_legalid=#{legalId}
+			]]>
+    </select>
+</mapper>

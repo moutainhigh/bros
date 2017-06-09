@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+				<xmlField dataName="custNo" message="${CECO000000001}" />
+				<xmlField dataName="operatorUserno" message="${CECO000000001}" />
+				<xmlField dataName="operatorUsername" message="${CECO000000001}" />
+				<xmlField dataName="operatorCtftype" message="${CECO000000001}" />
+				<xmlField dataName="operatorCtfno" message="${CECO000000001}" />
+				<xmlList dataName="operAcctInfoList" message="${CECO000000001}">
+					<xmlField dataName="accountNo" message="${CECO000000001}" />
+				</xmlList>
+	</xmlTag>
+</formats>

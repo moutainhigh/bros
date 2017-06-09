@@ -1,0 +1,13 @@
+<div class="tabs">
+    <div class="custome-tab">
+        <div class="custome-tab-item displayIB"
+        ng-class="{'selected':$index == index, 'unselected': $index != index}"
+        ng-click=select($index)
+        ng-repeat="item in items">
+            <span ng-bind="item.value"></span>
+        </div>
+    </div>
+    <div class="custome-tab-body" >
+        <div ng-transclude></div>
+    </div>
+</div>

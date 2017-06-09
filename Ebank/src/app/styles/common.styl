@@ -1,0 +1,514 @@
+body
+    margin 0
+    padding 0
+    font-size 14px
+    font-family '微软雅黑'
+    background-color #f5f5f5
+
+ul
+    list-style none
+    margin 0
+    padding 0
+
+ focus
+    outline-width 0
+
+// 带标题的步骤条
+.titile-step
+    position relative
+    height 80px
+    .step
+        position absolute
+        top 20px
+        right 0
+        height 30px
+        line-height 50px
+        span
+            padding 0 0px 0 5px
+            color #aaa
+            &.finish
+                color #00d500
+                i
+                    border #00d500 2px solid
+                    background #00d500
+                    color #fff
+            &.current
+                color #148ecd
+                i
+                    border #148ecd 2px solid
+                    background #148ecd
+                    color #fff
+            i
+                float left
+                width 30px
+                height 30px
+                margin 0 5px 0 20px
+                border #bbbbbb 2px solid
+                background #fff
+                moz-border-radius 15px
+                -webkit-border-radius 15px
+                border-radius 15px
+                line-height 28px
+                text-align center
+                font-style normal
+                color #aaa
+                font-weight bold
+    .title
+        position absolute
+        left 0
+        top 20px
+        height 50px
+        line-height 50px
+        font-size 22px
+.titile-step .step i, .titile-step .step span
+        display inline-block
+        height 30px
+        line-height 30px
+        vertical-align middle
+
+// 单行交易盒子
+.trading-one-box
+    padding 30px
+    background #fff
+    moz-border-radius 5px
+    -webkit-border-radius 5px
+    border-radius 5px
+    -moz-box-shadow 0 4px 3px rgba(0, 0, 0, .1)
+    -webkit-box-shadow 0 4px 3px rgba(0, 0, 0, .1)
+    box-shadow 0 4px 3px rgba(0, 0, 0, .1)
+
+// 左右交易盒子
+.trading-two-box
+    margin 0
+    background #fff
+    moz-border-radius 5px
+    -webkit-border-radius 5px
+    border-radius 5px
+    -moz-box-shadow 0 4px 3px rgba(0, 0, 0, .1)
+    -webkit-box-shadow 0 4px 3px rgba(0, 0, 0, .1)
+    box-shadow 0 4px 3px rgba(0, 0, 0, .1)
+    .left-box
+        padding 15px 0
+        background-color #f1f1f1
+        .left-nav
+            display block
+            border-top 0px solid #e7e7e7
+            li
+                border-bottom 0px solid #e7e7e7
+                a
+                    position relative
+                    display block
+                    padding 15px 20px
+                    text-decoration none
+                    color #333
+                    font-size 16px
+                    i
+                        width 14px
+                        height 14px
+                        position absolute
+                        top 50%
+                        right 10px
+                        margin-top -7px
+                        font-size 12px
+                        color #999
+                .current
+                    color $blue
+                    background-color #fff
+// 协议文本样式
+.other-agreement
+    padding: 20px
+    h2
+        padding-bottom: 30px
+        text-align: center
+    .content
+        line-height: 180%
+        p
+            line-height: 180%
+            padding-bottom: 10px
+            text-indent: 28px
+
+
+
+// 自定义录入架构及样式
+.ebank-input-box
+    padding 0 10px
+    .ebank-input-title
+        padding 10px 0 25px 0
+        color $blue
+        font-size 18px
+    // .form-group
+    //     padding-left 0;
+    // .form-control
+    //     display inline-block
+    //     margin-right 10px
+    //     width 300px
+    .alert
+        padding 25px
+        strong
+            font-size 18px
+    .alert-text
+        padding-top 10px
+        a
+            font-weight 100
+            padding-right 20px
+
+    .col-sm-4
+        padding-right 0
+    .control-label
+        font-weight 100
+        span
+            padding-right 5px
+            color $red
+            font-size 14px
+    .verify-img
+        display inline-block
+        height 34px
+    .form-mini-input
+        width 190px
+    .money
+        height 45px
+        font-size 20px
+        text-align right
+    .btn
+        vertical-align top
+    .btn-box-big
+        padding-top 10px
+        .btn
+            margin-right 10px
+            min-width 100px
+    .help-text
+        padding-top 5px
+form
+    &.ng-pristine
+        .ng-pristine
+            // border-color #6BADE5
+    &.ng-submitted
+        // .ng-invalid
+        //     border-color #ff6666
+        //     &:focus
+        //         border-color #6BADE5
+        .error
+            display block
+    .error
+        display none
+    .help-block
+        color #ff6666
+        background-image url("/assets/img/register/error.png")
+        background-repeat no-repeat
+        padding-left 20px
+.no-wrap
+    white-space nowrap
+.btn-box-center-big
+    padding 20px
+    text-align center
+    button
+        min-width 100px
+        margin 0 5px
+//转账确认信息
+.transfer-confirm-info
+    padding 10px 0
+    margin-bottom 25px
+    border 1px dotted #fbd37c
+    background-color #fdfde4
+    moz-border-radius 5px
+    -webkit-border-radius 5px
+    border-radius 5px
+    .transfer-info
+        position relative
+        padding 0 10px
+        .info-ico
+            float left
+            padding 8px
+        .ico
+            display block
+            width 36px
+            height 36px
+            text-align center
+            line-height 36px
+            background-color #66ccac
+            color #fff
+            font-size 18px
+            moz-border-radius 18px
+            -webkit-border-radius 18px
+            border-radius 18px
+            border 1px solid #66ccac
+        .ico-pay
+            background-color #f3986b
+            border 1px solid #f3986b
+        .ico-money
+            background-color #cdc716
+            border 1px solid #cdc716
+            font-size 20px
+        .info-list
+            padding-top 5px
+            margin-left 60px
+            li
+                float left
+                width 50%
+                b
+                    color #cc5e14
+                    padding 0 5px
+                    font-size 18px
+                    font-weight 100
+    .transfer-info-money
+        margin 10px 0
+        .info-list
+            border 1px dotted #ffcc00
+            border-left 0
+            border-right 0
+            li
+                line-height 34px
+// 联系人样式
+.contacts-list-box
+    padding 20px
+    .contacts-title
+        height: 40px
+        font-size  18px
+        line-height 26px
+    .pagination-box
+        text-align right
+        .pagination
+            margin 0
+    .keyword
+        float left
+        width 50%
+        line-height 34px
+        color #d8d8d8
+    .contacts-search
+        .input-group
+            width 50%
+            float right
+    .contacts-list
+        padding-top 15px
+        table
+            // border 1px solid #ddd
+            span
+                color $blue
+                cursor pointer
+            i
+                color $blue
+            th
+                width 32px
+                padding 15px 10px
+                text-align center
+            td
+                padding 15px 10px
+        .table-striped
+            tbody
+                tr:nth-of-type(odd)
+                    background-color #f3f6ff
+// 开户行列表
+.bank-list-box
+    padding 20px
+    .bank-title
+        height: 40px
+        font-size  18px
+        line-height 26px
+    .bank-list
+        padding 10px 0
+        border 1px solid #ddd
+        border-top 0
+        li
+            float left
+            width 33.3%
+            padding 13px 0
+            padding-left 15px
+            cursor pointer
+// 开户行查询
+.bank-address-box
+    padding 20px
+    .address-title
+        height: 40px
+        font-size  18px
+        line-height 26px
+    .pagination-box
+        text-align right
+        .pagination
+            margin 0
+    .keyword
+        float left
+        width 50%
+        line-height 34px
+        color #d8d8d8
+    .address-search
+        .input-group
+            width 50%
+            float right
+    .address-list
+        padding-top 15px
+        table
+            // border 1px solid #ddd
+            span
+                color $blue
+                cursor pointer
+            i
+                font-size 22px
+                color $blue
+            p
+                color #d1d1d1
+            th
+                width 32px
+                text-align center
+        .table-striped
+            tbody
+                tr:nth-of-type(odd)
+                    background-color #f3f6ff
+// 开户行列表
+
+//头部导航栏样式
+.icon-bar
+    position:fixed
+    bottom:90px
+    right:10px
+    width:40px
+    height:200px
+    z-index:999
+    .icon-contain
+        float:left
+        position:relative
+        width:40px
+        height:40px
+        margin-bottom:5px
+        background-color:#fff
+        cursor:pointer
+        overflow:hidden
+        border:1px solid $grayBorder
+        &:hover
+            .icon-group
+                top:-40px
+    .icon-group
+        position:absolute
+        top:0px
+        width:40px
+        height:40px
+        transition:top .5s ease
+    .icon
+        width:40px
+        height:40px
+        background-size:22px 22px
+        background-repeat:no-repeat
+        background-position:center center
+    .icon-tips
+        width:40px
+        height:40px
+        position:absolute
+        top:41px
+        background:$blueButton
+        color:#fff
+        font-size:12px
+        padding:3px 5px
+        text-align:center
+        line-height:16px
+    .glyphicon-arrow-right
+        line-height: 29px
+        font-size: 17px
+    .icon-bangzhuzhongxin
+        bg-image('home/iconfont-bangzhuzhongxin.png')
+    .icon-qudaoqushiduibifenxi
+        background-image:url('/assets/img/home/iconfont-qudaoqushiduibifenxi.png')
+    .icon-weibiaoti2
+        background-image:url('/assets/img/home/iconfont-weibiaoti2.png')
+    .icon-xiangshang
+        background-image:url('/assets/img/home/iconfont-xiangshang.png')
+    .icon-yijianfankui
+        background-image:url('/assets/img/home/iconfont-yijianfankui.png')
+        background-size:25px 25px
+    .icon-shoppingcart
+        background-image:url('/assets/img/home/shopping_cart.png')
+    .btn-group
+        .btn
+            padding: 11px 12px
+            border-top: none
+            border-color: $grayBorder
+            border-radius: 0px !important
+            color: $blue
+            background: $lightBlue
+        .btn-content
+            width: 246px
+            border-left: 0px
+            border-radius: 0px
+            text-align: left !important
+        .dropdown-toggle
+            width: 53px
+            border-right: 0px
+            border-radius: 0px
+        .dropdown-menu
+            background: $lightBlue
+            display: block
+            left: 46%
+            a
+                color: $blue
+
+.compare-tool-block
+    position: absolute
+    top: 45px
+    right: 100%
+    background: white
+    border: 1px solid $grayBorder
+    width: 300px
+    display: none
+    height: 240px
+    box-shadow: -2px 0 9px 0px #aaa
+    .compare-diaplay-list
+        height: 123px
+        overflow-x: hidden
+        overflow-y: auto
+        .compare-diaplay-li
+            padding: 11px 12px
+            color: #333
+            border-bottom: 1px dashed $grayBorder
+            font-size: 13px
+            position: relative
+            .clear-list
+                position: absolute
+                right: 0
+                top: 0
+                display: block
+                color: #ccc
+                font-size: 21px !important
+                height: 40px
+                width: 41px
+                background: white
+                line-height: 41px
+                text-align: center
+                font-size: 15px
+                &:hover
+                    color: #aaa
+    .clear-glyphicon
+        &:hover
+            color $red
+    .compare-footer-content
+        padding-left: 11px
+        padding-top: 15px
+        .span-info
+            color: #999999
+            font-size: 13px
+            padding-left: 3px
+        .clear-info
+            color: $blue
+            font-size: 12px
+            line-height: 35px
+            padding-right: 11px
+.show
+    display: block !important
+
+.plus-bankid
+    background-color:#FFF
+    border:1px dashed #cccccc
+    color:$blue
+    padding:8px 35px 8px 40px
+.circle
+    width:8px
+    height:8px
+    border-radius:50%
+.circle-pink
+    background:#d095d9
+.circle-blue
+    background:#1054b4
+.circle-red
+    background:#f35253
+.circle-yellow
+    background:#ffad01
+.circle-green
+    background:#1fba5d
+

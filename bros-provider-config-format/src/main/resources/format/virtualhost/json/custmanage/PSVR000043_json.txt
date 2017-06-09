@@ -1,0 +1,50 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+     "purchaseInvestmentList":[
+	     {"prodName":"好运瑞盈16年第138期圣诞节特别款",
+	      "custName":"马云",
+	      "prodType":"1",
+	      "maxExpectIncome":"5.10",
+	      "incomeBeginDate":"2015-12-24",
+	      "windingDate":"2015-12-28",
+	      "custRiskLevel":"1",
+	      "currency":"01",
+	      "prodRiskLevel":"2",
+	      "bigCapital":"伍万元"
+	     },
+	     {"prodName":"好运瑞盈16年第100期圣诞节特别款",
+	      "custName":"马化腾",
+	      "prodType":"1",
+	      "maxExpectIncome":"5.10",
+	      "incomeBeginDate":"2015-12-24",
+	      "windingDate":"2015-12-28",
+	      "custRiskLevel":"1",
+	      "currency":"01",
+	      "prodRiskLevel":"2",
+	      "bigCapital":"伍万元"
+	     }]
+}
+
+
+

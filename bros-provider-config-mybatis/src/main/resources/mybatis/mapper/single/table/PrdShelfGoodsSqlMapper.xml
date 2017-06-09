@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.prdshelfgoods">
+	<sql id="shelf_goods_param">
+		PSS_SHELFCODE,
+		PSS_GOODSCODE,
+		PSS_GOODSTATUS,
+		PSS_GOODSNAME,
+		PSS_PRDTYPECODE,
+		PSS_DESCRIPTION,
+		PSS_GOODSTYPE,
+		PSS_GOODSFLAG
+	</sql>
+	 
+	<resultMap type="java.util.HashMap" id="shelfGoodsMap">
+		<result property="shelfCode" column="PSS_SHELFCODE" />
+		<result property="goodsCode" column="PSS_GOODSCODE" />
+		<result property="goodStatus" column="PSS_GOODSTATUS" />
+		<result property="goodsName" column="PSS_GOODSNAME" />
+		<result property="prdTypeCode" column="PSS_PRDTYPECODE" />
+		<result property="description" column="PSS_DESCRIPTION" />
+		<result property="goodsType" column="PSS_GOODSTYPE" />
+		<result property="goodsFlag" column="PSS_GOODSFLAG" />
+	</resultMap>
+
+	<!--查询货架商品信息 -->
+	<select id="queryShelfGoods" resultMap="shelfGoodsMap">
+		select
+		<include refid="shelf_goods_param" />
+		from PRD_SHELFGOODS 
+		<![CDATA[ 
+			where 1 = 1
+       	]]>
+		<if test="shelfCode != null and shelfCode != '' ">
+			and PSS_SHELFCODE = #{shelfCode}
+		</if>
+		<if test="goodsCode != null and goodsCode != '' ">
+			and PSS_GOODSCODE = #{goodsCode}
+		</if>
+		<if test="goodStatus != null and goodStatus != '' ">
+			and PSS_GOODSTATUS = #{goodStatus}
+		</if>
+		<if test="prdTypeCode != null and prdTypeCode != '' ">
+			and PSS_PRDTYPECODE = #{prdTypeCode}
+		</if>
+		<if test="goodsType != null and goodsType != '' ">
+			and PSS_GOODSTYPE = #{goodsType}
+		</if>
+		<if test="goodsFlag != null and goodsFlag != '' ">
+			and PSS_GOODSFLAG = #{goodsFlag}
+		</if>
+	</select>
+
+	<!-- 修改货架商品信息 -->
+	<update id="updateShelfGoods" parameterType="java.util.HashMap">
+		update PRD_SHELFGOODS 
+      		<![CDATA[ 
+		       set  PSS_GOODSTATUS = #{goodStatus},PSS_GOODSNAME = #{goodsName},PSS_DESCRIPTION = #{description},PSS_GOODSFLAG = #{goodsFlag}
+			   where PSS_SHELFCODE = #{shelfCode} and PSS_GOODSCODE = #{goodsCode}
+       		]]>
+	</update>
+	
+	
+	<!-- 批量新增货架商品信息-->
+	<insert id="insertShelfGoods" parameterType="java.util.HashMap">
+		insert into PRD_SHELFGOODS (
+		<include refid="shelf_goods_param" />) 
+		values
+		   <foreach collection="list" item="item" index="index" separator="," >
+			  (
+			  #{item.shelfCode},
+			  #{item.goodsCode}, 
+			  #{item.goodStatus}, 
+			  #{item.goodsName},
+			  #{item.prdTypeCode}, 
+			  #{item.description}, 
+			  #{item.goodsType},
+			  '00'
+			  )
+		   </foreach> 
+	</insert>
+	
+    <!-- 删除货架商品信息-->
+    <delete id="deleteShelfGoods" parameterType="java.util.HashMap">
+		delete from PRD_SHELFGOODS
+		<![CDATA[ 
+	       where PSS_SHELFCODE = #{shelfCode} and PSS_GOODSCODE = #{goodsCode}
+	    ]]> 
+	</delete>
+	<!--查询货架商品总数 -->
+	<select id="queryShelfGoodsTotalNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from PRD_SHELFGOODS
+	    <![CDATA[ 
+	       where  1 = 1
+	    ]]>
+		<if test="shelfCode != null and shelfCode != '' ">
+			and PSS_SHELFCODE = #{shelfCode}
+		</if>
+		<if test="goodsCode != null and goodsCode != '' ">
+			and PSS_GOODSCODE = #{goodsCode}
+		</if>
+		<if test="goodStatus != null and goodStatus != '' ">
+			and PSS_GOODSTATUS = #{goodStatus}
+		</if>
+		<if test="prdTypeCode != null and prdTypeCode != '' ">
+			and PSS_PRDTYPECODE = #{prdTypeCode}
+		</if>
+		<if test="goodsType != null and goodsType != '' ">
+			and PSS_GOODSTYPE = #{goodsType}
+		</if>
+		<if test="goodsFlag != null and goodsFlag != '' ">
+			and PSS_GOODSFLAG = #{goodsFlag}
+		</if>
+	</select>
+</mapper>

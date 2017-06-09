@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.bmarole">
+	<sql id="bma_role_param">
+		    BRE_ID,
+			BRE_LEGAL,
+			BRE_NAME,
+			BRE_DESC,
+			BRE_LEVEL,
+			BRE_BRANCHID,
+			BRE_CATEGORY,
+			BRE_PRIVILEGE,
+			BRE_MODITIME,
+			BRE_MODIUSER,
+			BRE_ADDBRANCH,
+			BRE_CHANNEL,
+			BRE_NOTE1,
+			BRE_NOTE2
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="bmaRoleResult">
+    	<result property="roleId" column="BRE_ID"/>
+    	<result property="legal" column="BRE_LEGAL"/>
+    	<result property="name" column="BRE_NAME"/>
+    	<result property="desc" column="BRE_DESC"/>
+    	<result property="levl" column="BRE_LEVEL"/>
+    	<result property="branchId" column="BRE_BRANCHID"/>
+    	<result property="cateGory" column="BRE_CATEGORY"/>
+    	<result property="province" column="BRE_PRIVILEGE"/>
+    	<result property="modiTime" column="BRE_MODITIME"/>
+    	<result property="modiUser" column="BRE_MODIUSER"/>
+    	<result property="addBranch" column="BRE_ADDBRANCH"/>
+    	<result property="channel" column="BRE_CHANNEL"/>
+    	<result property="note1" column="BRE_NOTE1"/>
+    	<result property="note2" column="BRE_NOTE2"/>
+    </resultMap>
+    
+    <!-- 根据角色ID查询角色信息 -->	
+    <select id="queryBmaRoleByRoleId" resultMap="bmaRoleResult">
+         SELECT <include refid="bma_role_param"/> 
+              <![CDATA[ FROM BMA_ROLE 
+                  WHERE BRE_ID=#{roleId} 
+              ]]>
+    </select>
+    
+    <!-- 根据角色编号列表查询角色信息列表 -->
+	<select id="queryBmaRoleByRoleIdList" resultMap="bmaRoleResult" parameterType="java.util.HashMap">
+	    select <include refid="bma_role_param"/> 
+	      from BMA_ROLE 
+	        where BRE_ID in
+			<foreach item="item" index="index" collection="roleIdArray" open="(" separator="," close=")">  
+			     <![CDATA[#{item}]]>
+			</foreach>
+	</select>
+</mapper>

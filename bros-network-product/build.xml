@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="bros-network-product" default="auto-build" basedir=".">
+	<property name="desDir" value="D:/package/pre" /><!--文件拷贝目录路径-->
+	
+	
+	<target name="auto-build">
+		<!--拷贝文件-->
+		<copy file="target/bros-network-product.war" todir="${desDir}"/>
+	</target>
+</project>	

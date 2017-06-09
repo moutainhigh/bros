@@ -1,0 +1,149 @@
+<div class="main-box">
+    <div registtielt flow="1"></div>
+    <div class="trading-one-box">
+        <div class="ebank-input-box">
+            <div class="ebank-input-title">填写账户信息</div>
+            <div class="alert alert-danger" role="alert" ng-if="errorMsg " ng-bind="errorMsg"></div>
+            <form class="form-horizontal"  role="form" name="vm.regForm" novalidate ng-submit="vm.register()" >
+                <div class="form-group">
+                    <label for="txt_accountNo" class="col-sm-4 control-label" ><span class="red">*</span>账号/卡号
+                    </label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="txt_accountNo" required name="txt_accountNo" custom-pattern="account" ng-model="vm.model.accountNo" high-light="vm.regForm.txt_accountNo.$viewValue" maxlength="19" placeholder="请输入您的账号/卡号">
+                    </div>
+                    <div class="col-sm-4 error" ng-messages="vm.regForm.txt_accountNo.$error">
+                        <span class="help-block" ng-message="required">请输入您的账号/卡号</span>
+                        <span class="help-block" ng-message="customPattern">账号/卡号格式不正确</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_cardNumberType" class="col-sm-4 control-label"><span class="red">*</span>卡号类型</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" required name="txt_cardNumberType" id="txt_cardNumberType" ng-model="vm.model.cardNumberType">
+                            <option value="11">借记卡</option>
+                            <option value="12">活期一本通</option>
+                            <option value="13">定期一本通</option>
+                            <option value="14">普通存折</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 error" ng-messages="vm.regForm.txt_cardNumberType.$error">
+                        <span class="help-block" ng-message="required">请选择卡号类型</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_cardPwd" class="col-sm-4 control-label"><span class="red">*</span>账号/卡号密码</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control" required id="txt_cardPwd" name="txt_cardPwd" ng-model="vm.model.cardPwd" keyboard maxlength="6" placeholder="请输入您的卡号密码">
+                    </div>
+                    <div class="col-md-4 error" ng-messages="vm.regForm.txt_cardPwd.$error">
+                        <span class="help-block" ng-message="required">请输入您的卡号密码</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_custName" class="col-sm-4 control-label"><span class="red">*</span>客户姓名</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" required id="txt_custName" name="txt_custName" ng-model="vm.model.custName" high-light="vm.regForm.txt_custName.$viewValue" placeholder="请输入您的客户姓名">
+                    </div>
+                    <div class="col-md-4 error" ng-messages="vm.regForm.txt_custName.$error">
+                        <span class="help-block" ng-message="required">请输入您的客户姓名</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label"><span class="red">*</span>证件类型</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="txt_idType" name="txt_idType" required ng-model="vm.model.idType">
+                            <option value="1">居民身份证</option>
+                            <option value="2">临时身份证</option>
+                            <option value="3">军官证</option>
+                            <option value="4">武警证</option>
+                            <option value="5">士兵证</option>
+                            <option value="6">文职干部证</option>
+                            <option value="7">外国护照</option>
+                            <option value="8">香港通行证</option>
+                            <option value="9">澳门通行证</option>
+                            <option value="10">台湾通行证</option>
+                            <option value="11">其他证件</option>
+                        </select>
+                    </div>
+                     <div class="col-sm-4 error" ng-messages="vm.regForm.txt_idType.$error">
+                        <span class="help-block" ng-message="required">请选择证件类型</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_certNo" class="col-sm-4 control-label"><span class="red">*</span>证件号码</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="txt_certNo" name="txt_certNo" custom-pattern="identification" required ng-model="vm.model.certNo" high-light="vm.regForm.txt_certNo.$viewValue" maxlength="18" placeholder="请输入您的证件号码">
+                    </div>
+                    <div class="col-sm-4 error" ng-messages="vm.regForm.txt_certNo.$error">
+                        <span class="help-block" ng-message="required">请输入您的证件号码</span>
+                        <span class="help-block" ng-message="customPattern">证件格式不正确</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_iphone" class="col-sm-4 control-label"><span class="red">*</span>联系电话</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" required id="txt_iphone" name="txt_iphone" custom-pattern="phone" ng-model="vm.model.iphone" high-light="vm.regForm.txt_iphone.$viewValue" maxlength="11" placeholder="请输入您的联系电话">
+                    </div>
+                    <div class="col-sm-4 error" ng-messages="vm.regForm.txt_iphone.$error">
+                        <span class="help-block" ng-message="required">请输入您的联系电话</span>
+                        <span class="help-block" ng-message="customPattern">联系电话格式不正确</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_email" class="col-sm-4 control-label"><span class="red">*</span>E-mail地址</label>
+                    <div class="col-sm-4">
+                        <input type="email" class="form-control" id="txt_email" name="txt_email" required ng-model="vm.model.email" custom-pattern="email" high-light="vm.regForm.txt_email.$viewValue" placeholder="请输入您的E-mail地址">
+                    </div>
+                    <div class="col-sm-4 error" ng-messages="vm.regForm.txt_email.$error">
+                        <span class="help-block" ng-message="required">请输入您的E-mail地址</span>
+                        <span class="help-block" ng-message="customPattern">E-mail地址格式不正确</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                <label for="txt_email" class="col-sm-4 control-label"><span class="red">*</span>文件类型</label>
+                <div class="col-sm-4">
+                <input type="file" ngf-select ng-model="vm.regForm.file"/>
+                </div>
+                <div class="progress progress-striped active">
+                   <div class="progress-bar progress-bar-success" role="progressbar"
+                      aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                      ng-style="progressPercentageStyle">
+                      <span ng-style="sr-only"><p ng-bind="progressPercentagesrOnly"></p></span>
+                   </div>
+                </div>
+               </div>
+
+                <div class="form-group">
+                 <label for="txt_email" class="col-sm-4 control-label"></label>
+                    <div class="col-sm-4 ">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-show='true' required id="chk_deal" name="chk_deal" ng-model="vm.model.checkContract">
+                                <span class="grayColor">我已阅读并同意</span>
+                                <a href='javascript:void(0);'
+                                ng-click="vm.showAgreement();">《个人电子银行服务协议》</a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class=" col-sm-4 error" ng-messages="vm.regForm.chk_deal.$error">
+                        <span class="help-block" ng-message="required">请勾选我已阅读并同意协议</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8 btn-box-big ">
+                        <button type="submit" class="btn btn-primary btn-lg">确认</button>
+                        <button type="button" class="btn btn-default btn-lg" ng-click="vm.backLogin();">返回</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

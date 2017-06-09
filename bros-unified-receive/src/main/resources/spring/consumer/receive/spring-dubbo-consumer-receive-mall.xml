@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 产品上下架商城管理  ================================================-->
+	<!-- 新增商城信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addMallInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMallInfoServiceFacade" >
+		<dubbo:method name="addMallInfoMethod"/>
+	</dubbo:reference>
+	<!-- 修改商城信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateMallInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMallInfoServiceFacade" >
+		<dubbo:method name="updateMallInfoMethod"/>
+	</dubbo:reference>
+	<!-- 删除商城信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="deleteMallInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMallInfoServiceFacade" >
+		<dubbo:method name="deleteMallInfoMethod"/>
+	</dubbo:reference>
+	<!-- 查询商城信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryMallInfoQAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMallInfoServiceFacade" >
+		<dubbo:method name="queryMallInfoMethod"/>
+	</dubbo:reference>
+	<!-- 分页查询商城信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryMallInfoPageAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMallInfoServiceFacade" >
+		<dubbo:method name="queryMallInfoPageMethod"/>
+	</dubbo:reference>
+	<!-- 新增商城样式服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addMallInfoStyleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMallInfoServiceFacade" >
+		<dubbo:method name="addMallStyleMethod"/>
+	</dubbo:reference>
+	<!-- 删除商城样式服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="deleteMallInfoStyleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMallInfoServiceFacade" >
+		<dubbo:method name="deleteMallStyleMethod"/>
+	</dubbo:reference>
+	<!-- 查询商城样式服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryMallInfoStyleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMallInfoServiceFacade" >
+		<dubbo:method name="queryMallStyleMethod"/>
+	</dubbo:reference>
+	<!-- 根据法人id、渠道编码、机构号查询商城信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryMallInfoByChlCodeLegalIdBranchNoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMallInfoServiceFacade" >
+		<dubbo:method name="queryMallInfoByChlCodeLegalIdBranchNoMethod"/>
+	</dubbo:reference>
+	<!-- 根据法人id查询 渠道分组、渠道信息及商城信息 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryChlSysGroupChlInfoAndMallInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMallInfoServiceFacade" >
+		<dubbo:method name="queryChlSysGroupChlInfoAndMallInfoMethod"/>
+	</dubbo:reference>
+</beans>  

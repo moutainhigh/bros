@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 安保服务管理  ================================================-->
+	<!--安全证书发放服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addCertificateSignAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="addCertificateSign"/>
+	</dubbo:reference>
+	
+	<!--OTP令牌绑定服务服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="bindOTPTokenServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="bindOTPTokenService"/>
+	</dubbo:reference>
+	
+	<!--防重放随机数服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="avoidRepeatedRandomNoAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="avoidRepeatedRandomNo"/>
+	</dubbo:reference>
+	
+	<!--校验账户密码服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="checkAccountPasswordAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="checkAccountPassword"/>
+	</dubbo:reference>
+	
+	<!--OTP更换令牌服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="changeOTPTokenServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="changeOTPTokenService"/>
+	</dubbo:reference>
+	
+	<!--证书更新（自助） -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateCertificateServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="updateCertificateService"/>
+	</dubbo:reference>
+	
+	<!--OTP令牌同步服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="syncOTPTokenServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="syncOTPTokenService"/>
+	</dubbo:reference>
+	
+	<!--验证参考码和授权码 -->
+	<dubbo:reference check="false" version="1.0.0"  id="checkReferenceValueAndLicenseKeyServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="checkReferenceValueAndLicenseKeyService"/>
+	</dubbo:reference>
+	
+	<!--证书制证 -->
+	<dubbo:reference check="false" version="1.0.0"  id="makeCertificateServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="makeCertificateService"/>
+	</dubbo:reference>
+	
+	<!--OTP令牌设置激活码服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="setOTPTokenKeyServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="setOTPTokenKeyService"/>
+	</dubbo:reference>
+	
+	<!--证书注销 -->
+	<dubbo:reference check="false" version="1.0.0"  id="cancelCertificateServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="cancelCertificateService"/>
+	</dubbo:reference>
+	
+	<!--OTP令牌作废服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="cancelOTPTokenServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="cancelOTPTokenService"/>
+	</dubbo:reference>
+	
+	<!--作废短信验证码服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="cancelSMSValidateCodeServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="cancelSMSValidateCodeService"/>
+	</dubbo:reference>
+	
+	<!--OTP令牌挂起服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="hangUpOTPTokenServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="hangUpOTPTokenService"/>
+	</dubbo:reference>
+	
+	<!--OTP签约信息查询服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryOTPTokenSignInfoServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="queryOTPTokenSignInfoService"/>
+	</dubbo:reference>
+	
+	<!--OTP令牌PIN码解锁服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="unlockOTPTokenPINServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="unlockOTPTokenPINService"/>
+	</dubbo:reference>
+	
+	<!--OTP令牌动态口令认证 -->
+	<dubbo:reference check="false" version="1.0.0"  id="checkOTPTokenServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="checkOTPTokenService"/>
+	</dubbo:reference>
+	
+	<!--证书查询 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryCertificateServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="queryCertificateService"/>
+	</dubbo:reference>
+	
+	<!--获取短信验证码服务签约手机号、邮箱 -->
+	<dubbo:reference check="false" version="1.0.0"  id="querySMSValidateCodeServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="querySMSValidateCodeService"/>
+	</dubbo:reference>
+	
+	<!--解挂短信验证码服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="removeLossSMSValidateCodeServiceAction_1.0.0" interface="bros.c.securitytoolmanage.facade.service.ICSecurityToolManageServiceFacade" >
+		<dubbo:method name="removeLossSMSValidateCodeService"/>
+	</dubbo:reference>
+
+</beans>

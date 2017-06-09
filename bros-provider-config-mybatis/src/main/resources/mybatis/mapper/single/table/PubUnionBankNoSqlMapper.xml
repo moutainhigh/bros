@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.pubunionbankno">
+	<sql id="pub_unionbankno_par">
+		puo_bankno,
+		puo_banktype,
+		puo_name,
+		puo_aliasname,
+		puo_partytypecode,
+		puo_agent,
+		puo_center,
+		puo_stt,
+		puo_effdate,
+		puo_invdate
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="pubUnionBankNoResult">
+    	<result property="bankNo" column="puo_bankno"/><!-- 网银互联联行号 -->
+    	<result property="bankType" column="puo_banktype"/><!--行别代码（对应PUB_BANKTYPE表中的PBE_BANKTYPE字段） -->
+    	<result property="bankName" column="puo_name"/><!-- 银行名称 -->
+    	<result property="aliasName" column="puo_aliasname"/><!-- 银行别名 -->
+    	<result property="partyTypeCode" column="puo_partytypecode"/><!-- 参与机构类型（CL00:直接接入银行业机构,CL01：直接接入非银行业机构,CL02：代理接入银行机构） -->
+    	<result property="agent" column="puo_agent"/><!-- 银行代理 -->
+    	<result property="center" column="puo_center"/><!-- 银行中心 -->
+    	<result property="stt" column="puo_stt"/><!-- 银行状态（0：失效   1：生效） -->
+    	<result property="effDate" column="puo_effdate"/><!-- 银行生效日期 -->
+    	<result property="invDate" column="puo_invdate"/><!-- 银行失效日期 -->
+    </resultMap>
+    
+    <select id="queryAllPubUnionBankNo" resultMap="pubUnionBankNoResult">
+       select
+       <include refid="pub_unionbankno_par" /> 
+       from pub_unionbankno
+    </select>
+    <select id="queryPubUnionBankNoByName" resultMap="pubUnionBankNoResult" parameterType="java.util.HashMap">
+       select 
+       <include refid="pub_unionbankno_par" /> 
+       from pub_unionbankno where puo_name like '%'||#{bankName}||'%'
+    </select>
+    <select id="queryPubUnionBankNoByBankNo" resultMap="pubUnionBankNoResult" parameterType="java.util.HashMap">
+       select 
+       <include refid="pub_unionbankno_par" /> 
+       from pub_unionbankno where puo_bankno = #{bankNo}
+    </select>
+
+</mapper>

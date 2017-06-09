@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+	<!-- 采用注释的方式配置bean -->  
+	<context:annotation-config />
+	
+	<!-- 配置要扫描的包 -->
+	<context:component-scan base-package="bros"/>
+	
+	<dubbo:application name="${dubbo.application.consumer.name}"/>
+	<!-- 服务提供方与服务消费方之间的zookeeper-->
+    <dubbo:registry id="consumerReference" protocol="zookeeper" address="${dubbo.registry.address}" default="false"/>
+    <!-- 统一接入与服务消费方之间的zookeeper-->
+    <dubbo:registry id="providerReference" protocol="zookeeper" address="${dubbo.registry.receive.address}" />
+    
+	<dubbo:protocol name="dubbo" port="${dubbo.protocol.receive.consumer.login.port}"/>
+	
+	<!-- 监控中心配置，protocol="registry"，表示从注册中心发现监控中心地址 -->
+	<dubbo:monitor protocol="registry"/>
+	
+	<!-- 当ProtocolConfig和ServiceConfig某属性没有配置时,采用此缺省值 -->
+	<dubbo:provider timeout="60000" threadpool="fixed" threads="100" accepts="1000" version="1.0.0"/>
+
+
+	<!-- dubbo服务提供方配置     统一接入调用此模块服务 -->
+    <import resource="classpath*:spring/consumer/login/spring-dubbo-provider-login.xml" />
+    <!-- dubbo服务消费方配置    此模块调用服务提供方服务-->
+    <import resource="classpath*:spring/consumer/login/spring-dubbo-consumer-login.xml" />
+    	
+</beans>

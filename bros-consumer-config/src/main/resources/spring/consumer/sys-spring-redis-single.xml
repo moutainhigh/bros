@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="  
+    http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context.xsd  
+    http://www.springframework.org/schema/mvc  
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd  
+    http://www.springframework.org/schema/tx    
+    http://www.springframework.org/schema/tx/spring-tx.xsd  
+    http://www.springframework.org/schema/cache    
+	http://www.springframework.org/schema/cache/spring-cache.xsd">
+    
+    <!-- =======================redis单机配置开始=============================== -->
+	<!-- redis管理器 -->
+	<bean id="redisDao" class="bros.common.core.redis.impl.RedisMasterSlaveDaoImpl" init-method="init">
+		<property name="host" value="${sys.redis.single.ip}"/>
+		<property name="port" value="${sys.redis.single.port}"/>
+		<property name="expire" value="${sys.redis.single.expire}" />
+		<!-- <property name="password" value="${sys.redis.single.pass}"/> -->
+	</bean>
+	<!-- shaoxu 2017/06/05=======================redis单机配置结束=============================== -->
+	<bean id="redisLockSequence" class="bros.common.core.generator.redis.sequence.RedisLockSequence">
+		<property name="redisDao" ref="redisDao"/>
+		<property name="minValue" value="${distribute.flow.minValue}"/><!-- sequence最小值 -->
+		<property name="maxValue" value="${distribute.flow.maxValue}"/><!-- sequence最大值 -->
+		<property name="timeOut" value="${distribute.flow.timeOut}"/><!-- 获取锁超时时间 -->
+		<property name="lockExitExpire" value="${distribute.flow.lockExitExpire}"/><!-- 锁存活时间 -->
+	</bean>
+	<!-- =======================分布式流水生成（redis）开始=============================== -->
+	<bean id="distributedSequenceFactory" class="bros.common.core.generator.sequence.factory.DistributedSequenceFactory">
+		<!-- <property name="sequenceConfig" value="${sys.bros.consumer.sequence.config}"/> -->
+		<!-- <property name="maxValue" value="${sys.bros.consumer.sequence.maxvalue}"/> -->
+	</bean>
+	<bean id="flowGenerator" class="bros.common.core.generator.flow.FlowGenerator"/>
+	<!-- =======================分布式流水生成（redis）结束=============================== -->
+	<!-- =======================redis缓存工具类开始=============================== -->
+		
+	<!-- 从缓存中获取数据工具类 -->
+	<bean id="getCacheDataUtil" class="bros.common.core.redis.util.GetCacheDataUtil">
+		<property name="validationRedisDao" ref="redisDao"/><!-- 获取校验模板缓存 -->
+		<property name="errCodeRedisDao" ref="redisDao"/><!-- 获取错误码缓存 -->
+		<property name="appParRedisDao" ref="redisDao"/><!-- 获取转义数据缓存 -->
+		<property name="propertiesRedisDao" ref="redisDao"/><!-- 获取properties数据缓存 -->
+	</bean>
+	<!-- =======================redis缓存工具类结束=============================== -->
+</beans>

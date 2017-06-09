@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.relational.table.ttptranmbflow-ttptrandbflow">
+	
+	<sql id="ttptranmbflow_ttptrandbflow_param">
+		ttmf_gblflowseq,
+		ttmf_bsncode,
+		ttmf_channel,
+		ttmf_cstno,
+		ttmf_vouchetype,
+		ttmf_voucheno,
+		ttmf_paytype,
+		ttmf_paypwdno,
+		ttmf_vouchedate,
+		ttmf_cansicode,
+		ttmf_accountype,
+		ttmf_nowturnflag,
+		ttmf_payaccno,
+		ttmf_payaccname,
+		ttmf_paybankno,
+		ttmf_paybankname,
+		ttmf_resiveaccno,
+		ttmf_resiveaccname,
+		ttmf_resivebankno,
+		ttmf_resivebankname,
+		ttmf_currency,
+		ttmf_transamt,
+		ttmf_feeamt,
+		ttmf_purpose,
+		ttmf_scenecode,
+		ttmf_transstarttime,
+		ttmf_transendtime,
+		ttmf_branchid,
+		ttmf_legalcode,
+		ttmf_tellerno,
+		ttmf_autellerno,
+		ttmf_transtt,
+		ttmf_batchno,
+		ttmf_returncode,
+		ttmf_returnmsg,
+		ttmf_note1,
+		ttmf_note2,
+		ttmf_note3,
+		ttmf_note4,
+		ttmf_note5,
+		ttmf_note6,
+		ttmf_note7,
+		ttdf_detailbizdata
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="ttptranmbflow-ttptrandbflowResult">
+    	<result property="gblflowSeq" column="ttmf_gblflowseq"/>
+    	<result property="bsnCode" column="ttmf_bsncode"/>
+    	<result property="channel" column="ttmf_channel"/>
+    	<result property="cstNo" column="ttmf_cstno"/>
+    	<result property="voucheType" column="ttmf_vouchetype"/>
+    	<result property="voucheNo" column="ttmf_voucheno"/>
+    	<result property="payType" column="ttmf_paytype"/>
+    	<result property="payPwdno" column="ttmf_paypwdno"/>
+    	<result property="voucheDate" column="ttmf_vouchedate"/>
+    	<result property="cansicode" column="ttmf_cansicode"/>
+    	<result property="accounType" column="ttmf_accountype"/>
+    	<result property="nowturnFlag" column="ttmf_nowturnflag"/>
+    	<result property="payAccNo" column="ttmf_payaccno"/>
+    	<result property="payAccName" column="ttmf_payaccname"/>
+    	<result property="payBankNo" column="ttmf_paybankno"/>
+    	<result property="payBankName" column="ttmf_paybankname"/>
+    	<result property="resiveAccNo" column="ttmf_resiveaccno"/>
+    	<result property="resiveAccName" column="ttmf_resiveaccname"/>
+    	<result property="resiveBankNo" column="ttmf_resivebankno"/>
+    	<result property="resiveBankName" column="ttmf_resivebankname"/>
+    	<result property="currency" column="ttmf_currency"/>
+    	<result property="transAmt" column="ttmf_transamt"/>
+    	<result property="feeAmt" column="ttmf_feeamt"/>
+    	<result property="purpose" column="ttmf_purpose"/>
+    	<result property="sceneCode" column="ttmf_scenecode"/>
+    	<result property="transStartTime" column="ttmf_transstarttime"/>
+    	<result property="transEndTime" column="ttmf_transendtime"/>
+    	<result property="branchId" column="ttmf_branchid"/>
+    	<result property="legalcode" column="ttmf_legalcode"/>
+    	<result property="tellerNo" column="ttmf_tellerno"/>
+    	<result property="autellerNo" column="ttmf_autellerno"/>
+    	<result property="transtt" column="ttmf_transtt"/>
+    	<result property="batchNo" column="ttmf_batchno"/>
+    	<result property="returnCode" column="ttmf_returncode"/>
+    	<result property="returnMsg" column="ttmf_returnmsg"/>
+    	<result property="note1" column="ttmf_note1"/>
+    	<result property="note2" column="ttmf_note2"/>
+    	<result property="note3" column="ttmf_note3"/>
+    	<result property="note4" column="ttmf_note4"/>
+    	<result property="note5" column="ttmf_note5"/>
+    	<result property="note6" column="ttmf_note6"/>
+    	<result property="note7" column="ttmf_note7"/>
+    	<result property="detailBizData" column="ttdf_detailbizdata"/>
+    </resultMap>
+   
+    <!-- 根据条件查询主流水和明细信息 -->
+	<select id="queryMainAndDetailFlowByCondition" resultMap="ttptranmbflow-ttptrandbflowResult">  
+		  select <include refid="ttptranmbflow_ttptrandbflow_param"/>
+			  <![CDATA[
+			     from ttp_tranmb_flow, ttp_trandb_flow  
+				     where ttmf_gblflowseq= #{gblflowSeq}
+				     and ttmf_legalcode=#{legalId}
+				     and ttmf_cstno=#{cstNo}
+				     and ttmf_tellerno!=#{userNo}
+				     and ttmf_gblflowseq=ttdf_gblflowseq
+			  ]]>
+	</select>
+</mapper>

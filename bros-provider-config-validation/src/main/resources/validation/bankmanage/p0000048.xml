@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="legalPersonId" message="${CECO000000001}"/><!-- 法人id -->
+		<xmlField dataName="branchCode" message="${CECO000000001}"/><!-- 机构编号 -->
+		<xmlField dataName="branchName" message="${CECO000000001}"/><!-- 机构全称 -->
+		<xmlField dataName="branchStt" message="${CECO000000001}"/><!-- 机构状态 -->
+		<xmlField dataName="branchContact" message="${CECO000000001}"/><!-- 机构联系人名称 -->
+		<xmlField dataName="branchPhone" message="${CECO000000003}"/><!-- 机构联系人电话 -->
+	</xmlTag>
+</formats>

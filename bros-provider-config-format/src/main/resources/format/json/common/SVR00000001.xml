@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000001SendFmt">
+		     <xmlRel rel="SendFmt"/>
+			 <xmlField tagName="productStoreId" dataName="productStoreId"/><!--店铺标识  -->
+			 <xmlField tagName="webSiteId" dataName="webSiteId"/><!--站点标识   -->
+			 <xmlField tagName="currency" dataName="currency"/><!--币种   -->
+			 <xmlField tagName="partyId" dataName="partyId"/><!--当事人标识   -->
+			 <xmlList tagName="productItemList" dataName="productItemList"><!--产品项组 -->
+			 		 <xmlTag>
+			 		      <xmlField tagName="cartItemId" dataName="cartItemId"/><!--购物车明细标识-->
+		                  <xmlField tagName="productId" dataName="productId"/><!--产品标识 -->
+		                  <xmlField tagName="prodCatalogId" dataName="prodCatalogId"/><!--产品目录标识 -->
+		                  <xmlField tagName="configOptionId" dataName="configOptionId"/><!--配置项标识   -->
+		                  <xmlField tagName="selectedAmount" dataName="selectedAmount"/><!--输入金额  -->
+		                  <xmlField tagName="quantity" dataName="quantity"/><!--数量  -->
+		              </xmlTag>
+	          </xmlList>
+	</fmtDef>
+	<fmtDef id="SVR00000001RecFmt">
+		   <xmlRel rel="RecFmt"/>
+		   <xmlField tagName="displaySubTotal" dataName="displaySubTotal"/><!--购物车总计  -->
+	       <xmlList tagName="productPriceList" dataName="productPriceList"><!--产品价格组 -->
+	       	    <xmlTag>
+	       	            <xmlField tagName="cartItemId" dataName="cartItemId"/><!--购物车明细标识-->
+			         	<xmlField tagName="productId" dataName="productId"/><!--产品标识 -->
+			         	<xmlField tagName="productName" dataName="productName"/><!--产品名称-->
+			            <xmlField tagName="prodCatalogId" dataName="prodCatalogId"/><!--产品目录标识-->
+			            <xmlField tagName="configOptionId" dataName="configOptionId"/><!--配置项标识   -->
+			            <xmlField tagName="quantity" dataName="quantity"/><!--数量 -->
+			            <xmlField tagName="displayPrice" dataName="displayPrice"/><!--单价 -->
+			            <xmlField tagName="otherAdjustments" dataName="otherAdjustments"/><!--调整价格 -->
+			            <xmlField tagName="displayItemSubTotal" dataName="displayItemSubTotal"/><!--明细合计 -->
+			     </xmlTag>
+	    	</xmlList>
+	    	<xmlList tagName="cartLinesList" dataName="cartLinesList"><!--购物车明细使用促销情况 -->
+	       	    <xmlTag>
+			         	<xmlField tagName="cartLineIndex" dataName="cartLineIndex"/><!--序号 -->
+			         	<xmlField tagName="isPromo" dataName="isPromo"/><!--是促销产品-->
+			            <xmlField tagName="productId" dataName="productId"/><!--产品标识-->
+			            <xmlField tagName="promoQuantityUsed" dataName="promoQuantityUsed"/><!--已使用促销数量   -->
+			            <xmlField tagName="quantity" dataName="quantity"/><!--数量 -->
+			            <xmlField tagName="promoQuantityAvailable" dataName="promoQuantityAvailable"/><!--可使用促销数量 -->
+			            <xmlList tagName="quantityUsedPerPromoActualList" dataName="quantityUsedPerPromoActualList"><!--促销实际使用量 -->
+				       	    <xmlTag>
+						         	<xmlField tagName="actualQuantityUsed" dataName="actualQuantityUsed"/><!--实际使用数量-->
+						         	<xmlField tagName="isQualifier" dataName="isQualifier"/><!--是合格的人-->
+						            <xmlField tagName="productPromoId" dataName="productPromoId"/><!--产品促销码标识-->
+						            <xmlField tagName="promoName" dataName="promoName"/><!--促销名称   -->
+						            <xmlField tagName="promoText" dataName="promoText"/><!--促销规则-->
+						            <xmlField tagName="productId" dataName="productId"/><!--产品标识 -->
+						            <xmlField tagName="productName" dataName="productName"/><!--产品名称 -->
+						            <xmlField tagName="imageUrl" dataName="imageUrl"/><!--促销产品图片地址-->
+						     </xmlTag>
+	    	             </xmlList>
+			     </xmlTag>
+	    	</xmlList>
+	</fmtDef>
+</formats>

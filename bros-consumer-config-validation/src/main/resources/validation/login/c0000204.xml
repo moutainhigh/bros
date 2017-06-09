@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="tellerCode" message="${CECO000000001}"/><!-- 柜员编号 -->
+		<xmlField dataName="pwd" message="${CECO000000001}"/><!-- 登录密码 -->
+	</xmlTag>
+</formats>

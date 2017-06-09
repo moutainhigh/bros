@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--银行资讯表-->
+<mapper namespace="mybatis.mapper.single.table.banknotice">
+	<sql id="banknotice_par">
+		PBN_ID,
+		PBN_LEGALID,           
+		PBN_OPERATECHANNEL,      
+		PBN_TITLE,        
+		PBN_CONTENT,      
+		PBN_TYPE,         
+		PBN_CREATETIME,   
+		PBN_RELEASETIME,  
+		PBN_STT,          
+		PBN_TELLERNO,     
+		PBN_EXPIREDATE
+	</sql>
+	<!--银行资讯表公共出参  --> 
+	<resultMap type="java.util.HashMap" id="pubBankNoticeResultMap">
+	    <result property="uuid" column="PBN_ID" />
+		<result property="legalid" column="PBN_LEGALID" />
+		<result property="operatechannel" column="PBN_OPERATECHANNEL" />
+		<result property="title" column="PBN_TITLE" />
+		<result property="content" column="PBN_CONTENT" />
+		<result property="type" column="PBN_TYPE" />
+		<result property="createtime" column="PBN_CREATETIME" />
+		<result property="releasetime" column="PBN_RELEASETIME" />
+		<result property="stt" column="PBN_STT" />
+		<result property="tellerno" column="PBN_TELLERNO" />
+		<result property="expiredate" column="PBN_EXPIREDATE" />	
+	</resultMap>
+
+	<!--分页查询银行资讯总记录数  -->
+	<select id="queryPubBankNoticeTotalNo" resultType="int" parameterType="java.util.HashMap">
+		select count(*) from PUB_BANK_NOTICE where 1=1
+		<![CDATA[and PBN_LEGALID = #{legalId}]]> 
+		<if test="type!=null and type!=''">
+		    and PBN_TYPE = #{type}
+		</if>
+		<if test="operatechannel!=null and operatechannel!=''">
+			and PBN_OPERATECHANNEL = #{operatechannel}
+		</if>
+		<if test="startDate!=null and startDate!=''">
+		  	<![CDATA[ and PBN_CREATETIME >= #{startDate} ]]> 
+		</if>
+		<if test="endDate!=null and endDate!=''">
+			<![CDATA[ and PBN_CREATETIME < #{endDate} ]]> 
+		</if>
+		<if test="stt!=null and stt!=''">
+			and PBN_STT = #{stt}
+		</if>
+	</select>
+	
+	<!--条件查询银行资讯信息  -->
+	<select id="queryPubBankNotice" resultMap="pubBankNoticeResultMap" parameterType="java.util.HashMap">
+		select * from PUB_BANK_NOTICE where 1=1
+		<![CDATA[and PBN_LEGALID = #{legalId}]]> 
+		<if test="type!=null and type!=''">
+		    and PBN_TYPE = #{type}
+		</if>
+		<if test="operatechannel!=null and operatechannel!=''">
+			and PBN_OPERATECHANNEL = #{operatechannel}
+		</if>
+		<if test="startDate!=null and startDate!=''">
+		  	<![CDATA[ and PBN_CREATETIME >= #{startDate} ]]> 
+		</if>
+		<if test="endDate!=null and endDate!=''">
+			<![CDATA[ and PBN_CREATETIME < #{endDate} ]]> 
+		</if>
+		<if test="stt!=null and stt!=''">
+			and PBN_STT = #{stt}
+		</if>
+	</select>
+	
+	<!--增加银行资讯  -->
+	<insert id="insertBankNotice"  parameterType="java.util.HashMap" >
+		insert into PUB_BANK_NOTICE(
+				<include refid="banknotice_par"/>
+		) values(
+			#{uuid},
+			#{legalid},
+			#{operatechannel},
+			#{title},
+			#{content},
+			#{type},
+			#{createtime},
+			#{releasetime},
+			#{stt},
+			#{tellerno},
+			#{expiredate}
+		)
+	</insert>
+	
+	<!--修改银行资讯-->
+		<update id="updateBankNotice" parameterType="java.util.HashMap">			
+			update  PUB_BANK_NOTICE
+				 <![CDATA[ 
+				set
+					PBN_TITLE= #{title},
+					PBN_TYPE= #{type},
+					PBN_STT= #{stt},
+					PBN_CONTENT= #{content}
+					where PBN_ID = #{uuid} and PBN_LEGALID = #{legalId}
+				 ]]>
+		</update>
+</mapper>

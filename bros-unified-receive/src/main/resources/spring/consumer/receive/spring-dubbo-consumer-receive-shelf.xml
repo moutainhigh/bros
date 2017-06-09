@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 产品上下架货架管理  ================================================-->
+	<!-- 新增货架信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addShelfInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="addShelfInfoMethod"/>
+	</dubbo:reference>
+	<!-- 修改货架信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateShelfInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="updateShelfInfoMethod"/>
+	</dubbo:reference>
+	<!-- 删除货架信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="deleteShelfInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="deleteShelfInfoMethod"/>
+	</dubbo:reference>
+	<!-- 查询货架信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryShelfInfoAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="queryShelfInfoMethod"/>
+	</dubbo:reference>
+	<!-- 分页查询货架信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryShelfInfoPageAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="queryShelfInfoPageMethod"/>
+	</dubbo:reference>
+	<!-- 新增货架商品信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addShelfInfoGoodsAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="addShelfGoodsInfoMethod"/>
+	</dubbo:reference>
+	<!-- 修改商品信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateShelfInfoGoodsAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="updateShelfGoodsInfoMethod"/>
+	</dubbo:reference>
+	<!-- 删除货架商品信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="deleteShelfInfoGoodsAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="deleteShelfGoodsInfoMethod"/>
+	</dubbo:reference>
+	<!-- 查询货架商品信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryShelfInfoGoodsAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="queryShelfGoodsInfoMethod"/>
+	</dubbo:reference>
+	<!-- 分页查询货架商品信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryShelfGoodsInfoPageAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="queryShelfGoodsInfoPageMethod"/>
+	</dubbo:reference>
+	<!-- 根据渠道编码、法人id、机构号查询货架信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryShelfInfoShowAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="queryShowShelfInfoMethod"/>
+	</dubbo:reference>
+	<!-- 根据货架编码查询其下级货架编码且 根据货架编码查询需要展示的货架商品信息 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryShelfInfoShelfAndShelfGoodsAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICShelfInfoServiceFacade" >
+		<dubbo:method name="queryShelfAndShelfGoodsInfoMethod"/>
+	</dubbo:reference>
+</beans>  

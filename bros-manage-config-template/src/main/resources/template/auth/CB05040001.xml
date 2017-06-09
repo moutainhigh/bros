@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+ 	 <xmlField dataName="cllCode" label="法人编号" type="text" template="text001" title="新增法人" />
+	 <xmlField dataName="cllName" label="法人名称" type="text" template="text001" title="新增法人"/>
+	 <xmlField dataName="cllAddress" label="法人所在地" type="text" template="text001" title="新增法人"/>
+ 	 <xmlField dataName="cllAgentaddress" label="代报机构所在地" type="text" template="text001" title="新增法人" />
+	 <xmlField dataName="cllEconomy" label="出资人经济成份类别" type="text" template="text001" title="新增法人" categroy="legalCllEconomy"/>
+	 <xmlField dataName="cllIpostatus" label="上市状况" type="text" template="text001"  title="新增法人" categroy="legalCllIpostatus"/>
+ 	 <xmlField dataName="cllStatus" label="法人状态" type="text" template="text001" title="新增法人" categroy="legalCllIpostatus"/>
+	 <xmlField dataName="cllRepresentative" label="法人代表" type="text" template="text001" title="新增法人"/>
+</formats>

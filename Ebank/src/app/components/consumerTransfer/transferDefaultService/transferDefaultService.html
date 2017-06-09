@@ -1,0 +1,134 @@
+w
+<div class="main-box">
+    <div transferdefaultstate flow="2"></div>
+    <div class="trading-one-box">
+
+        <div class="ebank-input-box">
+            <div class="ebank-input-title">确认转账信息</div>
+            <form class="form-horizontal"  novalidate ng-submit="vm.totransferDefaultSucc();" name="vm.transForm" >
+                <div class="transfer-confirm-info">
+                    <div class="transfer-info  clearfix">
+                        <div class="info-ico"> <i class="ico ico-pay">付</i>
+                        </div>
+                        <ul class="info-list clearfix">
+                            <li>
+                                付款人：
+                                <span>张小明</span>
+                            </li>
+                            <li>
+                                付款账号：
+                                <span ng-bind="(vm.model.payaccount| splitNumberFilter)" ></span>
+                            </li>
+                            <li>
+                                付款用途：
+                                <span ng-bind="vm.model.transferuse"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="transfer-info transfer-info-money clearfix">
+                        <div class="info-ico"> <i class="ico ico-money">￥</i>
+                        </div>
+                        <ul class="info-list clearfix">
+                            <li>
+                                <!-- ng-bind="vm.model.payamount" -->
+                                转账金额：<b><span ng-bind="(vm.model.payamount | number:2)"></span></b>
+                                元
+                            </li>
+                            <li>
+                                手续费：<b>1.00</b>
+                                元
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="transfer-info transfer-info clearfix">
+                        <div class="info-ico">
+                            <i class="ico">收</i>
+                        </div>
+                        <ul class="info-list clearfix">
+                            <li>
+                                收款人：
+                                <span ng-bind="vm.model.custName"></span>
+                            </li>
+                            <li>
+                                收款账号：
+                                <span ng-bind="(vm.model.collectaccount|splitNumberFilter)" </span>
+                                </li>
+                                <li>
+                                    手机号：
+                                    <span ng-bind="vm.model.mobile"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-4 control-label">
+                            <span class="red">*</span>
+                            安全认证工具
+                        </label>
+                        <div class="col-sm-4" id="inlineCheckbox">
+                            <label class="radio-inline">
+                                <input type="radio" required name="rdo_securityType" value="rdo_securityType1" id="rdo_securityType" ng-model="vm.model.securityType" >短信认证</label>
+                                <label class="radio-inline">
+                                    <input type="radio" required name="rdo_securityType" value="rdo_securityType2" id="rdo_securityType" ng-model="vm.model.securityType" >USB Key</label>
+                                    <label class="radio-inline">
+                                        <input type="radio" required name="rdo_securityType" value="rdo_securityType3" id="rdo_securityType" ng-model="vm.model.securityType" >安全令牌</label>
+                                    </div>
+                                    <div class="col-sm-4  error" ng-messages="vm.transForm.rdo_securityType.$error">
+                                        <span class="help-block" ng-message="required">请选择安全认证工具</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-4 control-label">
+                                        <span class="red">*</span>
+                                        获取短信验证码手机号
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" maxlength="11" required ng-model="vm.model.mobileNo" id="txt_mobileNo" name="txt_mobileNo" placeholder="请输入短信通知手机号" custom-pattern="phone" >
+                                    </div>
+                                    <div class="col-sm-4 error" ng-messages="vm.transForm.txt_mobileNo.$error">
+                                        <span class="help-block" ng-message="required">请输入手机号</span>
+                                        <span class="help-block" ng-message="customPattern">手机号格式不正确</span>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-4 control-label">
+                                        <span class="red">*</span>
+                                        短信认证码
+                                    </label>
+                                    <div class="col-sm-4" >
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="txt_mobliecode" name="txt_mobliecode" ng-model="vm.model.mobliecode" required>
+                                            <span key="6" class="input-group-btn ">
+                                            <button class="btn btn-info" ng-click="vm.getMobileValidateCode()" type="button" ng-disabled="!(vm.transForm.rdo_securityType.$valid && vm.transForm.txt_mobileNo.$valid)">获取短信认证码</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4  error" ng-messages="vm.transForm.txt_mobliecode.$error">
+                                        <span class="help-block" ng-message="required">请输入您的短信确认码</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-4 control-label">
+                                        <span class="red">*</span>
+                                        交易密码
+                                    </label>
+                                    <div class="col-sm-4">
+                                        <input type="password" class="form-control"  required id="txt_cardpassword" name="txt_cardpassword" ng-model="vm.model.cardpassword" placeholder="请输入您的交易密码" keyboard></div>
+                                        <div class="col-sm-4  error" ng-messages="vm.transForm.txt_cardpassword.$error">
+                                            <span class="help-block" ng-message="required">请输入您的交易密码</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-4 col-sm-8 btn-box-big ">
+                                            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="!(vm.validateCode)">确认</button>
+                                            <button type="button" class="btn btn-default btn-lg" ng-click="vm.backTransferDefaultInput();">返回</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>

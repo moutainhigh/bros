@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.ttpRoleTemplate">
+	<sql id="ttp_role_template">
+		trt_id,
+		trt_name,
+		trt_desc,
+		trt_createtime,
+		trt_createuser,
+		trt_moditime,
+		trt_modiuser,
+		trt_state,
+		trt_type
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="ttpRoleTemplateResult">
+    	<result property="treId" column="trt_id"/>
+    	<result property="treName" column="trt_name"/>
+    	<result property="treDesc" column="trt_desc"/>
+    	<result property="treCreatetime" column="trt_createtime"/>
+    	<result property="treCreateuser" column="trt_createuser"/>
+    	<result property="treModitime" column="trt_moditime"/>
+    	<result property="treModiuser" column="trt_modiuser"/>
+    	<result property="treState" column="trt_state"/>
+    	<result property="treType" column="trt_type"/>
+    </resultMap>
+    
+    <!-- 查询全部角色 -->
+    <select id="queryTtpRoleTemplateList" resultMap="ttpRoleTemplateResult">
+       select
+       	<include refid="ttp_role_template"/> 
+       from ttp_role_template
+    </select>
+	
+</mapper>

@@ -1,0 +1,63 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+     "queryAccountList":[
+         {"depositType":"05",
+	      "accountNumber":"6217************199",
+	      "sonAccountNumber":"02",
+	      "currency":"CNY",
+	      "savePeriod":"1",
+	      "principal":"500000",
+	      "startDate":"2016年8月8号"
+	     },
+	     {"depositType":"05",
+	      "accountNumber":"6217************199",
+	      "sonAccountNumber":"03",
+	      "currency":"CNY",
+	      "savePeriod":"7",
+	      "principal":"500000",
+	      "startDate":"2016年8月8号"
+	     },
+	     {"accountNumber":"6217************199",
+	      "sonAccountNumber":"01",
+	      "depositType":"02",
+	      "currency":"CNY",
+	      "savePeriod":"63",
+	      "balance":"100000",
+	      "startDate":"2016年9月1日",
+	      "endDate":"2017年9月1日"
+	     },
+	     {
+	     "accountNumber":"6217************200",
+	     "sonAccountNumber":"02",
+	      "depositType":"02",
+	      "currency":"CNY",
+	      "savePeriod":"66",
+	      "balance":"900000",
+	      "startDate":"2016年9月1日",
+	      "endDate":"2017年9月1日"
+	     }]
+}
+
+
+

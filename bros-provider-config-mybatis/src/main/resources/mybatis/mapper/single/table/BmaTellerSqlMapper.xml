@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.single.table.bmateller">
+
+    <resultMap type="java.util.HashMap" id="bmaTellerResultMap">
+    	<result property="btrId" column="BTR_ID"/><!-- 柜员主键UUID -->
+		<result property="btrLegal" column="BTR_LEGAL"/><!-- 法人ID（对应法人表CMA_LEGAL中的CLL_ID字段）-->
+		<result property="btrBrancode" column="BTR_BRANCHCODE"/><!-- 机构编号 -->
+		<result property="btrCode" column="BTR_CODE"/><!-- 柜员编号 -->
+		<result property="btrName" column="BTR_NAME"/><!-- 柜员名称 -->
+		<result property="btrDesc" column="BTR_DESC"/><!-- 柜员描述 -->
+		<result property="btrAddress" column="BTR_ADDRESS"/><!-- 柜员地址 -->
+		<result property="btrCerttype" column="BTR_CERTTYPE"/><!-- 柜员证件类型 -->
+		<result property="btrCertno" column="BTR_CERTNO"/><!-- 柜员证件号码 -->
+		<result property="btrMobile" column="BTR_MOBILE"/><!-- 柜员手机号码 -->
+		<result property="btrPhone" column="BTR_PHONE"/><!-- 柜员电话号码 -->
+		<result property="btrEmail" column="BTR_EMAIL"/><!-- 柜员邮箱 -->
+		<result property="btrPwd" column="BTR_PWD"/><!-- 柜员登录密码 -->
+		<result property="btrPwdstt" column="BTR_PWDSTT"/><!-- 柜员登录密码状态（0：强制要求修改；1：未强制要求），默认为0-->
+		<result property="btrStt" column="BTR_STT"/><!-- 柜员状态：默认为0-->
+		<result property="btrLoginstt" column="BTR_LOGINSTT"/><!-- 柜员登录状态 （0：签到1：签退），默认为1 -->
+		<result property="btrValidateType" column="BTR_VALIDATE_TYPE"/><!-- 登录方式-->
+		<result property="note1" column="BTR_NOTE1"/><!-- 备用字段1-->
+		<result property="note2" column="BTR_NOTE2"/><!-- 备用字段2-->
+
+    </resultMap>
+    <resultMap type="java.util.HashMap" id="bmaTellerRoleMenuResultMap">
+    	<result property="bmfId" column="bmf_id"/><!-- 唯一标识ID -->
+    	<result property="bmfLegal" column="bmf_legal"/><!-- 法人ID -->
+    	<result property="bmfCode" column="bmf_code"/><!-- 菜单编号 -->
+		<result property="bmfName" column="bmf_name"/><!-- 菜单名称-->
+		<result property="bmfUrl" column="bmf_url"/><!-- 菜单链接 -->
+		<result property="bmfLevel" column="bmf_level"/><!-- 单层级 1:一级菜单，2:二级菜单，3:三级菜单 -->
+		<result property="bmfParentid" column="bmf_parentid"/><!-- 父菜单ID-->
+		<result property="bmfStt" column="bmf_stt"/><!-- 状态：0:正常，1:冻结 -->
+		<result property="bmfSeqno" column="bmf_seqno"/><!-- 菜单顺序号,表示在同一级别菜单中所显示的顺序 -->
+		<result property="bmfDesc" column="bmf_desc"/><!-- 菜单描述 -->
+		<result property="bmfChannel" column="bmf_channel"/><!-- 系统标识：1001：柜面 1002：内管 -->
+		<result property="bmfProperties" column="bmf_properties"/><!-- 菜单性质：Y：与货架关联 N：与货架不关联 -->
+    </resultMap>
+    <resultMap type="java.util.HashMap" id="bmaTellerRoleMenuProResultMap">
+    	<result property="bmfId" column="bmf_id"/><!-- 唯一标识ID -->
+    	<result property="bmfLegal" column="bmf_legal"/><!-- 法人ID -->
+    	<result property="bmfCode" column="bmf_code"/><!-- 菜单编号 -->
+		<result property="bmfName" column="bmf_name"/><!-- 菜单名称-->
+		<result property="bmfUrl" column="bmf_url"/><!-- 菜单链接 -->
+		<result property="bmfLevel" column="bmf_level"/><!-- 单层级 1:一级菜单，2:二级菜单，3:三级菜单 -->
+		<result property="bmfParentid" column="bmf_parentid"/><!-- 父菜单ID-->
+		<result property="bmfStt" column="bmf_stt"/><!-- 状态：0:正常，1:冻结 -->
+		<result property="bmfSeqno" column="bmf_seqno"/><!-- 菜单顺序号,表示在同一级别菜单中所显示的顺序 -->
+		<result property="bmfDesc" column="bmf_desc"/><!-- 菜单描述 -->
+		<result property="bmfChannel" column="bmf_channel"/><!-- 系统标识：1001：柜面 1002：内管 -->
+		<result property="bmfProperties" column="bmf_properties"/><!-- 菜单性质：Y：与货架关联 N：与货架不关联 -->
+		<result property="bmprId" column="bmpr_id"/><!-- 唯一标识 -->
+		<result property="bmprMenucode" column="bmpr_menucode"/><!-- 菜单编码 -->
+		<result property="bmprPrdtypecode" column="bmpr_prdtypecode"/><!-- 产品分类编号 -->
+		<result property="bmprGoodscode" column="bmpr_goodscode"/><!-- 商品编号 -->
+		<result property="bmprShelfcode" column="bmpr_shelfcode"/><!-- 货架编号 -->
+    </resultMap>
+    <sql id="bma_teller_queryall">
+	    btr_id,
+		btr_legal,
+		BTR_BRANCHCODE,
+		btr_code,
+		btr_name,
+		btr_desc,
+		btr_address,
+		btr_certtype,
+		btr_certno,
+		btr_mobile,
+		btr_phone,
+		btr_email,
+		btr_pwd,
+		btr_pwdstt,
+		btr_stt,
+		btr_loginstt,
+		BTR_VALIDATE_TYPE,
+		btr_note1,
+		btr_note2
+	</sql>
+    <!-- 查询柜员信息 -->
+    <select id="queryTellerById" resultMap="bmaTellerResultMap">
+       select
+       	<include refid="bma_teller_queryall"/>
+       from bma_teller
+       			<![CDATA[ 
+	     		 	where  btr_legal = #{btrLegal}
+	       		 ]]> 
+     			<if test="btrCode != null and btrCode != ''">
+			        and   btr_code = #{btrCode}
+				</if> 
+	       		<if test="btrStt != null and btrStt != ''">
+			        and   btr_stt = #{btrStt}
+				</if>
+				<if test="btrBrancode != null and btrBrancode != ''">
+			        and   BTR_BRANCHCODE = #{btrBrancode}
+				</if>
+    </select>
+    <!-- 查询柜员信息（不用柜员状态） -->
+    <select id="queryTellerBybtrLegal" resultMap="bmaTellerResultMap">
+       select
+       	<include refid="bma_teller_queryall"/>
+       from bma_teller
+       			<![CDATA[ 
+	     		 	where  btr_legal = #{btrLegal}
+	       		 ]]> 
+     			<if test="btrCode != null and btrCode != ''">
+			        and   btr_code = #{btrCode}
+				</if> 
+				<if test="btrBrancode != null and btrBrancode != ''">
+			        and   BTR_BRANCHCODE = #{btrBrancode}
+				</if>
+    </select>
+     <!-- 查询柜员信息总条数（不用柜员状态） -->
+    <select id="queryTellerBybtrLegalNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    	select count(*) from bma_teller
+    			<![CDATA[ 
+	     		 	where  btr_legal = #{btrLegal}
+	       		 ]]> 
+     			<if test="btrCode != null and btrCode != ''">
+			        and   btr_code = #{btrCode}
+				</if> 
+				<if test="btrBrancode != null and btrBrancode != ''">
+			        and   BTR_BRANCHCODE = #{btrBrancode}
+				</if>
+    </select>
+    <!-- 查询柜员信息总条数 -->
+    <select id="queryTellerNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    	select count(*) from bma_teller
+    			<![CDATA[ 
+	     		 	where  btr_legal = #{btrLegal}
+	       		 ]]> 
+     			<if test="btrCode != null and btrCode != ''">
+			        and   btr_code = #{btrCode}
+				</if> 
+	       		<if test="btrStt != null and btrStt != ''">
+			        and   btr_stt = #{btrStt}
+				</if>
+				<if test="btrBrancode != null and btrBrancode != ''">
+			        and   BTR_BRANCHCODE = #{btrBrancode}
+				</if>
+    </select>
+    <!-- 新增柜员 -->
+    <insert id="insertTeller" parameterType="java.util.HashMap">
+   		 insert into bma_teller ( <include refid="bma_teller_queryall"/>) 
+	    <![CDATA[ 
+		    values(
+		   		#{btrId},
+				#{btrLegal},
+				#{btrBrancode},
+				#{btrCode},
+				#{btrName},
+				#{btrDesc},
+				#{btrAddress},
+				#{btrCerttype},
+				#{btrCertno},
+				#{btrMobile},
+				#{btrPhone},
+				#{btrEmail},
+				#{btrPwd},
+				#{btrPwdstt},
+				#{btrStt},
+				#{btrLoginstt},
+				#{btrValidateType},
+				#{note1},
+				#{note2}
+		       )
+	    ]]>  
+    </insert>
+    <!-- 更新柜员信息 -->
+	<update id="updateTeller" parameterType="java.util.HashMap">
+		update bma_teller
+					set
+					<if test="btrName != null and btrName != ''">
+			          btr_name = #{btrName},
+					</if>
+					<if test="btrDesc != null and btrDesc != ''">
+			          btr_desc = #{btrDesc},
+					</if>	
+					<if test="btrAddress != null and btrAddress != ''">
+			          btr_address = #{btrAddress},
+					</if>	
+					<if test="btrCerttype != null and btrCerttype != ''">
+			          btr_certtype = #{btrCerttype},
+					</if>
+					<if test="btrCertno != null and btrCertno != ''">
+			          btr_certno = #{btrCertno},
+					</if>	
+					<if test="btrMobile != null and btrMobile != ''">
+			          btr_mobile = #{btrMobile},
+					</if>	
+					<if test="btrPhone != null and btrPhone != ''">
+			          btr_phone	= #{btrPhone},
+					</if>		
+					<if test="btrEmail != null and btrEmail != ''">
+			          btr_email = #{btrEmail},
+					</if>	
+					<if test="btrValidateType != null and btrValidateType != ''">
+			          btr_validate_type = #{btrValidateType}
+					</if>	
+						
+				 <![CDATA[ 	
+					where btr_legal = #{btrLegal}
+						and   BTR_BRANCHCODE = #{btrBrancode}
+						and   btr_code = #{btrCode}
+				 ]]>
+	</update>
+	<!-- 删除柜员信息 -->
+	<delete id="deleteTeller" parameterType="java.util.HashMap">
+		delete from bma_teller
+				 <![CDATA[ 
+					where btr_legal = #{btrLegal}
+						and   BTR_BRANCHCODE = #{btrBrancode}
+						and   btr_code = #{btrCode}
+				 ]]>
+	</delete>
+	<!-- 柜员登录(签退) -->
+	<update id="tellerLogin" parameterType="java.util.HashMap">
+		update bma_teller
+					set
+					<if test="btrStt != null and btrStt != ''">
+			          btr_stt = #{btrStt}
+					</if>
+					<if test="btrLoginstt != null and btrLoginstt != ''">
+			          btr_loginstt = #{btrLoginstt}
+					</if>
+					where btr_legal = #{btrLegal}
+						and   BTR_BRANCHCODE = #{btrBrancode}
+						and   btr_code = #{btrCode}
+			
+	</update>
+	<select id="queryTellerRoleMenu" parameterType="java.util.HashMap" resultMap="bmaTellerRoleMenuResultMap">
+		<![CDATA[ 
+			 select
+			 	d.bmf_id, 
+			 	d.bmf_code,
+			 	d.bmf_name,
+			 	d.bmf_url,
+			 	d.bmf_level,
+			 	d.bmf_parentid,
+			 	d.bmf_stt,
+			 	d.bmf_seqno,
+			 	d.bmf_desc,
+			 	d.bmf_channel,
+			 	d.bmf_properties 
+			 	from 
+			 		bma_menudef d 
+			 	where d.bmf_id in 
+				(select 
+					c.bmrl_menuid 
+					from 
+						bma_menu_role_rel c 
+					where c.bmrl_roleid = 
+					(select 
+						b.burl_roleid 
+						from  
+							bma_teller_role_rel b 
+							where 
+							((select a.btr_id 
+							from 
+								bma_teller a 
+								where  
+								a.btr_code = #{btrCode}) = b.BURL_TELLERID)))
+					 			and  d.bmf_channel =#{btrchannel}
+	  	]]>
+	</select>
+	<select id="queryTellerRoleMenuPro" parameterType="java.util.HashMap" resultMap="bmaTellerRoleMenuProResultMap">
+	select * from bma_menu_proser_rel a ,bma_menudef b 
+		<![CDATA[ 
+			   where a.bmpr_menucode = b.bmf_code 
+			   and b.bmf_channel=#{btrchannel}  
+			   and b.bmf_properties=#{btrproperties}  
+			   and b.bmf_legal = #{btrLegal}  
+	  	]]>
+	  		<if test="bmprShelfcode != null and bmprShelfcode != ''">
+			        and   bmpr_shelfcode = #{bmprShelfcode}
+			</if>
+	</select>
+</mapper>

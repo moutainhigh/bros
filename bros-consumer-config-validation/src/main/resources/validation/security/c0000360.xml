@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="channelNo" message="${CECO000000001}"/>
+		<xmlField dataName="legalNo" message="${CECO000000001}"/>
+		<xmlField dataName="cstNo" message="${CECO000000001}"/>
+	</xmlTag>
+</formats>

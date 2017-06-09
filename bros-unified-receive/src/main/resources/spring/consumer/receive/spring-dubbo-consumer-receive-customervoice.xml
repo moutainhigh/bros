@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 客户管理  ================================================-->
+	<!-- 客户之声提交 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addCustomervVoiceAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="addCustomervVoice"/>
+	</dubbo:reference>
+	<!-- 银行公告 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryBankAnnouncementAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryBankAnnouncement"/>
+	</dubbo:reference>
+	<!-- 批量查询短信签约 -->
+	<dubbo:reference check="false" version="1.0.0"  id="querySmsManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="querySmsManage"/>
+	</dubbo:reference>
+	<!-- pin转pinblock -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryPinblockAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryPinblock"/>
+	</dubbo:reference>
+	<!-- 防重放随机数服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryRandomNumAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryRandomNum"/>
+	</dubbo:reference>
+	<!-- 校验密码 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addCheckPasswordAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="addCheckPassword"/>
+	</dubbo:reference>
+	<!-- 短信签约开通/修改/关闭 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateSmsSigningAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="updateSmsSigning"/>
+	</dubbo:reference>
+	<!-- 客户昵称设置 初期开发阶段写的，后期操作数据库改为updateChannelCustomerInf-->
+	<dubbo:reference check="false" version="1.0.0"  id="updateCustomerNicknameAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="updateCustomerNickname"/>
+	</dubbo:reference>
+	<!-- 静态密码修改服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updatePasswordAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="updatePassword"/>
+	</dubbo:reference>
+	<!-- 预留信息查询-->
+	<dubbo:reference check="false" version="1.0.0"  id="queryReservedinfAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryReservedinf"/>
+	</dubbo:reference>
+	<!-- 预留信息设置 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateReservedinfAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="updateReservedinf"/>
+	</dubbo:reference>
+	<!-- 它行账户查询协议申请（网银互联） -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryInquiryAgreementAppAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryInquiryAgreementApp"/>
+	</dubbo:reference>
+	<!-- 它行账户支付协议申请（网银互联） -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryPaymentAgreementAppAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryPaymentAgreementApp"/>
+	</dubbo:reference>
+	<!-- 它行账户查询协议通知（网银互联） -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryInquiryAgreementNotAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryInquiryAgreementNot"/>
+	</dubbo:reference>
+	<!-- 它行账户支付协议通知（网银互联） -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryPaymentAgreementNotAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryPaymentAgreementNot"/>
+	</dubbo:reference>
+	<!-- 它行账户查询协议查询（网银互联）-->
+	<dubbo:reference check="false" version="1.0.0"  id="queryAccountProtocolAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryAccountProtocol"/>
+	</dubbo:reference>
+	<!-- 它行账户支付协议查询（网银互联） -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryAccountPaymentAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryAccountPayment"/>
+	</dubbo:reference>
+	<!-- 它行账户查询协议查询（网银互联）+ 它行账户支付协议查询（网银互联）的合集 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryAccountProPaymentAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryAccountProPayment"/>
+	</dubbo:reference>
+	<!-- 为了前端调用方便，根据不同条件调用queryAccountProtocol，queryAccountPayment，queryAccountProPayment -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryAllAccountProPaymentAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryAllAccountProPayment"/>
+	</dubbo:reference>
+	<!-- 它行账户余额查询 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryHeDidBalanceAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryHeDidBalance"/>
+	</dubbo:reference>
+	<!-- 它行账户明细列表查询 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryHeDidDetailAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryHeDidDetail"/>
+	</dubbo:reference>
+	<!--平台手续费试算 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryFreeAmtAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryFreeAmt"/>
+	</dubbo:reference>
+	<!--网银借记业务（他行转入） -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateOnlineBankingDebitAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="onlineBankingDebit"/>
+	</dubbo:reference>
+	<!--分页查询资金统筹计划指令信息 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryPagingInstructionAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryPagingInstruction"/>
+	</dubbo:reference>
+	<!--撤销资金归集指令 -->
+	<dubbo:reference check="false" version="1.0.0"  id="deleteFundInstructionAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="deleteFundInstruction"/>
+	</dubbo:reference>
+	<!--创建资金归集计划 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addFundInstructionAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="addFundInstruction"/>
+	</dubbo:reference>
+	<!--查询渠道客户信息 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryChannelCustomerInfAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryChannelCustomerInf"/>
+	</dubbo:reference>
+	<!--更改客户昵称信息 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateTprCstCstinfAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="updateTprCstCstinf"/>
+	</dubbo:reference>
+	<!--查询操作日志列表 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryOperationLogListAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="queryOperationLogList"/>
+	</dubbo:reference>
+	<!--电子渠道管理 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateElectronicManageAction_1.0.0" interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" >
+		<dubbo:method name="updateElectronicManage"/>
+	</dubbo:reference>
+</beans>  

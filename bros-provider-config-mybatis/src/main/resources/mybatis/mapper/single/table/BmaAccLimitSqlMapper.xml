@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.bmaacclimit">
+	<sql id="bma_acc_limit_param">
+		BAL_LEGALID,
+		BAL_CHANNEL,
+		BAL_CSTLEVEL,
+		BAL_BIZTYPE,
+		BAL_SAFETOOL,
+		BAL_SINGLEMAX,
+		BAL_DAYMAX
+	</sql>
+	
+	<sql id="bma_acc_limit_param1">
+	    BAL_ID,
+		BAL_LEGALID,
+		BAL_CHANNEL,
+		BAL_CSTLEVEL,
+		BAL_BIZTYPE,
+		BAL_SAFETOOL,
+		BAL_SINGLEMAX,
+		BAL_DAYMAX
+	</sql>
+	
+	<resultMap type="java.util.HashMap" id="bmaAccLimitResultMap">
+		<result property="legalId" column="BAL_LEGALID" />
+		<result property="channel" column="BAL_CHANNEL" />
+		<result property="cstLevel" column="BAL_CSTLEVEL" />
+		<result property="bizType" column="BAL_BIZTYPE" />
+		<result property="safeTool" column="BAL_SAFETOOL" />
+		<result property="singleMax" column="BAL_SINGLEMAX" javaType="java.lang.String" jdbcType="DECIMAL" />
+		<result property="dayMax" column="BAL_DAYMAX" javaType="java.lang.String" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<!-- 根据渠道和法人查找限额信息 -->
+	<select id="queryBmaAccLimit" resultMap="bmaAccLimitResultMap" parameterType="java.util.HashMap">
+		select
+		<include refid="bma_acc_limit_param" />
+				from BMA_ACC_LIMIT
+				 <![CDATA[ 
+				where BAL_CHANNEL = #{channel} 
+				  and BAL_LEGALID = #{legalId} 
+				 ]]>
+			  <if test="bizType!=null and bizType!=''">
+				  and BAL_BIZTYPE = #{bizType}
+		     </if>
+		      <if test="safeTool!=null and safeTool!=''">
+				  and BAL_SAFETOOL = #{safeTool}
+		     </if>
+		      <if test="cstLevel!=null and cstLevel!=''">
+				  and BAL_CSTLEVEL = #{cstLevel}
+		     </if>
+	</select>
+	
+	<!-- 根据渠道和法人查找限额信息列表 -->
+	<select id="queryBmaAccLimitTotalNum" resultType="int" parameterType="java.util.HashMap">
+		 <![CDATA[ 
+		   select   count(1)
+				from BMA_ACC_LIMIT
+				where BAL_CHANNEL = #{channel} 
+				  and BAL_LEGALID = #{legalId} 
+				 ]]>
+			  <if test="bizType!=null and bizType!=''">
+				  and BAL_BIZTYPE = #{bizType}
+		     </if>
+		      <if test="safeTool!=null and safeTool!=''">
+				  and BAL_SAFETOOL = #{safeTool}
+		     </if>
+		      <if test="cstLevel!=null and cstLevel!=''">
+				  and BAL_CSTLEVEL = #{cstLevel}
+		     </if>
+	</select>
+	
+	<!-- 查询系统限额信息 -->
+	<select id="queryBmaAccLimitSys" resultMap="bmaAccLimitResultMap" parameterType="java.util.HashMap">
+		select
+		<include refid="bma_acc_limit_param" />
+				from BMA_ACC_LIMIT
+				 <![CDATA[ 
+				where BAL_CHANNEL = #{channel} 
+				  and BAL_LEGALID = '00000000000000'
+				 ]]>
+			 <if test="bizType!=null and bizType!=''">
+				  and BAL_BIZTYPE = #{bizType}
+		 	</if>
+		 	 <if test="safeTool!=null and safeTool!=''">
+				  and BAL_SAFETOOL = #{safeTool}
+		     </if>
+		     <if test="cstLevel!=null and cstLevel!=''">
+				  and BAL_CSTLEVEL = #{cstLevel}
+		     </if>
+	</select>
+	
+	<!-- 设置银行账户限额 -->
+	<insert id="insertBmaAccLimit" parameterType="java.util.HashMap">
+		insert into BMA_ACC_LIMIT (
+				<include refid="bma_acc_limit_param1" />) 
+					    <![CDATA[ 
+						    values(
+						         #{id},
+						   		 #{legalId},
+						   		 #{channel},
+						   		 #{cstLevel},
+						         #{bizType},
+						         #{safeTool},
+						         #{singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+						         #{dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+						       )
+					    ]]>
+	</insert>
+	
+	<!-- 更新银行账户限额信息 -->
+	<update id="updateBmaAccLimit" parameterType="java.util.HashMap">
+		update BMA_ACC_LIMIT
+				 <![CDATA[ 
+				set BAL_SINGLEMAX=#{singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+					BAL_DAYMAX=#{dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+			  where BAL_CHANNEL = #{channel} 
+			    AND BAL_LEGALID = #{legalId}
+				 ]]>
+			 <if test="bizType!=null and bizType!=''">
+			 	AND BAL_BIZTYPE = #{bizType}
+			 </if>
+			 <if test="safeTool!=null and safeTool!=''">
+				AND BAL_SAFETOOL = #{safeTool}
+		     </if>
+		     <if test="cstLevel!=null and cstLevel!=''">
+				  and BAL_CSTLEVEL = #{cstLevel}
+		     </if>
+	</update>
+	
+	 <!-- 批量设置账户限额 -->
+    <insert id="insertBatchBmaAccLimit" parameterType="java.util.HashMap">
+    		insert into BMA_ACC_LIMIT 
+    		( <include refid="bma_acc_limit_param1"/>) 
+    		values
+			      <foreach collection="list" item="item" index="index" separator="," >
+				        (#{item.id},#{item.legalId},#{item.channel},#{item.cstLevel},#{item.bizType},
+				        #{item.safeTool},#{item.singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+				        #{item.dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				        )
+	   			 </foreach>  
+    </insert>
+    
+    <!-- 批量更新账户自定义限额 -->
+    <update id="updateBatchBmaAccLimit" parameterType="java.util.HashMap">
+	        <foreach collection="list" item="item" index="index" separator=";" >
+	         update BMA_ACC_LIMIT 
+	          	set  BAL_SINGLEMAX = #{item.singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+				 	 BAL_DAYMAX = #{item.dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+		       where BAL_CHANNEL = #{item.channel} 
+		        and  BAL_LEGALID = #{item.legalId}
+	      	  <if test="item.bizType!=null and item.bizType!=''">
+				and  BAL_BIZTYPE = #{item.bizType}
+			 </if>
+			 <if test="item.safeTool!=null and item.safeTool!=''">
+				and BAL_SAFETOOL = #{item.safeTool}
+		     </if>
+		      <if test="item.cstLevel!=null and item.cstLevel!=''">
+				  and BAL_CSTLEVEL = #{item.cstLevel}
+		     </if>
+			 </foreach>  
+    </update>
+</mapper>

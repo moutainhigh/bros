@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--个人客户基本信息表 -->
+<mapper namespace="mybatis.mapper.single.table.tprcstcstinf">
+	<!-- 客户信息公共出参 TPR_CST_INF-->
+	<resultMap id="tprCstCstinfResultMap" type="java.util.HashMap">
+	   <result property="cstId" column="tci_cstid" />
+	   <result property="cstNo" column="tci_cstno" />
+	   <result property="hostNo" column="tci_hostno" />
+	   <result property="legalId" column="tci_legalid" />
+	   <result property="level" column="tci_level" />
+	   <result property="nameCn" column="tci_namecn" />
+	   <result property="nameEn" column="tci_nameen" />
+	   <result property="certType" column="tci_ctftype" />
+	   <result property="certNo" column="tci_ctfno" />
+	   <result property="sex" column="tci_sex" />
+	   <result property="birthday" column="tci_birthday" />
+	   <result property="mobile1" column="tci_mobile1" />
+	   <result property="mobile2" column="tci_mobile2" />
+	   <result property="mobile3" column="tci_mobile3" />
+	   <result property="address" column="tci_address" />
+	   <result property="phone" column="tci_phone" />
+	   <result property="fax" column="tci_fax" />
+	   <result property="zipCode" column="tci_zipcode" />
+	   <result property="email" column="tci_email" />
+	   <result property="allChannel" column="tci_allchannel" />
+<!-- 	   <result property="oldEbankCstNo" column="tci_odebankcstno" /> -->
+	</resultMap>
+	
+	
+	<!--客户渠道签约信息公共出参 tpr_cst_channel_inf-->
+    <resultMap id="tprCstChannelResultMap" type="java.util.HashMap">
+    	<result property="cstId" column="tcci_cstid" />
+		<result property="csttype" column="tcci_csttype" />
+		<result property="signChannel" column="tcci_channel" />
+		<result property="alias" column="tcci_alias" />
+		<result property="password" column="tcci_password" />
+		<result property="accProtect" column="tcci_acc_protect" />
+		<result property="pretentinfo" column="tcci_pretentinfo" />
+		<result property="branchno" column="tcci_branchno" />
+		<result property="stt" column="tcci_stt" />
+		<result property="pwdReset" column="tcci_pwd_reset" />
+		<result property="pqReset" column="tcci_pq_reset" />
+		<result property="pwdTime" column="tcci_pwd_time" />
+		<result property="timeOut" column="tcci_time_out" />
+		<result property="style" column="tcci_style" />
+		<result property="picture" column="tcci_picture" />
+		<result property="machineCode1" column="tcci_machine_code1" />
+		<result property="machineCode2" column="tcci_machine_code2" />
+		<result property="machineCode3" column="tcci_machine_code3" />
+    </resultMap>
+    <!-- 客户信息公共出参 TPR_CST_INF  客户渠道签约信息公共出参 tpr_cst_channel_inf   合集-->
+	<resultMap id="tprcstinfResultMap" type="java.util.HashMap">
+	   <result property="cstNo" column="tci_cstno" />
+	   <result property="hostNo" column="tci_hostno" />
+	   <result property="legalId" column="tci_legalid" />
+	   <result property="level" column="tci_level" />
+	   <result property="nameCn" column="tci_namecn" />
+	   <result property="nameEn" column="tci_nameen" />
+	   <result property="certType" column="tci_ctftype" />
+	   <result property="certNo" column="tci_ctfno" />
+	   <result property="sex" column="tci_sex" />
+	   <result property="birthday" column="tci_birthday" />
+	   <result property="mobile1" column="tci_mobile1" />
+	   <result property="mobile2" column="tci_mobile2" />
+	   <result property="mobile3" column="tci_mobile3" />
+	   <result property="address" column="tci_address" />
+	   <result property="phone" column="tci_phone" />
+	   <result property="fax" column="tci_fax" />
+	   <result property="zipCode" column="tci_zipcode" />
+	   <result property="email" column="tci_email" />
+	   <result property="allChannel" column="tci_allchannel" />
+<!-- 	   <result property="oldEbankCstNo" column="tci_odebankcstno" /> -->
+	   <result property="cstId" column="tcci_cstid" />
+		<result property="csttype" column="tcci_csttype" />
+		<result property="signChannel" column="tcci_channel" />
+		<result property="alias" column="tcci_alias" />
+		<result property="password" column="tcci_password" />
+		<result property="accProtect" column="tcci_acc_protect" />
+		<result property="pretentinfo" column="tcci_pretentinfo" />
+		<result property="branchno" column="tcci_branchno" />
+		<result property="stt" column="tcci_stt" />
+		<result property="pwdReset" column="tcci_pwd_reset" />
+		<result property="pqReset" column="tcci_pq_reset" />
+		<result property="pwdTime" column="tcci_pwd_time" />
+		<result property="timeOut" column="tcci_time_out" />
+		<result property="style" column="tcci_style" />
+		<result property="picture" column="tcci_picture" />
+		<result property="machineCode1" column="tcci_machine_code1" />
+		<result property="machineCode2" column="tcci_machine_code2" />
+		<result property="machineCode3" column="tcci_machine_code3" />
+	</resultMap>
+    
+    <sql id="tprCstCstinf_par">
+		tci_cstno,
+	    tci_hostno,
+	    tci_legalid,
+	    tci_level,
+	    tci_namecn,
+	    tci_nameen,
+	    tci_ctftype,
+	    tci_ctfno,
+	    tci_sex,
+	    tci_birthday,
+	    tci_mobile1,
+	    tci_mobile2,
+	    tci_mobile3,
+	    tci_address,
+	    tci_phone,
+	    tci_fax,
+	    tci_zipcode,
+	    tci_email,
+	    tci_allchannel
+<!-- 	    tci_odebankcstno  -->
+    </sql>
+    <!-- 客户渠道签约信息公共入参 tpr_cst_channel_inf-->
+    <sql id="cstinfchannel_par">
+		tcci_cstid,
+		tcci_csttype,
+		tcci_channel,
+		tcci_alias,
+		tcci_password,
+		tcci_acc_protect,
+		tcci_pretentinfo,
+		tcci_branchno,
+		tcci_stt,
+		tcci_pwd_reset,
+		tcci_pq_reset,
+		tcci_pwd_time,
+		tcci_time_out,
+		tcci_style,
+		tcci_picture,
+		tcci_machine_code1,
+		tcci_machine_code2,
+		tcci_machine_code3 
+    </sql>
+	
+	<!-- 条件查询客户基本信息-证件类型+证件号+客户名+法人Id TPR_CST_INF-->
+	<select id="queryCstInfoByCstNo" resultMap="tprCstCstinfResultMap" parameterType="java.util.HashMap">
+		SELECT
+		    DISTINCT  
+		    tci_cstid,
+		    tci_cstno,
+		    tci_hostno,
+		    tci_legalid,
+		    tci_level,
+		    tci_namecn,
+		    tci_nameen,
+		    tci_ctftype,
+		    tci_ctfno,
+		    tci_sex,
+		    tci_birthday,
+		    tci_mobile1,
+		    tci_mobile2,
+		    tci_mobile3,
+		    tci_address,
+		    tci_phone,
+		    tci_fax,
+		    tci_zipcode,
+		    tci_email,
+		    tci_allchannel
+<!-- 		    tci_odebankcstno -->
+		FROM
+		    tpr_cst_info
+		WHERE
+		  tci_ctftype=#{certType} 
+		  and tci_ctfno=#{certNo}
+		  and tci_legalid = #{legalId}
+		<if test="nameCn!='' and nameCn!=null">
+		and tci_namecn=#{nameCn}
+		</if>
+	</select>
+	
+	
+	<!--查询客户渠道签约信息 法人Id+客户号 || 法人Id+手机号+渠道标识  tpr_cst_channel_inf-->
+	<select id="queryCstInfoChannelInfo" resultMap="tprCstChannelResultMap" parameterType="java.util.HashMap">
+         SELECT
+         	tcci_cstid,
+			tcci_csttype,
+			tcci_channel,
+			tcci_alias,
+			tcci_password,
+			tcci_acc_protect,
+			tcci_pretentinfo,
+			tcci_branchno,
+			tcci_stt,
+			tcci_pwd_reset,
+			tcci_pq_reset,
+			tcci_pwd_time,
+			tcci_time_out,
+			tcci_style,
+			tcci_picture,
+			tcci_machine_code1,
+			tcci_machine_code2,
+			tcci_machine_code3
+        FROM
+            tpr_cst_channel_inf
+        WHERE
+        	<if test="cstId!='' and cstId!=null">
+			tcci_cstid = #{cstId}
+			</if>
+        	<if test="payPhoneNo!='' and payPhoneNo!=null">
+			AND tcci_machine_code1 = #{payPhoneNo}
+			</if>
+        	<if test="channel!='' and channel!=null">
+			AND tcci_channel = #{channel}
+			</if>
+            AND tcci_stt!='1'
+	</select>
+	
+	
+	<!-- 提交渠道客户签约信息 TPR_CST_CHANNEL-->
+	<insert id="insertCstInfChannel" parameterType="java.util.HashMap">
+		insert into tpr_cst_channel_inf(
+		   <include refid="cstinfchannel_par"/>
+		) values(
+		#{cstId},
+		#{cstType},
+		#{channel},
+		#{alias,jdbcType=VARCHAR},
+		#{passWord,jdbcType=VARCHAR},
+		#{accProtect,jdbcType=VARCHAR},
+		#{pretentInfo,jdbcType=VARCHAR},
+		#{branchNo,jdbcType=VARCHAR},
+		#{stt,jdbcType=VARCHAR},
+		#{pwdReset,jdbcType=VARCHAR},
+		#{pqReset,jdbcType=VARCHAR},
+		#{pwdTime,jdbcType=VARCHAR},
+		#{timeOut,jdbcType=VARCHAR},
+		#{style,jdbcType=VARCHAR},
+		#{picture,jdbcType=VARCHAR},
+		#{machineCode1,jdbcType=VARCHAR},
+		#{machineCode2,jdbcType=VARCHAR},
+		#{machineCode3,jdbcType=VARCHAR}
+		) 
+	</insert>
+	<!-- 条件查询渠道客户信息-法人+客户号  -->
+	<select id="queryTprCstInfChannelByCstNo" resultMap="tprCstChannelResultMap" parameterType="java.util.HashMap">
+		select 
+		<include refid="cstinfchannel_par"/> 
+		from tpr_cst_channel_inf where tcci_cstid=#{cstId} and TCC_STT!='5'
+	</select>
+	<!-- 根据客户号或证件类型证件号码客户名查出客户基本信息  + 法人  -->
+	<select id="queryTprCstCstinf" resultMap="tprCstCstinfResultMap" parameterType="java.util.HashMap">
+		select 
+		<include refid="tprCstCstinf_par"/>  
+		from tpr_cst_info where tci_legalid=#{legalId} 
+		<if test="cstNo!='' and cstNo!=null">
+			AND tci_cstno = #{cstNo}
+		</if>
+		<if test="ctftype != '' and ctftype != null and ctfno != '' and ctfno != null and namecn != '' and namecn != null"  >
+			AND tci_ctftype = #{ctftype}
+			AND tci_ctfno = #{ctfno}
+			AND tci_namecn = #{namecn}
+		</if>
+	</select>
+	<!-- 更新客户昵称 -->
+	<update id="updateTprCstCstinf" parameterType="java.util.HashMap">
+		update tpr_cst_channel_inf 
+		       	<set>
+			tcci_alias=#{alias}
+		</set>
+			where 1=1 and tcci_cstid=#{cstId}
+	</update>
+	<!-- 检查客户昵称是否重复 -->
+	<select id="checkCustomerAliasByAlias" resultMap="tprCstChannelResultMap" parameterType="java.util.HashMap">
+		select 
+			tcci_cstid,
+			tcci_csttype,
+			tcci_channel,
+			tcci_alias,
+			tcci_password,
+			tcci_acc_protect,
+			tcci_pretentinfo,
+			tcci_branchno,
+			tcci_stt,
+			tcci_pwd_reset,
+			tcci_pq_reset,
+			tcci_pwd_time,
+			tcci_time_out,
+			tcci_style,
+			tcci_picture,
+			tcci_machine_code1,
+			tcci_machine_code2,
+			tcci_machine_code3
+	    from 
+			tpr_cst_channel_inf 
+			where tcci_alias=#{alias} and tcci_channel=#{channel} 
+			and tcci_cstid=#{cstId}
+	</select>
+	<!-- 根据客户号查询个人渠道客户信息  -->
+	<select id="queryPbCstInfoByCstNo" resultMap="tprcstinfResultMap" parameterType="java.util.HashMap">
+		SELECT
+		    DISTINCT ci.tci_cstno,
+		    ci.tci_hostno,
+		    ci.tci_legalid,
+		    ci.tci_level,
+		    ci.tci_namecn,
+		    ci.tci_nameen,
+		    ci.tci_ctftype,
+		    ci.tci_ctfno,
+		    ci.tci_sex,
+		    ci.tci_birthday,
+		    ci.tci_mobile1,
+		    ci.tci_mobile2,
+		    ci.tci_mobile3,
+		    ci.tci_address,
+		    ci.tci_phone,
+		    ci.tci_fax,
+		    ci.tci_zipcode,
+		    ci.tci_email,
+		    ci.tci_allchannel,
+<!-- 		    ci.tci_odebankcstno, -->
+		    cn.tcci_machine_code1
+		FROM
+		    tpr_cst_info ci,
+		    tpr_cst_channel_inf AS cn
+		WHERE
+		    ci.tci_cstno=#{cstNo} and ci.tci_legalid=#{legalId}
+		AND ci.tci_cstid=cn.tcci_cstid
+	</select>
+	<!-- 根据客户证件类型+证件号码查询客户基本信息 -->
+	<select id="queryPbCstInfoByCtfTypeAndCtfNo" resultMap="tprcstinfResultMap" parameterType="java.util.HashMap">
+		    select 
+		    	tci_cstno,
+				tci_hostno,
+				tci_legalid,
+				tci_level,
+				tci_namecn,
+				tci_nameen,
+				tci_ctftype,
+				tci_ctfno,
+				tci_sex,
+				tci_birthday,
+				tci_mobile1,
+				tci_mobile2,
+				tci_mobile3,
+				tci_address,
+				tci_phone,
+				tci_fax,
+				tci_zipcode,
+				tci_email,
+				tci_allchannel
+<!-- 				tci_odebankcstno  -->
+		    from tpr_cst_info a where 
+		    a.tci_cstid=(
+			select DISTINCT b.tcci_cstid from tpr_cst_channel_inf b where b.tcci_stt!='3' and b.tcci_cstid=a.tci_cstid
+			) 
+			and  a.tci_ctftype=#{certType} and a.tci_ctfno=#{certNo} and a.tci_legalid=#{legalId}
+	</select>
+</mapper>

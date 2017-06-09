@@ -1,0 +1,103 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+    "subAccList":[
+    	{
+			"subAccountNo":"62262201",
+			"currency":"01",
+			"cashFlag":"1",
+			"depositType":"03",
+			"savePeriod":"00",
+			"interestBeginDate":"20160908",	
+			"interestEndDate":"",
+			"interests":"0.00",
+			"balanceAvailable":"10000.00",
+			"balance":"10000.00",
+			"accountOpenDate":"20160102",
+			"accountOpenBranchNo":"8010010101",
+			"accountOpenBranchName":"北京东城区和平里支行",
+			"accountState":"0",
+			"interestRate":"0.3850%",
+			"isExitDrawFlg":"0"
+
+        },
+    	{
+			"subAccountNo":"62262201",
+			"currency":"01",
+			"cashFlag":"1",
+			"depositType":"03",
+			"savePeriod":"00",
+			"interestBeginDate":"20160908",	
+			"interestEndDate":"",
+			"interests":"0.00",
+			"balanceAvailable":"10000.00",
+			"balance":"10000.00",
+			"accountOpenDate":"20160102",
+			"accountOpenBranchNo":"8010010101",
+			"accountOpenBranchName":"北京东城区和平里支行",
+			"accountState":"0",
+			"interestRate":"0.3850%",
+			"isExitDrawFlg":"0"
+
+        },
+        {
+			"subAccountNo":"62262201",
+			"currency":"01",
+			"cashFlag":"1",
+			"depositType":"07",
+			"savePeriod":"2",
+			"interestBeginDate":"20160908",	
+			"interestEndDate":"",
+			"interests":"0.00",
+			"balanceAvailable":"10000.00",
+			"balance":"10000.00",
+			"accountOpenDate":"20160102",
+			"accountOpenBranchNo":"8010010101",
+			"accountOpenBranchName":"北京东城区和平里支行",
+			"accountState":"0",
+			"interestRate":"0.3850%",
+			"isExitDrawFlg":"0"
+        },
+        {
+			"subAccountNo":"62262201",
+			"currency":"01",
+			"cashFlag":"1",
+			"depositType":"07",
+			"savePeriod":"2",
+			"interestBeginDate":"20160908",	
+			"interestEndDate":"",
+			"interests":"0.00",
+			"balanceAvailable":"10000.00",
+			"balance":"10000.00",
+			"accountOpenDate":"20160102",
+			"accountOpenBranchNo":"8010010101",
+			"accountOpenBranchName":"北京东城区和平里支行",
+			"accountState":"0",
+			"interestRate":"0.3850%",
+			"isExitDrawFlg":"0"
+        }
+    ]
+}
+
+
+

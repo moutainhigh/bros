@@ -1,0 +1,21 @@
+<div>
+    <div class="banner-transfer">
+    </div>
+    <div class="main-box">
+        <div class="nav-title-bar">
+            <div class="title">产品列表</div>
+        </div>
+        <div>
+            <div class="transfer-list-two">
+                <div class="transfer-list-box">
+                    <div class="transfer-list" ng-repeat="product in vm.product" ng-if="product.saleFalg == 0">
+                        <transfer-product compare="vm.addcar(product);" product="product"></transfer-product>
+                    </div>
+                </div>
+            </div>
+            <paging ng-if="vm.product.length > 0" class="small" page="vm.page.currentPage" page-size="vm.page.pageSize" total="vm.page.total" adjacent="{{vm.page.adjacent}}" dots="{{vm.page.dots}}" scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="vm.DoCtrlPagingAct('Paging Clicked', page, pageSize, total)">
+            </paging>
+        </div>
+        <div browsehistory></div>
+    </div>
+</div>

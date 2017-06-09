@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.tprcstlogonctrl">
+	
+	<resultMap id="tprCstLogonCtrlResultMap" type="java.util.HashMap">
+		<result property="id" column="TCLC_ID"/>
+		<result property="cstId" column="TCLC_CSTID"/>
+		<result property="channel" column="TCLC_CHANNEL"/>
+		<result property="firstLogon" column="TCLC_FIRSTLOGON"/>
+		<result property="lastLogon" column="TCLC_LASTLOGON"/>
+		<result property="lastFail" column="TCLC_LASTFAIL"/>
+		<result property="failToday" column="TCLC_FAILTODAY"/>
+		<result property="failSum" column="TCLC_FAILSUM"/>
+		<result property="count" column="TCLC_COUNT"/>
+		<result property="freezeDate" column="TCLC_FREEZEDATE"/>
+		<result property="stopStart" column="TCLC_STOPSTART"/>
+		<result property="stopEnd" column="TCLC_STOPEND"/>
+	</resultMap>
+	
+	<sql id="tpr_cst_logon_ctrl_param">
+	    TCLC_ID,
+		TCLC_CSTID,
+		TCLC_CHANNEL,
+		TCLC_FIRSTLOGON,
+		TCLC_LASTLOGON,
+		TCLC_LASTFAIL,
+		TCLC_FAILTODAY,
+		TCLC_FAILSUM,
+		TCLC_COUNT,
+		TCLC_FREEZEDATE,
+		TCLC_STOPSTART,
+		TCLC_STOPEND
+    </sql>
+    
+	<!-- 根据客户标识+渠道编号查询个人客户登录控制信息 -->
+	<select id="queryTprCstLogonCtrlByCstIdAndChannel" resultMap="tprCstLogonCtrlResultMap">		  
+	      select <include refid="tpr_cst_logon_ctrl_param"/>
+			 from TPR_CST_LOGON_CTRL
+		  <![CDATA[	     
+		        where TCLC_CSTID = #{cstId}
+		          and TCLC_CHANNEL = #{channel}
+	      ]]>
+	</select>
+	
+	<!-- 插入个人客户登录控制信息 -->
+    <insert id="insertTprCstLogonCtrl" parameterType="java.util.HashMap">
+        insert into TPR_CST_LOGON_CTRL(
+    		<include refid="tpr_cst_logon_ctrl_param"/>
+    	)values(
+    	    <![CDATA[ 
+		    	#{id},
+				#{cstId},
+				#{channel},
+				#{firstLogon},
+				#{lastLogon},
+				#{lastFail},
+				#{failToday},
+				#{failSum},
+				#{count},
+				#{freezeDate},
+				#{stopStart},
+				#{stopEnd})
+			]]>
+    </insert>
+    
+    <!-- 更新个人客户登录控制信息 -->
+    <update id="updateTprCstLogonCtrl" parameterType="java.util.HashMap">
+		<![CDATA[
+			update TPR_CST_LOGON_CTRL
+				set 
+					TCLC_FIRSTLOGON=#{firstLogon},
+					TCLC_LASTLOGON=#{lastLogon},
+					TCLC_FAILTODAY=#{failToday},
+					TCLC_FAILSUM=#{failSum},
+					TCLC_COUNT=TCLC_COUNT + 1,
+					TCLC_FREEZEDATE=#{freezeDate}	
+				 where TCLC_CSTID=#{cstId}
+				    and TCLC_CHANNEL=#{channel}
+		 ]]> 
+	</update>
+	
+	<!-- 密码验证失败，更新个人客户登录控制信息 -->
+    <update id="updateTprCstLogonCtrlFail" parameterType="java.util.HashMap">
+		<![CDATA[
+			update TPR_CST_LOGON_CTRL
+				set 
+					TCLC_LASTFAIL=#{lastFail},
+					TCLC_FAILTODAY=#{failToday},
+					TCLC_FAILSUM=TCLC_FAILSUM + 1,
+					TCLC_FREEZEDATE=#{freezeDate}	
+				 where TCLC_CSTID=#{cstId}
+				    and TCLC_CHANNEL=#{channel}
+		 ]]> 
+	</update>
+	
+	<!-- 更新个人客户临时停用日期 -->
+    <update id="updateTprCstLogonCtrlStopDate" parameterType="java.util.HashMap">
+		<![CDATA[
+			update TPR_CST_LOGON_CTRL
+				set 
+					TCLC_STOPSTART=#{stopStart},
+					TCLC_STOPEND=#{stopEnd}
+				 where TCLC_CSTID=#{cstId}
+				    and TCLC_CHANNEL=#{channel}
+		 ]]> 
+	</update>
+
+</mapper>

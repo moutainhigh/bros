@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.tprbatchtranmbflow">
+	<sql id="tpr_tprBatchTranmbFlow_param">
+		tbmf_gblflowseq,
+		tbmf_bsncode,
+		tbmf_channel,
+		tbmf_cstno,
+		tbmf_nowTurnFlag,
+		tbmf_payaccno,
+		tbmf_payaccname,
+		tbmf_paybankno,
+		tbmf_paybankname,
+		tbmf_totalno,
+		tbmf_totalamt,
+		tbmf_currency,
+		tbmf_feeamt,
+		tbmf_purpose,
+		tbmf_scenecode,
+		tbmf_transstarttime,
+		tbmf_transendtime,
+		tbmf_branchid,
+		tbmf_legalcode,
+		tbmf_tellerno,
+		tbmf_autellerno,
+		tbmf_transtt,
+		tbmf_batchno,
+		tbmf_returncode,
+		tbmf_returnmsg
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="tprBatchTranmbFlowResult">
+    	<result property="gblflowSeq" column="tbmf_gblflowseq"/><!-- 30位全局流水号 -->
+    	<result property="bsnCode" column="tbmf_bsncode"/><!-- 业务编码 -->
+    	<result property="channel" column="tbmf_channel"/><!-- 渠道编号 -->
+    	<result property="cstNo" column="tbmf_cstno"/><!-- 客户号 -->
+    	<result property="nowTurnFlag" column="tbmf_nowTurnFlag"/><!-- 现转标志 -->
+    	<result property="payAccNo" column="tbmf_payaccno"/><!-- 付款账号 -->
+    	<result property="payAccName" column="tbmf_payaccname"/><!-- 付款名称户名 -->
+    	<result property="payBankNo" column="tbmf_paybankno"/><!-- 付款行行号 -->
+    	<result property="payBankName" column="tbmf_paybankname"/><!-- 付款行行名 -->
+    	<result property="totalNo" column="tbmf_totalno"/><!-- 总笔数 -->
+    	<result property="currency" column="tbmf_currency"/><!-- 币种 -->
+    	<result property="totalAmt" column="tbmf_totalamt"/><!-- 总金额 -->
+    	<result property="feeAmt" column="tbmf_feeamt"/><!-- 手续费金额 -->
+    	<result property="purpose" column="tbmf_purpose"/><!-- 用途 -->
+    	<result property="sceneCode" column="tbmf_scenecode"/><!-- 场景编码 -->
+    	<result property="transStartTime" column="tbmf_transstarttime"/><!-- 交易提交时间 -->
+    	<result property="transEndTime" column="tbmf_transendtime"/><!-- 交易结束时间 -->
+    	<result property="branchId" column="tbmf_branchid"/><!-- 操作机构 -->
+    	<result property="legalCode" column="tbmf_legalcode"/><!-- 法人 -->
+    	<result property="tellerNo" column="tbmf_tellerno"/><!-- 操作员 -->
+    	<result property="autellerNo" column="tbmf_autellerno"/><!-- 授权员 -->
+    	<result property="transtt" column="tbmf_transtt"/><!-- 00成功   01失败   02处理中 03待查 -->
+    	<result property="batchNo" column="tbmf_batchno"/><!-- 批次号 -->
+    	<result property="returnCode" column="tbmf_returncode"/><!-- 返回码 -->
+    	<result property="returnMsg" column="tbmf_returnmsg"/><!-- 返回信息 -->
+    	<result property="note1" column="tbmf_note1"/><!-- 预留字段 -->
+    	<result property="note2" column="tbmf_note2"/><!-- 预留字段 -->
+    	<result property="note3" column="tbmf_note3"/><!-- 预留字段 -->
+    	<result property="note4" column="tbmf_note4"/><!-- 预留字段 -->
+    	<result property="note5" column="tbmf_note5"/><!-- 预留字段 -->
+    	<result property="note6" column="tbmf_note6"/><!-- 预留字段 -->
+    	<result property="note7" column="tbmf_note7"/><!-- 预留字段 -->
+    </resultMap>
+    
+    <!-- 插入主流水表数据定义 -->
+    <insert id="insertTprBatchTranmbFlow" parameterType="java.util.HashMap">
+        insert into tpr_batch_tranmb_flow(
+    		<include refid="tpr_tprBatchTranmbFlow_param"/>
+    	)values(
+    	    <![CDATA[ 
+		    	#{gblflowSeq},
+				#{bsnCode},
+				#{channel},
+				#{cstNo},
+				#{nowTurnFlag},
+				#{payAccNo},
+				#{payAccName},
+				#{payBankNo},
+				#{payBankName},
+				#{totalNo},
+				#{totalAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+				#{currency},
+				#{feeAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+				#{purpose},
+				#{sceneCode},
+				#{transStartTime},
+				#{transEndTime},
+				#{branchId},
+				#{legalCode},
+				#{tellerNo},
+				#{autellerNo},
+				#{transtt},
+				#{batchNo},
+				#{returnCode},
+				#{returnMsg})
+			]]>
+    </insert>
+    
+    <!-- 根据流水号更新主流水表业务信息 -->
+    <update id="updateTprBatchTranmbFlowForMsg" parameterType="java.util.HashMap">
+        <![CDATA[ 
+			update tpr_batch_tranmb_flow
+				set tbmf_bsncode=#{bsnCode},
+					tbmf_channel=#{channel},
+					tbmf_cstno=#{cstNo},
+					tbmf_nowTurnFlag=#{nowTurnFlag},
+					tbmf_payaccno=#{payAccNo},
+					tbmf_payaccname=#{payAccName},
+					tbmf_paybankno=#{payBankNo},
+					tbmf_paybankname=#{payBankName},
+					tbmf_totalno=#{totalNo},
+					tbmf_totalamt=#{totalAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+					tbmf_currency=#{currency},
+					tbmf_feeamt=#{feeAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+					tbmf_purpose=#{purpose},
+					tbmf_scenecode=#{sceneCode},
+					tbmf_transstarttime=#{transStartTime},
+					tbmf_transendtime=#{transEndTime},
+					tbmf_branchid=#{branchId},
+					tbmf_legalcode=#{legalCode},
+					tbmf_tellerno=#{tellerNo},
+					tbmf_autellerno=#{autellerNo},
+					tbmf_transtt=#{transtt},
+					tbmf_batchno=#{batchNo},
+					tbmf_returncode=#{returnCode},
+					tbmf_returnmsg=#{returnMsg}	
+				 where tbmf_gblflowseq=#{gblflowSeq} 
+		 ]]>
+	</update>
+	
+	<!-- 根据流水号更新主流水表业务状态 -->
+    <update id="updateTprBatchTranmbFlowForState" parameterType="java.util.HashMap">
+		<![CDATA[
+			update tpr_batch_tranmb_flow
+				set 
+					tbmf_transtt=#{transtt},
+					tbmf_returncode=#{returnCode},
+					tbmf_returnmsg=#{returnMsg}	
+				 where tbmf_gblflowseq=#{gblflowSeq} 
+		 ]]> 
+	</update>
+	
+	<!-- 根据流水号查询主流水表记录-->
+	<select id="queryTprBatchTranmbFlowByOne" resultMap="tprBatchTranmbFlowResult">
+       select 
+       <include refid="tpr_tprBatchTranmbFlow_param"/>
+       from tpr_batch_tranmb_flow 
+          where tbmf_gblflowseq=#{gblflowSeq}
+    </select>
+   
+   <!-- 根据流水号更新主流水表业务状态和批次号 -->
+    <update id="updateTprBatchTranmbFlowForStateAndBatchNo" parameterType="java.util.HashMap">
+		update tpr_batch_tranmb_flow
+			set tbmf_gblflowseq=#{gblflowSeq}
+		<if test="transtt!=null and transtt!=''">
+			,tbmf_transtt=#{transtt}
+		</if>
+		<if test="batchNo!=null and batchNo!=''">
+			,tbmf_batchno=#{batchNo}
+		</if>
+		<if test="returnMsg!=null and returnMsg!=''">
+			,tbmf_returnmsg=#{returnMsg}
+		</if>
+		 where tbmf_gblflowseq=#{gblflowSeq} 
+	</update>
+	
+	<!-- 根据批次号查询全局流水号 -->
+    <select id="queryGblFlowSeqByBatchNo" resultMap="tprBatchTranmbFlowResult" parameterType="java.util.HashMap">
+		<![CDATA[
+			select tbmf_gblflowseq
+				from tpr_batch_tranmb_flow
+				    where tbmf_batchno=#{batchNo}
+		]]>
+	</select>
+</mapper>

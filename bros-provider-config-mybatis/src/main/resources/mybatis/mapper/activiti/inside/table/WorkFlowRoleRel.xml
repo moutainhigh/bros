@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="mybatis.mapper.single.table.workflowrolerel"> -->
+<mapper namespace="mybatis.mapper.activiti.inside.table.workflowrolerel">
+
+    <resultMap id="roleRelResult" type="java.util.HashMap">
+		<result property="relId" column="BAR_ID"/><!-- 记录id -->
+		<result property="roleId" column="BAR_ROLEID"/><!-- 角色ID -->
+	</resultMap>
+	
+	<!-- 角色关联id查询角色id-->
+    <select id="queryRelRole"  parameterType="java.util.HashMap" resultMap="roleRelResult">
+	       SELECT BAR_ROLEID
+	              FROM BMA_ACT_ROLEREL
+	       WHERE  BAR_ID=#{relId}
+    </select>
+   
+   
+</mapper>

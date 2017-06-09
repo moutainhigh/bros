@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+           http://www.springframework.org/schema/beans/spring-beans.xsd    
+           http://www.springframework.org/schema/context    
+           http://www.springframework.org/schema/context/spring-context.xsd  
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd  
+           http://www.springframework.org/schema/aop    
+           http://www.springframework.org/schema/aop/spring-aop.xsd    
+           ">
+	<!-- 公共bean定义配置位置 -->	
+	<!-- 服务调用日志记录dao -->
+	<bean id="callProviderServiceLogDao" class="bros.common.core.callservice.log.CallProviderServiceLogDao">
+		<property name="myBatisDaoSysDao" ref="myBatisDaoSysDao"/>
+	</bean>
+	
+	<!-- 服务调用日志记录服务 -->
+	<bean id="callProviderServiceLog" class="bros.common.core.callservice.log.CallProviderServiceLogImpl">
+		<property name="callProviderServiceLogDao" ref="callProviderServiceLogDao" />
+	</bean>
+	
+	<!-- 数据加密解密服务 -->
+	<bean id="encryptAndDecryptService" class="bros.common.core.crypto.service.impl.EncryptAndDecryptServiceImpl" >
+		<property name="keyStr">
+		     <value>jZQKn/7HdWgpvW0RMHxHUg==</value>
+		</property>
+		<property name="algorithm">
+		     <value>AES</value>
+		</property>
+		<property name="encroptMode">
+		     <value>ECB</value>
+		</property>
+		<property name="paddingMode">
+		     <value>PKCS5Padding</value>
+		</property>
+	</bean>
+	
+	<!-- ftp服务bean定义 -->
+	<bean id="ftpClientServer" class="bros.common.core.ftp.service.impl.FtpServiceImpl">
+ 		<property name="host" value="${sys.ftp.host}"/><!--ip地址 -->
+ 		<property name="port" value="${sys.ftp.port}"/><!--端口 -->
+ 		<property name="userName" value="${sys.ftp.userName}"/><!--用户名 -->
+ 		<property name="password" value="${sys.ftp.password}"/><!--密码 -->
+ 		<property name="srcCharset" value="${sys.ftp.srcCharset}"/><!--原文件编码 -->
+ 		<property name="desCharset" value="${sys.ftp.desCharset}"/><!--目标文件编码 -->
+	</bean>
+	
+	<!-- sftp服务bean定义 -->
+	<bean id="sftpClientServer" class="bros.common.core.ftp.service.impl.SftpServiceImpl">
+ 		<property name="host" value="${sys.sftp.host}"/><!--ip地址 -->
+ 		<property name="port" value="${sys.sftp.port}"/><!--端口 -->
+ 		<property name="userName" value="${sys.sftp.userName}"/><!--用户名 -->
+ 		<property name="password" value="${sys.sftp.password}"/><!--密码 -->
+ 		<property name="srcCharset" value="${sys.sftp.srcCharset}"/><!--原文件编码 -->
+ 		<property name="desCharset" value="${sys.sftp.desCharset}"/><!--目标文件编码 -->
+	</bean>
+	
+	<!-- 授权流程图展示服务 shaoxu 2017/06/05-->
+	<!-- <bean id="authShowService" class="bros.provider.parent.activiti.composite.service.impl.AuthShowServiceImpl"> -->
+		<!-- <property name="taskService" ref="taskService"/> -->
+		<!-- <property name="repositoryService" ref="repositoryService"/> -->
+		<!-- <property name="runtimeService" ref="runtimeService"/> -->
+		<!-- <property name="historyService" ref="historyService"/> -->
+		<!-- <property name="processEngineConfiguration" ref="processEngineConfiguration"/> -->
+		<!-- <property name="qryInnerUserService" ref="qryInnerUserService"/> --><!-- 行内查询柜员信息服务 -->
+		<!-- <property name="qryOutSideUserService" ref="qryOutSideUserService"/> --><!-- 对客查询操作员信息服务 -->
+		<!-- <property name="ftpService" ref="ftpClientServer"/> --><!-- ftp服务 -->
+		<!-- <property name="directory" value="${sys.activiti.process.show.photo.path}"/> --><!-- ftp上传文件目录 -->
+		<!-- <property name="fileExtension" value="${sys.activiti.process.show.photo.endwith}"/> --><!-- 文件后缀 -->
+	<!-- </bean> -->
+
+</beans>

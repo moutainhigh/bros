@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.ttpauthmodel">
+	<resultMap id="ttpAuthModelMap" type="java.util.HashMap">
+		<result property="authorizeId" column="TAM_ID"/><!-- 模型编号 -->
+		<result property="name" column="TAM_NAME"/><!-- 授权模型名称-->
+		<result property="legalId" column="TAM_LEGALID"/><!-- 法人唯一标识 -->
+		<result property="channel" column="TAM_CHANNEL"/><!--渠道编码 -->
+		<result property="cstNo" column="TAM_CSTNO"/><!-- 客户编号 -->
+		<result property="moneyType" column="TAM_MONEYTYPE"/><!-- 模式类型（0：无金额模式 1：有金额模式）-->
+		<result property="orderly" column="TAM_ORDERLY"/><!-- 授权顺序（0：无序授权，1：有序授权）-->
+		<result property="send" column="TAM_SEND"/><!-- 发送类型（0：手工发送，1：自动发送）-->
+		<result property="state" column="TAM_STATE"/><!-- 状态（0：停用；1：正常）-->
+	</resultMap>
+	
+	<sql id="ttp_auth_model_param">
+			TAM_ID,
+			TAM_NAME,
+			TAM_LEGALID,
+			TAM_CHANNEL,
+			TAM_CSTNO,
+			TAM_MONEYTYPE,
+			TAM_ORDERLY,
+			TAM_SEND,
+			TAM_STATE
+    </sql>
+    
+	<!-- 保存授权模型  -->
+	<insert id="insertTtpAuthModel" parameterType="java.util.HashMap">
+		insert into TTP_AUTH_MODEL(
+			<include refid="ttp_auth_model_param"/>  
+		) values(
+			<![CDATA[ 
+				#{authorizeId,jdbcType=VARCHAR},
+				#{name,jdbcType=VARCHAR},
+				#{legalId,jdbcType=VARCHAR},
+				#{channel,jdbcType=VARCHAR},
+				#{cstNo,jdbcType=VARCHAR},
+				#{moneyType,jdbcType=VARCHAR},
+				#{orderly,jdbcType=VARCHAR},
+				#{send,jdbcType=VARCHAR},
+				#{state,jdbcType=VARCHAR}
+	       	]]> 
+		)
+	</insert>
+	
+	<!-- 修改授权模型 -->
+	<update id="updateTtpAuthModel" parameterType="java.util.HashMap">
+	    <![CDATA[
+			update TTP_AUTH_MODEL
+			   set  
+					TAM_NAME = #{name,jdbcType=VARCHAR},
+					TAM_MONEYTYPE = #{moneyType,jdbcType=VARCHAR},
+					TAM_ORDERLY = #{orderly,jdbcType=VARCHAR},
+					TAM_SEND = #{send,jdbcType=VARCHAR},
+					TAM_STATE = #{state,jdbcType=VARCHAR},
+				    TAM_CHANNEL = #{channel,jdbcType=VARCHAR}
+			   where TAM_ID=#{authorizeId}
+			     and TAM_LEGALID=#{legalId}   
+			     and TAM_CSTNO=#{cstNo} 
+		]]> 
+	</update>
+	
+	<!-- 删除授权模型-->
+	<delete id="deleteTtpAuthModelByAuthorizeId"  parameterType="java.util.HashMap">
+		<![CDATA[ 
+		      DELETE FROM TTP_AUTH_MODEL 
+		         WHERE TAM_ID=#{authorizeId}
+		            and TAM_CHANNEL=#{channel}
+		            and TAM_LEGALID=#{legalId}
+		  ]]> 
+	</delete>
+	
+	<!-- 根据企业查询 授权模型 是否存在-->
+	<select id="queryTtpAuthModel" resultMap="ttpAuthModelMap" parameterType="java.util.HashMap">
+		select  <include refid="ttp_auth_model_param"/>  
+		        from TTP_AUTH_MODEL 
+		        where  TAM_CHANNEL=#{channel}
+		            and TAM_LEGALID=#{legalId}
+		            and TAM_CSTNO=#{cstNo}
+				<if test="name != null and name!=''">
+					and TAM_NAME=#{name}
+				</if>
+				<if test="moneyType != null and moneyType!=''">
+					and TAM_MONEYTYPE=#{moneyType}
+				</if>
+				<if test="orderly != null and orderly!=''">
+					and TAM_ORDERLY=#{orderly}
+				</if>
+				<if test="send != null and send!=''">
+					and TAM_SEND=#{send}
+				</if>
+				<if test="state != null and state!=''">
+					and TAM_STATE=#{state}
+				</if>
+	</select>
+	
+	<!-- 根据条件查询总条数-->
+	<select id="queryTtpAuthModelTotalNum" resultType="int" parameterType="java.util.HashMap">
+		select  count(1) 
+		        from TTP_AUTH_MODEL 
+		        where   TAM_CHANNEL=#{channel}
+		            and TAM_LEGALID=#{legalId}
+		            and TAM_CSTNO=#{cstNo}
+				<if test="name != null and name!=''">
+					and TAM_NAME=#{name}
+				</if>
+				<if test="moneyType != null and moneyType!=''">
+					and TAM_MONEYTYPE=#{moneyType}
+				</if>
+				<if test="orderly != null and orderly!=''">
+					and TAM_ORDERLY=#{orderly}
+				</if>
+				<if test="send != null and send!=''">
+					and TAM_SEND=#{send}
+				</if>
+				<if test="state != null and state!=''">
+					and TAM_STATE=#{state}
+				</if>
+	</select>
+	
+	<!-- 根据条件查询授权模型是否存在-->
+	<select id="queryTtpAuthModelIsExist" resultMap="ttpAuthModelMap" parameterType="java.util.HashMap">
+		select  <include refid="ttp_auth_model_param"/>  
+		         from TTP_AUTH_MODEL 
+		         where  TAM_NAME=#{name}
+		            and TAM_CHANNEL=#{channel}
+		            and TAM_LEGALID=#{legalId}
+				    and TAM_CSTNO=#{cstNo}
+	</select>
+	
+	<!-- 根据授权模型编号查询指定法人授权模型信息 -->
+	<select id="queryTtpAuthModelById" resultMap="ttpAuthModelMap" parameterType="java.util.HashMap">
+       select  <include refid="ttp_auth_model_param"/>  
+	   <![CDATA[      
+	      from TTP_AUTH_MODEL 
+		        where TAM_ID=#{authorizeId}
+			        and TAM_CHANNEL=#{channel}
+		            and TAM_LEGALID=#{legalId}
+				    and TAM_CSTNO=#{cstNo}
+	   ]]>  
+	</select>
+</mapper>

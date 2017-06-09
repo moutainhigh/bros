@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.ttprole">
+	<sql id="ttp_role">
+		tre_id,
+		tre_legalId,
+		tre_cstno,
+		tre_name,
+		tre_desc,
+		tre_createtime,
+		tre_createuser,
+		tre_moditime,
+		tre_modiuser,
+		tre_state,
+		tre_type
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="ttpRoleResult">
+    	<result property="treId" column="tre_id"/>
+    	<result property="treLegalId" column="tre_legalId"/>
+    	<result property="treCstno" column="tre_cstno"/>
+    	<result property="treName" column="tre_name"/>
+    	<result property="treDesc" column="tre_desc"/>
+    	<result property="treCreatetime" column="tre_createtime"/>
+    	<result property="treCreateuser" column="tre_createuser"/>
+    	<result property="treModitime" column="tre_moditime"/>
+    	<result property="treModiuser" column="tre_modiuser"/>
+    	<result property="treState" column="tre_state"/>
+    	<result property="treType" column="tre_type"/>
+    </resultMap>
+    
+    <!-- 查询全部角色 -->
+    <select id="queryTtpRole" resultMap="ttpRoleResult">
+       select
+       	<include refid="ttp_role"/> 
+       from ttp_role
+    </select>
+    
+    <!-- 添加角色基本信息-->
+	<insert id="insertTtpRole" parameterType="java.util.HashMap">
+		insert into ttp_role(
+			<include refid="ttp_role"/>  
+		) values(
+			<![CDATA[ 
+				#{treId,jdbcType=VARCHAR},
+				#{treLegalId,jdbcType=VARCHAR},
+				#{treCstno,jdbcType=VARCHAR},
+				#{treName,jdbcType=VARCHAR},
+				#{treDesc,jdbcType=VARCHAR},
+				#{treCreatetime,jdbcType=VARCHAR},
+				#{treCreateuser,jdbcType=VARCHAR},
+				#{treModitime,jdbcType=VARCHAR},
+				#{treModiuser,jdbcType=VARCHAR},
+				#{treState,jdbcType=VARCHAR},
+				#{treType,jdbcType=VARCHAR}
+	       	]]> 
+		)
+	</insert>
+	
+	<!-- 根据客户号角色名称和法人id校验角色名称-->
+	<select id="selectRoleListByCstAndRoleName"   resultType="Long"  parameterType="java.util.HashMap">
+		SELECT count(*) FROM ttp_role r WHERE r.tre_name=#{treName} 
+		and r.tre_state='0' 
+		and r.tre_cstno=#{treCstno} 
+		and r.tre_legalId=#{legalId}
+		<if test="treId != null and treId !=''">
+			and r.tre_id != #{treId} 
+		</if>
+	</select>
+    
+     <!-- 根据法人id+企业客户号查询企业角色信息列表 -->	
+     <select id="queryTtpRoleByCondition" resultMap="ttpRoleResult">
+       select <include refid="ttp_role"/> 
+      	 from ttp_role 
+      	 	where tre_cstno=#{treCstno} 
+      	 	  and tre_legalId=#{legalId}
+    </select>	
+    
+      <!--查询角色信息总条数 -->	
+     <select id="queryTtpRoleTotalNumByCondition" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+      select count(1)  
+      from ttp_role where tre_cstno=#{treCstno}	and tre_legalId=#{legalId}
+    </select>	
+    
+     <!-- 根据角色id+法人id+企业客户号查询角色信息 -->	
+     <select id="queryTtpRoleByTreId" resultMap="ttpRoleResult">
+       select <include refid="ttp_role"/> 
+         from ttp_role 
+           where tre_id=#{treId}
+           and tre_legalId=#{legalId}
+           and tre_cstno=#{treCstno}
+    </select>	 
+    
+     <!-- 删除角色-->
+	<delete id="deleteTtpRoleByTreId"  parameterType="java.util.HashMap">
+	    <![CDATA[
+		   delete from ttp_role 
+		      where tre_id=#{roleId} 
+		        and tre_legalId=#{treLegalId} 
+		        and tre_cstno=#{treCstno}
+		]]>
+	</delete>
+	
+	 <!-- 更新角色基本信息 -->
+    <update id="updateTtpRoleById" parameterType="java.util.HashMap">
+		update ttp_role
+		set 
+	    	tre_name=#{treName},
+			tre_desc=#{treDesc},
+			tre_moditime=#{treModitime},
+			tre_modiuser=#{treModiuser},
+			tre_state=#{treState},
+			tre_type=#{treType} 
+		where 
+			tre_id=#{treId} and tre_legalId=#{treLegalId} 
+	</update>
+	
+	<!-- 根据角色编号列表查询角色信息列表 -->
+	<select id="queryTtpRoleByRoleIdList" resultMap="ttpRoleResult" parameterType="java.util.HashMap">
+	    select <include refid="ttp_role"/>
+	      from TTP_ROLE 
+	        where TRE_ID in
+			<foreach item="item" index="index" collection="roleIdArray" open="(" separator="," close=")">  
+			     <![CDATA[#{item}]]>
+			</foreach>
+	</select>
+	
+	 <!-- 根据角色ID查询角色基本信息 -->	
+     <select id="queryTtpRoleByRoleId" resultMap="ttpRoleResult">
+       select
+       	<include refid="ttp_role"/> 
+       from ttp_role where tre_id=#{treId}
+    </select>
+    
+    <!-- 根据法人id+企业客户号+角色名称查询角色信息 -->
+	<select id="queryTtpRoleListByCondition" parameterType="java.util.HashMap" resultMap="ttpRoleResult" >
+		 select	<include refid="ttp_role"/> 
+      	 	from ttp_role 
+      	 	  where tre_legalId=#{legalId} 
+      	 	    and tre_cstno=#{treCstno}
+      	 	    and tre_name=#{treName}
+	</select>	
+	
+</mapper>

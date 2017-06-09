@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.cmacserviceflow">
+	
+	<sql id="cma_cmacServiceFlow_param">
+		ccw_flowseq,
+		ccw_gblflowseq,
+		ccw_bsncode,
+		ccw_channel,
+		ccw_scenecode,
+		ccw_transstarttime,
+		ccw_transendtime,
+		ccw_branchid,
+		ccw_legalcode,
+		ccw_tellerno,
+		ccw_autellerno,
+		ccw_transtt,
+		ccw_batchno,
+		ccw_returncode,
+		ccw_returnmsg
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="cmacServiceFlowResult">
+    	<result property="flowSeq" column="ccw_flowseq"/><!-- 40位交易流水号 -->
+    	<result property="gblflowSeq" column="ccw_gblflowseq"/><!-- 30位全局流水号 -->
+    	<result property="bsnCode" column="ccw_bsncode"/><!-- 业务编码 -->
+    	<result property="channel" column="ccw_channel"/><!-- 渠道编号 -->
+    	<result property="sceneCode" column="ccw_scenecode"/><!-- 场景编码 -->
+    	<result property="transStartTime" column="ccw_transstarttime"/><!-- 交易提交时间 -->
+    	<result property="transEndTime" column="ccw_transendtime"/><!-- 交易结束时间 -->
+    	<result property="branchId" column="ccw_branchid"/><!-- 操作机构 -->
+    	<result property="legalCode" column="ccw_legalcode"/><!-- 法人 -->
+    	<result property="tellerNo" column="ccw_tellerno"/><!-- 操作员 -->
+    	<result property="autellerNo" column="ccw_autellerno"/><!-- 授权员 -->
+    	<result property="transtt" column="ccw_transtt"/><!-- 00成功   01失败   02处理中 03待查 -->
+    	<result property="batchNo" column="ccw_batchno"/><!-- 批次号 -->
+    	<result property="returnCode" column="ccw_returncode"/><!-- 返回码 -->
+    	<result property="returnMsg" column="ccw_returnmsg"/><!-- 返回信息 -->
+    	<result property="note1" column="ccw_note1"/><!-- 预留字段 -->
+    	<result property="note2" column="ccw_note2"/><!-- 预留字段 -->
+    	<result property="note3" column="ccw_note3"/><!-- 预留字段 -->
+    	<result property="note4" column="ccw_note4"/><!-- 预留字段 -->
+    	<result property="note5" column="ccw_note5"/><!-- 预留字段 -->
+    	<result property="note6" column="ccw_note6"/><!-- 预留字段 -->
+    	<result property="note7" column="ccw_note6"/><!-- 预留字段 -->
+    </resultMap>
+  
+    <!-- 插入子流水表数据定义 -->
+    <insert id="insertCmacServiceFlow" parameterType="java.util.HashMap">
+        insert into cma_cserviceflow(
+    		<include refid="cma_cmacServiceFlow_param"/>
+    	)values(
+    	<![CDATA[
+			#{flowSeq},
+			#{gblflowSeq},
+			#{bsnCode},
+			#{channel},
+			#{sceneCode},
+			#{transStartTime},
+			#{transEndTime},
+			#{branchId},
+			#{legalCode},
+			#{tellerNo},
+			#{autellerNo},
+			#{transtt},
+			#{batchNo},
+			#{returnCode},
+			#{returnMsg})
+		]]>
+    </insert>
+    
+	<!-- 根据流水号更新子流水表业务状态 -->
+    <update id="updateCmacServiceFlowForState" parameterType="java.util.HashMap">
+        <![CDATA[
+			update cma_cserviceflow
+			set 
+				ccw_transtt=#{transtt},
+				ccw_returncode=#{returnCode},
+				ccw_returnmsg=#{returnMsg}	
+			 where ccw_flowseq=#{flowSeq}
+		 ]]> 
+	</update>
+	
+    <!-- 根据流水号查询子流水表记录 -->
+	<select id="queryCmacServiceFlowList" resultMap="cmacServiceFlowResult">
+       select 
+       <include refid="cma_cmacServiceFlow_param"/>
+        from cma_cserviceflow where ccw_gblflowseq=#{gblflowSeq}
+       <if test="flowSeq!=null and flowSeq!=''">
+ 			 and ccw_flowseq=#{flowSeq}
+	   </if>
+    </select>
+    
+</mapper>

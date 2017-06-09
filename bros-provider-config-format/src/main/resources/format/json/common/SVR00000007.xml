@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000007SendFmt">
+	     <xmlRel rel="SendFmt"/>
+		 <xmlField tagName="productStoreId" dataName="productStoreId"/><!--店铺标识  -->
+	</fmtDef>
+	<fmtDef id="SVR00000007RecFmt">
+	   <xmlRel rel="RecFmt"/>
+       <xmlList tagName="bestSellingDetails" dataName="bestSellingDetails"><!--返回产品列表 -->
+       		<xmlTag>
+		         <xmlField tagName="productId" dataName="productId"/><!--产品标识 -->
+		         <xmlField tagName="imageAdress" dataName="imageAdress"/><!--图片地址-->
+		         <xmlField tagName="productName" dataName="productName"/><!--产品名称-->
+		         <xmlField tagName="price" dataName="price"/><!--价格 -->
+		         <xmlField tagName="textData" dataName="textData"/><!--文本数据 -->
+		         <xmlField tagName="chargeShipping" dataName="chargeShipping"/><!--是否需要货运 -->
+		         <xmlField tagName="requireAmount" dataName="requireAmount"/><!--计价单位 -->
+		         <xmlList tagName="productConfigOptionList" dataName="productConfigOptionList"><!--产品配置项列表 -->
+		         	 <xmlTag>
+			            <xmlField tagName="configOptionId" dataName="configOptionId"/><!--配置项标识 -->
+			            <xmlField tagName="configOptionName" dataName="configOptionName"/><!--配置项名称 -->
+			            <xmlField tagName="configOptionPrice" dataName="configOptionPrice"/><!--配置项价格 -->
+			         </xmlTag>
+		         </xmlList>
+		         <xmlList tagName="productCategoryList" dataName="productCategoryList"><!--产品所在目录列表 -->
+		         	 <xmlTag>
+			            <xmlField tagName="thirdProductCategoryId" dataName="thirdProductCategoryId"/><!--三级目录 -->
+			            <xmlField tagName="parentProductCategoryId" dataName="parentProductCategoryId"/><!--二级目录 -->
+			            <xmlField tagName="rootProductCategoryId" dataName="rootProductCategoryId"/><!--根目录 -->
+			         </xmlTag>
+		         </xmlList>
+		     </xmlTag>
+    	</xmlList>
+	</fmtDef>
+</formats>

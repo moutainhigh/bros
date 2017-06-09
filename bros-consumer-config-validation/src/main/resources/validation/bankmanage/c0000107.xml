@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<!-- 修改商城信息 -->
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="mallName" message="${CECO000000001}"/><!-- 商城名称 -->
+	</xmlTag>
+</formats>

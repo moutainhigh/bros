@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- demo用例 -->
+<formats>
+	<xmlRel rel="head"/>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField variable="cstNoBody" dataName="cstNoBody" message="${CECO000000001}"/>
+		<xmlField dataName="nameBody" message="${CECO000000001}">
+			<validator class="asdfafdasdfsf" min="2" symbol="le" message="${CECO000000005}"/>
+		</xmlField>
+	</xmlTag>
+</formats>

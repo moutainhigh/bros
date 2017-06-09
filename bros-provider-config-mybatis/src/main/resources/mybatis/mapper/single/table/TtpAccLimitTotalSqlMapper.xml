@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.ttpacclimittotal">
+	<sql id="ttp_acc_limit_total_param">
+		TALT_CSTNO,
+		TALT_ACCNO,
+		TALT_CHANNEL,
+		TALT_BIZTYPE,
+		TALT_LEGALID,
+		TALT_DAYSUM,
+		TALT_LASTDATE
+	</sql>
+    <resultMap type="java.util.HashMap" id="ttpAccLimitTotalResultMap">
+    	<result property="cstNo" column="TALT_CSTNO"/>
+    	<result property="accNo" column="TALT_ACCNO"/>
+    	<result property="channel" column="TALT_CHANNEL"/>
+    	<result property="bizType" column="TALT_BIZTYPE"/>
+    	<result property="legalId" column="TALT_LEGALID"/>
+    	<result property="daySum" column="TALT_DAYSUM" javaType="java.lang.String" jdbcType="DECIMAL"/>
+    	<result property="lastDate" column="TALT_LASTDATE"/>
+    </resultMap>
+    
+    <!-- 查询账户日累计限额 -->
+	<select id="queryTtpAccLimitTotal" resultMap="ttpAccLimitTotalResultMap" parameterType="java.util.HashMap">
+		select
+		<include refid="ttp_acc_limit_total_param" />
+			from TTP_ACC_LIMIT_TOTAL
+			<![CDATA[ 
+			where TALT_CHANNEL = #{channel} 
+			  and TALT_CSTNO = #{cstNo} 
+			  and TALT_ACCNO = #{accNo} 
+			  and TALT_LEGALID = #{legalId}
+			   ]]>
+	      	 <if test="bizType!=null and bizType!=''">
+	           and  TALT_BIZTYPE = #{bizType}
+	         </if>
+	</select>
+	
+	 <!-- 新增一条账户日累计数据 -->
+    <insert id="insertTtpAccLimitTotal" parameterType="java.util.HashMap">
+   		 insert into TTP_ACC_LIMIT_TOTAL ( <include refid="ttp_acc_limit_total_param"/>) 
+			    <![CDATA[ 
+			    values(
+			   		 #{cstNo},
+			   		 #{accNo},
+			   		 #{channel},
+			         #{bizType},
+			         #{legalId},
+			         #{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			         #{lastDate}
+			       )
+			    ]]>  
+    </insert>
+    
+    
+     <!-- 更新客户日累计限额 有记录非当天  daySum -->
+    <update id="updateTtpAccLimitTotalNotToday" parameterType="java.util.HashMap">
+		UPDATE TTP_ACC_LIMIT_TOTAL
+		<![CDATA[
+			SET   TALT_LASTDATE = #{today},
+				  TALT_DAYSUM = #{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				  WHERE   TALT_CHANNEL = #{channel}
+				    AND   TALT_CSTNO = #{cstNo}
+					AND   TALT_LEGALID = #{legalId}
+					AND   TALT_LASTDATE = #{lastDate}
+				]]> 
+				<if test="bizType!=null and bizType!=''">
+					AND   TALT_BIZTYPE = #{bizType}
+				</if>
+	</update>
+	
+	<!-- 更新客户日累计限额 有当天记录  非首笔daySum-->
+    <update id="updateTtpAccLimitTotaltodayNotFirst" parameterType="java.util.HashMap">
+		<![CDATA[
+		    UPDATE TTP_ACC_LIMIT_TOTAL
+				SET TALT_DAYSUM = TALT_DAYSUM + #{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+						WHERE EXISTS (
+							   SELECT  TALT_DAYSUM
+							      FROM TTP_ACC_LIMIT_TOTAL
+					            WHERE TALT_CHANNEL = #{channel}
+								    AND  TALT_CSTNO = #{cstNo}
+									AND  TALT_LEGALID = #{legalId}
+									AND  TALT_LASTDATE = #{lastDate}
+									AND  TALT_BIZTYPE = #{bizType}
+						)
+						AND  TALT_CHANNEL = #{channel}
+					    AND  TALT_CSTNO = #{cstNo}
+						AND  TALT_LEGALID = #{legalId}
+						AND  TALT_LASTDATE = #{lastDate}
+						AND  TALT_BIZTYPE = #{bizType}
+		]]>
+	</update>
+	
+	<!-- 更新客户日累计限额 有当天记录  首笔记录daySum-->
+	 <update id="updateTtpAccLimitTotaltodayFirst" parameterType="java.util.HashMap">
+		<![CDATA[
+		    UPDATE TTP_ACC_LIMIT_TOTAL
+			  SET TALT_DAYSUM = #{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				  WHERE  EXISTS (
+					     SELECT  TALT_DAYSUM
+					             FROM TTP_ACC_LIMIT_TOTAL
+								         WHERE    TALT_CHANNEL = #{channel}
+										    AND   TALT_CSTNO = #{cstNo}
+											AND   TALT_LEGALID = #{legalId}
+											AND   TALT_LASTDATE = #{lastDate}
+											AND   TALT_BIZTYPE = #{bizType}
+				        )
+					    AND   TALT_CHANNEL = #{channel}
+					    AND   TALT_CSTNO = #{cstNo}
+						AND   TALT_LEGALID = #{legalId}
+						AND   TALT_LASTDATE = #{lastDate}
+						AND   TALT_BIZTYPE = #{bizType}
+		]]>
+	</update>
+	
+    <!-- 回滚限额  金额大于等于0 -->
+    <update id="rollbackTtpAccLimitTotal" parameterType="java.util.HashMap">
+	      <![CDATA[
+	       update TTP_ACC_LIMIT_TOTAL   
+		       set TALT_DAYSUM = TALT_DAYSUM-#{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				   where TALT_CHANNEL = #{channel} 
+				      	 and TALT_CSTNO = #{cstNo} 
+				      	 and TALT_LEGALID = #{legalId}
+				      	 and TALT_BIZTYPE = #{bizType}
+				      	 and TALT_LASTDATE = #{lastDate}
+				      	 and TALT_DAYSUM-#{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}>=0
+	      	]]>
+    </update>
+</mapper>

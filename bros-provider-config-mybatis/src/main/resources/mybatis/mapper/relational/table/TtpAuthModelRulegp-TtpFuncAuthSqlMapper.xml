@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.relational.table.ttpAuthModelRulegp-ttpFuncAuth">
+    <resultMap type="java.util.HashMap" id="ttpAuthModelTtpFuncAuthResult">
+		<result property="id" column="TFA_ID"/>					<!-- ID -->
+		<result property="tfaLegal" column="TFA_LEGAL"/>		<!-- 法人唯一标识 -->
+		<result property="cstNo" column="TFA_CSTNO"/>			<!-- 网银客户号 -->
+		<result property="funcId" column="TFA_FUNCID"/>			<!-- 功能 -->
+		<result property="authModeId" column="TFA_AUTHMODELFK"/><!-- 授权模型ID -->
+		<result property="authModeName" column="TAM_NAME"/>		<!-- 授权模型名称 -->
+	</resultMap>
+	
+   <!-- 根据角色id+法人id+客户号查询功能Id列表（角色-模型-功能）-->
+	<select id="queryFunctionListByCondition" resultMap="ttpAuthModelTtpFuncAuthResult" parameterType="java.util.HashMap">
+		SELECT tfa.TFA_FUNCID,tfa.TFA_AUTHMODELFK ,tam.TAM_NAME 
+		FROM TTP_FUNC_AUTH tfa ,TTP_AUTH_MODEL tam 
+		WHERE  tfa.TFA_CSTNO=#{cstNo} and tfa.TFA_AUTHMODELFK=tam.TMD_ID and  tfa.TFA_AUTHMODELFK IN (
+			SELECT  DISTINCT  camr.TAMR_AUTHMODELID 
+			FROM TTP_AUTH_MODEL_RULEGP tamr 
+			WHERE tamr.TAMR_AUTHRNROLE1=#{roleId} 
+			   or tamr.TAMR_AUTHRNROLE2=#{roleId} 
+			   or tamr.TAMR_AUTHRNROLE3=#{roleId} 
+			   or tamr.TAMR_AUTHRNROLE4=#{roleId} 
+			   or tamr.TAMR_AUTHRNROLE5=#{roleId})
+	</select>
+</mapper>

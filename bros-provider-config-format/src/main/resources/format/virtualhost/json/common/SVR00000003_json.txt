@@ -1,0 +1,38 @@
+{
+	RspSvcHeader: {
+        channelDate: "",
+        acctDate: "",
+        tranTime: "",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20170214",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "",
+        langCode: "",
+        BackendSeqNo: "02021702140000000000094606",
+        globalSeqNo: "",
+        TranTime: "142929849",
+        backendSysId: "",
+        ReturnMsg: "交易成功"
+    },
+    
+    productPriceList: [
+        {
+            selectedAmount:"0",
+            prodCatalogId: "MODEL-FPSC-DP",
+            quantity: "1",
+            displayItemSubTotal: "0.00",
+            otherAdjustments: "-5.00",
+            displayPrice: "5.00",
+            productName: "润和鼎元卡个人人民币活期",
+            productId: "CARD_0521_10000-01"
+        }
+    ],
+    orderId: "HR10682"
+}

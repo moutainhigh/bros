@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.tpraccfunc">
+
+    <sql id="tpr_accFunc_param">
+		TAF_ID,
+		TAF_CSTID,
+		TAF_ACCNO,
+		TAF_CLASSNO,
+		TAF_CHANNEL 
+	</sql>
+    
+    <resultMap type="java.util.HashMap" id="tprAccFuncResult">
+    	<result property="id" column="TAF_ID"/><!-- 唯一标识 -->
+    	<result property="cstId" column="TAF_CSTID"/><!-- 客户id -->
+    	<result property="accNo" column="TAF_ACCNO"/><!-- 账号 -->
+    	<result property="classNo" column="TAF_CLASSNO"/><!-- 分类编号 -->
+    	<result property="channel" column="TAF_CHANNEL"/><!-- 渠道号 -->
+    </resultMap>
+	
+    <!-- 根据客户号查询账户功能信息  -->
+	<select id="queryAccFuncInfoNoChannel" resultMap="tprAccFuncResult">
+       select 
+       <include refid="tpr_accFunc_param"/>
+       from  TPR_ACC_FUNC  where 1 = 1
+       <if test="cstId != null and cstId != '' ">
+ 			 and TAF_CSTID = #{cstId}
+	   </if>
+    </select>
+    <!-- 根据账号和客户标识删除TPR_ACC_FUNC -->
+	<delete id="deleteTprAccFuncByCstIdAndAccNo" parameterType="java.util.HashMap">
+		delete from TPR_ACC_FUNC
+			where TAF_CSTID = #{cstId} 
+			 and  TAF_ACCNO = #{accNo} 
+	</delete>
+</mapper>

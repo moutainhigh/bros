@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.single.table.bmamenurolerel">
+
+    <resultMap type="java.util.HashMap" id="bmaMenuRoleRelResultMap">
+    	<result property="bmrlId" column="bmrl_id"/><!-- 唯一ID主键 -->
+		<result property="bmrlMenuId" column="bmrl_menuid"/><!-- 菜单编号 -->
+		<result property="bmrlRoleId" column="bmrl_roleid"/><!-- 角色编号 -->
+		<result property="bmrlNote1" column="bmrl_note1"/><!-- 备用字段1 -->
+		<result property="bmrlNote2" column="bmrl_note2"/><!-- 备用字段2 -->
+
+    </resultMap>
+    <sql id="bma_menurolerel_queryall">
+	    bmrl_id,
+		bmrl_menuid,
+		bmrl_roleid,
+		bmrl_note1,
+		bmrl_note2
+	</sql>
+    
+     <!-- 设置菜单角色关联关系 -->
+	<insert id="insertMenuRoleRel" parameterType="java.util.HashMap">
+		insert into bma_menu_role_rel (
+		<include refid="bma_menurolerel_queryall"/>) 
+		values
+		   <foreach collection="list" item="item" index="index" separator="," >
+			  (
+			  #{item.bmrlId},
+				#{item.bmrlMenuId},
+				#{item.bmrlRoleId},
+				#{item.bmrlNote1},
+				#{item.bmrlNote2}
+			  )
+		   </foreach> 
+	</insert>
+	<!-- 删除菜单角色关联关系 -->
+	<delete id="deleteMenuRoleRel" parameterType="java.util.HashMap">
+		delete from bma_menu_role_rel
+				 <![CDATA[ 
+					where bmrl_roleid = #{bmrlRoleId}
+				 ]]>
+				 <if test="bmrlMenuId != null and bmrlMenuId != ''">
+			        and   bmrl_menuid = #{bmrlMenuId}
+				</if>
+	</delete>
+	<!-- 查询菜单角色关联 -->
+    <select id="queryMenuRoleRel" resultMap="bmaMenuRoleRelResultMap">
+       select
+       	<include refid="bma_menurolerel_queryall"/>
+       from bma_menu_role_rel
+       			<![CDATA[ 
+	     		 	where  1=1
+	       		 ]]> 
+	       		 <if test="bmrlMenuId != null and bmrlMenuId != ''">
+			        and   bmrl_menuid = #{bmrlMenuId}
+				</if>
+     			<if test="bmrlRoleId != null and bmrlRoleId != ''">
+			        and   bmrl_roleid = #{bmrlRoleId}
+				</if>
+    </select>
+    <!-- 查询记录数 -->
+	<select id="queryMenuRoleRelNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from bma_menu_role_rel
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="bmrlMenuId != null and bmrlMenuId != ''">
+	        and   bmrl_menuid = #{bmrlMenuId}
+		</if>
+		<if test="bmrlRoleId != null and bmrlRoleId != ''">
+	        and   bmrl_roleid = #{bmrlRoleId}
+		</if>
+	</select>
+</mapper>

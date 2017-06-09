@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.ttpcstlimittotal">
+	<sql id="ttp_cst_limit_total_param">
+		TCLT_CSTNO,
+		TCLT_CHANNEL,
+		TCLT_BIZTYPE,
+		TCLT_LEGALID,
+		TCLT_DAYSUM,
+		TCLT_LASTDATE
+	</sql>
+    <resultMap type="java.util.HashMap" id="ttpCstLimitTotalResultMap">
+    	<result property="cstNo" column="TCLT_CSTNO"/>
+    	<result property="channel" column="TCLT_CHANNEL"/>
+    	<result property="bizType" column="TCLT_BIZTYPE"/>
+    	<result property="legalId" column="TCLT_LEGALID"/>
+    	<result property="daySum" column="TCLT_DAYSUM" javaType="java.lang.String" jdbcType="DECIMAL"/>
+    	<result property="lastDate" column="TCLT_LASTDATE"/>
+    </resultMap>
+    
+    <!-- 查询企业客户日累计限额 -->
+	<select id="queryTtpCstLimitTotal" resultMap="ttpCstLimitTotalResultMap" parameterType="java.util.HashMap">
+		select
+		<include refid="ttp_cst_limit_total_param" />
+			from TTP_CST_LIMIT_TOTAL
+			where TCLT_CHANNEL = #{channel} 
+			  and TCLT_CSTNO = #{cstNo} 
+			  and TCLT_LEGALID = #{legalId}
+			  <if test="bizType!=null and bizType!=''">
+				   and  TCLT_BIZTYPE = #{bizType}
+			 </if>
+	</select>
+	
+	 <!-- 新增一条日累计数据 -->
+    <insert id="insertTtpCstLimitTotal" parameterType="java.util.HashMap">
+   		 insert into TTP_CST_LIMIT_TOTAL ( <include refid="ttp_cst_limit_total_param"/>) 
+			    <![CDATA[ 
+			    values(
+			   		 #{cstNo},
+			   		 #{channel},
+			         #{bizType},
+			         #{legalId},
+			         #{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			         #{lastDate}
+			       )
+			    ]]>  
+    </insert>
+    
+     <!-- 更新客户日累计限额 有记录非当天  daySum -->
+    <update id="updateTtpCstLimitTotalNotToday" parameterType="java.util.HashMap">
+		UPDATE TTP_CST_LIMIT_TOTAL
+		<![CDATA[
+			SET   TCLT_LASTDATE = #{today},
+				  TCLT_DAYSUM = #{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				  WHERE   TCLT_CHANNEL = #{channel}
+				    AND   TCLT_CSTNO = #{cstNo}
+					AND   TCLT_LEGALID = #{legalId}
+					AND   TCLT_LASTDATE = #{lastDate}
+				]]> 
+				<if test="bizType!=null and bizType!=''">
+					and  TCLT_BIZTYPE = #{bizType}
+				</if>
+	</update>
+	
+	<!-- 更新客户日累计限额 有当天记录  非首笔daySum-->
+    <update id="updateTtpCstLimitTotaltodayNotFirst" parameterType="java.util.HashMap">
+		<![CDATA[
+		    UPDATE TTP_CST_LIMIT_TOTAL
+				SET TCLT_DAYSUM = TCLT_DAYSUM + #{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+						WHERE EXISTS (
+							   SELECT  TCLT_DAYSUM
+							      FROM TTP_CST_LIMIT_TOTAL
+					            WHERE TCLT_CHANNEL = #{channel}
+								    AND  TCLT_CSTNO = #{cstNo}
+									AND  TCLT_LEGALID = #{legalId}
+									AND  TCLT_LASTDATE = #{lastDate}
+									AND  TCLT_BIZTYPE = #{bizType}
+						)
+						AND  TCLT_CHANNEL = #{channel}
+					    AND  TCLT_CSTNO = #{cstNo}
+						AND  TCLT_LEGALID = #{legalId}
+						AND  TCLT_LASTDATE = #{today}
+						AND  TCLT_BIZTYPE = #{bizType}
+		]]>
+	</update>
+	
+	<!-- 更新客户日累计限额 有当天记录  首笔记录daySum-->
+	 <update id="updateTtpCstLimitTotaltodayFirst" parameterType="java.util.HashMap">
+		<![CDATA[
+		    UPDATE TTP_CST_LIMIT_TOTAL
+			  SET TCLT_DAYSUM = #{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				  WHERE  EXISTS (
+					     SELECT  TCLT_DAYSUM
+					             FROM TTP_CST_LIMIT_TOTAL
+								         WHERE    TCLT_CHANNEL = #{channel}
+										    AND   TCLT_CSTNO = #{cstNo}
+											AND   TCLT_LEGALID = #{legalId}
+											AND   TCLT_LASTDATE = #{lastDate}
+											AND   TCLT_BIZTYPE = #{bizType}
+				        )
+					    AND   TCLT_CHANNEL = #{channel}
+					    AND   TCLT_CSTNO = #{cstNo}
+						AND   TCLT_LEGALID = #{legalId}
+						AND   TCLT_LASTDATE = #{today}
+						AND  TCLT_BIZTYPE = #{bizType}
+		]]>
+	</update>
+	
+    <!-- 回滚限额  金额大于等于0 -->
+    <update id="rollbackTtpCstLimitTotal" parameterType="java.util.HashMap">
+	      <![CDATA[
+	       update TTP_CST_LIMIT_TOTAL   
+		       set TCLT_DAYSUM = TCLT_DAYSUM-#{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				   where TCLT_CHANNEL = #{channel} 
+				      	 and TCLT_CSTNO = #{cstNo} 
+				      	 and TCLT_LEGALID = #{legalId}
+				      	 and TCLT_BIZTYPE = #{bizType}
+				      	 and TCLT_LASTDATE = #{lastDate}
+				      	 and TCLT_DAYSUM-#{payAmount,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}>=0
+	      	]]>
+    </update>
+</mapper>

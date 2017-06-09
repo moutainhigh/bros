@@ -1,0 +1,29 @@
+<div>
+    <div class="banner-transfer">
+    </div>
+    <div class="main-box">
+        <div class="product-list-two">
+            <div class="product-list-box">
+                <div class="product-list">
+                    <div class="list" ng-repeat="list in vm.financialList">
+                        <div class="img"><img src="{{list.financialurl}}" alt="" ui-sref="productdetail({productCode:list.financialcode})"></div>
+                        <ul class="product-info">
+                            <li class="product-title" ui-sref="productdetail({productCode:list.financialcode})" ng-bind="list.financialname"></li>
+                            <li ng-bind="list.financialbewrite">稳健投资，安心回报</li>
+                            <li>近一年收益率：<b class="big-font" ng-bind="list.financialrate"></b><b class="big-font"><span>%</span></b></li>
+                            <li>投资风险：<span ng-bind="list.financialtype"></span></li>
+                            <li class="product-but">
+                                <button type="button" class="btn btn-primary" ui-sref="productdetail({productCode:list.financialcode})">加入购物车</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <paging class="small" page="vm.page.currentPage" page-size="vm.page.pageSize" total="vm.page.total" adjacent="{{vm.page.adjacent}}" dots="{{vm.page.dots}}" scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="vm.DoCtrlPagingAct('Paging Clicked', page, pageSize, total)">
+                </paging>
+            </div>
+        </div>
+    </div>
+</div>
+

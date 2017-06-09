@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000010SendFmt">										<!-- 查询店铺与客户支付工具和客户地址信息列表流程 -->
+			<xmlRel rel="SendFmt" />
+			<xmlField tagName="partyId" dataName="partyId" />                    <!-- 当事人标识 -->
+			<xmlField tagName="productId" dataName="productId" />                <!-- 产品Id -->
+			<xmlField tagName="productStoreId" dataName="productStoreId" />      <!-- 产品店铺标识 -->
+			<xmlField tagName="webSiteId" dataName="webSiteId" />      			 <!-- 网点标识 -->
+			<xmlField tagName="currency" dataName="currency" />      			 <!-- 币种 -->
+	</fmtDef>
+	<fmtDef id="SVR00000010RecFmt">
+			<xmlRel rel="RecFmt" />
+			<xmlList tagName="paymentMethod" dataName="paymentMethod">							<!--返回支付工具列表 -->
+				<xmlTag>
+					<xmlField tagName="paymentMethodId" dataName="paymentMethodId" />				<!--支付工具标识 -->
+					<xmlField tagName="paymentMethodTypeId" dataName="paymentMethodTypeId" />		<!--支付工具类型标识 -->
+					<xmlField tagName="paymentMethodTypeName" dataName="paymentMethodTypeName"/>		<!--支付工具名称-->
+					<xmlField tagName="partyId" dataName="partyId"/>            					<!--当事人标识 -->
+					<xmlField tagName="cardNumber" dataName="cardNumber"/>         					<!--卡号 -->
+					<xmlField tagName="bankName" dataName="bankName"/>           					<!--行名-->
+					<xmlField tagName="custAcctno" dataName="custAcctno"/>         					<!--客户账号-->
+					<xmlField tagName="batNum" dataName="batNum"/>             						<!--凭证批号 -->
+					<xmlField tagName="oNum" dataName="oNum"/>               						<!--凭证序号 -->
+				</xmlTag>
+			</xmlList>
+			<xmlList tagName="partyContactMechValueMaps" dataName="partyContactMechValueMaps">	<!--返回地址列表 -->
+				<xmlTag>
+				    <xmlField tagName="contactMechId" dataName="contactMechId" />				    <!--联系机制标识 -->
+					<xmlField tagName="toName" dataName="toName" />									<!--目标名称 -->
+					<xmlField tagName="address1" dataName="address1" />								<!--地址1 -->
+					<xmlField tagName="address2" dataName="address2" />								<!--地址2 -->
+					<xmlField tagName="city" dataName="city" />										<!--城市 -->
+					<xmlField tagName="stateProvinceGeoId" dataName="stateProvinceGeoId" />			<!--省份标识 -->
+					<xmlField tagName="stateProvinceGeoName" dataName="stateProvinceGeoName" />		<!--省份 -->
+					<xmlField tagName="countryGeoId" dataName="countryGeoId" />						<!--国家标识 -->
+					<xmlField tagName="countryGeoName" dataName="countryGeoName" />					<!--国家 -->
+					<xmlField tagName="postalCode" dataName="postalCode" />							<!--邮编 -->
+				</xmlTag>
+			</xmlList>
+			<xmlList tagName="shipMethList" dataName="shipMethList">	<!--交付方式列表 -->
+				<xmlTag>
+					<xmlField tagName="shipMethId" dataName="shipMethId" />							<!--交付方式标识 -->
+					<xmlField tagName="shipmentMethodName" dataName="shipmentMethodName" />			<!--交付方式名称 -->
+					<xmlField tagName="amount" dataName="amount" />									<!--金额 -->
+				</xmlTag>
+			</xmlList>
+	</fmtDef>
+</formats>

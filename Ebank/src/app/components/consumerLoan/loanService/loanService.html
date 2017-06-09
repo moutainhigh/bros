@@ -1,0 +1,22 @@
+<div>
+    <div class="banner-transfer"></div>
+    <div class="main-box">
+        <div class="product-list-two">
+        <div class="nav-title-bar">
+            <div class="title">贷款申请</div>
+            <div loanhead flow="1"></div>
+        </div>
+            <div class="product-list-box">
+                <div class="product-list" ng-repeat="product in vm.productDetail">
+                <consumer-loandirective product='product' type="vm.type"></consumer-loandirective>
+
+                </div>
+
+            </div>
+            <div>
+                <paging class="small" page="vm.page.currentPage" page-size="vm.page.pageSize" total="vm.page.total" adjacent="{{vm.page.adjacent}}" dots="{{vm.page.dots}}" scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="vm.DoCtrlPagingAct('Paging Clicked', page, pageSize, total)">
+                </paging>
+            </div>
+        </div>
+    </div>
+</div>

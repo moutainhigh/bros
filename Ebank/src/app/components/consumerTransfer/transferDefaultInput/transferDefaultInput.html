@@ -1,0 +1,223 @@
+<div class="main-box">
+    <div transferdefaultstate flow="1"></div>
+    <div class="trading-one-box">
+        <div class="ebank-input-box">
+            <div class="ebank-input-title">填写账户信息</div>
+            <form class="form-horizontal" novalidate ng-submit="vm.totransferDefaultService()" name="vm.transForm" >
+
+                <!-- 省市区县样例（注释参考）  <div class="form-group">
+                <label class="col-md-4 control-label">地址</label>
+                <div class="col-md-4">
+                    <select required="" class="col-sm-4 form-control" ng-model="address.province" ng-options="key as key for (key,value) in division"  ng-change="address.city='';address.district='';">
+                        <option value="">省</option>
+                    </select>
+                    <select class="col-sm-4 form-control" ng-model="address.city" ng-options="key as key for (key,value) in division[address.province]"  ng-change="address.district='';">
+                        <option value="">市</option>
+                    </select>
+                    <select class="form-control" ng-model="address.district" ng-options="value as value for value in division[address.province][address.city]">
+                        <option value="">区</option>
+                    </select>
+
+                </div>
+            </div>
+            -->
+            <div class="form-group" >
+
+                <label for="slt_provCode" class="col-sm-4 control-label">
+                    <span class="red">*</span>
+                    开户省市:
+                </label>
+                <div class="col-sm-4">
+                    <select required="" class="col-sm-4 form-control" name="slt_provCode" ng-model="address.province" ng-options="key as key for (key,value) in division"  ng-change="address.city='';address.district='';">
+                        <option value="">请选择开户省</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 error" ng-messages="vm.transForm.slt_provCode.$error">
+                    <span class="help-block" ng-message="required">请选择开户省市</span>
+                </div>
+            </div>
+            <!-- ng-init="vm.model.province = vm.city[0].value1" -->
+            <div class="form-group" >
+                <label for="slt_cityCode" class="col-sm-4 control-label">
+                    <span class="red">*</span>
+                    开户市:
+                </label>
+                <div class="col-sm-4">
+                    <select class="col-sm-4 form-control" name="slt_cityCode" ng-model="address.city" ng-options="key as key for (key,value) in division[address.province]"  ng-change="address.district='';" required>
+                        <option value="">请选择开户市</option>
+                    </select>
+                </div>
+                <div class="col-sm-4 error" ng-messages="vm.transForm.slt_cityCode.$error">
+                    <span class="help-block" ng-message="required">请选择开户市</span>
+                </div>
+            </div>
+
+            <!--  <div class="form-group" >
+            <label for="slt_provCode" class="col-sm-4 control-label">开户省市:</label>
+            <div class="col-sm-4">
+                <select class="col-sm-4 form-control" name="slt_provCode" ng-model="vm.model.provCode" ng-options="prov.value as prov.name for prov in vm.province" ng-init="vm.model.provCode = vm.province[0].value" required  ng-change="getCity(vm.model.provCode)">
+                    <option value="">请选择开户省</option>
+                </select>
+            </div>
+            <div class="col-sm-4 error" ng-messages="vm.transForm.slt_provCode.$error">
+                <span class="help-block" ng-message="required">请选择开户省市</span>
+            </div>
+        </div>
+
+        <div class="form-group" >
+            <label for="slt_citCode" class="col-sm-4 control-label">开户市:</label>
+            <div class="col-sm-4">
+                <select class="col-sm-4 form-control" name="slt_cityCode" ng-model="vm.model.cityCode" ng-options="prov.value1 as prov.area for prov in vm.city[vm.province]"  required >
+                    <option value="">请选择开户市</option>
+                </select>
+            </div>
+            <div class="col-sm-4 error" ng-messages="vm.transForm.slt_citCode.$error">
+                <span class="help-block" ng-message="required">请选择开户省市</span>
+            </div>
+        </div>
+        -->
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">
+                <span class="red">*</span>
+                付款账号
+            </label>
+            <div class="col-sm-4">
+                <select class="form-control" ng-model="vm.model.payaccount" required id="txt_payaccount" name="txt_payaccount" placeholder="请选择付款账号" >
+                    <option value="">请选择付款账号</option>
+                    <option value="11111111111">11111111111</option>
+                    <option value="22222222222">2222222</option>
+                    <option value="333333333">33333333</option>
+                    <option value="44444444">4444444</option>
+                    <option value="55555555">555555</option>
+                </select>
+                <p class="help-text">
+                    账户余额：
+                    <span>500,000.00元</span>
+                </p>
+            </div>
+            <div class="col-sm-4 error" ng-messages="vm.transForm.txt_payaccount.$error">
+                <span class="help-block" ng-message="required">请选择付款账号</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">
+                <span class="red">*</span>
+                转账金额
+            </label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" maxlength="13" required id="txt_payamount" name="txt_payamount" ng-model="vm.model.payamount" placeholder="请输入您的转账金额">
+                <p class="help-text">
+                    <!-- 大写： -->
+                    <span ng-bind="vm.model.payamount|ChinaCost"></span>
+                </p>
+            </div>
+            <div class="col-sm-4  error" ng-messages="vm.transForm.txt_payamount.$error">
+                <span class="help-block" ng-message="required">请输入您的转账金额</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">
+                <span class="red">*</span>
+                收款账号
+            </label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" required ng-model="vm.model.collectaccount" id="txt_collectaccount" name="txt_collectaccount"placeholder="请选择收款账号">
+                    <span key="6" class="input-group-btn ">
+                        <button class="btn btn-info" type="button" ng-click="vm.contactsList();">选择</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-4 error" ng-messages="vm.transForm.txt_collectaccount.$error">
+                <span class="help-block" ng-message="required">请选择收款账号</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">
+                <span class="red">*</span>
+                收款人姓名
+            </label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" required   id="txt_custName" name="txt_custName" ng-model="vm.model.custName" placeholder="请输入收款人姓名"></div>
+            <div class="col-sm-4  error" ng-messages="vm.transForm.txt_custName.$error">
+                <span class="help-block" ng-message="required">请输入收款人姓名</span>
+                <span class="help-block" ng-message="customPattern">姓名为2至6位中文</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">
+                <span class="red">*</span>
+                收款人开户行
+            </label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-disabled required ng-model="vm.model.payaccountbank" id="txt_payaccountbank" name="txt_payaccountbank" placeholder="请选择收款人开户行">
+                    <span key="6" class="input-group-btn ">
+                        <button class="btn btn-info" type="button" ng-click="vm.bankList();">选择</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-4 error" ng-messages="vm.transForm.txt_payaccountbank.$error">
+                <span class="help-block" ng-message="required">请选择收款人开户行</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">
+                <span class="red">*</span>
+                开户网点
+            </label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" required ng-model="vm.model.bankNo" id="txt_bankNo" name="txt_bankNo" placeholder="请选择开户网点">
+                    <span key="6" class="input-group-btn ">
+                        <button class="btn btn-info" type="button" ng-click="vm.bankListSearch();">选择</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-4 error" ng-messages="vm.transForm.txt_bankNo.$error">
+                <span class="help-block" ng-message="required">请选择开户网点</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">
+                <span class="red">*</span>
+                短信通知手机号
+            </label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" required maxlength="11" ng-model="vm.model.mobile" id="txt_mobile" name="txt_mobile" placeholder="请输入短信通知手机号" custom-pattern="phone" >
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model = "vm.model.mobliesign" value="">是否短信通知</label>
+                </div>
+            </div>
+            <div class="col-sm-4 error" ng-messages="vm.transForm.txt_mobile.$error">
+                <span class="help-block" ng-message="required">请输入短信通知手机号</span>
+                <span class="help-block" ng-message="customPattern">短信通知手机号格式不正确</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">
+                <span class="red">*</span>
+                转账用途
+            </label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" required ng-model="vm.model.transferuse" id="txt_trandsferuse" name="txt_trandsferuse" placeholder="请输入转账用途"></div>
+            <div class="col-sm-4 error" ng-messages="vm.transForm.txt_trandsferuse.$error">
+                <span class="help-block" ng-message="required">请输入转账用途</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8 btn-box-big ">
+                <button type="submit" class="btn btn-primary btn-lg" >确认</button>
+                <button type="button" class="btn btn-default btn-lg" ng-click="vm.backTranfer();">返回</button>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+</div>

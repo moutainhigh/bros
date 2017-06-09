@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.bmadserviceflow">
+	
+    <resultMap type="java.util.HashMap" id="bmadServiceFlowResult">
+    	<result property="gblflowSeq" column="bdw_gblflowseq"/><!-- 30位全局流水号 -->
+    	<result property="detailBizData" column="bdw_detailbizdata"/><!-- 明细信息 -->
+    </resultMap>
+       
+    <!-- 插入明细流水表数据定义 -->
+    <insert id="insertBmadServiceFlow" parameterType="java.util.HashMap">
+       insert into bma_dserviceflow(
+            bdw_gblflowseq,
+    		bdw_detailbizdata
+    	)values(
+    	    <![CDATA[ 
+				#{gblflowSeq},
+				#{detailBizData}
+			]]>
+		)
+    </insert>
+    
+    <!-- 根据流水号查询流水明细表记录-->
+	<select id="queryBmadServiceFlowByOne" resultMap="bmadServiceFlowResult">
+	   <![CDATA[ 
+           select bdw_gblflowseq,
+                  bdw_detailbizdata
+              from bma_dserviceflow 
+                where bdw_gblflowseq=#{gblflowSeq}
+       ]]>
+    </select>
+</mapper>

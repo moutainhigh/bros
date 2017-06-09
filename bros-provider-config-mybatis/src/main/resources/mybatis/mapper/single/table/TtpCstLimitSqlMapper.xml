@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.ttpcstlimit">
+	<sql id="ttp_cst_limit_param">
+		TCL_CSTNO,
+		TCL_CHANNEL,
+		TCL_BIZTYPE,
+		TCL_LEGALID,
+		TCL_SINGLEMAX,
+		TCL_DAYMAX
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="ttpCstLimitResultMap">
+    	<result property="cstNo"     column="TCL_CSTNO"/>
+    	<result property="channel"   column="TCL_CHANNEL"/>
+    	<result property="bizType"   column="TCL_BIZTYPE"/>
+    	<result property="legalId"   column="TCL_LEGALID"/>
+    	<result property="singleMax" column="TCL_SINGLEMAX" javaType="java.lang.String" jdbcType="DECIMAL"/>
+    	<result property="dayMax"    column="TCL_DAYMAX"    javaType="java.lang.String" jdbcType="DECIMAL"/>
+    </resultMap>
+    
+     <!-- 查询企业自定义客户限额信息 -->
+	<select id="queryTtpCstLimit" resultMap="ttpCstLimitResultMap" parameterType="java.util.HashMap">
+		select
+		<include refid="ttp_cst_limit_param" />
+			 from TTP_CST_LIMIT
+	       <![CDATA[ 
+		       where TCL_CHANNEL = #{channel} 
+		        and  TCL_CSTNO = #{cstNo} 
+		        and  TCL_LEGALID = #{legalId}
+	        ]]>
+	        <if test="bizType!=null and bizType!=''">
+	       	    and  TCL_BIZTYPE = #{bizType}
+	        </if>
+	</select>
+	
+    <!-- 更新企业自定义客户限额信息 -->
+	<update id="updateTtpCstLimit" parameterType="java.util.HashMap">
+		update TTP_CST_LIMIT 
+		       <![CDATA[ 
+	          	set  TCL_SINGLEMAX = #{singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+				 	 TCL_DAYMAX = #{dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+		       where TCL_CHANNEL = #{channel} 
+		        and  TCL_CSTNO = #{cstNo} 
+		        and  TCL_LEGALID = #{legalId}
+		      	 ]]>
+		      	<if test="bizType!=null and bizType!=''">
+	       	        and  TCL_BIZTYPE = #{bizType}
+	        	</if>
+	</update>
+	
+    <!-- 设置企业自定义客户限额 -->
+    <insert id="insertTtpCstLimit" parameterType="java.util.HashMap">
+   		 insert into TTP_CST_LIMIT ( <include refid="ttp_cst_limit_param"/>) 
+			    <![CDATA[ 
+			    values(
+			   		 #{cstNo},
+			   		 #{channel},
+			         #{bizType},
+			         #{legalId},
+			         #{singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+			         #{dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+			       )
+			    ]]>  
+    </insert>
+    
+    <!-- 批量设置客户自定义限额 -->
+    <insert id="insertBatchTtpCstLimit" parameterType="java.util.HashMap">
+    		insert into TTP_CST_LIMIT 
+    		( <include refid="ttp_cst_limit_param"/>) 
+    		values
+			      <foreach collection="list" item="item" index="index" separator="," >
+				        (#{item.cstNo},#{item.channel},#{item.bizType},
+				         #{item.legalId},#{item.singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+				         #{item.dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				        )
+	   			 </foreach>  
+    </insert>
+    <!-- 批量更新客户自定义限额 -->
+    <update id="updateBatchTtpCstLimit" parameterType="java.util.HashMap">
+	        <foreach collection="list" item="item" index="index" separator=";" >
+	        update TTP_CST_LIMIT 
+	          	set  TCL_SINGLEMAX = #{item.singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+				 	 TCL_DAYMAX = #{item.dayMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+		       where TCL_CHANNEL = #{item.channel} 
+		        and  TCL_CSTNO = #{item.cstNo} 
+		        and  TCL_LEGALID = #{item.legalId}
+	      	  <if test="item.bizType!=null and item.bizType!=''">
+				   and  TCL_BIZTYPE = #{item.bizType}
+			 </if>
+			 </foreach>  
+    </update>
+    <!-- 删除企业自定义客户限额 -->
+    <delete id="deleteTtpCstLimit" parameterType="java.util.HashMap">
+   		 delete
+			 from TTP_CST_LIMIT
+	       <![CDATA[ 
+		       where TCL_CHANNEL = #{channel} 
+		        and  TCL_CSTNO = #{cstNo} 
+	        ]]>
+	        <if test="bizType!=null and bizType!=''">
+	       	    and  TCL_BIZTYPE = #{bizType}
+	        </if>
+	        <if test="legalId!=null and legalId!=''">
+	       	    and  TCL_LEGALID = #{legalId}
+	        </if>
+    </delete>
+    <!-- 查询企业自定义客户限额信息 -->
+	<select id="queryAllTtpCstLimit" resultMap="ttpCstLimitResultMap" parameterType="java.util.HashMap">
+		select
+		<include refid="ttp_cst_limit_param" />
+			 from TTP_CST_LIMIT
+	</select>
+</mapper>

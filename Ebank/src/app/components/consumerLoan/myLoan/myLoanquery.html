@@ -1,0 +1,55 @@
+<div class="banner-transfer"></div>
+<div class="main-box">
+        <div class="product-list-two">
+            <div class="nav-title-bar">
+                <div class="title">我的贷款</div>
+                <div loanhead flow="2"></div>
+            </div>
+            <div class="trading-one-box">
+                <nav class="navbar navbar-default">
+                    <form class="navbar-form navbar-left" role="search">
+                    <span>日期范围</span>
+                        <div class="form-group">
+                            <div style="float:left"><ui-calendar time="vm.startDate"></div>
+                            <div style="float:left"><ui-calendar time="vm.endDate"></div>
+                        </div>
+                        <button type="submit" class="btn btn-default" ng-click="vm.startserch()">开始查询</button>
+                    </form>
+                </nav>
+                <div class="ebak-table-list">
+                    <div class="ebak-table-title">查询结果</div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="center">扣款日</th>
+                                <th class="center">应还本息合计</th>
+                                <th class="right">应还本金</th>
+                                <th class="center">应还利息</th>
+                                <th class="center">剩余本金</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="list in vm.loanqueryList">
+                            <tr>
+                                <td class="center" ng-bind="list.paydate|dateFormat:{symbol:'yyyy-mm-dd'}"></td>
+                                <td class="center" ng-bind="list.payamt|currency:'¥'"></td>
+                                <td class="center" ng-bind="list.payamo|currency:'¥'"></td>
+                                <td class="center" ng-bind="list.payrate|currency:'¥'"></td>
+                                <td class="center" ng-bind="list.allloanamount|currency:'¥'"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination-box clearfix">
+                        <paging class="small" page="vm.page.currentPage" page-size="vm.page.pageSize" total="vm.page.total" adjacent="{{vm.page.adjacent}}" dots="{{vm.page.dots}}" scroll-top="false" hide-if-empty="true" ul-class="pagination" active-class="active" disabled-class="disabled" show-prev-next="true" paging-action="vm.DoCtrlPagingAct('Paging Clicked', page, pageSize, total)">
+                        </paging>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 btn-box-big">
+                        <!-- 后期传页数，以便通讯拿值 -->
+                        <button type="button" class="btn btn-default" ui-sref="mayloan">关闭</button>
+
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

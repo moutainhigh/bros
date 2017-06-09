@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 对统一接入发布服务                       统一接入与服务消费方之间的zookeeper -->
+	
+	<!-- 账户管理 -->
+	<dubbo:service retries="0"  interface="bros.c.custmanage.facade.service.ICAccountManageServiceFacade" ref="caccountManageServiceFacade" />
+	
+	<!--操作员管理  -->
+	<dubbo:service retries="0"  interface="bros.c.custmanage.facade.service.ICOperatorManageServiceFacade" ref="coperatorManageServiceFacade" />
+	<!--角色管理  -->
+	<dubbo:service retries="0"  interface="bros.c.custmanage.facade.service.ICRoleManageServiceFacade" ref="croleManageServiceFacade" />
+	<!-- 对客授权管理 -->
+	<dubbo:service retries="0"  interface="bros.c.custmanage.facade.service.ICTtpAuthModelSerivceFacade" ref="cttpAuthModelSerivceFacade" />
+	<!-- 客户之声 -->
+	<dubbo:service retries="0"  interface="bros.c.custmanage.facade.service.ICCustomervoiceServiceFacade" ref="ccustomervoiceServiceFacade" />
+	<!-- 安保服务 -->
+	<dubbo:service retries="0"  interface="bros.c.custmanage.facade.service.ICSecurityServiceFacade" ref="csecurityServiceFacade" />
+	<!-- 收款人名册维护 -->
+	<dubbo:service retries="0"  interface="bros.c.custmanage.facade.service.ICRecvPersonInfoServiceFacade" ref="crecvPersonInfoServiceFacade" />
+	<!-- 转账汇款 -->
+	<dubbo:service retries="0"  interface="bros.c.custmanage.facade.service.ICTransServiceFacade" ref="ctransServiceFacade" />
+	<!-- 储蓄服务 -->
+	<dubbo:service retries="0"  interface="bros.c.custmanage.facade.service.ICSavingsAcountServiceFacade" ref="csavingsAcountServiceFacade" />
+	<!-- 查询客户总览服务 -->
+	<dubbo:service retries="0"  interface="bros.c.custmanage.facade.service.ICPersonOverviewServiceFacade" ref="cpersonOverviewServiceFacade" />
+	
+	<!-- 监听当前服务是否存活 -->
+	<dubbo:service retries="0"  interface="bros.c.monitor.service.ICApplicationAliveMonitorCustmanageServiceFacade" ref="capplicationAliveMonitorCustmanageServiceFacade" />
+	<!-- 投资理财 -->
+	<dubbo:service retries="0"  interface="bros.c.custmanage.facade.service.ICFinanceInvestmentServiceFacade" ref="cfinanceInvestmentServiceFacade" />
+</beans>  

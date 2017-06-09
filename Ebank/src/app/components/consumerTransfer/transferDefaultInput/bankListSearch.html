@@ -1,0 +1,57 @@
+<div class="bank-address-box" ng-controller="bankListSearchController as vm">
+    <div class="address-title">中国工商银行</div>
+    <div class="address-search clearfix">
+        <div class="keyword">关键字查询  例如  北京 崇文门</div>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="">
+            <span class="input-group-btn"><button class="btn btn-default" type="button">搜索</button></span>
+        </div>
+    </div>
+    <div class="address-list">
+        <table class="table table-striped">
+            <tbody>
+                <tr  ng-repeat="bank in vm.bankList">
+                    <th scope="row"><i class="glyphicon glyphicon-map-marker"></i></th>
+                    <td><span ng-bind="bank.bankCode"></span><p>行号</p></td>
+                    <td ng-bind="bank.bankName"></td>
+                    <td><span ng-click="vm.selectBank(bank.bankCode)">选择</span></td>
+                </tr>
+               <!--  <tr>
+                    <th scope="row"><i class="glyphicon glyphicon-map-marker"></i></th>
+                    <td><span>317110010019</span><p>行号</p></td>
+                    <td>中国工商银行北京崇文门外大街支行</td>
+                    <td><span>选择</span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><i class="glyphicon glyphicon-map-marker"></i></th>
+                    <td><span>317110010019</span><p>行号</p></td>
+                    <td>中国工商银行北京崇文门外大街支行</td>
+                    <td><span>选择</span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><i class="glyphicon glyphicon-map-marker"></i></th>
+                    <td><span>317110010019</span><p>行号</p></td>
+                    <td>中国工商银行北京崇文门外大街支行</td>
+                    <td><span>选择</span></td>
+                </tr>
+                <tr>
+                    <th scope="row"><i class="glyphicon glyphicon-map-marker"></i></th>
+                    <td><span>317110010019</span><p>行号</p></td>
+                    <td>中国工商银行北京崇文门外大街支行</td>
+                    <td><span>选择</span></td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination-box">
+        <ul class="pagination">
+            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+        </ul>
+    </div>
+</div>

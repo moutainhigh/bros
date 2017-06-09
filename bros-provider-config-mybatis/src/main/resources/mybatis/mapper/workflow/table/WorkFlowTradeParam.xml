@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.workflowtradeparam">
+
+    <resultMap id="tradeParamResult" type="java.util.HashMap">
+		<result property="businessKey" column="PAT_BUSINESSKEY"/><!-- 流水号 -->
+		<result property="bizData" column="PAT_BIZDATA" javaType="String" jdbcType="VARBINARY" typeHandler="bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler"/><!-- 参数 -->
+		<result property="beanId" column="PAT_BEANID"/><!-- 回调服务beanid -->
+		<result property="method" column="PAT_METHOD"/><!-- 回调服务方法名 -->
+		<result property="paramTypes" column="PAT_PARAMTYPES" javaType="String" jdbcType="VARBINARY" typeHandler="bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler"/><!-- 回调服务方法参数类型 -->
+	</resultMap>
+	<resultMap id="channelResult" type="java.util.HashMap">
+		<result property="flag" column="PCL_FLAG"/><!-- 渠道标记 -->
+		<result property="checkAuth" column="PCL_CHECKAUTH"/><!-- 是否检查授权 -->
+	</resultMap>
+	<sql id="seq_tradeparam">
+		PAT_BUSINESSKEY,
+		PAT_BUSINESSKEY,
+		PAT_BEANID,
+		PAT_METHOD,
+		PAT_PARAMTYPES
+	</sql>
+	
+	<!-- 根据businessKey查询交易数据-->
+    <select id="queryActBizData"  parameterType="java.util.HashMap" resultMap="tradeParamResult">
+	       SELECT <include refid="seq_tradeparam"/>
+	              FROM PUB_ACT_TRADEPARAM
+	       WHERE  PAT_BUSINESSKEY=#{businessKey}
+    </select>
+    <!-- 添加数据 -->
+	<insert id="insertActBizData" parameterType="java.util.HashMap">
+		insert into PUB_ACT_TRADEPARAM(
+			<include refid="seq_tradeparam"/>
+		) values(
+			<![CDATA[ 
+				#{businessKey,jdbcType=VARCHAR},
+				#{bizData,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler}
+				#{beanId,jdbcType=VARCHAR},
+				#{method,jdbcType=VARCHAR},
+				#{paramTypes,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler},
+	       	]]>
+		)
+	</insert>
+    <!-- 删除数据-->
+	<delete id="deleteActBizData"  parameterType="java.util.HashMap">
+		delete from PUB_ACT_TRADEPARAM where PAT_BUSINESSKEY=#{businessKey}
+	</delete>
+	
+	<!-- 查询渠道标记 -->
+   <select id="queryChannelFlag"  parameterType="java.util.HashMap" resultMap="channelResult">
+	       SELECT PCL_FLAG,PCL_CHECKAUTH
+	              FROM PUB_CHANNEL
+	       WHERE  PCL_CODE=#{channel}
+    </select>
+</mapper>

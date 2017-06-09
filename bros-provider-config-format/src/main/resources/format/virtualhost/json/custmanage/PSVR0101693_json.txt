@@ -1,0 +1,86 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+     "personSummaryInfo":[
+	     {"partyId":"010000000101",
+	      "customerName":"张三",
+	      "contactCertificateTypeId":"10",
+	      "contactCertificateNo":"41080319233211",
+	      "mobilePhone":"13422223333",
+	      "postalAddress":"南京市软件大道"
+	     }],
+	"personPropertyInfo":[
+		{"depositProperty":"1234567",
+	      "loanProperty":"1534567",
+	      "investProperty":"1554560",
+	      "signProductCount":"1000000",
+	      "creditCardCount":"2000000"
+	     }],
+	"personRemindInfo":[
+		{"remindTxt":"身份证有效期2016-11-31即将到期"}],
+	"familyMemberInfo":[
+	     {"partyRelationShipTypeId":"11",
+	      "partyId":"010000000011",
+	      "custName":"李四",
+	      "contactCertificateTypeId":"1X",
+	      "contactCertificateNo":"123432123",
+	      "authCountry":"CNH",
+	      "birthDate":"20010101",
+	      "gender":"2",
+	      "flag":"7",
+	      "partyId":"020000001002",
+	      "partyGroupName":"北京联创智融信息技术有限公司",
+	      "partyAddr":"北京市东城区航星园",
+	      "partyPostal":"100022",
+	      "jobTitle":"2",
+	      "post":"人力资源总监",
+	      "contactNumber":"01088887777",
+	      "monthIncome":"6000",
+	      "degree":"2",
+	      "isOurBankCustomer":"10",
+	      "contactCertificateNo":"0"
+	     }],
+	"relativePersonInfo":[
+	     {"partyRelationShipTypeId":"24",
+			"partyId":"010000000123",
+			"contactCertificateTypeId":"1X",
+			"contactCertificateNo":"767654323",
+			"lastName":"王五",
+			"birthDate":"19991201",
+			"gender":"1",
+			"job":"2",
+			"partyName":"南京张三王五有限公司",
+			"partyAddr":"南京市鼓楼区叉叉路",
+			"partyPhone":"02533334444",
+			"partyType":"1",
+			"jobTitle":"2",
+			"post":"助理",
+			"contactNumber":"13544442222",
+			"monthIncome":"6000",
+			"qualify":"2",
+			"isOurBankCustomer":"1"
+	     }]
+}
+
+
+

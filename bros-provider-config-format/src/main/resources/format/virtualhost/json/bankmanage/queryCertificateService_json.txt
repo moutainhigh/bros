@@ -1,0 +1,39 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+    "certDN":"123456",
+	"issUer":"0001",
+	"caType":"1",
+	"serialNo":"qwer1234",
+	"endDate":"2016-01-06 11-12-13",
+	"startDate":"2018-01-06 11-12-13",
+	"certState":"4",
+	"overEndFlag":"0",
+	"remindUpdateFlag":"1",
+	"remainDays":"1211",
+	"alGorithm":"1",
+	"issHare":"1",
+	"isPreKey":"1",
+	"keyId":"qwerqwer1234",
+	"is2Key":"1"
+}

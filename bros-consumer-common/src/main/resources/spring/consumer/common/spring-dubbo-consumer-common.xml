@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!-- 大小额联行号查询 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="ppmsBankNoCacheServiceFacade" interface="bros.p.common.facade.service.IPPmsBankNoCacheServiceFacade" />
+	<!-- 城市信息查询 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pcityCacheServiceFacade" interface="bros.p.common.facade.service.IPCityCacheServiceFacade" />
+	<!-- 网银互联联行号信息查询 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="ppubunionBankNoCacheServiceFacade" interface="bros.p.common.facade.service.IPPubUnionBankNoCacheServiceFacade" />
+	<!-- 省份信息查询 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="ppubProvinceCacheServiceFacade" interface="bros.p.common.facade.service.IPPubProvinceCacheServiceFacade" />
+	<!-- 购物车 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pshopCartServiceFacade" interface="bros.p.common.facade.service.IPShopCartServiceFacade" />
+	<!-- 数据字典转义服务 -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pescapeAppparServiceFacade" interface="bros.p.common.facade.service.IPEscapeAppparServiceFacade" />
+	<!--购物车  -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="pshoppingCartServiceFacade" interface="bros.p.common.facade.service.IPShoppingCartServiceFacade" />
+	
+	<!--监听当前模块是否存活  -->
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="papplicationAliveMonitorCommonServiceFacade" interface="bros.p.monitor.service.IPApplicationAliveMonitorCommonServiceFacade" />
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="papplicationAliveMonitorAccountServiceFacade" interface="bros.p.monitor.service.IPApplicationAliveMonitorAccountServiceFacade" />
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="papplicationAliveMonitorCustomerServiceFacade" interface="bros.p.monitor.service.IPApplicationAliveMonitorCustomerServiceFacade" />
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="papplicationAliveMonitorFinancialServiceFacade" interface="bros.p.monitor.service.IPApplicationAliveMonitorFinancialServiceFacade" />
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="papplicationAliveMonitorNetbankServiceFacade" interface="bros.p.monitor.service.IPApplicationAliveMonitorNetbankServiceFacade" />
+	<dubbo:reference check="false" version="1.0.0" registry="consumerReference" id="papplicationAliveMonitorTransferServiceFacade" interface="bros.p.monitor.service.IPApplicationAliveMonitorTransferServiceFacade" />
+
+</beans>  

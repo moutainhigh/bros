@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- 设置菜单角色关联关系 -->
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="bmrlMenuId" message="${CECO000000001}"/><!-- 菜单编号 -->
+		<xmlField dataName="bmrlRoleId" message="${CECO000000001}"/><!-- 角色编号 -->
+	</xmlTag>
+</formats>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.tpraccinfdefault">
+
+    <sql id="tpr_accinfDefault_param">
+		TAID_CSTID,
+		TAID_ACCNO,
+		TAID_MOBILENO
+	</sql>
+    
+    <resultMap type="java.util.HashMap" id="tprAccinfDefaultResult">
+    	<result property="cstId" column="TAID_CSTID"/><!-- 客户id -->
+    	<result property="accNo" column="TAID_ACCNO"/><!-- 账号 -->
+    	<result property="mobileNo" column="TAID_MOBILENO"/><!-- 手机号 -->
+    </resultMap>
+	
+    <!-- 通过法人id、账号和 客户号   查询默认账户  -->
+	<select id="queryAccInfDefaultByAccNoAndCstNo" resultMap="tprAccinfDefaultResult">
+       select 
+       <include refid="tpr_accinfDefault_param"/>
+       from  TPR_ACC_INFO_DEFAULT  where 1 = 1
+       <if test="cstId != null and cstId != '' ">
+ 			 and TAID_CSTID = #{cstId}
+	   </if>
+	   <if test="accNo != null and accNo != '' ">
+ 			 and TAID_ACCNO = #{accNo}
+	   </if>
+    </select>
+</mapper>

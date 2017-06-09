@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.prdptservice">
+	<sql id="prd_prdptservice_param">
+		ppe_prdsvrcode,
+		ppe_prdtypecode,
+		ppe_prdsvrname,
+		ppe_prdsvrdesc
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="prdPtServiceResult">
+    	<result property="prdSvrCode" column="ppe_prdsvrcode"/><!-- 服务编号 -->
+    	<result property="prdTypeCode" column="ppe_prdtypecode"/><!-- 产品分类编号 -->
+    	<result property="prdSvrName" column="ppe_prdsvrname"/><!-- 服务名称 -->
+    	<result property="prdSvrDesc" column="ppe_prdsvrdesc"/><!-- 服务描述 -->
+    	<result property="note1" column="note1"/><!-- 预留字段 -->
+    	<result property="note2" column="note2"/><!-- 预留字段 -->
+    </resultMap>
+      <!-- 插入产品分类表数据定义 -->
+    <insert id="insertPrdPtService" parameterType="java.util.HashMap">
+       insert into prd_ptservice(
+    		<include refid="prd_prdptservice_param"/>
+    	)values(#{prdSvrCode},
+		#{prdTypeCode},
+		#{prdSvrName},
+		#{prdSvrDesc})
+    </insert>
+    <!-- 修改产品分类表信息 -->
+    <update id="updatePrdPtService" parameterType="java.util.HashMap">
+		update prd_ptservice
+		set ppe_prdsvrname=#{prdSvrName},
+			ppe_prdsvrdesc=#{prdSvrDesc}
+		 where ppe_prdsvrcode=#{prdSvrCode} 
+	</update>
+	<!-- 删除产品分类表信息 -->
+    <delete id="deletePrdPtServiceByprdSvrCode" parameterType="java.util.HashMap">
+       delete from prd_ptservice where ppe_prdsvrcode=#{prdSvrCode}
+    </delete>
+    <!-- 查询产品分类表所有数据 -->
+    <select id="queryPrdPtServiceForAll" resultMap="prdPtServiceResult">
+       select <include refid="prd_prdptservice_param"/> from prd_ptservice
+    </select>
+     <!-- 查询产品分类表所有数据 -->
+    <select id="queryPrdPtServiceByParameter" resultMap="prdPtServiceResult">
+       select <include refid="prd_prdptservice_param"/> from prd_ptservice where 1=1
+       <if test="prdSvrCode!=null and prdSvrCode!=''">
+ 			 and ppe_prdsvrcode=#{prdSvrCode}
+		</if>
+		<if test="prdTypeCode!=null and prdTypeCode!=''">
+ 			 and ppe_prdtypecode=#{prdTypeCode}
+		</if>
+		<if test="prdSvrName!=null and prdSvrName!=''">
+ 			 and ppe_prdsvrname=#{prdSvrName}
+		</if>
+       
+    </select>
+    <!-- 查询记录数 -->
+	<select id="queryPrdPtServiceNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from prd_ptservice
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="prdSvrCode!=null and prdSvrCode!=''">
+ 			 and ppe_prdsvrcode=#{prdSvrCode}
+		</if>
+		<if test="prdTypeCode!=null and prdTypeCode!=''">
+ 			 and ppe_prdtypecode=#{prdTypeCode}
+		</if>
+		<if test="prdSvrName!=null and prdSvrName!=''">
+ 			 and ppe_prdsvrname=#{prdSvrName}
+		</if>
+	</select>
+</mapper>

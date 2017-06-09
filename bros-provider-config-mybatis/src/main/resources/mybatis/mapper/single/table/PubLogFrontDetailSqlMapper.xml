@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.publogfrontdetail">
+	<sql id="pub_log_frontdetail_param">
+		PLL_FLOWSEQ,
+		PLL_UPBIZDATA,
+		PLL_DOWNBIZDATA
+	</sql>
+	
+	<!-- 前端服务调用日志详细插入 -->
+	<insert id="insertPubLogFrontDetail" parameterType="java.util.HashMap">
+		insert into PUB_LOGFRONTDETAIL (
+				<include refid="pub_log_frontdetail_param" />) 
+	    values(
+	         #{flowSeq},
+	   		 #{upBizData,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler},
+	   		 #{downBizData,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler}
+	       )
+
+	</insert>
+	
+	<!-- 前端服务调用日志详细更新 -->
+	<update id="updatePubLogFrontDetail" parameterType="java.util.HashMap">
+		update PUB_LOGFRONTDETAIL
+		<set>
+			<if test="downBizData !='' and downBizData != null">
+				PLL_DOWNBIZDATA = #{downBizData,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler},
+			</if>
+		</set>
+		where PLL_FLOWSEQ = #{flowSeq} 
+	</update>
+
+</mapper>

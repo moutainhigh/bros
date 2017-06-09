@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.pubapppar">
+	<sql id="pub_apppar_param">
+		par_id,
+		par_typecode,
+		par_typename,
+		par_value,
+		par_language,
+		par_showmsg
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="pubAppParResult">
+    	<result property="id" column="par_id"/><!-- 记录uuid -->
+    	<result property="typeCode" column="par_typecode"/><!-- 参数分类码 -->
+    	<result property="typeName" column="par_typename"/><!-- 参数分类名称 -->
+    	<result property="value" column="par_value"/><!-- 参数实际值 -->
+    	<result property="language" column="par_language"/><!-- 参数语种 -->
+    	<result property="showMsg" column="par_showmsg"/><!-- 参数显示信息 -->
+    </resultMap>
+    
+    <!-- 查询应用参数定义表 -->
+    <select id="queryPubAppPar" resultMap="pubAppParResult">
+       select
+       	<include refid="pub_apppar_param"/>
+       from pub_apppar
+    </select>
+    <!-- 根据参数分类码查询参数分类信息 -->
+    <select id="queryPubAppParByTypeCode" parameterType="java.util.HashMap" resultMap="pubAppParResult" >  
+	    select <include refid="pub_apppar_param"/> 
+		  from pub_apppar
+	      <where>  
+	        par_typecode in  
+	        <foreach collection="typeCodeList" index="index" item="typeCode" open="(" separator="," close=")">
+   				#{typeCode}
+  		   </foreach>
+  		   
+	      </where>  
+    </select>
+</mapper>

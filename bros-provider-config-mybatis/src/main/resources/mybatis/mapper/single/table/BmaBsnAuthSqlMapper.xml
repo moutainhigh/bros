@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.bmabsnauth">
+	<sql id="bma_bsn_auth_param">
+		BBA_BSNID,
+		BBA_CHANNEL,
+		BBA_LEGALID,
+		BBA_AUTHFLAG,
+		BBA_AUTHMODELFK,
+		BBA_PROCDEFID
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="bmaBsnAuthResult">
+    	<result property="bsnCode" column="BBA_BSNID"/>
+    	<result property="channel" column="BBA_CHANNEL"/>
+    	<result property="legalId" column="BBA_LEGALID"/>
+    	<result property="authFlag" column="BBA_AUTHFLAG"/>
+    	<result property="authModelFK" column="BBA_AUTHMODELFK"/>
+    	<result property="procdefId" column="BBA_PROCDEFID"/>
+    </resultMap>
+    
+     <!-- 根据条件查询授权模型ID -->	
+    <select id="queryBmaBsnAuthByChannelAndLegalId"  parameterType="java.util.HashMap" resultMap="bmaBsnAuthResult">
+	       SELECT <include refid="bma_bsn_auth_param"/>
+	              FROM BMA_BSN_AUTH
+	       WHERE  BBA_LEGALID=#{legalId}
+			 AND  BBA_CHANNEL=#{channel}
+    </select>
+    <!-- 根据条件查询授权模型信息笔数 -->	
+    <select id="queryBmaBsnAuthNum"  parameterType="java.util.HashMap" resultType="java.lang.Integer">
+	       SELECT  count(*)
+	              FROM BMA_BSN_AUTH
+	       WHERE  BBA_LEGALID=#{legalId}
+			 AND  BBA_CHANNEL=#{channel}
+			 AND  BBA_BSNID=#{bsnCode}
+    </select>	
+    
+      <!--更新配置表  -->
+    <update id="updateBmaBsnAuth" parameterType="java.util.HashMap">
+	    <foreach collection="list" item="item" index="index" separator=";" >
+	         	UPDATE BMA_BSN_AUTH 
+	         	  SET  BBA_AUTHMODELFK=#{item.modelId},
+	         	       BBA_AUTHFLAG=#{item.authFlag},
+	         	       BBA_PROCDEFID=#{item.procdefId}
+				WHERE    BBA_CHANNEL=#{item.channel}
+					AND  BBA_LEGALID=#{item.legalId}
+					AND  BBA_BSNID=#{item.bsnCode}
+	     </foreach>  
+	</update> 
+	<!-- 保存授权模型  -->
+	<insert id="insertBmaBsnAuth" parameterType="java.util.HashMap">
+		<foreach collection="list" item="item" index="index" separator=";" >
+		insert into BMA_BSN_AUTH(
+			<include refid="bma_bsn_auth_param"/>  
+		) values(
+			<![CDATA[ 
+				#{item.bsnCode},
+				#{item.channel},
+				#{item.legalId},
+				#{item.authFlag},
+				#{item.modelId},
+				#{item.procdefId}
+	       	]]> 
+		)
+		</foreach>
+	</insert> 
+</mapper>

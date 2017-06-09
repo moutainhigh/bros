@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.prdattriparamspec">
+	<sql id="prd_prdattriparamspec_param">
+		ppc_productcode,
+		ppc_property,
+		ppc_propertyname,
+		ppc_setvalue,
+		ppc_description
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="prdAttriParamSpecResult">
+    	<result property="productCode" column="ppc_productcode"/><!-- 产品编号 -->
+    	<result property="property" column="ppc_property"/><!-- 产品属性编码 -->
+    	<result property="propertyName" column="ppc_propertyname"/><!-- 属性名称 -->
+    	<result property="setValue" column="ppc_setvalue" javaType="String" jdbcType="VARBINARY" typeHandler="bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler"/><!-- 属性值 -->
+    	<result property="description" column="ppc_description" javaType="String" jdbcType="VARBINARY" typeHandler="bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler"/><!-- 属性描述 -->
+    	<result property="note1" column="note1"/><!-- 预留字段 -->
+    	<result property="note2" column="note2"/><!-- 预留字段 -->
+    </resultMap>
+      <!-- 插入产品属性参数表数据定义 -->
+    <insert id="insertPrdAttriParamSpec" parameterType="java.util.HashMap">
+       insert into prd_attriparamspec(
+    		<include refid="prd_prdattriparamspec_param"/>
+    	)values<foreach collection="list" item="item" index="index" separator="," >
+    	(#{item.productCode},
+		#{item.property},
+		#{item.propertyName},
+		#{item.setValue,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler},
+		#{item.description,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler})
+		</foreach>
+    </insert>
+	<!-- 删除产品属性参数表信息 -->
+    <delete id="deletePrdAttriParamSpecByProductCode" parameterType="java.util.HashMap">
+       delete from prd_attriparamspec where ppc_productcode=#{productCode} 
+    </delete>
+    <!-- 查询产品属性参数表所有数据 -->
+    <select id="queryPrdAttriParamSpecForAll" resultMap="prdAttriParamSpecResult">
+       select <include refid="prd_prdattriparamspec_param"/> from prd_attriparamspec
+    </select>
+     <!-- 查询产品属性参数表所有数据 -->
+    <select id="queryPrdAttriParamSpecByParameter" resultMap="prdAttriParamSpecResult">
+       select <include refid="prd_prdattriparamspec_param"/> from prd_attriparamspec where 1=1
+       <if test="productCode!=null and productCode!=''">
+ 			 and ppc_productcode=#{productCode}
+		</if>
+		<if test="property!=null and property!=''">
+ 			 and ppc_property=#{property}
+		</if>
+		<if test="propertyName!=null and propertyName!=''">
+ 			 and ppc_propertyname=#{propertyName}
+		</if>
+		<if test="setValue!=null and setValue!=''">
+ 			 and ppc_setvalue=#{setValue,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler}
+		</if>
+		<if test="description!=null and description!=''">
+ 			 and ppc_description=#{description,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler}
+		</if>
+    </select>
+    <!-- 查询记录数 -->
+	<select id="queryPrdAttriParamSpecNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from prd_attriparamspec
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="productCode!=null and productCode!=''">
+ 			 and ppc_productcode=#{productCode}
+		</if>
+		<if test="property!=null and property!=''">
+ 			 and ppc_property=#{property}
+		</if>
+		<if test="propertyName!=null and propertyName!=''">
+ 			 and ppc_propertyname=#{propertyName}
+		</if>
+		<if test="setValue!=null and setValue!=''">
+ 			 and ppc_setvalue=#{setValue,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler}
+		</if>
+		<if test="description!=null and description!=''">
+ 			 and ppc_description=#{description,javaType=String,jdbcType=VARBINARY,typeHandler=bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.bmalandlimit">
+	<sql id="bma_land_limit_param">
+		BLL_LEGALID,
+		BLL_BRANCHID,
+		BLL_CHANNEL,
+		BLL_CSTLEVEL,
+		BLL_BIZTYPE,
+		BLL_SAFETOOL,
+		BLL_SINGLEMAX
+	</sql>
+	
+	<sql id="bma_land_limit_param1">
+	    BLL_ID,
+		BLL_LEGALID,
+		BLL_BRANCHID,
+		BLL_CHANNEL,
+		BLL_CSTLEVEL,
+		BLL_BIZTYPE,
+		BLL_SAFETOOL,
+		BLL_SINGLEMAX
+	</sql>
+    <resultMap type="java.util.HashMap" id="bmaLandResultMap">
+    	<result property="legalId" column="BLL_LEGALID"/>
+    	<result property="branchId" column="BLL_BRANCHID"/>
+    	<result property="channel" column="BLL_CHANNEL"/>
+    	<result property="cstLevel" column="BLL_CSTLEVEL"/>
+    	<result property="bizType" column="BLL_BIZTYPE"/>
+    	<result property="safeTool" column="BLL_SAFETOOL"/>
+    	<result property="singleMax" column="BLL_SINGLEMAX" javaType="java.lang.String" jdbcType="DECIMAL"/>
+    </resultMap>
+    
+    <!--查询银行落地限额信息 -->
+    <select id="queryBmaLandLimit" resultMap="bmaLandResultMap" parameterType="java.util.HashMap">
+      	 select
+       	<include refid="bma_land_limit_param"/>
+      	     from BMA_LAND_LIMIT
+      	 	<![CDATA[ 
+     		 where  BLL_CHANNEL = #{channel}
+       		   and  BLL_LEGALID = #{legalId}
+       		]]> 
+       		<if test="branchId!=null and branchId!=''">
+			     and  BLL_BRANCHID = #{branchId}
+			</if>
+       		<if test="bizType!=null and bizType!=''">
+				 and  BLL_BIZTYPE = #{bizType}
+			</if>
+			<if test="safeTool!=null and safeTool!=''">
+				 and  BLL_SAFETOOL = #{safeTool}
+			</if>
+			<if test="cstLevel!=null and cstLevel!=''">
+				 and  BLL_CSTLEVEL = #{cstLevel}
+			</if>
+   	 </select>
+   	 
+   	  <!--查询银行落地限额信息条数 -->
+    <select id="queryBmaLandLimitTotalNum" resultType="int" parameterType="java.util.HashMap">
+      	 <![CDATA[ 
+	      	 select  count(1)
+      	    	from BMA_LAND_LIMIT
+	     		 	where  BLL_CHANNEL = #{channel}
+	       		   	and  BLL_LEGALID = #{legalId}
+       		]]> 
+	       		<if test="branchId!=null and branchId!=''">
+				     and  BLL_BRANCHID = #{branchId}
+				</if>
+	       		<if test="bizType!=null and bizType!=''">
+					 and  BLL_BIZTYPE = #{bizType}
+				</if>
+				<if test="safeTool!=null and safeTool!=''">
+					 and  BLL_SAFETOOL = #{safeTool}
+				</if>
+				<if test="cstLevel!=null and cstLevel!=''">
+					 and  BLL_CSTLEVEL = #{cstLevel}
+				</if>
+   	 </select>
+   	 
+      <!--查询银行机构落地限额信息 -->
+      <select id="queryBmaLimitByChannelAndBranchIdAndLegalId" resultMap="bmaLandResultMap" parameterType="java.util.HashMap">
+      	 select
+       	<include refid="bma_land_limit_param"/>
+      	     from BMA_LAND_LIMIT
+      	 	<![CDATA[ 
+     		 where  BLL_CHANNEL = #{channel}
+       		   and  BLL_BRANCHID = #{branchId}
+       		   and  BLL_LEGALID = #{legalId}
+       		]]> 
+       		<if test="bizType!=null and bizType!=''">
+				 and  BLL_BIZTYPE = #{bizType}
+			</if>
+			<if test="safeTool!=null and safeTool!=''">
+				 and  BLL_SAFETOOL = #{safeTool}
+			</if>
+			<if test="cstLevel!=null and cstLevel!=''">
+				 and  BLL_CSTLEVEL = #{cstLevel}
+			</if>
+   	 </select>
+   	 
+   	  <!--查询银行法人落地限额信息 -->
+      <select id="queryBmaLandlimitByChannelAndLegalId" resultMap="bmaLandResultMap" parameterType="java.util.HashMap">
+      	 select
+       	<include refid="bma_land_limit_param"/>
+      	 from BMA_LAND_LIMIT
+      	 	<![CDATA[ 
+     		 where  BLL_CHANNEL = #{channel}
+       		 and    BLL_LEGALID = #{legalId}
+       		]]> 
+       		<if test="bizType!=null and bizType!=''">
+				 and  BLL_BIZTYPE = #{bizType}
+			</if>
+			<if test="safeTool!=null and safeTool!=''">
+				 and  BLL_SAFETOOL = #{safeTool}
+			</if>
+			<if test="cstLevel!=null and cstLevel!=''">
+				 and  BLL_CSTLEVEL = #{cstLevel}
+			</if>
+   	 </select>
+   	 
+     <!-- 更新落地限额信息 -->
+    <update id="updateBmaLandLimit" parameterType="java.util.HashMap">
+      	update BMA_LAND_LIMIT 
+      	<![CDATA[ 
+	       	set    BLL_SINGLEMAX=#{singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+			 where BLL_CHANNEL = #{channel}
+			 and   BLL_LEGALID = #{legalId}
+			 and   BLL_BRANCHID = #{branchId}
+       		]]>
+       		<if test="bizType!=null and bizType!=''">
+				 and  BLL_BIZTYPE = #{bizType}
+			</if>
+			<if test="safeTool!=null and safeTool!=''">
+				 and  BLL_SAFETOOL = #{safeTool}
+			</if>
+			<if test="cstLevel!=null and cstLevel!=''">
+				 and  BLL_CSTLEVEL = #{cstLevel}
+			</if>
+    </update>
+    
+     <!-- 设置落地限额 -->
+    <insert id="insertBmaLandLimit" parameterType="java.util.HashMap">
+   		 insert into BMA_LAND_LIMIT ( <include refid="bma_land_limit_param1"/>) 
+	    <![CDATA[ 
+		    values(
+		         #{id},
+		   		 #{legalId},
+		   		 #{branchId},
+		   		 #{channel},
+		   		 #{cstLevel},
+		         #{bizType},
+		         #{safeTool},
+		         #{singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+		       )
+	    ]]>  
+    </insert>
+    
+     <!-- 批量设置法人/机构落地限额 -->
+    <insert id="insertBatchBmaLandLimit" parameterType="java.util.HashMap">
+    	insert into BMA_LAND_LIMIT 
+    		( <include refid="bma_land_limit_param1"/>) 
+    		values
+			      <foreach collection="list" item="item" index="index" separator="," >
+				        ( #{item.id},#{item.legalId},#{item.branchId},#{item.channel},#{item.cstLevel},
+				         #{item.bizType},#{item.safeTool},
+				         #{item.singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+				         )
+	   			 </foreach>  
+    </insert>
+    
+    <!-- 批量更新法人/机构落地限额 -->
+    <update id="updateBatchBmaCstLandLimit" parameterType="java.util.HashMap">
+	        <foreach collection="list" item="item" index="index" separator=";" >
+	         update BMA_LAND_LIMIT 
+	          	set  BLL_SINGLEMAX = #{item.singleMax,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler}
+		       where  BLL_CHANNEL = #{item.channel}
+				 and  BLL_LEGALID = #{item.legalId}
+				 and  BLL_BRANCHID = #{item.branchId}
+				 <if test="item.bizType!=null and item.bizType!=''">
+					 and  BLL_BIZTYPE = #{item.bizType}
+				</if>
+				<if test="item.safeTool!=null and item.safeTool!=''">
+				     and  BLL_SAFETOOL = #{item.safeTool}
+			    </if>
+			    <if test="item.cstLevel!=null and item.cstLevel!=''">
+				    and  BLL_CSTLEVEL = #{item.cstLevel}
+			   </if>
+			 </foreach>  
+    </update>
+</mapper>

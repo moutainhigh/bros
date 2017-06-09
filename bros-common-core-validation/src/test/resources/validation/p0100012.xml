@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- demo用例 -->
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlList dataName="list" message="${CECO000000001}">
+			<xmlList dataName="tempList" message="${CECO000000001}">
+				<xmlField variable="cstNoBody" dataName="cstNoBody" message="${CECO000000001}"/>
+				<xmlField dataName="nameBody" message="${CECO000000001}"/>
+			</xmlList>
+		</xmlList>
+	</xmlTag>
+</formats>

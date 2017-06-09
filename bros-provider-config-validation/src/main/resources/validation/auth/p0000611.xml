@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="operateType" message="${CECO000000001}"/><!-- 操作类型-->
+		<xmlField dataName="beginDate" message="${CECO000000001}"/><!-- 开始日期-->
+		<xmlField dataName="endDate" message="${CECO000000001}"/><!-- 结束日期-->
+		<xmlField dataName="pageNo" message="${CECO000000001}"><!-- 起始页数 -->
+			<validator class="IsPositiveInt" message="${CECO000000008}"/>
+		</xmlField>
+	</xmlTag>
+</formats>

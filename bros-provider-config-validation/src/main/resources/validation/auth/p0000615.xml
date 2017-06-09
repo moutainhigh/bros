@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="isPass" message="${CECO000000001}"/><!-- 审核结果-->
+		<xmlList dataName="taskAuthList" message="${CECO000000001}">
+			<xmlTag message="${CECO000000001}">
+				<xmlField dataName="taskId" message="${CECO000000001}"/><!-- 任务Id -->
+			</xmlTag>
+		</xmlList>
+	</xmlTag>
+</formats>

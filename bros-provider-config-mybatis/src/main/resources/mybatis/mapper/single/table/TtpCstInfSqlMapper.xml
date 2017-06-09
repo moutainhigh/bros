@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.ttpcst">
+	<sql id="ttp_cst_inf_param">
+		tci_cstid,
+		tci_legalid,
+		tci_cstno,
+		tci_hostno,
+		tci_csttype,
+		tci_namecn,
+		tci_nameen,
+		tci_ctftype,
+		tci_ctfno,
+		tci_address,
+		tci_zipcode,
+		tci_fax,
+		tci_legalname,
+		tci_phone,
+		tci_email,
+		tci_groupflag
+	</sql>
+	
+    <resultMap type="java.util.HashMap" id="ttpCstInfResultMap">
+    	<result property="cstid"  column="tci_cstid"/>
+		<result property="legalid"  column="tci_legalid"/>
+		<result property="cstno"  column="tci_cstno"/>
+		<result property="hostno"  column="tci_hostno"/>
+		<result property="csttype"  column="tci_csttype"/>
+		<result property="namecn"  column="tci_namecn"/>
+		<result property="nameen"  column="tci_nameen"/>
+		<result property="ctftype"  column="tci_ctftype"/>
+		<result property="ctfno"  column="tci_ctfno"/>
+		<result property="address"  column="tci_address"/>
+		<result property="zipcode"  column="tci_zipcode"/>
+		<result property="fax"  column="tci_fax"/>
+		<result property="legalname"  column="tci_legalname"/>
+		<result property="phone"  column="tci_phone"/>
+		<result property="email"  column="tci_email"/>
+		<result property="groupflag"  column="tci_groupflag"/>
+    </resultMap>
+    
+     <!-- 根据法人ID和 客户号查询企业客户信息 -->
+	<select id="queryTtpCstInfByCstNoAndLegalid" resultMap="ttpCstInfResultMap" parameterType="java.util.HashMap">
+		select
+		<include refid="ttp_cst_inf_param" />
+			 from ttp_cst_inf
+		       where tci_legalid = #{legalid} 
+		        and  tci_cstno = #{cstNo} 
+	</select>
+	
+
+</mapper>

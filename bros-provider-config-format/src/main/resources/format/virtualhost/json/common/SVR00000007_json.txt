@@ -1,0 +1,359 @@
+{
+	RspSvcHeader: {
+        channelDate: "",
+        acctDate: "",
+        tranTime: "",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20170214",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "",
+        langCode: "",
+        BackendSeqNo: "02021702140000000000094593",
+        globalSeqNo: "",
+        TranTime: "141252634",
+        backendSysId: "",
+        ReturnMsg: "交易成功"
+    },
+
+    bestSellingDetails: [
+            {
+                "price": "0.000",
+                "requireAmount": "N",
+                "chargeShipping": "Y",
+                "imageAdress": "/ecom/images/hopeRunICOneCardSolution.jpg",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "CARD_0521_10010",
+                        "configOptionName": "人民币活期开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "<h3>产品特点</h3><p>1.人民币和多种外币存取款及<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9299182\">通存通兑</a>业务。外币包括：美元、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">欧元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">日元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">港币</a>、英镑、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">加拿大元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">澳大利亚元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">瑞士法郎</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">新加坡元和澳门元</a>(仅限广东省)；</p><p>2.本人、他人之间转账；（外币见相关网页）</p><p>3.境内、境外<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">汇款</a>、自动入账；</p><p>4.预留密码方可通存通兑（下同）</p><h3>结算功能（限于个人结算账户）</h3><p>1.办理和使用<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"681305\">借记卡</a>；</p><p>2.开通<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2219528\">电话银行</a>、网上银行等<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5410435\">电子渠道</a>服务；</p><p>3.办理<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">外汇宝</a>、基金、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">国债</a>、保险、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">银证转账</a>、银券通等投资理财业务；</p><p>4.代发工资、代发养老保险金等；</p><p>5.代缴纳电话、手机、水电煤气等各种<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9209991\">公用事业收费</a>；</p><p>6.ATM取现、商户消费等。</p><h3>适用对象</h3><p>中国居民、港澳台居民、居住在中国境内外的外国人、外籍华人和华侨，均可凭实名制认可的<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5039723\">有效身份证件</a>在<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"245376\">中国银行</a>开立活期储蓄存款账户；另外主要采用活期存折、信用卡（银联卡等）等。</p><h3>办理流程</h3><p>携相关<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">证件</a>到各银行商业网点柜台办理 。</p><p><strong>提交证件</strong></p><p>1.中国公民</p><p>16岁以上中国公民，应出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2080960\">居民身份证</a>/<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"973253\">临时身份证</a>。</p><p>军人、武装警察尚未申领居民身份证的，可出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"373161\">军人身份证</a>、武装警察身份证。</p><p>居住在境内或境外的中国籍华侨,可出具中国护照。</p><p>2.港澳台居民</p><p>往来内地通行证/台湾居民/来往大陆通行证/或其他有效旅行证件。</p><p>3.外国公民（外国人、外籍华人和华侨）</p><p>护照/华侨持中国护照/外国人居留许可证。</p><p>4.16岁之前的未成年人</p><p>如果有身份证，要在监护人的监护下办理，且只能办理存折（<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"921064\">中国民生银行</a>除外），没有身份证的，可用居民户口簿</p><p>温馨提示：</p><p>1.个人每日存款外币现钞不得超过<em><strong>5000</strong></em>美元（其他外币折合等值5000美元）；</p><p>2.个人每日取款外币现钞不得超过<em><strong>10,000</strong></em>美元（其他外币折合等值10,000美元）；</p><p>3.个人每日到柜台提取人民币现金超过<em><strong>50000</strong></em>元，需提前预约；</p><p>4.开户起存金额 1元人民币或100元人民币的等值外币。</p>",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-BL",
+                        "parentProductCategoryId": "MODEL-FPSC-DP02001"
+                    },
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-DP",
+                        "parentProductCategoryId": "DFD-BEST-SELL"
+                    }
+                ],
+                "productName": "润和IC一卡通个人人民币活期",
+                "productId": "CARD_0616_10000-01"
+            },
+            {
+                "price": "0.000",
+                "requireAmount": "N",
+                "chargeShipping": "Y",
+                "imageAdress": "/images/products/CARD_0521_10000-01/small.jpg",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "CARD_0521_10010",
+                        "configOptionName": "人民币活期开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "<h3>产品特点</h3><p>1.人民币和多种外币存取款及<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9299182\">通存通兑</a>业务。外币包括：美元、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">欧元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">日元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">港币</a>、英镑、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">加拿大元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">澳大利亚元</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">瑞士法郎</a>、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">新加坡元和澳门元</a>(仅限广东省)；</p><p>2.本人、他人之间转账；（外币见相关网页）</p><p>3.境内、境外<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">汇款</a>、自动入账；</p><p>4.预留密码方可通存通兑（下同）</p><h3>结算功能（限于个人结算账户）</h3><p>1.办理和使用<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"681305\">借记卡</a>；</p><p>2.开通<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2219528\">电话银行</a>、网上银行等<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5410435\">电子渠道</a>服务；</p><p>3.办理<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">外汇宝</a>、基金、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">国债</a>、保险、<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">银证转账</a>、银券通等投资理财业务；</p><p>4.代发工资、代发养老保险金等；</p><p>5.代缴纳电话、手机、水电煤气等各种<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"9209991\">公用事业收费</a>；</p><p>6.ATM取现、商户消费等。</p><h3>适用对象</h3><p>中国居民、港澳台居民、居住在中国境内外的外国人、外籍华人和华侨，均可凭实名制认可的<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"5039723\">有效身份证件</a>在<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"245376\">中国银行</a>开立活期储蓄存款账户；另外主要采用活期存折、信用卡（银联卡等）等。</p><h3>办理流程</h3><p>携相关<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\">证件</a>到各银行商业网点柜台办理 。</p><p><strong>提交证件</strong></p><p>1.中国公民</p><p>16岁以上中国公民，应出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"2080960\">居民身份证</a>/<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"973253\">临时身份证</a>。</p><p>军人、武装警察尚未申领居民身份证的，可出具<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"373161\">军人身份证</a>、武装警察身份证。</p><p>居住在境内或境外的中国籍华侨,可出具中国护照。</p><p>2.港澳台居民</p><p>往来内地通行证/台湾居民/来往大陆通行证/或其他有效旅行证件。</p><p>3.外国公民（外国人、外籍华人和华侨）</p><p>护照/华侨持中国护照/外国人居留许可证。</p><p>4.16岁之前的未成年人</p><p>如果有身份证，要在监护人的监护下办理，且只能办理存折（<a href=\"http://baike.baidu.com/edit/?′????/654866?dl=2#\" lemmaid=\"921064\">中国民生银行</a>除外），没有身份证的，可用居民户口簿</p><p>温馨提示：</p><p>1.个人每日存款外币现钞不得超过<em><strong>5000</strong></em>美元（其他外币折合等值5000美元）；</p><p>2.个人每日取款外币现钞不得超过<em><strong>10,000</strong></em>美元（其他外币折合等值10,000美元）；</p><p>3.个人每日到柜台提取人民币现金超过<em><strong>50000</strong></em>元，需提前预约；</p><p>4.开户起存金额 1元人民币或100元人民币的等值外币。</p>",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-BL",
+                        "parentProductCategoryId": "MODEL-FPSC-DP02001"
+                    },
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-DP",
+                        "parentProductCategoryId": "DFD-BEST-SELL"
+                    }
+                ],
+                "productName": "润和鼎元卡个人人民币活期",
+                "productId": "CARD_0521_10000-01"
+            },
+            {
+                "price": "0.000",
+                "requireAmount": "N",
+                "chargeShipping": "Y",
+                "imageAdress": "/ecom/images/personalEducationSavings18.png",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "DP_0523_10001",
+                        "configOptionName": "个人整存整取开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "个人教育储蓄 产品简介 通过个人教育储蓄以零存整取方式积累教育资金，总额控制，本金合计最高限额为2万元，利率优惠，利息免税。用于鼓励城乡居民以储蓄方式为子女教育积蓄资金，支持教育事业发展。存期分为一年、三年和六年三种。 功能特点 个人教育储蓄实行利率优惠。一年期、三年期教育储蓄按开户日同期同档次整存整取定期储蓄存款利率计息，六年期按开户日五年期整存整取定期储蓄存款利率计息。客户以实名开立存款帐户，办理续存，并凭存折和学校提供的正在接受非义务教育的学生身份证明一次支取本金和利息，可享受利率优惠，并免征储蓄存款利息所得税",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-BL",
+                        "parentProductCategoryId": "MODEL-FPSC-DP01001"
+                    },
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-BL",
+                        "parentProductCategoryId": "BL-BEST-SELL"
+                    }
+                ],
+                "productName": "个人教育储蓄",
+                "productId": "CARD_0621_20004-01"
+            },
+            {
+                "price": "0.000",
+                "requireAmount": "N",
+                "chargeShipping": "Y",
+                "imageAdress": "/ecom/images/personalEntireStorage15.png",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "DP_0523_10001",
+                        "configOptionName": "个人整存整取开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "个人整存零取 个人整存零取是指在开户时约定存款期限、本金一次存入，固定期限分次支取本金的一种定期储蓄，1000元起存，存期分一年、三年、五年，支取期分一个月、三个月及半年一次。 个人整存零取定期储蓄指在存款开户时约定存款期限、本金一次存入，固定期限周期分次支取本金的一种个人存款。存期分一年、三年、五年，存入时一千元起存，支取期分一个月、三个月及半年一次，由您与营业网点商定。利息按存款开户日挂牌整存零取利率计算，于期满结清时支取。到期未支取部分按支取日挂牌的活期利率计算利息；若要提前支取，则只能办理全部支取。 个人整存零取办理 开户：客户凭有效身份证件办理开户，开户时由客户与银行协商确定支取期限和每次支取金额。 提前支取：客户在存期内如有急需，可持存款凭证及有效身份证件办理全部提前支取。 个人整存零取常见问题 1、开户时是否要与银行约定取款金额？ 要与银行约定取款金额。 2、开户时是否要与银行约定支取期？ 开户时要与银行约定支取期，支取期分为一个月、三个月、半年一次。",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-BL",
+                        "parentProductCategoryId": "MODEL-FPSC-DP01001"
+                    },
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-BL",
+                        "parentProductCategoryId": "BL-BEST-SELL"
+                    }
+                ],
+                "productName": "个人整存零取",
+                "productId": "CARD_0621_20005-01"
+            },
+            {
+                "price": "1.000",
+                "requireAmount": "Y",
+                "chargeShipping": "Y",
+                "imageAdress": "/ecom/images/personalRMBLump13.png",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "DP_0523_10001",
+                        "configOptionName": "个人整存整取开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "<p><strong>一、定义：</strong></p><p>　　整存整取存款是指开户时约定存期，本金一次存入，到期一次支取本息的定期存款。整存整取存款到期可按原存期自动转存。人民币起存金额为50元。存款期限分为分为3个月、半年、1年、2年、3年、5年。</p><p><strong>二、特点：</strong></p><p>　　1．较高的稳定收入：利率较高，利率大小与期限长短成正比，但受时间限制，如果提前支取，利息损失较大。</p><p>　　2．省心方便：具备整存整取存款到期后自动转存功能和约定转存功能，储户可以根据需求灵活的管理整存整取存款的本息、存期、存款形式等；</p><p>　　3．资金灵活：在需要资金周转而整存整取存款未到期时，可部分提前支取一次或者全部提前结清，提前支取部分将按支取当日挂牌活期存款利率计息，还可以办理质押贷款；</p><p>　　4．起存金额低：人民币50元；</p><p>　　5.．存期选择多：人民币存期选择：三个月、六个月、一年、二年、三年和五年。</p><p><strong>三、适用对象：</strong></p><p>　　事先预知使用的资金或长时间动不用的资金。</p>",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-BL",
+                        "parentProductCategoryId": "BL-BEST-SELL"
+                    },
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-BL",
+                        "parentProductCategoryId": "MODEL-FPSC-DP01001"
+                    }
+                ],
+                "productName": "个人人民币整存整取",
+                "productId": "DP_0523_10000-01"
+            },
+            {
+                "price": "0.000",
+                "requireAmount": "N",
+                "chargeShipping": "Y",
+                "imageAdress": "/images/products/CURR_0523_10000-01/small.jpg",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "CURR_10001",
+                        "configOptionName": "个人活期账户开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "<h4>活期储蓄</h4><br><div>    人民币活期储蓄是指您在存款时不约定存款期限，可以随时存取，每次存取金额不限的储蓄方式。1元起存，多存不限。产品载体为本行发行的各类银行卡和存折。    <br><br><strong>有哪些特点？</strong>   <br>    1、存取便利：凭银行卡/存折您可随时存取。<br>    2、灵活通用：您可根据需要在本行全国任意营业网点、自助机具、客户服务中心（电话银行）、网上银行等渠道办理业务，享受服务。<br><br><strong>收益怎样？</strong>   <br>    利率按结息日中国人民银行挂牌公告的活期储蓄存款利率计付。    <br><br><strong>适用于哪些群体？</strong><br>    适合中国境内的个人居民。<br><br><strong>有哪些服务渠道？</strong><br>    您若选择持有我行存折，可根据需要在本行营业网点办理开户、销户、存取现金、转账、汇款、账务查询、书面挂失、更改密码等业务。可通过网上银行办理账务查询、口头挂失等业务；可通过客户服务中心（电话银行）办理账务查询、改密、口头挂失等业务。 您若选择持有我行银行卡，可根据需要在本行营业网点、自助银行办理卡账务查询、卡存款、卡取款、卡转账、卡改密等业务。可通过客户服务中心（电话银行）办理账务查询、改密、挂失等业务；可通过网上银行办理账务查询、卡挂失、代缴费、定制短信息等业务。您还可在任何一个贴有银联标记的ATM、POS机上取现或刷卡消费。<br><br><strong>如何办理业务？</strong><br>    1、开户存款：您持本人有效身份证件到本行网点办理开户存款手续，领取活期存折或银行卡。<br>    2、支取款项：若单笔提取现金5万元以上，须提供本人有效身份证件；大额取款须提前预约，以便本行为您准备现金；在异地办理存取款，须按规定支付手续费。<br>    3、销户：办理销户时，利随本清。<br>    4、其它：在办理挂失、解挂、修改密码、换卡/折、大额取款等业务时须提供您的有效身份证件；他人代您办理的，须向本行提供您及代办人的有效身份证件。（其中解挂、修改密码需由本人办理，不得代办）<br><br><strong>贴心小提示：<br></strong>    1、请您妥善保管储蓄存折/单或银行卡，一旦丢失应及时办理挂失，以确保资金安全。<br>    2、请您设置不易被破译的数字组合作为个人密码，并注意保密，防止密码泄漏。</div>",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-BL",
+                        "parentProductCategoryId": "BL-BEST-SELL"
+                    }
+                ],
+                "productName": "个人人民币活期",
+                "productId": "CURR_0523_10000-01"
+            },
+            {
+                "price": "0.000",
+                "requireAmount": "N",
+                "chargeShipping": "Y",
+                "imageAdress": "/ecom/images/workingCapitalLoans04.png",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "LP_0620_10001",
+                        "configOptionName": "一般贷款开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "流动资金贷款是为满足生产经营者在生产经营过程中短期资金需求，保证生产经营活动正常进行而发放的贷款。按贷款期限可分为一年期以内的短期流动资金贷款和一年至三年期的中期流动资金贷款；按贷款方式可分为担保贷款和信用贷款，其中担保贷款又分保证、抵押和质押等形式；按使用方式可分为逐笔申请、逐笔审贷的短期周转贷款，和在银行规定时间及限额内随借、随用、随还的短期循环贷款。 流动资金贷款作为一种高效实用的融资手段，具有贷款期限短、手续简便、周转性较强、融资成本较低的特点，因此成为深受广大客户欢迎的银行业务。",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "MODEL-FPSC-LP01"
+                    },
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "DFL-BEST-SELL"
+                    }
+                ],
+                "productName": "流动资金贷款",
+                "productId": "LP_0620_20010-01"
+            },
+            {
+                "price": "0.000",
+                "requireAmount": "N",
+                "chargeShipping": "Y",
+                "imageAdress": "/ecom/images/fixedAssetsLoan02.png",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "LP_0620_10001",
+                        "configOptionName": "一般贷款开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "固定资产贷款项目和贷款计划的安排，必须以国家批准的项目计划和信贷计划为依据，根据规定的程序和授权，先评估，后决策。固定资产贷款项目的选择必须符合国家产业政策和金融政策，向有利于促进国民经济持续、快速、健康发展和各项社会事业全面进步的基础产业、支柱产业以及具有较大竞争力和发展潜能的新兴产业倾斜；增强市场观念，提高投资效益，结合银行的业务发展方向，注意培育银行的基本户和重点户；符合商业银行资金营运的要求，注重资金安全性、流动性、效益性的协调统一，既保证贷款本息的按时收回，扩大银行对经济的调节能量和影响，又兼顾银行的实际承受能力。",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "MODEL-FPSC-LP01"
+                    },
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "DFL-BEST-SELL"
+                    }
+                ],
+                "productName": "固定资产贷款",
+                "productId": "LP_0620_20009-01"
+            },
+            {
+                "price": "0.000",
+                "requireAmount": "N",
+                "chargeShipping": "Y",
+                "imageAdress": "/ecom/images/personalBusinessLoansMicroCredit08.png",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "LP_0620_10001",
+                        "configOptionName": "一般贷款开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "微贷（全称微小企业信贷）是小额信贷（MicroCredit）的一种，它是指为微小企业提供的信贷服务。由此衍生出的另一个被广泛运用的词汇叫做微型金融（Microfinance），是将服务内容扩展到储蓄、保险、汇兑等其他金融服务领域。",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "MODEL-FPSC-LP04"
+                    },
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "DFL-BEST-SELL"
+                    }
+                ],
+                "productName": "个人经营类贷款(普通)-微贷",
+                "productId": "LP_0620_20005-01"
+            },
+            {
+                "price": "0.000",
+                "requireAmount": "N",
+                "chargeShipping": "Y",
+                "imageAdress": "/ecom/images/personalCreditLoan14.png",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "DP_0523_10016",
+                        "configOptionName": "一般贷款开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "个人信用贷款 在银行申请个人贷款，银行对贷款资金的用途是有要求的，一般银行会规定贷款申请人不得将贷款资金用于银监会明令禁止的生产、经营、投资领域，借款人需要提供资金用途证明或者用途声明。 中文名 个人信用贷款 起  点 1万元 不超过 50万元 贷款期限 一年以内 个人信用贷款资料 借款人向银行申请个人信用贷款，需书面填写申请表，并提交如下资料： 1、本人有效身份证件； 2、居住地址证明（户口簿等）； 3、个人职业证明； 4、借款申请人本人及家庭成员的收入证明； 5、银行规定的其他资料。",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "DFL-BEST-SELL"
+                    },
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "MODEL-FPSC-LP04"
+                    }
+                ],
+                "productName": "个人信用贷款",
+                "productId": "LP_0623_20001-01"
+            },
+            {
+                "price": "0.000",
+                "requireAmount": "N",
+                "chargeShipping": "Y",
+                "imageAdress": "/ecom/images/personalBusinessLoansOrdinary03.png",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "DP_0523_10016",
+                        "configOptionName": "一般贷款开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "个人经营性贷款是指贷款人向借款人发放的用于借款人合法经营活动所需资金周转点人民币担保贷款 申请条件 　　1、年满18周岁，具有完全民事行为能力的自然人；外国人以及港、澳、台居民为借款人的，应在中国境内居住满一年并有固定居所和职业。 　　2、具有合法有效点身份证明及户籍证明 　　3、借款人具有合法点经营资格，能够提供个体工商户营业执照、合伙企业营业执照或企业法人营业执照。 　　4、具有良好点信用记录 　　5、具有稳定的收入来源和按时足额偿还贷款点能力 　　6、能够提供合法点经营场所及贷款点具体用途。 　　7、 其他银行规定的要求",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "MODEL-FPSC-LP04"
+                    },
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "DFL-BEST-SELL"
+                    }
+                ],
+                "productName": "个人经营类贷款（普通）",
+                "productId": "LP_0623_20015-01"
+            },
+            {
+                "price": "0.000",
+                "requireAmount": "N",
+                "chargeShipping": "Y",
+                "imageAdress": "/ecom/images/personalCarMortgageLoansGeneral80.png",
+                "productConfigOptionList": [
+                    {
+                        "configOptionId": "DP_0523_10016",
+                        "configOptionName": "一般贷款开户",
+                        "configOptionPrice": "5.000"
+                    }
+                ],
+                "textData": "个人汽车按揭贷款 产品介绍 个人汽车按揭贷款是指银行向借款申请人发放的用于购买自用新车的人民币贷款。 产品特色　 期限灵活，按需选择； 借款人可根据实际需要在最长不超过三年的范围内自由选择； 还款灵活，手续便捷； 在贷款额度和贷款期限内，借款人可根据实际资金情况部分或全部提前归还贷款； 定价灵活，产品联动； 根据借款人对本行金融产品的覆盖度与客户忠诚度，综合确定贷款利率优惠政策。 申请条件 年满18周岁，具有完全民事行为能力的自然人； 具有固定职业和可预见的还款来源，信用状况良好，具有良好的还款意愿与按期归还贷款本息的能力； 以所购车辆作为抵押，办妥银行要求的车辆保险。 申请资料 本人及配偶有效身份证件、户籍证明、婚姻状况证明及居住地证明； 本人及配偶职业及收入情况证明； 购车合同或购车凭证； 首付款证明；",
+                "productCategoryList": [
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "MODEL-FPSC-LP04"
+                    },
+                    {
+                        "thirdProductCategoryId": "",
+                        "rootProductCategoryId": "MODEL-FPSC-LP",
+                        "parentProductCategoryId": "DFL-BEST-SELL"
+                    }
+                ],
+                "productName": "个人汽车按揭贷款(普通)",
+                "productId": "LP_0627_20016-01"
+            }
+        ],
+    totalCount: "12"
+}

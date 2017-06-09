@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.activiti.table.actruidentitylink">
+
+	<resultMap id="actRuIdentityLinkResultMap" type="java.util.HashMap">
+		<result property="id" column="ID_" />
+		<result property="rev" column="REV_" />
+		<result property="groupId" column="GROUP_ID_" />
+		<result property="type" column="TYPE_" />
+		<result property="userId" column="USER_ID_" />
+		<result property="taskId" column="TASK_ID_" />
+		<result property="procInstId" column="PROC_INST_ID_" />
+		<result property="procDefId" column="PROC_DEF_ID_" />
+    </resultMap>
+ 
+	<!-- 根据任务ID查询候选身份信息-->
+	<select id="qryActRuIdentityLinkByTaskId" resultMap="actRuIdentityLinkResultMap" parameterType="java.util.HashMap">
+	   <![CDATA[
+			select a.ID_, 
+			       a.REV_,
+			       a.GROUP_ID_,
+			       a.TYPE_,
+			       a.USER_ID_,
+			       a.TASK_ID_,
+			       a.PROC_INST_ID_,
+			       a.PROC_DEF_ID_
+			from ACT_RU_IDENTITYLINK a 
+			where a.TYPE_='candidate'
+			   and a.TASK_ID_=#{taskId}
+          ]]>
+	</select>
+	
+</mapper> 
+ 

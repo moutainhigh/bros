@@ -1,0 +1,691 @@
+.wrapper
+    margin-bottom 0px
+    margin-top:0px
+    @media $smart
+        margin-bottom:5px
+// 居中盒子
+.main-box
+    display: block
+    margin: 0 auto
+    width: 1000px
+    padding-bottom: 20px
+// 头部样式
+.header-box
+    position: relative
+    z-index: 90
+    width: 100%
+    border-top: 5px solid #148fcc
+    border-bottom: 1px solid #ececec
+    background: #fff
+    -moz-box-shadow: 0 6px 10px rgba(0, 0, 0, .2)
+    -webkit-box-shadow: 0 6px 10px rgba(0, 0, 0, .2)
+    box-shadow: 0 6px 10px rgba(0, 0, 0, .2)
+    .header-bar-box
+        height: 39px
+        border: #ececec solid 1px
+        .header-bar
+            position: relative
+            width: 1000px
+            height: 39px
+            margin: 0 auto
+            .header-bar-btn
+                position: absolute
+                top: 5px
+                right: 0
+                height: 29px
+                border-left: 1px #ececec solid
+                li
+                    float: left
+                    padding: 0 15px
+                    height: 29px
+                    border-right: 1px #ececec solid
+                    line-height: 29px
+                    vertical-align: middle
+                    i
+                        padding-right: 8px
+                a
+                    text-decoration: none
+            .message
+                line-height: 38px
+                span
+                    padding-right: 10px
+                i
+                    padding-right: 5px
+    .header
+        position: relative
+        width: 1000px
+        height: 90px
+        margin: 0 auto
+        .link
+            position: absolute
+            top: 35px
+            right: 0
+            height: 20px
+            li
+                float: left
+                height: 20px
+                padding: 0 15px 0 5px
+                a
+                    line-height: 20px
+                    color: #58585a
+                    text-decoration: none
+                    &:hover
+                        text-decoration: none
+                    i
+                        float: left
+                        display: inline-block
+                        width: 20px
+                        height: 20px
+                        font-size: 12px
+                        line-height: 20px
+                        color: #148fcc
+        .logo
+            position: absolute
+            width: 170px
+            height: 50px
+            top: 20px
+            background: url(../assets/img/logo.png) center center no-repeat
+        .header-nav
+            position: absolute
+            left: 250px
+            top: 25px
+            .font-big
+                padding: 10px 20px
+                font-size: 18px
+                color: #58585a
+        .nav
+            position: absolute
+            left: 240px
+            top: 20px
+            height: 50px
+            position: absolute
+            left: 240px
+            top: 20px
+            height: 50px
+            li
+                float: left
+                padding: 0 20px
+                height: 50px
+                line-height: 50px
+                float: left
+                padding: 0 20px
+                height: 50px
+                line-height: 50px
+                a
+                    font-size: 18px
+                    color: #58585a
+                    text-decoration: none
+                    font-size: 18px
+                    color: #58585a
+                    text-decoration: none
+                    &:hover
+                        color: #148fcc
+                        color: #148fcc
+// 头部购物车
+.top-car
+    position: absolute
+    top: 25px
+    right: 0
+    .top-car-btn
+        position: absolute
+        right: 0
+        padding-top: 8px
+        z-index: 10
+        width: 140px
+        height: 40px
+        border: #148fcc 1px solid
+        text-align: center
+        cursor: pointer
+        -moz-border-radius: 5px
+        -webkit-border-radius: 5px
+        border-radius: 5px
+        b
+            padding: 0 5px
+            color: #148fcc
+        *
+            display: inline-block
+            vertical-align: middle
+        i
+            color: #148fcc
+            font-size: 12px
+        .glyphicon-shopping-cart
+            font-size 16px
+            padding-right 4px
+    .top-car-box
+        display: none
+        position: absolute
+        right: 0
+        top: 49px
+        z-index: 1
+        padding: 15px
+        width: 460px
+        border: #148fcc 1px solid
+        background: #fff
+        -moz-border-radius: 5px 0 5px 5px
+        -webkit-border-radius: 5px 0 5px 5px
+        border-radius: 5px 0 5px 5px
+        .top-car-title
+            padding: 0 0 10px 0
+            border-bottom: 1px #e2e2e2 dotted
+            font-weight: bold
+        .top-car-list
+            display: inline-block
+            width: 100%
+            .list
+                display: inline-block
+                padding: 10px 0
+                width: 95%
+                border-bottom: 1px #e2e2e2 dotted
+                .ico
+                    float: left
+                    width: 28px
+                    height: 28px
+                    text-align: center
+                    color: #148fcc
+                    line-height: 26px
+                    border: 2px solid #148fcc
+                    -moz-border-radius: 14px
+                    -webkit-border-radius: 14px
+                    border-radius:14px
+                    i
+                        font-size: 14px
+                .money
+                    float: right
+                    text-align: right
+                    font-size: 12px
+                    line-height: 18px
+                    .tool
+                        color: #148fcc
+                        cursor: pointer
+                .title
+                    float: left
+                    width: 260px
+                    padding-left: 10px
+                    font-size: 12px
+        .top-car-info
+            float: left
+            width: 100%
+            padding-top: 10px
+            .top-car-total
+                float: left
+                line-height: 34px
+                b
+                    padding: 0 3px
+                span
+                    padding-right: 15px
+            .top-car-info-btn
+                float: right
+    .top-car-btn-open
+        height: 50px
+        -moz-border-radius: 5px 5px 0 0
+        -webkit-border-radius: 5px 5px 0 0
+        border-radius: 5px 5px 0 0
+        border-bottom: 0
+        background: #fff
+
+// 底部样式
+.footer-login
+    padding: 30px 0
+    width: 100%
+    text-align: center
+    p
+        padding: 5px
+        span
+            padding: 0 10px
+        a
+            color: #333
+            &:hover
+                color: #333
+
+.footer
+    padding: 30px 0
+    width: 100%
+    background: #58585a
+    color: #c3c3c8
+    text-align: center
+    p
+        padding: 5px
+        span
+            padding: 0 10px
+        a
+            color: #c3c3c8
+            &:hover
+                color: #c3c3c8
+// 输入框样式
+.input-rows-box
+    padding: 0px
+    border: #e2e2e2 0px solid
+    .input-rows
+        padding-top: 10px
+        margin: 0px 0
+        margin-top: -1px
+        padding-bottom: 10px
+        border-top: #e2e2e2 0px solid
+        border-bottom: #e2e2e2 0px solid
+        .dn-info
+            padding-top: 10px
+            em
+                color: #999
+        .right-info
+            display: inline-block
+            padding: 0 5px
+            height: 28px
+            line-height: 28px
+            vertical-align: middle
+            _zoom: 1
+            *display: inline
+            input
+                margin-top: -2px
+                vertical-align: middle
+        .right-btn-box
+            display: inline-block
+            height: 34px
+            vertical-align: middle
+            _zoom: 1
+            *display: inline
+            a
+                margin: 0 5px
+        .box
+            display: inline-block
+        .box-text
+            padding-top: 6px
+            margin-bottom: 6px
+            font-size: 14px
+            line-height: 20px
+        .controls
+            margin-left: 180px
+    .input-btn-box
+        display: block
+        padding: 10px
+        margin-top: 3px
+        padding-left: 175px
+        -webkit-box-sizing: border-box
+        -moz-box-sizing: border-box
+        box-sizing: border-box
+        clear: both
+        button
+            margin-right: 10px
+    .dekaronBox
+        padding: 5px
+        margin-bottom: 6px
+        display: block
+        width: 270px
+        background-color: #fffde8
+        border: #f4eca6 1px solid
+        .dekaronBtnBox
+            text-align: center
+            padding-top: 5px
+            *padding-top: 10px
+            a
+                margin: 0 5px
+        .dekaronImg
+            display: block
+    .input-title
+        padding: 15px
+        margin: 0px
+        background-color: #fbfbfb
+        font-weight: bold
+        margin-bottom: 15px
+        font-size: 16px
+    .input-rows-title
+        float: left
+        width: 165px
+        padding-top: 4px
+        margin-bottom: 6px
+        text-align: right
+        font-weight: normal
+        line-height: 24px
+        i
+            padding-right: 4px
+            color: red
+            font-size: 12px
+
+.input-column-box
+    .input-btn-box
+        padding: 10px
+        margin-top: -10px
+        width: 100%
+        clear: both
+        -webkit-box-sizing: border-box
+        -moz-box-sizing: border-box
+        box-sizing: border-box
+        text-align: center
+        a
+            margin: 0 5px
+    .input-title
+        height: 25px
+        padding: 5px 0px
+        margin: 0 10px
+        background-color: #fbfbfb
+        border-top: 0px solid #eee
+        border-bottom: 0px solid #eee
+        font-weight: bold
+        font-size: 14px
+        line-height: 25px
+
+.input-column-big
+    width: 100%
+
+.input-column-two
+    display: table
+    width: 100%
+    border-bottom: #ececec 0px solid
+
+.input-column
+    display: block
+    float: left
+    width: 50%
+    min-height: 30px
+    -webkit-box-sizing: border-box
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+    .input-rows
+        margin-top: 0px
+        padding-bottom: 10px
+        .dn-info
+            padding-top: 5px
+            em
+                padding-right: 15px
+                color: #999
+        .right-info
+            display: inline-block
+            padding: 0 5px
+            height: 32px
+            line-height: 32px
+            vertical-align: middle
+            _zoom: 1
+            *display: inline
+        .controls
+            padding: 0 10px
+            display: block
+            .inputMini
+                width: 46%
+            .input
+                width: 100%
+        .right-btn-box
+            display: inline-block
+            height: 32px
+            vertical-align: middle
+            _zoom: 1
+            a
+                margin: 0 5px
+    .input-rows-title
+        display: block
+        padding-left: 10px
+        padding-top: 6px
+        margin-bottom: 6px
+        text-align: left
+        font-weight: normal
+        line-height: 20px
+        i
+            color: #f00
+            font-size: 14px
+
+//头部一级菜单
+.menu-box
+    position: absolute
+    width 100%
+    height 40px
+    left 0px
+    bottom -1px
+    background-color #0168c5
+#menu
+    position: absolute
+    width 1000px
+    height 40px
+    margin-left -500px
+    left 50%
+    bottom 0px
+    zoom: 1
+    &:before
+        display: table
+    &:after
+        display: table
+        clear: both
+    li
+        float: left
+        position: relative
+    a
+        float: left
+        padding: 8px 10px
+        color: #fff
+        text-decoration: none
+        font-size 16px
+        cursor pointer
+    a:hover
+        color #fff
+
+#menu
+    li
+        &:hover
+            & > a
+                color: #3782c4
+#menu
+    ul
+        margin: 20px 0 0 0
+        opacity: 0
+        visibility: hidden
+        position: absolute
+        top: 42px
+        left: 0
+        z-index: 1
+        background: #fff
+        border 1px solid #ddd
+        -moz-border-radius: 3px
+        -webkit-border-radius: 3px
+        border-radius: 3px
+        -webkit-transition: all .2s ease-in-out
+        -moz-transition: all .2s ease-in-out
+        -ms-transition: all .2s ease-in-out
+        -o-transition: all .2s ease-in-out
+        transition: all .2s ease-in-out
+        background-color: #fff
+        -webkit-background-clip: padding-box
+        background-clip: padding-box
+        border-radius: 4px
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175)
+        box-shadow: 0 6px 12px rgba(0,0,0,.175)
+#menu
+    li
+        &:hover
+            & > ul
+                opacity: 1
+                visibility: visible
+                margin: 0
+#menu
+    ul
+        ul
+            top: 0
+            left: 149px
+            margin: 0 0 0 20px
+
+
+#menu
+    ul
+        li
+            float: none
+            display: block
+            border: 0
+
+#menu
+    ul
+        li
+            &:last-child
+                -moz-box-shadow: none
+                -webkit-box-shadow: none
+                box-shadow: none
+
+#menu
+    ul
+        a
+            padding: 10px 15px
+            width: 150px
+            display: block
+            white-space: nowrap
+            float: none
+            text-transform: none
+            font-size 14px
+            color #58585a
+
+#menu
+    ul
+        a
+            &:hover
+                background-color: #f5f5f5
+
+
+#menu
+    ul
+        li
+            &:first-child
+                & > a
+                    -moz-border-radius: 3px 3px 0 0
+                    -webkit-border-radius: 3px 3px 0 0
+                    border-radius: 3px 3px 0 0
+#menu
+    ul
+        li
+            &:first-child
+                & > a
+                    &:after
+                        content: ''
+                        position: absolute
+                        left: 40px
+                        top: -6px
+                        border-left: 6px solid transparent
+                        border-right: 6px solid transparent
+                        border-bottom: 6px solid #ddd
+#menu
+    ul
+        ul
+            li
+                &:first-child
+                    a
+                        &:after
+                            left: -6px
+                            top: 50%
+                            margin-top: -6px
+                            border-left: 0
+                            border-bottom: 6px solid transparent
+                            border-top: 6px solid transparent
+                            border-right: 6px solid #ddd
+
+#menu
+    ul
+        li
+            &:first-child
+                a
+                    &:hover
+                        &:after
+                            border-bottom-color: #ddd
+#menu
+    ul
+        ul
+            li
+                &:first-child
+                    a
+                        &:hover
+                            &:after
+                                border-right-color: #ddd
+                                border-bottom-color: transparent
+#menu
+    ul
+        li
+            &:last-child
+                & > a
+                    -moz-border-radius: 0 0 3px 3px
+                    -webkit-border-radius: 0 0 3px 3px
+                    border-radius: 0 0 3px 3px
+
+// 下部二级导航带标题导航
+.nav-title-bar
+    border-bottom: 1px solid #ddd
+    margin 0 auto
+    width 1000px
+    height 55px
+    .title
+        float left
+        font-size 22px
+        line-height 55px
+    .nav-tabs
+        padding-top 11px
+        float right
+        border-bottom 0
+        font-size 16px
+.nav-title-bar-heigth
+    margin-top 10px
+.ebak-table-list
+    .table
+        border 1px solid #ddd
+    .table > thead > tr > th
+        border 0
+        background-color #eff9f6
+        padding 10px
+    .table > tbody > tr > td
+        padding 10px
+    .pagination
+        margin 0
+        float right
+        text-align right
+    .ebak-table-title
+        padding 10px 0
+        font-size 18px
+        color $blue
+    .table-detail
+        th
+            border-right 1px solid #ddd
+            border-left 1px solid #ddd
+            text-align right
+            width 20%
+        td
+            width 30%
+.table-list
+    width 100%
+    // border 1px solid #e9eaec
+    th
+        padding 8px
+        background #e8f4fb
+        border 1px solid #e9eaec
+    td
+        padding 8px
+        border 1px solid #e9eaec
+    .choice
+        width 80px
+        text-align center
+    .title
+        width 330px
+    .price
+        width 140px
+        text-align right
+    .number
+        width 120px
+        text-align center
+    .money
+        width 180px
+        text-align right
+    .tool
+        width 100px
+        text-align center
+        color $blue
+        cursor pointer
+    .td-np
+        padding 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

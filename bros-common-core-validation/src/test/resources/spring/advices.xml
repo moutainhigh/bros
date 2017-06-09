@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+           http://www.springframework.org/schema/beans/spring-beans.xsd    
+           http://www.springframework.org/schema/context    
+           http://www.springframework.org/schema/context/spring-context.xsd  
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd  
+           http://www.springframework.org/schema/aop    
+           http://www.springframework.org/schema/aop/spring-aop.xsd    
+           ">
+	<!-- 服务提供方拦截器拦截顺序 -->
+	<!-- 
+	    1、异常信息转换
+	    2、进行数据校验
+	    
+	    16、封装服务提供方返回字段信息
+	 -->
+	
+	<!-- 服务提供方字段校验拦截器 -->
+	<bean id="validateInterceptor" class="bros.common.core.intercepter.ValidateInterceptor" />
+	<aop:config>
+		<aop:advisor order="2" id="validateParamsInterceptor" advice-ref="validateInterceptor" pointcut="execution(* bros.t..facade.service..*(..))" />
+	</aop:config>
+	
+</beans>

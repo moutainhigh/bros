@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.prdmallinfo">
+	<sql id="mall_info_param">
+		PMI_MAILLID,
+		PMI_MALLCODE,
+		PMI_MALLNAME,
+		PMI_MALLDESC,
+		PMI_CHLID,
+		PMI_BRANCHNO,
+		PMI_PAGENAME
+	</sql>
+
+	<resultMap type="java.util.HashMap" id="mallInfoMap">
+		<result property="mallId" column="PMI_MAILLID" />
+        <result property="mallCode" column="PMI_MALLCODE" />
+		<result property="mallName" column="PMI_MALLNAME" />
+		<result property="mallDesc" column="PMI_MALLDESC" />
+		<result property="chlId" column="PMI_CHLID" />
+		<result property="branchNo" column="PMI_BRANCHNO" />
+		<result property="pageName" column="PMI_PAGENAME" />
+	</resultMap>
+
+	<!--查询商城信息 -->
+	<select id="queryMallInfo" resultMap="mallInfoMap">
+		select
+		<include refid="mall_info_param" />
+		from PRD_MALL_INFO
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="mallId != null and mallId != '' ">
+			and PMI_MAILLID = #{mallId}
+		</if>
+		<if test="mallCode != null and mallCode != '' ">
+			and PMI_MALLCODE = #{mallCode}
+		</if>
+		<if test="mallName != null and mallName != '' ">
+			and PMI_MALLNAME = #{mallName}
+		</if>
+		<if test="chlId != null and chlId != '' ">
+			and PMI_CHLID = #{chlId}
+		</if>
+		<if test="branchNo != null and branchNo != '' ">
+			and PMI_BRANCHNO = #{branchNo}
+		</if>
+	</select>
+
+	<!-- 更新商城信息 -->
+	<update id="updateMallInfo" parameterType="java.util.HashMap">
+		update PRD_MALL_INFO 
+      		<![CDATA[ 
+		       set  PMI_MALLNAME=#{mallName},PMI_MALLDESC=#{mallDesc},PMI_PAGENAME=#{pageName}
+			   where 1 = 1
+       		]]>
+       	<if test="mallId != null and mallId != '' ">
+			and PMI_MAILLID = #{mallId}
+		</if>
+		<if test="mallCode != null and mallCode != '' ">
+			and PMI_MALLCODE = #{mallCode}
+		</if>
+		<if test="chlId != null and chlId != '' ">
+			and PMI_CHLID = #{chlId}
+		</if>
+		<if test="branchNo != null and branchNo != '' ">
+			and PMI_BRANCHNO = #{branchNo}
+		</if>
+	</update>
+
+	<!-- 新增商城信息-->
+	<insert id="insertMallInfo" parameterType="java.util.HashMap">
+		insert into PRD_MALL_INFO (
+		<include refid="mall_info_param" />) 
+	    <![CDATA[ 
+		    values(
+		   		 #{mallId},
+		   		 #{mallCode},
+		   		 #{mallName},
+		   		 #{mallDesc},
+		   		 #{chlId},
+		   		 #{branchNo},
+		   		 #{pageName}
+		       )
+	    ]]>
+	</insert>
+    <!-- 删除商城信息-->
+	<delete id="deleteMallInfo" parameterType="java.util.HashMap">
+		delete from PRD_MALL_INFO 
+	    <![CDATA[ 
+	     where 1 = 1
+	    ]]>
+	    <if test="mallId != null and mallId != '' ">
+			and PMI_MAILLID = #{mallId}
+		</if>
+		<if test="mallCode != null and mallCode != '' ">
+			and PMI_MALLCODE = #{mallCode}
+		</if>
+		<if test="chlId != null and chlId != '' ">
+			and PMI_CHLID = #{chlId}
+		</if>
+		<if test="branchNo != null and branchNo != '' ">
+			and PMI_BRANCHNO = #{branchNo}
+		</if>
+	</delete>
+	<!--查询商城信息 -->
+	<select id="queryMallInfoTotalNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from PRD_MALL_INFO
+	    <![CDATA[ 
+	       where  1 = 1
+	    ]]>
+		<if test="mallId != null and mallId != '' ">
+			and PMI_MAILLID = #{mallId}
+		</if>
+		<if test="mallCode != null and mallCode != '' ">
+			and PMI_MALLCODE = #{mallCode}
+		</if>
+		<if test="mallName != null and mallName != '' ">
+			and PMI_MALLNAME = #{mallName}
+		</if>
+		<if test="chlId != null and chlId != '' ">
+			and PMI_CHLID = #{chlId}
+		</if>
+		<if test="branchNo != null and branchNo != '' ">
+			and PMI_BRANCHNO = #{branchNo}
+		</if>
+	</select>
+	<!--根据机构号、渠道标识查询商城信息 -->
+	<select id="queryMallDetailedInfo" resultMap="mallInfoMap">
+		select
+		<include refid="mall_info_param" />
+		from PRD_MALL_INFO
+      	 	<![CDATA[ 
+     		 where  PMI_BRANCHNO = #{branchNo} and PMI_CHLID = #{chlId}
+     		 ]]>
+	</select>
+</mapper>

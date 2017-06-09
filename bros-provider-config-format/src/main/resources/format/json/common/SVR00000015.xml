@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats><!-- 根据partyId查询客户产品视图 -->
+	<fmtDef id="SVR00000015SendFmt">
+	     <xmlRel rel="SendFmt"/>
+		 <xmlField tagName="partyId" dataName="partyId"/><!--客户号  -->
+	</fmtDef>
+	<fmtDef id="SVR00000015RecFmt">
+        <xmlRel rel="RecFmt"/>
+        	<xmlList tagName="returnList" dataName="returnList"><!--产品视图List -->
+               <xmlTag>
+           		   <xmlField tagName="productId" dataName="productId"/><!-- 产品ID-->
+	               <xmlField tagName="productName" dataName="productName"/><!--产品名称-->
+	               <xmlField tagName="orderdate" dataName="orderdate"/><!--订单日期 -->
+	               <xmlList tagName="productIdList" dataName="productIdList"><!--产品详情-->
+	                	<xmlTag>
+			               	<xmlField tagName="productId" dataName="productId"/><!--产品ID -->
+			               	<xmlField tagName="productName" dataName="productName"/><!--产品名称 -->
+			            </xmlTag>
+	               </xmlList>
+               </xmlTag>
+           	</xmlList>
+	</fmtDef>
+</formats>

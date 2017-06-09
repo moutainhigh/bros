@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000004SendFmt">
+	         <xmlRel rel="SendFmt"/>
+			 <xmlField tagName="partyId" dataName="partyId"/><!--当事人编号  -->
+			 <xmlField tagName="orderId" dataName="orderId"/><!--订单标识 -->
+			 <xmlField tagName="visitId" dataName="visitId"/><!--流水标识 -->
+	</fmtDef>
+	<fmtDef id="SVR00000004RecFmt">
+	      <xmlRel rel="RecFmt"/>
+		 <xmlField tagName="responseMessage" dataName="responseMessage"/><!--返回码  -->
+		 <xmlField tagName="errorMessage" dataName="errorMessage"/><!--错误信息 -->
+		 <xmlTag tagName="orderInfo" dataName="orderInfo"> <!-- 订单信息 -->
+				<xmlField tagName="orderId"  dataName="orderId"/><!--订单标识 -->
+				<xmlField tagName="orderCurrentStatus"  dataName="orderCurrentStatus"/><!--当前状态 -->
+				 <xmlList tagName="orderStatusList" dataName="orderStatusList"><!--订单历史状态列表-->
+	          	  <xmlTag>
+		             <xmlField tagName="status" dataName="status"/><!--状态 -->
+		             <xmlField tagName="statusDatetime" dataName="statusDatetime"/><!--变更状态的日期-->
+		          </xmlTag>
+         		</xmlList>
+		          <xmlField tagName="orderDate"  dataName="orderDate"/><!--订货日期 -->
+		          <xmlField tagName="currencyUom"  dataName="currencyUom"/><!--货币 -->
+		          <xmlField tagName="channelName"  dataName="channelName"/><!--销售渠道 -->
+		          <xmlTag tagName="productStoreMap" dataName="productStoreMap"> <!-- 货品仓库 -->
+		             <xmlField tagName="storeName" dataName="storeName"/><!--店铺名称 -->
+		             <xmlField tagName="productStoreId" dataName="statusDatetime"/><!--店铺标识-->
+		           </xmlTag>
+		          <xmlField tagName="originFacilityId"  dataName="originFacilityId"/><!--原仓储设施 -->
+		          <xmlField tagName="createdBy"  dataName="createdBy"/><!--创建者 -->
+		          <xmlField tagName="priority"  dataName="priority"/><!--优先级-->		
+			      <xmlField tagName="invoicePerShipment"  dataName="invoicePerShipment"/><!--是否统计每次货运发票-->	
+			      <xmlField tagName="isViewed"  dataName="isViewed"/><!--标记已浏览-->	
+		 </xmlTag>
+		 <xmlTag tagName="orderContactInfoMap" dataName="orderContactInfoMap"><!-- 订单联络信息 -->
+				<xmlField tagName="fullName"  dataName="fullName"/><!--客户名称 -->
+				<xmlField tagName="partyId"  dataName="partyId"/><!--下订单客户的编号-->
+				<xmlList tagName="postalAddressList" dataName="postalAddressList"><!--货运地址 -->
+	          	  <xmlTag>
+		             <xmlField tagName="toName" dataName="toName"/><!--收货人姓名 -->
+		             <xmlField tagName="address1" dataName="address1"/><!--地址1-->
+		             <xmlField tagName="address2" dataName="address2"/><!--地址2-->
+		             <xmlField tagName="city" dataName="city"/><!--城市 -->
+		             <xmlField tagName="postalCode" dataName="postalCode"/><!--邮政编号 -->
+		             <xmlField tagName="stateProvinceGeoId" dataName="stateProvinceGeoId"/><!--省标识-->
+		             <xmlField tagName="countryGeoId" dataName="countryGeoId"/><!--市标识-->
+		             <xmlField tagName="stateProvinceName" dataName="stateProvinceName"/><!--省份-->
+		             <xmlField tagName="countryName" dataName="countryName"/><!--市-->
+		          </xmlTag>
+                </xmlList>
+		 </xmlTag>
+		 	<xmlList tagName="orderShippingInfo" dataName="orderShippingInfo"><!--发货信息 -->
+          	  <xmlTag>
+	             <xmlField tagName="shipmentMethodTypeName" dataName="shipmentMethodTypeName"/><!--货运方法类型名称-->
+	             <xmlField tagName="shipGroupAddressName" dataName="shipGroupAddressName"/><!--货运地址-->
+		          <xmlList tagName="shipmentIdList" dataName="shipmentIdList"><!--货运标识列表-->
+	          	  <xmlTag>
+		             <xmlField tagName="shipmentId" dataName="shipmentId"/><!--货运标识列表-->
+		          </xmlTag>
+	            </xmlList>
+	            </xmlTag>
+            </xmlList>
+		 <xmlTag tagName="orderPaymentInfo" dataName="orderPaymentInfo"> <!-- 付款信息 -->
+				 <xmlList tagName="orderPaymentStatusList" dataName="orderPaymentStatusList"><!--订单支付状态列表-->
+	          	  <xmlTag>
+		             <xmlField tagName="statusItemName" dataName="statusItemName"/><!--状态名称-->
+		             <xmlField tagName="statusDatetime" dataName="statusDatetime"/><!--变更状态的日期-->
+		             <xmlField tagName="statusUserLogin" dataName="statusUserLogin"/><!--变更状态的用户-->
+		          </xmlTag>
+	            </xmlList>
+	             <xmlList tagName="invoiceIdList" dataName="invoiceIdList"><!--发票标识列表-->
+	          	  <xmlTag>
+		             <xmlField tagName="invoiceId" dataName="invoiceId"/><!--发票标识-->
+		          </xmlTag>
+	            </xmlList>
+	             <xmlList tagName="paymentMethodList" dataName="paymentMethodList"><!--支付工具列表-->
+	          	  <xmlTag>
+		             <xmlField tagName="paymentMethodId" dataName="paymentMethodId"/><!--支付工具标识-->
+		             <xmlField tagName="paymentMethodTypeId" dataName="paymentMethodTypeId"/><!--支付工具类型标识-->
+		          </xmlTag>
+	            </xmlList>
+				<xmlField tagName="openAmount"  dataName="openAmount"/><!--金额 -->
+		 </xmlTag>
+		 <xmlTag tagName="orderItemsMap" dataName="orderItemsMap"> <!-- 订单项 -->
+				<xmlField tagName="orderSubTotal"  dataName="orderSubTotal"/><!--项目小计 -->
+				<xmlField tagName="otherAdjAmount"  dataName="otherAdjAmount"/><!--其他调整总计 -->
+				<xmlField tagName="shippingAmount"  dataName="shippingAmount"/><!--货运及处理总计-->
+				<xmlField tagName="taxAmount"  dataName="taxAmount"/><!--销售税总额 -->
+				<xmlField tagName="grandTotal"  dataName="grandTotal"/><!--应付总计-->
+				<xmlList tagName="orderItemLists" dataName="orderItemLists"><!--订单项列表-->
+				  <xmlTag>
+				  <xmlField tagName="orderItemSeqId" dataName="orderItemSeqId"/><!--订单项序列标识-->
+				   <xmlTag tagName="productMap" dataName="productMap"><!-- 产品信息 -->
+		             <xmlField tagName="productId" dataName="productId"/><!--产品标识-->
+		             <xmlField tagName="productName" dataName="productName"/><!--产品名称-->
+		             <xmlField tagName="prodCatalogId" dataName="prodCatalogId"/><!--产品目录标识-->
+		             <xmlTag tagName="productConfigOptionMap" dataName="productConfigOptionMap"><!-- 产品配置项-->
+		                  <xmlField tagName="configOptionId" dataName="configOptionId"/><!--配置项标识-->	
+		                  <xmlField tagName="configOptionName" dataName="configOptionName"/><!--配置项名称-->	
+		             </xmlTag>
+		             <xmlField tagName="supplierProductId" dataName="supplierProductId"/><!--供应商产品标识-->
+		             <xmlField tagName="orderItemDesc" dataName="orderItemDesc"/><!--订单项描述-->
+		          </xmlTag>
+	          	  <xmlTag tagName="unitPriceMap" dataName="unitPriceMap">
+		             <xmlField tagName="unitPrice" dataName="unitPrice"/><!--支付工具标识-->
+		             <xmlField tagName="unitListPrice" dataName="unitListPrice"/><!--单位列表价格-->
+		             <xmlField tagName="currencyUomId" dataName="currencyUomId"/><!--货币-->
+		          </xmlTag>
+		          <xmlTag tagName="quantityMap" dataName="quantityMap">
+		             <xmlField tagName="quantity" dataName="quantity"/><!--数量-->
+		          </xmlTag>
+		           <xmlTag tagName="adjustMentMap" dataName="adjustMentMap">
+		             <xmlField tagName="adjustMent" dataName="adjustMent"/><!--调整价格-->
+		             <xmlField tagName="currencyUomId" dataName="currencyUomId"/><!--货币-->
+		          </xmlTag>
+		          <xmlTag tagName="subTotalMap" dataName="subTotalMap">
+		             <xmlField tagName="subTotal" dataName="subTotal"/><!--明细项小计价格-->
+		             <xmlField tagName="currencyUomId" dataName="currencyUomId"/><!--货币-->
+		          </xmlTag>
+		           <xmlTag tagName="priceMap" dataName="priceMap">
+		             <xmlField tagName="price" dataName="price"/><!--原价-->
+		             <xmlField tagName="currencyUomId" dataName="currencyUomId"/><!--货币-->
+		          </xmlTag>
+		          </xmlTag>
+	           </xmlList>
+		 </xmlTag>
+		  <xmlList tagName="noteList" dataName="noteList"><!--注释列表-->
+          	  <xmlTag>
+	             <xmlField tagName="partyName" dataName="partyName"/><!--支付工具标识-->
+	             <xmlField tagName="noteDateTime" dataName="noteDateTime"/><!--支付工具类型标识-->
+	             <xmlField tagName="noteInfo" dataName="noteInfo"/><!--注释信息-->
+	          </xmlTag>
+	      </xmlList>
+	</fmtDef>
+</formats>

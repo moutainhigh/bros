@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!--================================================ 机构管理 ================================================-->
+	<!-- 添加机构服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="addBranchManageAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBranchManageServiceFacade">
+		<dubbo:method name="addBranch" />
+	</dubbo:reference>
+	<!-- 修改机构服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateBranchManageAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBranchManageServiceFacade">
+		<dubbo:method name="updateBranch" />
+	</dubbo:reference>
+	<!-- 删除机构服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="deleteBranchManageAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBranchManageServiceFacade">
+		<dubbo:method name="deleteBranch" />
+	</dubbo:reference>
+	<!-- 查询所有机构服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryAllBranchManageAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBranchManageServiceFacade">
+		<dubbo:method name="queryAllBaranch" />
+	</dubbo:reference>
+	<!--================================================ 法人管理 ================================================-->
+	<!-- 添加法人服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="addLegalAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICLegalServiceFacade">
+		<dubbo:method name="addLegal" />
+	</dubbo:reference>
+	<!-- 法人查询服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryLegalAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICLegalServiceFacade">
+		<dubbo:method name="queryLegal" />
+	</dubbo:reference>
+	<!-- 分页法人查询服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryLegalPageAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICLegalServiceFacade">
+		<dubbo:method name="queryLegalPage" />
+	</dubbo:reference>
+	<!-- 法人树形数据查询服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="querytreeLegalAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICLegalServiceFacade">
+		<dubbo:method name="querytreeLegal" />
+	</dubbo:reference>
+	<!-- 法人修改服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateLegalAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICLegalServiceFacade">
+		<dubbo:method name="updateLegal" />
+	</dubbo:reference>
+	<!-- 删除法人信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="deleteLegalAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICLegalServiceFacade">
+		<dubbo:method name="deleteLegal" />
+	</dubbo:reference>
+	<!--================================================ 菜单管理 ================================================-->
+	<!-- 添加菜单服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="addMenudefAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMenudefServiceFacade">
+		<dubbo:method name="addMenudef" />
+	</dubbo:reference>
+	<!-- 菜单查询服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryMenudefAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMenudefServiceFacade">
+		<dubbo:method name="queryMenudef" />
+	</dubbo:reference>
+	<!-- 菜单修改服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateMenudefAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMenudefServiceFacade" 
+	url="dubbo://10.20.38.41:20913">
+		<dubbo:method name="updateMenudef" />
+	</dubbo:reference>
+	<!-- 删除菜单信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="deleteMenudefAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMenudefServiceFacade">
+		<dubbo:method name="deleteMenudef" />
+	</dubbo:reference>
+	<!-- 设置菜单角色关联关系服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="addsetMenuRoleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMenudefServiceFacade">
+		<dubbo:method name="setMenuRole" />
+	</dubbo:reference>
+	<!-- 修改菜单角色关联关系服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateMenuRoleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMenudefServiceFacade" 
+	>
+		<dubbo:method name="updateMenuRole" />
+	</dubbo:reference>
+	<!-- 查询菜单角色关联关系服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryMenuRoleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICMenudefServiceFacade" 
+	>
+		<dubbo:method name="queryMenuRole" />
+	</dubbo:reference>
+	<!--================================================ 柜员角色管理 ================================================-->
+	<!-- 增加柜员角色服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="addTellerRoleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerRoleServiceFacade">
+		<dubbo:method name="addTellerRole" />
+	</dubbo:reference>
+	<!-- 更改柜员角色服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateTellerRoleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerRoleServiceFacade">
+		<dubbo:method name="updateTellerRole" />
+	</dubbo:reference>
+	<!-- 删除柜员角色服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="deleteTellerRoleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerRoleServiceFacade">
+		<dubbo:method name="deleteTellerRole" />
+	</dubbo:reference>
+	<!-- 设置柜员角色关联关系服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="addsetTellerRoleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerRoleServiceFacade">
+		<dubbo:method name="setTellerRole" />
+	</dubbo:reference>
+	<!-- 更新柜员角色关联关系服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateSetTellerRoleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerRoleServiceFacade">
+		<dubbo:method name="updateSetTellerRole" />
+	</dubbo:reference>
+	<!-- 查询柜员已分配角色信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="querySetTellerRoleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerRoleServiceFacade">
+		<dubbo:method name="querySetTellerRole" />
+	</dubbo:reference>
+	<!-- 查询柜员角色服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryTellerRoleAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerRoleServiceFacade">
+		<dubbo:method name="queryTellerRole" />
+	</dubbo:reference>
+	<!--================================================ 柜员管理 ================================================-->
+	<!-- 增加柜员服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="addTellerAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerServiceFacade">
+		<dubbo:method name="addTeller" />
+	</dubbo:reference>
+	<!-- 柜员信息查询服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryTellerByIdAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerServiceFacade">
+		<dubbo:method name="queryTellerById" />
+	</dubbo:reference>
+	<!-- 柜员信息修改服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateTellerAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerServiceFacade">
+		<dubbo:method name="updateTeller" />
+	</dubbo:reference>
+	<!-- 删除柜员信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="deleteTellerAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerServiceFacade">
+		<dubbo:method name="deleteTeller" />
+	</dubbo:reference>
+	<!-- 柜员登录服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateTellerLoginAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerServiceFacade">
+		<dubbo:method name="updateTellerLogin" />
+	</dubbo:reference>
+	<!-- 柜员登出服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateTellerLogoutAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerServiceFacade">
+		<dubbo:method name="updateTellerLogout" />
+	</dubbo:reference>
+	<!-- 根据柜员查询菜单服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryTellerRoleMenuAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerRoleServiceFacade">
+		<dubbo:method name="queryTellerRoleMenu" />
+	</dubbo:reference>
+	<!-- 根据柜员查询菜单服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryMenudefProAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICTellerRoleServiceFacade">
+		<dubbo:method name="queryMenudefPro" />
+	</dubbo:reference>
+	<!--================================================ 业务功能管理 ================================================-->
+	<!-- 查询业务功能信息 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryBsnFunAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBusinessFunctionServiceFacade" 
+	>
+		<dubbo:method name="queryBsnFun" />
+	</dubbo:reference>
+	<!-- 查询业务功能关联菜单信息 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryBsnFunRelMenudefAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBusinessFunctionServiceFacade" 
+	>
+		<dubbo:method name="queryBsnFunRelMenudef" />
+	</dubbo:reference>
+	<!-- 修改业务功能关联菜单信息 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateBsnFunRelMenuAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBusinessFunctionServiceFacade" 
+	>
+		<dubbo:method name="updateBsnFunRelMenu" />
+	</dubbo:reference>
+	<!-- 添加业务功能信息 -->
+	<dubbo:reference check="false" version="1.0.0" id="insertOneBsndefAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBusinessFunctionServiceFacade" 
+	>
+		<dubbo:method name="insertOneBsndef" />
+	</dubbo:reference>
+	<!-- 修改业务功能信息 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateOneBsndefAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBusinessFunctionServiceFacade" 
+	>
+		<dubbo:method name="updateOneBsndef" />
+	</dubbo:reference>
+	<!-- 删除业务功能信息 -->
+	<dubbo:reference check="false" version="1.0.0" id="deleteOneBsndefAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBusinessFunctionServiceFacade" 
+	>
+		<dubbo:method name="deleteOneBsndef" />
+	</dubbo:reference>
+</beans>  

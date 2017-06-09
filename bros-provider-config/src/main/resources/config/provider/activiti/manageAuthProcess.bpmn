@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="manageAuthProcess" name="管理类授权" isExecutable="true">
+    <startEvent id="startevent1" name="Start">
+      <documentation>开始</documentation>
+    </startEvent>
+    <serviceTask id="servicetask1" name="回调业务服务逻辑" activiti:expression="${authFLowCallBackNoContextBase.callBack(execution)}"></serviceTask>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow8" sourceRef="servicetask1" targetRef="endevent1"></sequenceFlow>
+    <endEvent id="terminateendevent1" name="TerminateEndEvent">
+      <terminateEventDefinition></terminateEventDefinition>
+    </endEvent>
+    <boundaryEvent id="boundaryerror1" name="Error" attachedToRef="servicetask1">
+      <documentation>回调业务逻辑服务异常</documentation>
+      <errorEventDefinition errorRef="PPAI0015"></errorEventDefinition>
+    </boundaryEvent>
+    <sequenceFlow id="flow48" name="回调异常" sourceRef="boundaryerror1" targetRef="terminateendevent1"></sequenceFlow>
+    <userTask id="usertask12" name="管理员授权" activiti:candidateUsers="${authUserId}">
+      <extensionElements>
+        <activiti:taskListener event="create" class="bros.common.core.activiti.tasklistener.CheckManageTaskCompleteResultTaskListener">
+          <activiti:field name="roleNumberField">
+            <activiti:string><![CDATA[roleNumber]]></activiti:string>
+          </activiti:field>
+          <activiti:field name="approvedField">
+            <activiti:string><![CDATA[approved]]></activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="authUserIdList" activiti:elementVariable="authUserId">
+        <completionCondition>${immediatelyEnd == 'true'}</completionCondition>
+      </multiInstanceLoopCharacteristics>
+    </userTask>
+    <exclusiveGateway id="exclusivegateway21" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow83" sourceRef="usertask12" targetRef="exclusivegateway21"></sequenceFlow>
+    <serviceTask id="servicetask16" name="设置通过授权结果" activiti:class="bros.common.core.activiti.delegate.SetAuthPassResultServiceDelegate">
+      <extensionElements>
+        <activiti:field name="authResultField">
+          <activiti:string><![CDATA[authResult]]></activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <serviceTask id="servicetask17" name="设置拒绝授权结果" activiti:class="bros.common.core.activiti.delegate.SetAuthResultServiceDelegate">
+      <extensionElements>
+        <activiti:field name="authResultField">
+          <activiti:string><![CDATA[authResult]]></activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow86" sourceRef="servicetask16" targetRef="servicetask1"></sequenceFlow>
+    <sequenceFlow id="flow87" sourceRef="servicetask17" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="flow93" sourceRef="exclusivegateway21" targetRef="servicetask16">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${approved='true'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow94" sourceRef="exclusivegateway21" targetRef="servicetask17">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${approved='false'}]]></conditionExpression>
+    </sequenceFlow>
+    <boundaryEvent id="boundaryerror2" name="Error" attachedToRef="servicetask16">
+      <errorEventDefinition errorRef="CCAI0001"></errorEventDefinition>
+    </boundaryEvent>
+    <boundaryEvent id="boundaryerror3" name="Error" attachedToRef="servicetask17">
+      <errorEventDefinition errorRef="CCAI0001"></errorEventDefinition>
+    </boundaryEvent>
+    <sequenceFlow id="flow95" sourceRef="boundaryerror3" targetRef="terminateendevent1"></sequenceFlow>
+    <sequenceFlow id="flow96" sourceRef="boundaryerror2" targetRef="terminateendevent1"></sequenceFlow>
+    <sequenceFlow id="flow97" sourceRef="startevent1" targetRef="usertask12"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_manageAuthProcess">
+    <bpmndi:BPMNPlane bpmnElement="manageAuthProcess" id="BPMNPlane_manageAuthProcess">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="-129.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask1" id="BPMNShape_servicetask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="130.0" y="720.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="165.0" y="830.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="terminateendevent1" id="BPMNShape_terminateendevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="350.0" y="716.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="boundaryerror1" id="BPMNShape_boundaryerror1">
+        <omgdc:Bounds height="30.0" width="30.0" x="206.0" y="719.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask12" id="BPMNShape_usertask12">
+        <omgdc:Bounds height="55.0" width="105.0" x="-164.0" y="315.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway21" id="BPMNShape_exclusivegateway21">
+        <omgdc:Bounds height="40.0" width="40.0" x="-132.0" y="410.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask16" id="BPMNShape_servicetask16">
+        <omgdc:Bounds height="55.0" width="105.0" x="-60.0" y="530.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="boundaryerror2" id="BPMNShape_boundaryerror2">
+        <omgdc:Bounds height="30.0" width="30.0" x="15.0" y="528.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask17" id="BPMNShape_servicetask17">
+        <omgdc:Bounds height="55.0" width="105.0" x="-246.0" y="530.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="boundaryerror3" id="BPMNShape_boundaryerror3">
+        <omgdc:Bounds height="30.0" width="30.0" x="-180.0" y="528.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="182.0" y="775.0"></omgdi:waypoint>
+        <omgdi:waypoint x="182.0" y="830.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow48" id="BPMNEdge_flow48">
+        <omgdi:waypoint x="236.0" y="734.0"></omgdi:waypoint>
+        <omgdi:waypoint x="350.0" y="733.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="48.0" x="389.0" y="608.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow83" id="BPMNEdge_flow83">
+        <omgdi:waypoint x="-112.0" y="370.0"></omgdi:waypoint>
+        <omgdi:waypoint x="-112.0" y="410.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow86" id="BPMNEdge_flow86">
+        <omgdi:waypoint x="-8.0" y="585.0"></omgdi:waypoint>
+        <omgdi:waypoint x="-8.0" y="746.0"></omgdi:waypoint>
+        <omgdi:waypoint x="130.0" y="747.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow87" id="BPMNEdge_flow87">
+        <omgdi:waypoint x="-194.0" y="585.0"></omgdi:waypoint>
+        <omgdi:waypoint x="-194.0" y="847.0"></omgdi:waypoint>
+        <omgdi:waypoint x="165.0" y="847.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow93" id="BPMNEdge_flow93">
+        <omgdi:waypoint x="-92.0" y="430.0"></omgdi:waypoint>
+        <omgdi:waypoint x="-8.0" y="430.0"></omgdi:waypoint>
+        <omgdi:waypoint x="-8.0" y="530.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow94" id="BPMNEdge_flow94">
+        <omgdi:waypoint x="-132.0" y="430.0"></omgdi:waypoint>
+        <omgdi:waypoint x="-194.0" y="430.0"></omgdi:waypoint>
+        <omgdi:waypoint x="-194.0" y="530.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow95" id="BPMNEdge_flow95">
+        <omgdi:waypoint x="-150.0" y="543.0"></omgdi:waypoint>
+        <omgdi:waypoint x="-100.0" y="542.0"></omgdi:waypoint>
+        <omgdi:waypoint x="-100.0" y="653.0"></omgdi:waypoint>
+        <omgdi:waypoint x="367.0" y="653.0"></omgdi:waypoint>
+        <omgdi:waypoint x="367.0" y="716.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow96" id="BPMNEdge_flow96">
+        <omgdi:waypoint x="45.0" y="543.0"></omgdi:waypoint>
+        <omgdi:waypoint x="367.0" y="542.0"></omgdi:waypoint>
+        <omgdi:waypoint x="367.0" y="716.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow97" id="BPMNEdge_flow97">
+        <omgdi:waypoint x="-112.0" y="185.0"></omgdi:waypoint>
+        <omgdi:waypoint x="-112.0" y="315.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

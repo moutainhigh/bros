@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.relational.table.prdproduct-prdattriparamspec">
+	<sql id="prd_attri_param">
+		PPC_PROPERTY,
+		PPC_PROPERTYNAME,
+		PPC_SETVALUE,
+		PPC_DESCRIPTION
+	</sql>
+	 
+	<resultMap type="java.util.HashMap" id="prdattriMap">
+    	<result property="property" column="PPC_PROPERTY"/><!-- 产品属性编码 -->
+    	<result property="propertyName" column="PPC_PROPERTYNAME"/><!-- 属性名称 -->
+    	<result property="setValue" column="PPC_SETVALUE" javaType="String" jdbcType="VARBINARY" typeHandler="bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler"/><!-- 属性值 -->
+    	<result property="description" column="PPC_DESCRIPTION" javaType="String" jdbcType="VARBINARY" typeHandler="bros.common.core.mybatis.handler.StringOrVarbinaryTypeHandler"/><!-- 属性描述 -->
+	</resultMap>
+	
+	<!--根据产品分类编码和属性编码查询属性参数值 -->
+	<select id="queryPropertyValueInfo" resultMap="prdattriMap">
+		select distinct
+		<include refid="prd_attri_param" />
+		from PRD_ATTRIPARAMSPEC pa left join PRD_PRODUCT pp on pp.PPT_PRODUCTCODE = pa.PPC_PRODUCTCODE   
+		<![CDATA[ 
+			where pp.PPT_PRDTYPECODE = #{prdTypeCode} and pa.PPC_PROPERTY = #{property}
+       	]]>
+	</select>
+</mapper>

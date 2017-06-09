@@ -1,0 +1,63 @@
+<div>
+    <div class="account-box">
+        <div class="account">
+
+            <div class="account-chart">
+                <div class="title">账户总览</div>
+                <div class="my-fortune">
+                    <div class="finance-summary">
+                        <div class="main">
+                            <div class="finance-body">
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <div ng-if="vm.hasPie" e-chart class="pieChart" options="vm.pieOptions"></div>
+                                        <img ng-if="!vm.hasPie" ng-src="{{vm.emptyPie}}" style="margin-left:15px">
+                                        <div class="shadow-line"></div>
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 col-sm-7">
+                                        <div class="row finance-row" ng-repeat="distribution in vm.distributionData">
+                                            <div class="col-md-1">
+                                                <div class="circle" ng-style="{background:distribution.color}"></div>
+                                            </div>
+                                            <div class="col-md-2 product-name" ng-bind="distribution.desc"></div>
+                                            <div class="col-md-4 text-right no-wrap"><span class="money" privacy ng-bind="(distribution.sum| number:2)"></span>元</div>
+                                            <div class="col-md-3 oper">
+                                                <a class="operlink" ng-repeat="operator in distribution.operator" ng-if="operator.state" ui-sref="{{operator.state}}">{{operator.name}}</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recommend-product">
+                <div class="title">推荐产品</div>
+                <div class="img"><img src="../assets/img/layout/img05.jpg" alt=""></div>
+                <ul class="product-info">
+                    <li class="product-title">60天理财债券型投资基金</li>
+                    <li class="product-tag"><span>低风险</span><span>申赎免费</span><span>收益稳健</span></li>
+                    <li>近一年收益率：<b class="big-font">24.16<span>%</span></b></li>
+                    <li>投资风险：低</li>
+                    <li class="product-but">
+                        <button type="button" class="btn btn-primary">查看详情</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="account-nav-box">
+        <div class="nav-title-bar">
+            <div class="title">本行账户</div>
+            <ul class="nav nav-tabs">
+                <li role="presentation" class=" active">
+                    <a href="#">本行账户</a>
+                </li>
+                <li role="presentation" class=""><a href="#">他行账户</a></li>
+            </ul>
+        </div>
+    </div>
+    <account-management compare="vm.getSubAccount();" list="vm.accountList" shelfcodelist="vm.shelfCodeList">
+
+    </account-management>
+</div>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.prdshelfgoods-bmamenuproserrel-bmamenudef">
+	<sql id="shelfgoods_menu_info_param">
+		mp.BMPR_SHELFCODE,
+		mp.BMPR_GOODSCODE,
+		mp.BMPR_PRDTYPECODE,
+		m.BMF_CODE,
+		m.BMF_NAME,
+		m.BMF_URL,
+		m.BMF_LEVEL,
+		m.BMF_PARENTID,
+		m.BMF_STT,
+		m.BMF_SEQNO,
+		m.BMF_DESC
+	</sql>
+	<resultMap type="java.util.HashMap" id="shelfGoodsMenuInfoMap">
+		<result property="shelfCode" column="BMPR_SHELFCODE" />
+        <result property="goodsCode" column="BMPR_GOODSCODE" />
+		<result property="prdTypeCode" column="BMPR_PRDTYPECODE" />
+		<result property="menuCode" column="BMF_CODE" />
+		<result property="menuUrl" column="BMF_URL" />
+		<result property="menuLevel" column="BMF_LEVEL" />
+		<result property="menuParentId" column="BMF_PARENTID" />
+		<result property="menuStt" column="BMF_STT" />
+		<result property="menuSeqNo" column="BMF_SEQNO" />
+		<result property="menuDesc" column="BMF_DESC" />
+	</resultMap>
+
+	<!--根据渠道号等信息查询货架信息 -->
+	<select id="queryShowShelfGoodsMenuInfo" resultMap="shelfGoodsMenuInfoMap">
+		select
+		<include refid="shelfgoods_menu_info_param" />
+		  from BMA_MENUDEF m left join BMA_MENU_PROSER_REL mp on m.BMF_CODE=mp.BMPR_MENUCODE  
+		<![CDATA[ 
+			 where mp.BMPR_GOODSCODE in
+  			(select p.PSS_GOODSCODE from PRD_SHELFGOODS p where p.PSS_SHELFCODE = #{shelfCode} and p.PSS_GOODSTATUS = #{goodStatus}) 
+       	]]>
+	</select>
+</mapper>

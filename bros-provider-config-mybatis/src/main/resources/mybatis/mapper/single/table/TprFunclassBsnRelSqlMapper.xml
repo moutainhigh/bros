@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.tprfunclassbsnrel">
+
+    <sql id="tpr_funclassBsnRel_param">
+		TFBR_ID,
+		TFBR_LEGALID,
+		TFBR_CLASSNO,
+		TFBR_BSNCODE
+	</sql>
+    
+    <resultMap type="java.util.HashMap" id="tprFunclassBsnRelResult">
+    	<result property="id" column="TFBR_ID"/><!-- 唯一标识 -->
+    	<result property="legalId" column="TFBR_LEGALID"/><!-- 法人id -->
+    	<result property="classNo" column="TFBR_CLASSNO"/><!-- 分类编号 -->
+    	<result property="bsnCode" column="TFBR_BSNCODE"/><!-- 业务编码 -->
+    </resultMap>
+	
+    <!-- 根据业务代码查询个人网银账户功能业务分类与业务关系 -->
+	<select id="queryFuncClassBsnRelInfoByBsnCode" resultMap="tprFunclassBsnRelResult" parameterType="java.util.HashMap">
+		select 
+		<include refid="tpr_funclassBsnRel_param"/> 
+		 from 
+			TPR_FUNCLASS_BSN_REL 
+		where 
+			TFBR_LEGALID = #{legalId} and TFBR_BSNCODE = #{bsnCode}
+	</select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 转账汇款  ================================================-->
+	<!--汇款预校验服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryTransferPreCheckAction_1.0.0" interface="bros.c.custmanage.facade.service.ICTransServiceFacade" >
+		<dubbo:method name="transferPreCheck"/>
+	</dubbo:reference>
+	<!--转账汇款服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updateTransferAction_1.0.0" interface="bros.c.custmanage.facade.service.ICTransServiceFacade" >
+		<dubbo:method name="tranProcess"/>
+	</dubbo:reference>
+	<!--转账历史查询服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryAccTransResultInfAction_1.0.0" interface="bros.c.custmanage.facade.service.ICTransServiceFacade" >
+		<dubbo:method name="queryAccTransResultInf"/>
+	</dubbo:reference>
+	<!--大小额转账结果查证服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryCnapsTransResultAction_1.0.0" interface="bros.c.custmanage.facade.service.ICTransServiceFacade" >
+		<dubbo:method name="queryCnapsTransResult"/>
+	</dubbo:reference>
+	<!--业务状态查询服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryTransResultAction_1.0.0" interface="bros.c.custmanage.facade.service.ICTransServiceFacade" >
+		<dubbo:method name="queryTransResult"/>
+	</dubbo:reference>
+	<!--条件查询落地审批信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryApproveByStatAction_1.0.0" interface="bros.c.custmanage.facade.service.ICTransServiceFacade" >
+		<dubbo:method name="queryApproveByStatMethod"/>
+	</dubbo:reference>
+	<!--取消转账服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="deleteCancelTransAction_1.0.0" interface="bros.c.custmanage.facade.service.ICTransServiceFacade" >
+		<dubbo:method name="cancelTransMethod"/>
+	</dubbo:reference>
+	<!--添加电子回单服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="addEletoSingleAction_1.0.0" interface="bros.c.custmanage.facade.service.ICTransServiceFacade" >
+		<dubbo:method name="addEletoSingleMethod"/>
+	</dubbo:reference>
+	<!--查询电子回单信息服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryEletoSingleinfoAction_1.0.0" interface="bros.c.custmanage.facade.service.ICTransServiceFacade" >
+		<dubbo:method name="queryEleToSingleinfoMethod"/>
+	</dubbo:reference>
+	<!--更新电子回单打印次数服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="updatePrintNumByObjectIdAction_1.0.0" interface="bros.c.custmanage.facade.service.ICTransServiceFacade" >
+		<dubbo:method name="updateEletoSinglePrintNumByObjectId"/>
+	</dubbo:reference>
+</beans>  

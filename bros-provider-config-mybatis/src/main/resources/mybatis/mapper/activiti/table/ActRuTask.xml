@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.activiti.table.actrutask">
+
+	<resultMap id="actRuTaskResultMap" type="java.util.HashMap">
+		<result property="bsnType" column="BSN_TYPE" /><!-- 交易类型 -->
+		<result property="recordNum" column="RECORD_NUM" /><!-- 记录条数 -->
+		<result property="bsnCode" column="BSN_CODE" /><!-- 业务编码 -->
+    </resultMap>
+    
+    
+    <!-- 根据法人记录唯一标识+客户编号+操作员ID（处理人不能是任务提交人）+业务大类统计待签收笔数信息列表   2016/09/23-->
+	<select id="qryTaskBsnTypeViewListByCondition" resultMap="actRuTaskResultMap" parameterType="java.util.HashMap">
+		select v.TEXT_ as BSN_TYPE, 
+				count(distinct t.PROC_INST_ID_) as RECORD_NUM 
+		from ACT_RU_TASK t, 
+			 ACT_RU_VARIABLE v, 
+			 ACT_RU_IDENTITYLINK k
+		where k.TYPE_='candidate'
+			  and k.USER_ID_=#{userId}
+			  and t.ID_=k.TASK_ID_
+			  and t.PROC_INST_ID_=v.PROC_INST_ID_
+			  and v.NAME_=#{bsnTypeFieldName}
+			  and t.SUSPENSION_STATE_=#{state}
+			  <!-- and (t.ASSIGNEE_ is null or t.ASSIGNEE_='' or t.ASSIGNEE_ ='null')-->
+			  and exists (select r.ID_ from ACT_RU_VARIABLE r where r.NAME_=#{legalIdFieldName} and r.TEXT_=#{legalId}) 
+			  and exists (select r.ID_ from ACT_RU_VARIABLE r where r.NAME_=#{cstNoFieldName} and r.TEXT_=#{cstNo}) 
+			  <if test="bsnType != null and bsnType != ''">
+			       and exists (select r.ID_ from ACT_RU_VARIABLE r where r.NAME_=#{bsnTypeFieldName} and r.TEXT_=#{bsnType})
+			  </if>
+			  and not exists (select r.ID_ from ACT_RU_VARIABLE r where r.NAME_=#{submitUserField} and r.TEXT_=#{userId})
+			  group by v.TEXT_
+	</select>
+	
+	
+	<!-- 根据法人记录唯一标识+客户编号+操作员ID（处理人不能是任务提交人）+业务大类统计待签收笔数信息列表   2016/09/23-->
+	<select id="qryTaskBsnCodeViewListByCondition" resultMap="actRuTaskResultMap" parameterType="java.util.HashMap">
+		select v.TEXT_ as BSN_CODE, 
+				count(distinct t.PROC_INST_ID_) as RECORD_NUM 
+		from ACT_RU_TASK t, 
+			 ACT_RU_VARIABLE v, 
+			 ACT_RU_IDENTITYLINK k
+		where k.TYPE_='candidate'
+			  and k.USER_ID_=#{userId}
+			  and t.ID_=k.TASK_ID_
+			  and t.PROC_INST_ID_=v.PROC_INST_ID_
+			  and v.NAME_=#{bsnCodeFieldName}
+			  and t.SUSPENSION_STATE_=#{state}
+			  <!-- and (t.ASSIGNEE_ is null or t.ASSIGNEE_='' or t.ASSIGNEE_ ='null')-->
+			  and exists (select r.ID_ from ACT_RU_VARIABLE r where r.NAME_=#{legalIdFieldName} and r.TEXT_=#{legalId}) 
+			  and exists (select r.ID_ from ACT_RU_VARIABLE r where r.NAME_=#{cstNoFieldName} and r.TEXT_=#{cstNo}) 
+			  <if test="bsnType != null and bsnType != ''">
+			       and exists (select r.ID_ from ACT_RU_VARIABLE r where r.NAME_=#{bsnTypeFieldName} and r.TEXT_=#{bsnType})
+			  </if>
+			  <if test="bsnCode != null and bsnCode != ''">
+			       and exists (select r.ID_ from ACT_RU_VARIABLE r where r.NAME_=#{bsnCodeFieldName} and r.TEXT_=#{bsnCode})
+			  </if>
+			  and not exists (select r.ID_ from ACT_RU_VARIABLE r where r.NAME_=#{submitUserField} and r.TEXT_=#{userId})
+			  group by v.TEXT_
+	</select>
+</mapper> 
+ 

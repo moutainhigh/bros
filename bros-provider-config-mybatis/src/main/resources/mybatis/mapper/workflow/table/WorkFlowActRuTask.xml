@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.relation.table.actrutask">
+
+	<resultMap id="actRuTaskResultMap" type="java.util.HashMap">
+		<result property="bsnCode" column="BDF_CODE" />
+		<result property="bsnName" column="BDF_NAME" />
+		<result property="recordNum" column="RECORD_NUM" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+		<result property="bsnType" column="BDF_TYPE" />
+    </resultMap>
+	
+	<!-- 根据操作柜员ID+业务类型编号统计已签收待处理笔数信息列表-->
+	<select id="qryClaimEdTaskViewListByCondition" resultMap="actRuTaskResultMap" parameterType="java.util.HashMap">
+		<![CDATA[
+			select v.TEXT_ as BDF_CODE,b.tbf_name,count(distinct t.PROC_INST_ID_) as RECORD_NUM 
+			from ACT_RU_TASK t, ACT_RU_VARIABLE v,bma_bsndef b
+			where t.proc_inst_id_=v.proc_inst_id_
+			and t.ASSIGNEE_=#{userId}
+			and v.NAME_=#{bsnCodeFieldName}
+			and t.SUSPENSION_STATE_=#{state}
+			and b.tbf_type=#{bsnType}
+			and v.TEXT_=b.tbf_bsncode
+			and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=t.proc_inst_id_ and r.NAME_=#{authShapFieldName} and r.TEXT_=#{authShap}) 
+			and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=t.proc_inst_id_ and r.NAME_=#{legalIdFieldName} and r.TEXT_=#{legalId})
+			group by v.TEXT_, b.tbf_name
+		]]>
+	</select>
+	
+	<!-- 根据操作柜员ID（签收人不能是任务提交人）+法人ID+业务类型编号统计待签收笔数信息列表-->
+	<select id="qryWaitClaimTaskViewListByCondition" resultMap="actRuTaskResultMap" parameterType="java.util.HashMap">
+		<![CDATA[	
+			select v.text_ as BDF_CODE,count(distinct t.PROC_INST_ID_) as RECORD_NUM
+			from ACT_RU_TASK t,ACT_RU_VARIABLE v,ACT_RU_IDENTITYLINK k,bma_bsndef b
+			where t.proc_inst_id_=v.proc_inst_id_
+			and v.NAME_=#{bsnCodeFieldName}
+			and t.SUSPENSION_STATE_=#{state}
+			and (t.ASSIGNEE_ is null or t.ASSIGNEE_='' or t.ASSIGNEE_ ='null') 
+			and t.ID_=k.TASK_ID_
+			and k.TYPE_='candidate'
+			and k.PROC_INST_ID_ is null
+			and k.USER_ID_=#{userId}
+			and b.tbf_type=#{bsnType}
+			and v.TEXT_=b.tbf_bsncode
+			and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=t.proc_inst_id_ and r.NAME_=#{authShapFieldName} and r.TEXT_=#{authShap})
+			and not exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=t.proc_inst_id_ and r.NAME_=#{submitUserIdFieldName} and r.TEXT_=#{userId})				 
+			group by v.TEXT_, b.tbf_name
+		]]>
+	</select>
+	
+	<!-- 根据法人ID，用户ID统计已签收概览信息列表-->
+	<select id="qryClaimEdTaskOverViewListByCondition" resultMap="actRuTaskResultMap" parameterType="java.util.HashMap">
+		<![CDATA[
+			select v.TEXT_ as BSN_TYPE, count(distinct t.PROC_INST_ID_) as RECORD_NUM 
+			from ACT_RU_TASK t, ACT_RU_VARIABLE v,
+			where t.proc_inst_id_=v.proc_inst_id_
+			and t.ASSIGNEE_=#{userId}
+			and v.NAME_=#{bsnTypeFieldName}
+			and t.SUSPENSION_STATE_=#{state}
+			and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=t.proc_inst_id_ and r.NAME_=#{authShapeFieldName} and r.TEXT_=#{authShape}) 
+			and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=c.proc_inst_id_ and r.NAME_=#{legalIdFieldName} and r.TEXT_=#{legalId})
+			group by v.TEXT_
+		]]>
+	</select>
+	<!-- 根据法人ID，用户ID统计待签收概览信息列表-->
+	<select id="qryWaitClaimTaskViewListByCondition" resultMap="actRuTaskResultMap" parameterType="java.util.HashMap">
+		<![CDATA[
+			select b.TEXT_ as BSN_TYPE,count(distinct c.PROC_INST_ID_) as RECORD_NUM
+			from ACT_RU_IDENTITYLINK a,ACT_RU_VARIABLE b,ACT_RU_TASK c
+			where a.TYPE_='candidate' and a.USER_ID_=#{userId}
+			and a.TASK_ID_=c.ID_ and c.PROC_INST_ID_=b.PROC_INST_ID_
+			and b.NAME_=#{bsnTypeFieldName}
+			and c.SUSPENSION_STATE_=#{state}
+			and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=c.proc_inst_id_ and r.NAME_=#{legalIdFieldName} and r.TEXT_=#{legalId})
+			and exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=c.proc_inst_id_ and r.NAME_=#{authShapFiledName} and r.TEXT_=#{authShap})
+			and not exists (select r.ID_ from ACT_RU_VARIABLE r where r.proc_inst_id_=t.proc_inst_id_ and r.NAME_=#{submitTellerNoField} and r.TEXT_=#{userId})
+			group by b.TEXT_
+		]]>
+	</select>
+</mapper> 
+ 

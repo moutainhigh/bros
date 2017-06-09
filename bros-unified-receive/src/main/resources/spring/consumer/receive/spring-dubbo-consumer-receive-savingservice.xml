@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 储蓄服务  ================================================-->
+	<!--储种查询 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryDepositTypeAction_1.0.0" interface="bros.c.custmanage.facade.service.ICSavingsAcountServiceFacade">
+		<dubbo:method name="queryDepositType"/>
+	</dubbo:reference>
+	<!--活期转定期 -->
+	<dubbo:reference check="false" version="1.0.0"  id="tranCurrentToFixAction_1.0.0" interface="bros.c.custmanage.facade.service.ICSavingsAcountServiceFacade">
+		<dubbo:method name="tranCurrentToFix"/>
+	</dubbo:reference>
+	<!--定转活账号列表查询 -->
+	<dubbo:reference check="false" version="1.0.0"  id="queryAccountListAction_1.0.0" interface="bros.c.custmanage.facade.service.ICSavingsAcountServiceFacade">
+		<dubbo:method name="queryAccountList"/>
+	</dubbo:reference>
+	<!--定转活 -->
+	<dubbo:reference check="false" version="1.0.0"  id="tranFixToCurrentAction_1.0.0" interface="bros.c.custmanage.facade.service.ICSavingsAcountServiceFacade">
+		<dubbo:method name="tranFixToCurrent"/>
+	</dubbo:reference>
+	
+	
+</beans>  

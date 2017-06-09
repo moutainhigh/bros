@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.prdshelfinfo">
+	<sql id="shelf_info_param">
+		PSF_SHELFCODE,
+		PSF_SHELFNAME,
+		PSF_SHELFDESC,
+		PSF_PARENTSHELF,
+		PSF_MALLID,
+		PSF_SHELFFLAG
+	</sql>
+
+	<resultMap type="java.util.HashMap" id="shelfInfoMap">
+		<result property="shelfCode" column="PSF_SHELFCODE" />
+        <result property="shelfName" column="PSF_SHELFNAME" />
+		<result property="shelfDesc" column="PSF_SHELFDESC" />
+		<result property="parentShelf" column="PSF_PARENTSHELF" />
+		<result property="mallId" column="PSF_MALLID" />
+		<result property="shelfFlag" column="PSF_SHELFFLAG" />
+	</resultMap>
+
+	<!--查询货架信息 -->
+	<select id="queryShelfInfo" resultMap="shelfInfoMap">
+		select
+		<include refid="shelf_info_param" />
+		from PRD_SHELFDEF
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="shelfCode != null and shelfCode != '' ">
+			and PSF_SHELFCODE = #{shelfCode}
+		</if>
+		<if test="parentShelf != null and parentShelf != '' ">
+			and PSF_PARENTSHELF = #{parentShelf}
+		</if>
+		<if test="mallId != null and mallId != '' ">
+			and PSF_MALLID = #{mallId}
+		</if>
+		<if test="shelfFlag != null and shelfFlag != '' ">
+			and PSF_SHELFFLAG = #{shelfFlag}
+		</if>
+	</select>
+
+	<!-- 更新货架信息 -->
+	<update id="updateShelfInfo" parameterType="java.util.HashMap">
+		update PRD_SHELFDEF 
+      		<![CDATA[ 
+		       set  PSF_SHELFNAME=#{shelfName},PSF_SHELFDESC=#{shelfDesc},PSF_SHELFFLAG=#{shelfFlag}
+			   where PSF_SHELFCODE = #{shelfCode} and PSF_MALLID = #{mallId}
+       		]]>
+		<if test="parentShelf != null and parentShelf != '' ">
+			and PSF_PARENTSHELF = #{parentShelf}
+		</if>
+	</update>
+
+	<!-- 新增货架信息-->
+	<insert id="insertShelfInfo" parameterType="java.util.HashMap">
+		insert into PRD_SHELFDEF (
+		<include refid="shelf_info_param" />) 
+	    <![CDATA[ 
+		    values(
+		   		 #{shelfCode},
+		   		 #{shelfName},
+		   		 #{shelfDesc},
+		   		 #{parentShelf},
+		   		 #{mallId},
+		   		 #{shelfFlag}
+		       )
+	    ]]>
+	</insert>
+    <!-- 删除货架信息-->
+	<delete id="deleteShelfInfo" parameterType="java.util.HashMap">
+		delete from PRD_SHELFDEF 
+	    <![CDATA[ 
+	     where PSF_SHELFCODE = #{shelfCode} and PSF_MALLID = #{mallId}
+	    ]]>
+	</delete>
+	<!--查询货架总数 -->
+	<select id="queryShelfInfoTotalNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from PRD_SHELFDEF
+	    <![CDATA[ 
+	       where  1 = 1
+	    ]]>
+		<if test="shelfCode != null and shelfCode != '' ">
+			and PSF_SHELFCODE = #{shelfCode}
+		</if>
+		<if test="parentShelf != null and parentShelf != '' ">
+			and PSF_PARENTSHELF = #{parentShelf}
+		</if>
+		<if test="mallId != null and mallId != '' ">
+			and PSF_MALLID = #{mallId}
+		</if>
+		<if test="shelfFlag != null and shelfFlag != '' ">
+			and PSF_SHELFFLAG = #{shelfFlag}
+		</if>
+	</select>
+	
+	<!--根据货架编号查询货架信息 -->
+	<select id="queryShelfInfoByShelfCode" resultMap="shelfInfoMap">
+		select
+		<include refid="shelf_info_param" />
+		from PRD_SHELFDEF
+	     <![CDATA[ 
+	     	where  PSF_SHELFCODE = #{shelfCode}
+	     ]]>
+	     <if test="mallId != null and mallId != '' ">
+			and PSF_MALLID = #{mallId}
+		</if>
+	</select>
+</mapper>

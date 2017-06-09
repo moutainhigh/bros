@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.ttpuserinf">
+	<sql id="ttp_user_inf">
+		tui_id,
+		tui_userno,
+		tui_cstno,
+		tui_username,
+		tui_usernameen,
+		tui_ctftype,
+		tui_ctfno,
+		tui_department,
+		tui_jobtitle,
+		tui_mobile,
+		tui_email,
+		tui_legalid
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="ttpUserInfResult">
+    	<result property="operatorId" column="tui_id"/><!-- UUID -->
+    	<result property="operatorUserno" column="tui_userno"/><!-- 员工编号 -->
+    	<result property="cstNo" column="tui_cstno"/><!-- 用户所属的企业客户号 -->
+    	<result property="operatorUsername" column="tui_username"/><!-- 姓名 -->
+    	<result property="operatorUserEn" column="tui_usernameen"/><!-- 英文名 -->
+    	<result property="operatorCtftype" column="tui_ctftype"/><!--证件类型  -->
+    	<result property="operatorCtfno" column="tui_ctfno"/><!--证件号码  -->
+    	<result property="operatorDepartment" column="tui_department"/><!-- 部门 -->
+    	<result property="operatorJobtitle" column="tui_jobtitle"/><!-- 职位 -->
+    	<result property="operatorMobile" column="tui_mobile"/><!--手机号码  -->
+    	<result property="operatorEmail" column="tui_email"/><!-- 电子邮件 -->
+    	<result property="legalid" column="tui_legalid"/><!--法人ID  -->
+    </resultMap>
+    <!-- 查询最大操作员编号 -->
+    <select id="queryMaxUserno" resultMap="ttpUserInfResult">
+       select
+       	max(tui_userno) as tui_userno
+       from ttp_user_inf 
+    </select>
+    <!-- 查询全部角色 -->
+    <select id="queryAllTtpUserInf" resultMap="ttpUserInfResult">
+       select
+       	<include refid="ttp_user_inf"/> 
+       from ttp_user_inf 
+    </select>
+    
+    <!-- 根据企业客户号、操作员编号及法人ID 查询角色信息 -->
+    <select id="queryTtpUserInfByCstNoAndlegalId" resultMap="ttpUserInfResult">
+       select
+       	<include refid="ttp_user_inf"/> 
+       from ttp_user_inf 
+       where 
+       		tui_legalid = #{legalid}
+       and  tui_userno = #{operatorUserno}
+       and  tui_cstno  = #{cstNo}
+    </select>
+    <!-- 添加操作员用户信息 -->
+	<insert id="insertTtpUserInf" parameterType="java.util.HashMap">
+		insert into ttp_user_inf(
+			<include refid="ttp_user_inf"/>  
+		) values(
+			<![CDATA[ 
+				#{operatorId,jdbcType=VARCHAR},
+				#{operatorUserno,jdbcType=VARCHAR},
+				#{cstNo,jdbcType=VARCHAR},
+				#{operatorUsername,jdbcType=VARCHAR},
+				#{operatorUserEn,jdbcType=VARCHAR},
+				#{operatorCtftype,jdbcType=VARCHAR},
+				#{operatorCtfno,jdbcType=VARCHAR},
+				#{operatorDepartment,jdbcType=VARCHAR},
+				#{operatorJobtitle,jdbcType=VARCHAR},
+				#{operatorMobile,jdbcType=VARCHAR},
+				#{operatorEmail,jdbcType=VARCHAR},
+				#{legalcode,jdbcType=VARCHAR}
+	       	]]> 
+		)
+	</insert>
+	<!-- 修改操作员信息 -->
+	<update id="updateTtpUserInfByOperatorId" parameterType="java.util.HashMap">
+		UPDATE ttp_user_inf
+		SET 	
+			<if test="operatorMobile!=null and operatorMobile!=''">
+				tui_mobile=#{operatorMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorUserEn!=null and operatorUserEn!=''">
+				tui_usernameen=#{operatorUserEn,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorEmail!=null and operatorEmail!=''">
+				tui_email=#{operatorEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorDepartment!=null and operatorDepartment!=''">
+				tui_department=#{operatorDepartment,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorJobtitle!=null and operatorJobtitle!=''">
+				tui_jobtitle=#{operatorJobtitle,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorName!=null and operatorName!=''">
+				tui_username=#{operatorName,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorCtftype!=null and operatorCtftype!=''">
+				tui_ctftype=#{operatorCtftype,jdbcType=VARCHAR},
+			</if>
+				tui_ctfno=#{operatorCtfno,jdbcType=VARCHAR}
+		WHERE tui_cstno=#{cstNo} and tui_userno=#{operatorUserno}
+	
+	</update>
+</mapper>

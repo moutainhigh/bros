@@ -1,0 +1,27 @@
+{
+	RspSvcHeader: {
+        channelDate: "",
+        acctDate: "",
+        tranTime: "",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20170214",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "",
+        langCode: "",
+        BackendSeqNo: "02021702140000000000094611",
+        globalSeqNo: "",
+        TranTime: "142929850",
+        backendSysId: "",
+        ReturnMsg: "交易成功"
+    },
+    
+    errorMessage: "",
+    responseMessage: "success"
+}

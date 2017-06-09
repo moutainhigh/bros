@@ -1,0 +1,152 @@
+<div class="main-box">
+    <div class="order-box">
+        <div class="order-title">
+            <div class="title-big">订单信息</div>
+        </div>
+        <div class="order-list">
+            <div class="order-bar">
+                <div class="order-info"><span>共计<b ng-bind="vm.totalcount"></b>笔订单</span><span>总价<b ng-bind="vm.totalamt|currency:'¥'"></b>元</span></div>
+                <div class="order-btn" ng-click="vm.orderdetail();">订单信息 <i class="glyphicon glyphicon-chevron-down"></i></div>
+            </div>
+            <div class="tableList" >
+           <!--  ng-show="showorderdetail.show" -->
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                            <th class="title">名称</th>
+                            <th style="text-align:center">数量</th>
+                            <th class="money">单价(元)</th>
+                            <th class="money">优惠价格(元)</th>
+                            <th class="money">小计(元)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in vm.carlist">
+                            <td class="title">
+                                <p ng-bind="x.productId + x.productName"></p>
+                            </td>
+                            <td align="center" ng-bind="x.productAmount"></td>
+                            
+                            <td class="money">
+                                <p ng-bind="x.tradeData.displayPrice|currency:'¥'"></p>
+                            </td>
+                             <td class="money">
+                                <p ng-bind="x.tradeData.otherAdjustments|currency:'¥'"></p>
+                            </td>
+                             <td class="money">
+                                <p ng-bind="x.tradeData.displayItemSubTotal|currency:'¥'"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="order-bar" ng-show="established.show">
+                <i>
+                <button class="bar-btn" ng-click="vm.established()">确认订单</button>
+                </i>
+            </div> -->
+        </div>
+    </div>
+    <form class="form-horizontal" role="form" name="vm.regForm" novalidate ng-submit="vm.paysybmit()">
+        <div class="pay-box" ng-show="showpay.show">
+            <div class="pay-title">
+                <div class="title-big">地址</div>
+            </div>
+            <div class="pay-list-box">
+                <div class="payAdd-list ">
+                    <ul ng-repeat="returnList in vm.partyContactMechValueMaps">
+                        <li>
+                            <div class="payment-item online-payment" id="address0000{{$index}}" name="address" ng-click="vm.select('address','address0000'+$index,returnList);"><b></b><span ng-bind="returnList.toName"></span></div>
+                            <div class="add-list"><span ng-bind="returnList.countryGeoName"></span><span ng-bind="returnList.stateProvinceGeoName"></span><span ng-bind="returnList.city"></span><span ng-bind="returnList.address1"></span></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pay-title">
+                <div class="title-big">交付方式</div>
+            </div>
+            <div class="pay-list-box">
+                <div class="payment-list ">
+                    <ul ng-repeat="returnList in vm.shipMethList">
+                        <li>
+                            <div class="payment-item online-payment" id="shipMeth0000{{$index}}" name="shipMeth" ng-click="vm.select('shipMeth','shipMeth0000'+$index,returnList);"><b></b><span ng-bind="returnList.shipmentMethodName"></span></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pay-title">
+                <div class="title-big">支付方式</div>
+            </div>
+            <div class="pay-list-box">
+                <div class="payAdd-list ">
+                    <ul ng-repeat="return in vm.paymentMethod">
+                        <li>
+                            <div class="payment-item online-payment" id="pay0000{{$index}}" name="pay" ng-click="vm.select('pay','pay0000'+$index,return);"><b></b><span ng-bind="return.paymentMethodTypeId | paymentMethodTypeId"></span></div>
+                             <div class="add-list"><span ng-bind="return.cardNumber"></span><span ng-bind="return.bankName"></span><span ng-bind="return.custAcctno"></span></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pay-info">
+                    <div class="ebank-input-box">
+                        <form class="form-horizontal ng-pristine ng-invalid ng-invalid-required ng-valid-maxlength ng-valid-custom-pattern" novalidate="" ng-submit="vm.toSetLoginPassword()" name="vm.regForm">
+                           <!--  <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-4 control-label"><span class="red">*</span>账户</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" required="" id="txt_cardtype" name="txt_cardtype" ng-model="vm.model.cardtype" aria-invalid="true">
+                                        <option value="11">借记卡</option>
+                                        <option value="12">活期一本通</option>
+                                        <option value="13">定期一本通</option>
+                                        <option value="14">普通存折</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4 error ng-active" ng-messages="vm.regForm.txt_cardtype.$error" aria-live="assertive">
+                                    <span class="help-block ng-scope" ng-message="required">请选择卡号类型</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_cardpassword" class="col-sm-4 control-label"><span class="red">*</span>短信验证</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control ng-pristine ng-untouched ng-isolate-scope ng-empty ng-invalid ng-invalid-required" required="" id="txt_cardpassword" name="txt_cardpassword" keyboard="" ng-model="vm.model.cardpassword" placeholder="" aria-invalid="true"><span key="6" class="input-group-btn ng-scope"><button class="btn btn-info" type="button">获取短信验证码</button>
+                                    </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4  error ng-active" ng-messages="vm.regForm.txt_cardpassword.$error" aria-live="assertive">
+                                    <span class="help-block ng-scope" ng-message="required">请输入您短信验证码</span>
+                                </div>
+                            </div> -->
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-4 control-label"><span class="red">*</span>账户密码</label>
+                                <div class="col-sm-4">
+                                    <input type="password" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-custom-pattern" id="txt_password" name="txt_password" required="" ng-model="vm.model.password" placeholder="" aria-invalid="true">
+                                </div>
+                                <div class="col-sm-4 error ng-active" ng-messages="vm.regForm.txt_moblie.$error" aria-live="assertive">
+                                    <!-- ngMessage: required --><span class="help-block ng-scope" ng-message="required">请输入账户密码</span>
+                                    <!-- ngMessage: customPattern -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8 btn-box-big ">
+                                    <button type="submit" class="btn btn-primary" ng-click="vm.externalProcessOrder();">确认</button>
+                                    <button type="button" class="btn btn-default" ng-click="vm.paysubreturn();">返回</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="pay-result-info" ng-show="showpayresult.show">
+        <div class="order-title">
+            <div class="title-big">支付结果信息</div>
+        </div>
+        <div class="alert alert-success" role="alert">
+            <strong ng-bind="vm.returnMsg"></strong> 您已成功支付此笔订单(订单流水号：{{vm.txSerialNo}})
+        </div>
+        <div class="btn-box-center-big ">
+            <button type="button" class="btn btn-default btn-lg" ng-click="vm.successreturn();">返回</button>
+        </div>
+    </div>
+    <div browsehistory></div>
+</div>

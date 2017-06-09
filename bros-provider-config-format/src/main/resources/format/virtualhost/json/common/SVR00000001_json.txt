@@ -1,0 +1,84 @@
+{
+ 	RspSvcHeader: {
+        channelDate: "",
+        acctDate: "",
+        tranTime: "",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20170214",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "",
+        langCode: "",
+        BackendSeqNo: "02021702140000000000094605",
+        globalSeqNo: "",
+        TranTime: "142919504",
+        backendSysId: "",
+        ReturnMsg: "交易成功"
+    },
+        
+    "cartLinesList": [
+        {
+            "cartLineIndex": "0",
+            "quantityUsedPerPromoActualList": [
+                {
+                    "actualQuantityUsed": "1",
+                    "imageUrl": "/images/products/CARD_0521_10000-01/small.jpg",
+                    "isQualifier": "N",
+                    "promoText": "现在开通润个人借记卡，可以免除工本费、手续费，快加入润和大家庭吧！！",
+                    "promoName": "个人借记卡开卡免费",
+                    "productName": "润和鼎元卡个人人民币活期",
+                    "productPromoId": "MODEL10001",
+                    "productId": "CARD_0521_10000-01"
+                }
+            ],
+            "quantityUsedPerPromoCandidateList": [
+                
+            ],
+            "quantity": "1",
+            "quantityUsedPerPromoFailedList": [
+                
+            ],
+            "promoQuantityUsed": "1",
+            "promoQuantityAvailable": "0",
+            "productId": "CARD_0521_10000-01",
+            "isPromo": "N"
+        }
+    ],
+    productPriceList: [
+        {
+            configOptionId:"",
+            requireAmount:"",
+            cartItemId: "",
+            selectedAmount: "0",
+            prodCatalogId: "MODEL-FPSC-DP",
+            quantity: "1",
+            displayItemSubTotal: "0.00",
+            otherAdjustments: "-5.00",
+            displayPrice: "5.00",
+            productName: "润和鼎元卡个人人民币活期",
+            productId: "CARD_0521_10000-01"
+        }
+    ],
+    displaySubTotal: "0.00",
+    productPromoUseInfoList: [
+        {
+            amount: "5.00000000000000000",
+            totalDiscountAmount: "-5.00000000000000000",
+            imageUrl: "/images/products/CARD_0521_10000-01/small.jpg",
+            productPromoCodeId:"",
+            quantityLeftInActions: "0",
+            promoText: "现在开通润个人借记卡，可以免除工本费、手续费，快加入润和大家庭吧！！",
+            promoName: "个人借记卡开卡免费",
+            productPromoId: "MODEL10001",
+            productName: "润和鼎元卡个人人民币活期",
+            currency: "CNY",
+            productId: "CARD_0521_10000-01"
+        }
+    ]
+}

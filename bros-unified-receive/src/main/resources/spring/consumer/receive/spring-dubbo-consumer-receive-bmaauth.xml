@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	<!--================================================ 授权模型管理 ================================================-->
+	<!-- 分页查询授权模型服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryBmaAuthorizationModelListForPageAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBmaAuthModelSerivceFacade">
+		<dubbo:method name="queryAuthorizationModelListForPage" />
+	</dubbo:reference>
+	
+	<!-- 查询授权模型详细信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryBmaAuthorizationModelDetailAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBmaAuthModelSerivceFacade">
+		<dubbo:method name="queryAuthorizationModelDetail" />
+	</dubbo:reference>
+	
+	<!-- 删除授权模型详细信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="deleteBmaAuthorizationModelAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBmaAuthModelSerivceFacade">
+		<dubbo:method name="deleteAuthorizationModel" />
+	</dubbo:reference>
+	
+	<!-- 保存授权模型信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="saveBmaAuthorizationModelAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBmaAuthModelSerivceFacade">
+		<dubbo:method name="saveAuthorizationModel" />
+	</dubbo:reference>
+	
+	<!-- 更新授权模型信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateBmaAuthorizationModelAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBmaAuthModelSerivceFacade">
+		<dubbo:method name="updateAuthorizationModel" />
+	</dubbo:reference>
+	
+	<!-- 授权模型分配服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateBmaFunctionAuthorizationModelAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBmaAuthModelSerivceFacade">
+		<dubbo:method name="updateFunctionAuthorizationModel" />
+	</dubbo:reference>
+	
+	<!-- 不分页查询授权模型信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryBmaAuthorizationModelListAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBmaAuthModelSerivceFacade">
+		<dubbo:method name="queryAuthorizationModelList" />
+	</dubbo:reference>
+	
+	<!-- 查询菜单信息 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryBmaMenuUnionFuncionAction_1.0.0" interface="bros.c.bankmanage.facade.service.ICBmaAuthModelSerivceFacade">
+		<dubbo:method name="queryMenuUnionFuncion" />
+	</dubbo:reference>
+</beans>  

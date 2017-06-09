@@ -1,0 +1,49 @@
+/**
+ *  If you want to override some bootstrap variables, you have to change values here.
+ *  The list of variables are listed here bower_components/bootstrap-stylus/bootstrap/variables.styl
+ */
+$navbar-inverse-link-color = #5AADBB
+$icon-font-path = "../../bower_components/bootstrap-stylus/fonts/"
+
+/**
+ *  Do not remove the comments below. It's the markers used by wiredep to inject
+ *  stylus dependencies when defined in the bower.json of your dependencies
+ */
+// bower:styl
+// endbower
+
+/**
+* Global CSS styles of site which impact all pages.
+*/
+
+
+$redButton = #f45353
+$red = #ea1111
+$blue = #135dbc
+$blueButton = #135dbc
+$lightBlue = #f7fcff
+$gray = #555555
+$grayBorder =#e0e0e0
+$bold = 400
+$orange = #cc5e14
+$orangeBorder = #ffd3a2
+$green = #5ac64f
+$imgRoot = '/assets/img/'
+
+em
+    font-style normal
+p
+    margin 0
+
+bg-image(src)
+    background-image:url($imgRoot+src)
+
+$smart = 'screen and (max-width: 480px)'
+$tablet = 'screen and  (min-width: 481px) and (max-width: 768px)'
+$desktop = 'screen and (min-width: 769px)'
+/**
+ *  Do not remove the comments below. It's the markers used by gulp-inject to inject
+ *  all your stylus files automatically
+ */
+// injector
+// endinjector

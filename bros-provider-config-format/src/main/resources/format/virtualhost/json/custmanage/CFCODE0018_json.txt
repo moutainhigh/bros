@@ -1,0 +1,45 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+	"totalRecord":"1",
+	"accountNo":"62251234567890",
+	"accountType":"01",
+	"debitAccDetailsList":[{
+		"transDate":"20150101",
+		"summry":"还欠款",
+		"currency":"CNY",
+		"amt":"2000",
+		"loanFlag":"贷",
+		"balance":"50166",
+		"opponencyAccount":"6789123456679",
+		"opponencyacctName":"大鹏鹏"
+	}],
+	"creditAccDetailsList":[{
+		"subAccountNo":"0001",
+		"transDate":"20150101",
+		"summry":"收欠款",
+		"loanFlag":"借",
+		"currency":"CNY",
+		"amt":"2000"
+	}]
+}

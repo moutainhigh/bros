@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+           http://www.springframework.org/schema/beans/spring-beans.xsd    
+           http://www.springframework.org/schema/context    
+           http://www.springframework.org/schema/context/spring-context.xsd  
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd  
+           http://www.springframework.org/schema/aop    
+           http://www.springframework.org/schema/aop/spring-aop.xsd    
+           ">
+	<!-- 服务提供方拦截器拦截顺序 -->
+	<!-- 
+	    1、异常信息转换
+	    2、进行数据校验
+	    3、记录业务流水
+	    4、内管柜面行内授权拦截器
+	    5、对客行外授权拦截器
+	    
+	    16、封装服务提供方返回字段信息
+	 -->
+	<!-- 异常信息转换拦截器 -->
+	<bean id="exceptionInterceptor" class="bros.common.core.intercepter.ExceptionInterceptor">
+		<property name="flagLog" value="true"/><!-- 日志记录标志   true记录日志     false不记录日志 -->
+		<property name="callProviderServiceLog" ref="callProviderServiceLog"/>
+	</bean>
+	<aop:config>
+		<aop:advisor order="1" id="exceptionParamsInterceptor" advice-ref="exceptionInterceptor" pointcut="execution(* bros.p..facade.service..*(..))" />
+	</aop:config>
+	
+	
+	<!-- 服务提供方字段校验拦截器 -->
+	<!-- shaoxu 2017/06/07<bean id="validateInterceptor" class="bros.common.core.intercepter.ValidateInterceptor"/>
+	<aop:config>
+		<aop:advisor order="2" id="validateParamsInterceptor" advice-ref="validateInterceptor" pointcut="execution(* bros.p..facade.service..*(..))" />
+	</aop:config> -->
+	
+	
+	<!-- 业务流水记录拦截器  -->
+	<bean id="bussinessFlowInterceptor" class="bros.common.core.flow.intercepter.BussinessFlowInterceptor" /> 
+	<aop:config> 
+		<aop:advisor order="3" id="bussinessFlowInterceptorAdvice" advice-ref="bussinessFlowInterceptor" pointcut="execution(* bros.p..facade.service..*(..))" /> 
+	</aop:config>
+	 
+	<!-- 内管柜面行内授权拦截器  -->
+	<!-- shaoxu 2017/06/07<bean id="inSideAuthInterceptor" class="bros.provider.parent.activiti.intercepter.InSideAuthInterceptor" /> 
+	<aop:config> 
+		<aop:advisor order="4" id="inSideAuthInterceptorAdvice" advice-ref="inSideAuthInterceptor" pointcut="execution(* bros.p..facade.service..*(..))" /> 
+	</aop:config> -->
+	
+	<!-- 对客行外授权拦截器  -->
+	<!-- shaoxu 2017/06/07<bean id="outSideAuthInterceptor" class="bros.provider.parent.activiti.intercepter.OutSideAuthInterceptor" /> 
+	<aop:config> 
+		<aop:advisor order="5" id="outSideAuthInterceptorAdvice" advice-ref="outSideAuthInterceptor" pointcut="execution(* bros.p..facade.service..*(..))" /> 
+	</aop:config> -->
+	
+
+
+	<!-- 封装服务提供方返回字段信息      级别在调用方法之前执行-->
+	<!-- shaoxu 2017/06/07<bean id="responseEntityInterceptor" class="bros.common.core.intercepter.ResponseEntityInterceptor" />
+	<aop:config>
+		<aop:advisor order="16" id="responseEntityParamsInterceptor" advice-ref="responseEntityInterceptor" pointcut="execution(* bros.p..facade.service..*(..))" />
+	</aop:config> -->
+	
+</beans>

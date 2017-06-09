@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+   
+    <dubbo:application name="${dubbo.application.provider.name}"/>
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" />
+
+	<dubbo:protocol name="dubbo" port="${dubbo.protocol.provider.bankmanage.port}" />
+	
+	<!-- 监控中心配置，protocol="registry"，表示从注册中心发现监控中心地址 -->
+	<dubbo:monitor protocol="registry"/>
+	
+	<!-- 当ProtocolConfig和ServiceConfig某属性没有配置时,采用此缺省值 -->
+	<dubbo:provider timeout="60000" threadpool="fixed" threads="100" accepts="1000" version="1.0.0"/>
+	
+	
+	
+	<!-- 登录接口对外公布 -->
+<!-- 	<dubbo:service retries="0"  interface="bros.login.facade.service.ILoginServiceFacade" ref="loginServiceFacade" /> -->
+		<!-- 机构管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPBranchManageServiceFacade" ref="pbranchManageServiceFacade" />
+		<!-- 柜员管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPTellerServiceFacade" ref="ptellerServiceFacade" />
+		<!-- 柜员角色管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPTellerRoleServiceFacade" ref="ptellerRoleServiceFacade" />
+		<!-- 菜单管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPMenudefServiceFacade" ref="pmenudefServiceFacade" />
+		<!-- 法人管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPLegalServiceFacade" ref="plegalServiceFacade" />
+		<!-- 菜单与货架商品关联关系管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPMenuProRelServiceFacade" ref="pmenuProRelServiceFacade" />
+		<!-- 业务功能管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPBusinessFunctionServiceFacade" ref="pbusinessFunctionServiceFacade" />
+		<!-- 渠道系统分组管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPChannelSysGroupServiceFacade" ref="pchannelSysGroupServiceFacade" />
+		<!-- 渠道系统信息管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPChannelSysInfoServiceFacade" ref="pchannelSysInfoServiceFacade" />
+		<!--商城管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPMallInfoServiceFacade" ref="pmallInfoServiceFacade" />
+		<!--货架管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPShelfInfoServiceFacade" ref="pshelfInfoServiceFacade" />
+		<!--产品分类管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPProductTypeServiceFacade" ref="pproductTypeServiceFacade" />
+		<!--产品服务管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPProductServiceServiceFacade" ref="pproductServiceServiceFacade" />
+		<!--产品目录管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPProductCateServiceFacade" ref="pproductCateServiceFacade" />
+		<!--产品信息管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPProductInformationServiceFacade" ref="pproductInformationServiceFacade" />
+		<!--菜单与货架商品关联关系管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPMenuProRelServiceFacade" ref="pmenuProRelServiceFacade" />
+		<!--前端展示菜单调用接口管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPFrontShelfMenuRelServiceFacade" ref="pfrontShelfMenuRelServiceFacade" />
+		<!--对内授权调用接口管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPBmaAuthModelSerivceFacade" ref="pbmaAuthModelSerivceFacade" />
+		<!--安全工具信息管理接口服务 -->
+		<dubbo:service retries="0"  interface="bros.p.securitytoolmanage.facade.service.IPSecurityToolServiceFacade" ref="psecurityToolServiceFacade" />
+		<!--渠道客户信息管理接口服务 -->
+		<dubbo:service retries="0"  interface="bros.p.cst.facade.service.IPCstManageServiceFacade" ref="pcstManageServiceFacade" />
+		<!--广告栏调用接口管理 -->
+		<dubbo:service retries="0"  interface="bros.p.bankmanage.facade.service.IPBannerinfoServiceFacade" ref="pbannerinfoServiceFacade" />
+		<!--客户之声调用接口管理 -->
+		<dubbo:service retries="0"  interface="bros.p.leavewodtran.facade.service.IPLeaveWordTranServiceFacade" ref="pleaveWordTranServiceFacade" />
+		<!--银行资讯调用接口管理 -->
+		<dubbo:service retries="0"  interface="bros.p.leavewodtran.facade.service.IPBankNoticeServiceFacade" ref="pbankNoticeServiceFacade" />
+		<!--公告管理调用接口管理 -->
+		<dubbo:service retries="0"  interface="bros.p.leavewodtran.facade.service.IPNoticeServiceFacade" ref="pnoticeServiceFacade" />
+		
+		<!--监控当前模块是否存活 -->
+		<dubbo:service retries="0"  interface="bros.p.monitor.service.IPApplicationAliveMonitorBankmanageServiceFacade" ref="papplicationAliveMonitorBankmanageServiceFacade" />
+		
+</beans>  

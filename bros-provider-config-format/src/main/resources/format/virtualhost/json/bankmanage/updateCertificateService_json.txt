@@ -1,0 +1,33 @@
+{
+    RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+    "externalCode":"0000",
+	"externalMessage":"成功",
+	"certDN":"0001",
+	"shorTrefNo":"0002",
+	"shorTauthCode":"0003",
+	"issUer":"0004",
+	"serialNo":"0005",
+	"sendEmailSuccess":"0",
+	"sendSmsSuccess":"0"
+}

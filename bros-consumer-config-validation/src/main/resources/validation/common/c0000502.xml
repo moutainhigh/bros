@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+	    <xmlField dataName="productStoreId" message="${CECO000000001}" />
+	    <xmlField dataName="webSiteId" message="${CECO000000001}" />
+	    <xmlField dataName="currency" message="${CECO000000001}" />
+	    <xmlField dataName="partyId" message="${CECO000000001}" />
+	    <xmlField dataName="shippingMethod" message="${CECO000000001}" />
+	    <xmlField dataName="paymentMethodId" message="${CECO000000001}" />
+	    <xmlList dataName="productItemList" message="${CECO000000001}">
+	        <xmlTag>
+				<xmlField dataName="productId" message="${CECO000000001}" />
+				<xmlField dataName="prodCatalogId" message="${CECO000000001}" />
+				<xmlField dataName="configOptionId" message="${CECO000000001}" />
+				<xmlField dataName="quantity" message="${CECO000000001}" />
+			</xmlTag>
+		</xmlList>
+	</xmlTag>
+</formats>

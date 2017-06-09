@@ -1,0 +1,12 @@
+<div class="list">
+    <div class="img" ng-click="vm.goproductdetail(product)" style="padding:{{vm.mouseFlag ? '0px' : '10px'}}"><img src="../assets{{product.imageAdress}}"  ng-mouseover="vm.imgMouseover();" ng-mouseleave="vm.imgMouseLeave();" style="height:{{vm.mouseFlag ? '160px' : '150px'}};width:{{vm.mouseFlag ? '200px' : '180px'}}"></div>
+    <ul class="transfer-info">
+        <li class="transfer-title" ng-bind="product.goodsName" ng-click="vm.goproductdetail(product)"></li>
+        <li class="transfer-title" ng-bind="product.goodsCode"></li>
+        <li>产品综合价格</li>
+        <li><b class="big-font" ng-bind="product.sunPrice|currency:'¥'"></b><b class="big-font"><span>元</span></b></li>
+        <li class="transfer-but">
+            <button type="button" class="btn btn-primary" ng-click="vm.goproductdetail(product);">查看详情</button>
+        </li>
+    </ul>
+</div>

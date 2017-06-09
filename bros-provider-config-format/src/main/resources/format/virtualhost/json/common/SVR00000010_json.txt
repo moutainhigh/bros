@@ -1,0 +1,97 @@
+{
+	RspSvcHeader: {
+        channelDate: "",
+        acctDate: "",
+        tranTime: "",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20170214",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "",
+        langCode: "",
+        BackendSeqNo: "02021702140000000000094604",
+        globalSeqNo: "",
+        TranTime: "142919438",
+        backendSysId: "",
+        ReturnMsg: "交易成功"
+    },
+
+    partyContactMechValueMaps: [
+        {
+            postalCode: "200001",
+            countryGeoId: "CHN",
+            toName: "cuiyh",
+            contactMechId: "100455",
+            stateProvinceGeoId: "",
+            address1: "南京南",
+            address2: "",
+            countryGeoName: "China",
+            stateProvinceGeoName: "",
+            city: "南京"
+        }
+    ],
+    shipMethList: [
+        {
+            amount: "0",
+            shipmentMethodName: "线下网点交付",
+            shipMethId: "MODEL10000"
+        },
+        {
+            amount: "0",
+            shipmentMethodName: "线上电子渠道交付",
+            shipMethId: "MODEL10001"
+        }
+    ],
+    paymentMethod: [
+        {
+            batNum: "",
+            oNum: "",
+            partyId: "c10004",
+            paymentMethodTypeId: "CAPAY",
+            bankName: "",
+            paymentMethodId: "c10008",
+            custAcctno: "",
+            paymentMethodTypeName: "现金",
+            cardNumber: ""
+        },
+        {
+            batNum: "",
+            oNum: "",
+            partyId: "c10004",
+            paymentMethodTypeId: "OUR_DEBIT_CARD",
+            bankName: "",
+            paymentMethodId: "c10009",
+            custAcctno: "",
+            paymentMethodTypeName: "本行借记卡",
+            cardNumber: "6224150000000026"
+        },
+        {
+            batNum: "",
+            oNum: "",
+            partyId: "c10004",
+            paymentMethodTypeId: "OUR_DEBIT_CARD",
+            bankName: "",
+            paymentMethodId: "c10010",
+            custAcctno: "",
+            paymentMethodTypeName: "本行借记卡",
+            cardNumber: "6224150000000034"
+        },
+        {
+            batNum: "",
+            oNum: "",
+            partyId: "c10004",
+            paymentMethodTypeId: "OUR_DEBIT_CARD",
+            bankName: "",
+            paymentMethodId: "10520",
+            custAcctno: "",
+            paymentMethodTypeName: "本行借记卡",
+            cardNumber: "8120002400000217"
+        }
+    ]
+}

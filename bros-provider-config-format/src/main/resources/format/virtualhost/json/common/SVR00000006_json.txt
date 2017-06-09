@@ -1,0 +1,42 @@
+{
+	RspSvcHeader: {
+        channelDate: "",
+        acctDate: "",
+        tranTime: "",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20170214",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "",
+        langCode: "",
+        BackendSeqNo: "02021702140000000000094601",
+        globalSeqNo: "",
+        TranTime: "142929849",
+        backendSysId: "",
+        ReturnMsg: "交易成功"
+    },
+    
+    
+    "enumQuestionList": [
+            {
+                "enumTypeId": "",
+                "description": "CD_NO",
+                "custRequest": "",
+                "enumList": [],
+                "question": "卡号："
+            },
+            {
+                "enumTypeId": "",
+                "description": "PASSWD_C",
+                "custRequest": "",
+                "enumList": [],
+                "question": "交易密码："
+            }
+        ]
+}

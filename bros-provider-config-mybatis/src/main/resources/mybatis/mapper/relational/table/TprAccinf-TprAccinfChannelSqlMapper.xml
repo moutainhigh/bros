@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.relational.table.tpraccinf-tpraccinfchannel">
+
+    <sql id="tpr_acc_inf_param">
+		TAI_ACCNO,
+		TAI_OPENNODE,
+		TAI_ACCTYPE,
+		TAI_ALIAS,
+		TAI_CARDSTYLES
+	</sql>
+	<sql id="tpr_acc_branch_param">
+		TAI_ACCNO,
+		TAI_OPENNODE,
+		TAI_ACCTYPE,
+		TAI_ALIAS,
+		TAI_CARDSTYLES,
+		BBH_NAME
+	</sql>
+    <sql id="tpr_accChannelInf_param">
+		TACI_ID,
+		TACI_CSTID,
+		TACI_ACCNO,
+		TACI_REGISTNODE,
+		TACI_STT,
+		TACI_SIGNFLAG,
+		TACI_CHANNEL,
+		TACI_LASTTIME,
+		TACI_ISFEETYPE
+	</sql>
+	<sql id="tpr_accinfAndAccChannelInf_param">
+		TACI_ID,
+		TACI_CSTID,
+		TACI_ACCNO,
+		TACI_REGISTNODE,
+		TACI_STT,
+		TACI_SIGNFLAG,
+		TACI_CHANNEL,
+		TACI_LASTTIME,
+		TACI_ISFEETYPE,
+		TAI_OPENNODE,
+		TAI_ACCTYPE,
+		TAI_ALIAS,
+		TAI_CARDSTYLES
+	</sql>
+    <resultMap type="java.util.HashMap"  id="accChannelinfAccinfResultMap" >
+	   <result property="uuid" column="TACI_ID" /><!-- id -->
+	   <result property="cstId" column="TACI_CSTID" /><!-- 客户id -->
+	   <result property="accountNo" column="TACI_ACCNO" /><!-- 账号 -->
+	   <result property="registNode" column="TACI_REGISTNODE" /><!-- 账号签约网点 -->
+	   <result property="accountState" column="TACI_STT" /><!-- 账户状态 -->
+	   <result property="accountSignFlag" column="TACI_SIGNFLAG" /><!-- 账户签约标志 -->
+	   <result property="channel" column="TACI_CHANNEL" /><!-- 渠道 -->
+	   <result property="lastTime" column="TACI_LASTTIME" /><!-- 最后修改时间 -->
+	   <result property="isfeeType" column="TACI_ISFEETYPE" /><!-- 是否为缴费账户 -->
+	   <result property="accountOpenBranchNo" column="TAI_OPENNODE" /><!-- 账户开户行号 -->
+	   <result property="accountType" column="TAI_ACCTYPE" /><!-- 账号类型 -->
+	   <result property="accountAlias" column="TAI_ALIAS" /><!-- 账户别名 -->
+	   <result property="cardStyles" column="TAI_CARDSTYLES" /><!-- 账号卡样式 -->
+    </resultMap>
+	<resultMap type="java.util.HashMap" id="accinfResultMap" >
+	   <result property="accNo" column="TAI_ACCNO" />
+	   <result property="openNode" column="TAI_OPENNODE" />
+	   <result property="accType" column="TAI_ACCTYPE" />
+	   <result property="alias" column="TAI_ALIAS" />
+	   <result property="cardStyles" column="TAI_CARDSTYLES" />
+    </resultMap>
+    <resultMap type="java.util.HashMap" id="accinfBranchResultMap" >
+	   <result property="accNo" column="TAI_ACCNO" />
+	   <result property="openNode" column="TAI_OPENNODE" />
+	   <result property="accType" column="TAI_ACCTYPE" />
+	   <result property="alias" column="TAI_ALIAS" />
+	   <result property="cardStyles" column="TAI_CARDSTYLES" />
+	   <result property="brachName" column="BBH_NAME" />
+    </resultMap>
+    <!-- 根据查询条件查询账号信息  -->
+	<select id="queryAccInfChannelBySttAccNo" resultMap="accChannelinfAccinfResultMap">
+		select 
+		<include refid="tpr_accinfAndAccChannelInf_param"/> 
+		from TPR_ACC_CHANNEL_INFO p,TPR_ACC_INFO a
+		where p.TACI_CSTID = #{cstId}
+		<if test="stt != null and stt != '' ">
+			and p.TACI_STT = #{stt}
+		</if>
+		<if test="accountType != null and accountType != ''"> 
+			and a.TAI_ACCTYPE = #{accountType}
+		</if>
+		<if test="accNo != null and accNo != '' "> 
+			and p.TACI_ACCNO = #{accNo}
+		</if>
+		and p.TACI_ACCNO = a.TAI_ACCNO and p.TACI_STT != '5'
+	</select>
+	
+	<!-- 修改账户渠道信息-账户状态 -->
+	<update id="updateAccChannelInfStt" parameterType="java.util.HashMap">
+		update 
+			TPR_ACC_CHANNEL_INFO 
+		<set>
+			TACI_STT = #{stt}	
+		</set>
+		where 
+			TACI_CSTID = #{cstId} and 
+			TACI_ACCNO = #{accNo} 
+	</update>
+	
+	<!--根据账号查询账户基本信息 -->
+	<select id="queryAccInfByAccNo" resultMap="accinfResultMap">
+		select 
+		<include refid="tpr_acc_inf_param"/> 
+		from  TPR_ACC_INFO
+		where TAI_ACCNO = #{accNo}
+	</select>
+	<!-- 根据账号联合查询账号开户行信息  -->
+	<select id="queryBranchByAccNo" resultMap="accinfBranchResultMap" parameterType="java.util.HashMap">
+		select 
+		<include refid="tpr_acc_branch_param"/> 
+		from TPR_ACC_INFO a,BMA_BRANCH m where a.TAI_ACCNO = #{accNo} and a.TAI_OPENNODE = m.BBH_ID
+	</select>
+</mapper>

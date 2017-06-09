@@ -1,0 +1,59 @@
+<div>
+    <carousel interval="myInterval">
+        <slide ng-repeat="productIdList in vm.productIdList" active="slide.active">
+            <img ng-src="../assets{{productIdList.contentImg}}" style="margin:auto;width: 100%;height: 400px" ng-click="vm.slideProImg(productIdList);">
+        </slide>
+    </carousel>
+    <div class="account-box">
+        <div class="account">
+            <div class="account-chart">
+                <div class="title">账户总览</div>
+                    <div class="my-fortune">
+                    <div class="finance-summary">
+                        <div class="main">
+                            <div class="finance-body">
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <div ng-if="vm.hasPie" e-chart class="pieChart" options="vm.pieOptions"></div>
+                                        <img ng-if="!vm.hasPie" ng-src="{{vm.emptyPie}}" style="margin-left:15px">
+                                        <div class="shadow-line"></div>
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 col-sm-7">
+                                        <div class="row finance-row" ng-repeat="distribution in vm.distributionData">
+                                            <div class="col-md-1">
+                                                <div class="circle" ng-style="{background:distribution.color}"></div>
+                                            </div>
+                                            <div class="col-md-2 product-name" ng-bind="distribution.desc"></div>
+                                            <div class="col-md-4 text-right no-wrap" ng-if="distribution.assetType=='1' || distribution.assetType=='2'||distribution.assetType=='3'"><span class="money" privacy ng-bind="(distribution.sum| number:2)"></span>元</div>
+                                            <div class="col-md-4 text-right no-wrap" ng-if="distribution.assetType=='4' || distribution.assetType=='5'"><span class="money" privacy ng-bind="(distribution.sum)"></span>张</div>
+                                            <div class="col-md-3 oper">
+                                                <a class="operlink" ng-repeat="operator in distribution.operator" ng-if="operator.state" ui-sref="{{operator.state}}">{{operator.name}}</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <div class="recommend-product">
+                <div class="title">到期提醒</div>
+                <div><span>   </span></div>
+                <div class="gunlun">
+                    <ul class="product-info1" style="border: 0xp;">
+                        <li ng-repeat="personRemindInfo in vm.personRemindInfo">
+                            <div class="tex">
+                                <span>产品</span>有<b>1</b>{{personRemindInfo.remindTxt}}<b></b><br/>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="main-box">
+            <div browsehistory></div>
+    </div>
+</div>
+

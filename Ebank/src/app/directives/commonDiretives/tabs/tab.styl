@@ -1,0 +1,46 @@
+.tabs
+    border solid 1px #e8e8e8
+    overflow auto
+    background: white
+    border-bottom 0
+    .custome-tab
+        height 50px
+        line-height 46px
+        font-size 12px
+        border-bottom solid 1px #e8e8e8
+        background #f7fcff
+        @media $smart
+            line-height 27px
+            height 33px
+        .custome-tab-item
+            min-width 81px
+            text-align center
+            border-right solid 1px #e8e8e8
+            float left
+            @media $smart
+                height 33px
+        .selected
+            background-color #fff
+            color #135dbc
+            font-weight bold
+            border-top solid 2px $blue
+            border-bottom-width 0
+            line-height 48px
+            border-bottom 1px solid #fff
+
+            @media $smart
+                line-height 27px
+                height 33px
+        .unselected
+            background-color #f7fcff
+            color #777
+            @media $smart
+                line-height 27px
+                height 29px
+        .unselected:hover
+            border-top solid 2px $blue
+            color #135dbc
+            line-height 48px
+            height 48px
+    .custome-tab-body
+        background #fff

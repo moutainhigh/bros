@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.pubcity">
+	<sql id="pub_city_par">
+		pcy_code,
+		pcy_name,
+		pcy_level,
+		pcy_location,
+		pcy_provinceid
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="pubCityResult">
+    	<result property="code" column="pcy_code"/>
+    	<result property="name" column="pcy_name"/>
+    	<result property="level" column="pcy_level"/>
+    	<result property="location" column="pcy_location"/>
+    	<result property="provinceid" column="pcy_provinceid"/>
+    </resultMap>
+    
+    <select id="queryPubCity" resultMap="pubCityResult">
+       select
+       	<include refid="pub_city_par"/> 
+       from pub_city
+    </select>
+    <select id="queryPubCityByName" resultMap="pubCityResult" parameterType="java.util.HashMap">
+       select 
+       <include refid="pub_city_par"/> 
+       from pub_city where pcy_name like '%'||#{name}||'%'
+    </select>
+    <select id="queryPubCityByCode" resultMap="pubCityResult" parameterType="java.util.HashMap">
+       select 
+       <include refid="pub_city_par"/> 
+       from pub_city 
+       <if test="provinceId !='' and provinceId != null">
+       where pcy_provinceid = #{provinceId} 
+       </if>
+    </select>
+    
+    
+
+</mapper>

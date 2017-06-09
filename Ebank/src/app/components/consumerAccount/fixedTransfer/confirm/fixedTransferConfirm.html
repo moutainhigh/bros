@@ -1,0 +1,68 @@
+<div class="main-box">
+    <div rfixedtransfertitle flow="2"></div>
+    <div class="trading-one-box">
+        <div class="ebank-input-box">
+            <div class="ebank-input-title">确认信息</div>
+            <div class="alert alert-danger" role="alert" ng-if="errorMsg " ng-bind="errorMsg"></div>
+            <form class="form-horizontal"  role="form" name="vm.regForm" novalidate ng-submit="vm.fixedTranserSussess()" >
+                <div class="form-group">
+                    <label for="txt_cardNumberType" class="col-sm-4 control-label"><span class="red">*</span>产品名称</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" required name="txt_cardNumberType" id="txt_cardNumberType" ng-model="vm.model.cardNumberType">
+                            <option value="" selected>三个月期人民币整存整取</option>
+                            <option value="12">六个月期人民币整存整取</option>
+                            <option value="13">一年期人民币整存整取</option>
+                            <option value="14">两年期人民币整存整取</option>
+                            <option value="14">三年期人民币整存整取</option>
+                            <option value="14">五年期人民币整存整取</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_cardPwd" class="col-sm-4 control-label"><span class="red">*</span>起存金额</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  id="" name="" ng-disabled="true">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_custName" class="col-sm-4 control-label"><span class="red">*</span>挂牌利率</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  id="" name="" ng-disabled="true">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-4 control-label"><span class="red">*</span>转出卡(账)号</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="txt_idType" name="txt_idType" required ng-model="vm.model.idType">
+                            <option value="">6229828601000201602</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_iphone" class="col-sm-4 control-label"><span class="red">*</span>转存金额</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" required id="" name="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txt_iphone" class="col-sm-4 control-label"><span class="red">*</span>交易密码</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" required id="" name="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8 btn-box-big ">
+                        <button type="submit" class="btn btn-primary btn-lg">确认</button>
+                        <button type="button" class="btn btn-default btn-lg" ng-click="vm.backLogin();">返回</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

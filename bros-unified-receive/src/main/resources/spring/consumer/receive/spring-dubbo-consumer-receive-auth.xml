@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	
+	
+	<!--================================================ 内部授权服务 ================================================-->
+	<!-- 交易类型待授权指令概览统计服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryInsideQryTaskCenterViewAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="qryTaskCenterView" />
+	</dubbo:reference>
+	<!-- 业务编码待授权指令概览统计服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryInsideQryTaskCenterViewByBsnTypeAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="qryTaskCenterViewByBsnType" />
+	</dubbo:reference>
+	<!-- 查询待授权指令列表服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryInsideQryAuthQueueListAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="qryAuthQueueList" />
+	</dubbo:reference>
+	<!-- 签收任务退回（暂时未使用）服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateInsideUnClaimTaskJobAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="unClaimTaskJob" />
+	</dubbo:reference>
+	<!-- 单笔授权（临柜）服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateInsideSingleCompleteTaskAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="singleCompleteTask" />
+	</dubbo:reference>
+	<!-- 单笔授权（审核式）服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateInsideAuthSingleCompleteTaskAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="authSingleCompleteTask" />
+	</dubbo:reference>
+	<!-- 批量授权服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateInsideBatchCompleteTaskAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="batchCompleteTask" />
+	</dubbo:reference>
+	<!-- 查询指令详情列表（用于凭证打印）服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryInsideQryOrderDetailListByBatchNoAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="qryOrderDetailListByBatchNo" />
+	</dubbo:reference>
+	<!-- 查询审批意见历史信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryInsideQryCommentListByTaskIdAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="qryCommentListByTaskId" />
+	</dubbo:reference>
+	<!-- 根据业务流水号（指令流水号）+业务编号查询授权详情页面展示数据服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryInsideQryAuthDetailPageDataByBusinessKeyAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="qryAuthDetailPageDataByBusinessKey" />
+	</dubbo:reference>
+	<!-- 根据法人记录唯一标识+任务提交柜员ID查询可撤销流程实例列表服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryInsideCancelProcessInstanceListAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="queryCancelProcessInstanceList" />
+	</dubbo:reference>
+	<!-- 撤销流程服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryInsideCancelProcessInstanceAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="cancelProcessInstance" />
+	</dubbo:reference>
+	<!-- 已办事宜列表查询服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryInsideAuthHistoryListAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="queryAuthHistoryList" />
+	</dubbo:reference>
+	<!-- 显示流程图生成，上传到ftp服务器 -->
+	<dubbo:reference check="false" version="1.0.0" id="addInsideAuthProcessPhotoToFtpServerAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="addAuthProcessPhotoToFtpServer" />
+	</dubbo:reference>
+	<!-- 查询授权流程节点坐标和明细信息 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryInsideAuthProcessNodeDetailAction_1.0.0" interface="bros.c.auth.facade.service.ICInsideAuthServiceFacade">
+		<dubbo:method name="queryAuthProcessNodeDetail" />
+	</dubbo:reference>
+	
+	<!--================================================ 对客授权任务中心对外发布服务================================================-->
+	<!-- 交易类型待授权指令概览统计服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryOutsideQryTaskCenterViewAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="qryTaskCenterView" />
+	</dubbo:reference>
+	<!-- 业务编码待授权指令概览统计服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryOutsideQryTaskCenterViewByBsnTypeAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="qryTaskCenterViewByBsnType" />
+	</dubbo:reference>
+	<!-- 查询待授权指令列表服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryOutsideQryAuthQueueListAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="qryAuthQueueList" />
+	</dubbo:reference>
+	<!-- 签收任务退回（暂时未使用）服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateOutsideUnClaimTaskJobAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="unClaimTaskJob" />
+	</dubbo:reference>
+	<!-- 单笔授权服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateOutsideAuthSingleCompleteTaskAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="singleCompleteTask" />
+	</dubbo:reference>
+	<!-- 批量授权服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="updateOutsideBatchCompleteTaskAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="batchCompleteTask" />
+	</dubbo:reference>
+	<!-- 查询指令详情列表（用于凭证打印）服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryOutsideQryOrderDetailListByBatchNoAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="qryOrderDetailListByBatchNo" />
+	</dubbo:reference>
+	<!-- 查询审批意见历史信息服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryOutsideQryCommentListByTaskIdAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="qryCommentListByTaskId" />
+	</dubbo:reference>
+	<!-- 根据业务流水号（指令流水号）+业务编号查询授权详情页面展示数据服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryOutsideQryAuthDetailPageDataByBusinessKeyAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="qryAuthDetailPageDataByBusinessKey" />
+	</dubbo:reference>
+	<!-- 根据法人记录唯一标识+任务提交柜员ID查询可撤销流程实例列表服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryOutsideCancelProcessInstanceListAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="queryCancelProcessInstanceList" />
+	</dubbo:reference>
+	<!-- 撤销流程服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryOutsideCancelProcessInstanceAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="cancelProcessInstance" />
+	</dubbo:reference>
+	<!-- 已办事宜列表查询服务 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryOutsideAuthHistoryListAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="queryAuthHistoryList" />
+	</dubbo:reference>
+	<!-- 显示流程图生成，上传到ftp服务器-->
+	<dubbo:reference check="false" version="1.0.0" id="addOutsideAuthProcessPhotoToFtpServerAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="addAuthProcessPhotoToFtpServer" />
+	</dubbo:reference>
+	<!-- 查询授权流程节点坐标和明细信息 -->
+	<dubbo:reference check="false" version="1.0.0" id="queryOutsideAuthProcessNodeDetailAction_1.0.0" interface="bros.c.auth.facade.service.ICOutSideAuthSerivceFacade">
+		<dubbo:method name="queryAuthProcessNodeDetail" />
+	</dubbo:reference>
+	
+</beans>  

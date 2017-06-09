@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="oldPassword" message="${CECO000000001}"><!-- 原登录密码 -->
+		   <validator class="IsRamdomLength" min="6" max="100" symbol="r" message="${CECO000000007}"/>
+		</xmlField>
+		<xmlField dataName="newPassword" message="${CECO000000001}"><!-- 新登录密码 -->
+		   <validator class="IsRamdomLength" min="6" max="100" symbol="r" message="${CECO000000007}"/>
+		</xmlField>
+		<xmlField dataName="cfmPassword" message="${CECO000000001}"><!-- 确认登录密码 -->
+		   <validator class="IsRamdomLength" min="6" max="100" symbol="r" message="${CECO000000007}"/>
+		</xmlField>
+		<xmlField dataName="customerAlias" message="${CECO000000001}"><!-- 客户昵称 -->
+		   <validator class="IsRamdomLength" min="6" max="30" symbol="r" message="${CECO000000007}"/>
+		</xmlField>
+	</xmlTag>
+</formats>

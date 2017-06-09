@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<formats>
+	<fmtDef id="SVR00000009SendFmt">										<!-- 查询产品列表流程 -->
+		    <xmlRel rel="SendFmt" />
+			<xmlField tagName="productStoreId" dataName="productStoreId" />      <!-- 产品店铺标识 -->
+	</fmtDef>
+	<fmtDef id="SVR00000009RecFmt">
+		    <xmlRel rel="RecFmt" />
+			<xmlList tagName="returnList" dataName="returnList">  													<!--返回产品列表 -->
+				<xmlTag >				              
+						<xmlList tagName="catalogInfos" dataName="catalogInfos">							                <!--一级目录信息 -->
+							<xmlTag>
+									<xmlField tagName="catalogId" dataName="catalogId" />							                <!--一级目录标识 -->
+									<xmlField tagName="catalogName" dataName="catalogName" />						                <!--一级目录名称 -->
+									<xmlList  tagName="LcatChild" dataName="LcatChild">								                <!--二级目录列表 -->
+										<xmlTag>
+												<xmlField tagName="catalogId" dataName="catalogId" />						                <!--二级分类标识 -->
+												<xmlField tagName="catalogName" dataName="catalogName" />					                <!--二级目录名称 -->
+												<xmlList  tagName="LcatChilds" dataName="LcatChilds">						                <!--三级目录列表 -->
+														<xmlTag >
+																<xmlField tagName="catalogId" dataName="catalogId" />					                <!--三级分类标识 -->
+																<xmlField tagName="catalogName" dataName="catalogName" />				                <!--三级目录名称 -->
+																<xmlList  tagName="productIds" dataName="productIds">					                <!--返回产品列表 -->
+																	<xmlTag >
+																			<xmlField tagName="productId" dataName="productId" />				                <!--产品标识 -->
+																			<xmlField tagName="productName" dataName="productName" />			                <!--产品名-->
+																			<xmlField tagName="price" dataName="price" />						                <!--价格 -->
+																			<xmlField tagName="imageAdress" dataName="imageAdress" />			                <!--图片地址-->
+																			<xmlList tagName="productIds" dataName="productIds">				                <!--返回产品列表 -->
+																				<xmlTag >
+																						<xmlField tagName="productId" dataName="productId" />			                <!--产品标识 -->
+																						<xmlField tagName="productName" dataName="productName" />		                <!--产品名-->
+																						<xmlField tagName="price" dataName="price" />					                <!--价格 -->
+																						<xmlField tagName="imageAdress" dataName="imageAdress" />		                <!--图片地址-->
+																						<xmlField tagName="textData" dataName="textData" />				                <!--文本数据-->
+																						<xmlList tagName="productConfigOptionList" dataName="productConfigOptionList"><!--图片地址-->
+																							<xmlTag >
+																									<xmlField tagName="configOptionId" dataName="configOptionId" />				<!--配置项标识-->
+																									<xmlField tagName="configOptionName" dataName="configOptionName" />			<!--配置项名称-->
+																							</xmlTag>
+																						</xmlList>
+																				</xmlTag>
+																			</xmlList>
+																	</xmlTag>
+																</xmlList>
+														</xmlTag>
+												</xmlList>
+										</xmlTag>
+									</xmlList>
+							</xmlTag>			
+						</xmlList>
+				</xmlTag>		
+			</xmlList>
+	</fmtDef>
+</formats>

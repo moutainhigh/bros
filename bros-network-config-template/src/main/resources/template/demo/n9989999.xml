@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	 <xmlTag dataName="mainMap" selectFlag="No">
+	 	 <xmlField dataName="returnCode" label="返回码" type="text" template="text00001" title="测试模板编写" />
+	 </xmlTag>
+	 <xmlTag dataName="mainMap" selectFlag="No">
+		 <xmlField dataName="returnMsg" label="返回信息" type="text" template="text00001" />
+	 </xmlTag>
+	 <xmlTag dataName="mainMap" selectFlag="No">
+		 <xmlField dataName="tellerNo" label="柜员号" type="text" template="text00001" categroy="cateAccType"/>
+	 </xmlTag>
+	 <xmlTag title="账号明显表" type="table" template="table00001">
+	 			<xmlTag type="thead">
+	 						<xmlField label="交易流水号"/>
+	 						<xmlField label="行号"/>
+	 						<xmlField label="收款行名"/>
+	 						<xmlField label="附言"/>
+	 			</xmlTag>
+	 			<xmlTag type="tbody">
+	 						<xmlList dataName="detailList" tagName="allData">
+	 							<xmlTag>
+	 									<xmlField dataName="gblflowSeq"/>
+				 						<xmlField dataName="resiveBankNo" categroy="cateAccType"/>
+				 						<xmlField dataName="resiveBankName"/>
+				 						<xmlField dataName="purpose"/>
+				 				</xmlTag>
+	 						</xmlList>
+	 			</xmlTag>	
+	 </xmlTag>
+</formats>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="pageSize" message="${CECO000000001}"/><!-- 每页显示条数 -->
+		<xmlField dataName="pageNo" message="${CECO000000001}"/><!-- 当前页码 -->
+		<xmlField dataName="legalPersonId" message="${CECO000000001}"/><!-- 法人id -->
+	</xmlTag>
+</formats>

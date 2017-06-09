@@ -1,0 +1,49 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+    "totalNo": 2,
+    "finAccTranList": [
+        {
+            "transDate": "2014-12-02",
+            "prodName": "好运瑞盈第八期",
+            "prodCode": "HYRY09",
+            "transStatus": "申请成功",
+            "appAmt": "100,000.00",
+            "currency": "人民币",
+   			"channelFlag": "手机银行"
+        },
+        {
+             "transDate": "2014-12-02",
+            "prodName": "好运瑞盈第二期",
+            "prodCode": "HYRY02",
+            "transStatus": "已撤单（成功）",
+            "appAmt": "50,000.00",
+            "currency": "人民币",
+   			"channelFlag": "手机银行"
+        }
+    ],
+    "totalPage": 1
+}
+
+
+

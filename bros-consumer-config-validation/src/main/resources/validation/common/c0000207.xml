@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="uniqueCstIdentity" message="${CECO000000001}"/><!-- 客户唯一标识 -->
+		<xmlTag dataName="recordMap" message="${CECO000000001}"><!-- 更新购物车记录 -->
+			<xmlField dataName="id" message="${CECO000000001}"/><!-- 记录唯一主键 -->
+		</xmlTag>
+	</xmlTag>
+</formats>

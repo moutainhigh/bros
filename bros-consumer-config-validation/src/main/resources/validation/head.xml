@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="headMap" message="${CECO000000000}">
+		<xmlField dataName="globalSeqNo" message="${CECO000000001}"><!-- 全局流水号 -->
+			<validator class="IsRamdomLength" min="30" symbol="e" message="${CECO000000004}"/><!-- 长度必须为多少位 -->
+		</xmlField>
+		<xmlField dataName="tranSeqNo" message="${CECO000000001}"><!-- 交易流水号 -->
+			<validator class="IsRamdomLength" min="40" symbol="e" message="${CECO000000004}"/>
+		</xmlField>
+		<xmlField dataName="branchId" message="${CECO000000001}"><!-- 机构号 -->
+			<validator class="IsRamdomLength" min="10" symbol="le" message="${CECO000000005}"/><!-- 长度不能超过 -->
+		</xmlField>
+		<xmlField dataName="tranTellerNo" message="${CECO000000001}"><!-- 柜员号 -->
+			<validator class="IsRamdomLength" min="8" symbol="le" message="${CECO000000005}"/>
+		</xmlField>
+		<xmlField dataName="consumerId" message="${CECO000000001}"><!-- 调用方系统id -->
+			<validator class="IsRamdomLength" min="4" symbol="le" message="${CECO000000005}"/>
+		</xmlField>
+		<xmlField dataName="tranDate" message="${CECO000000001}"><!-- 交易日期 -->
+			<validator class="IsRamdomLength" min="8" symbol="e" message="${CECO000000004}"/>
+		</xmlField>
+		<xmlField dataName="tranTime" message="${CECO000000001}"><!-- 交易时间 -->
+			<validator class="IsRamdomLength" min="6" max="9" symbol="r" message="${CECO000000007}"/><!-- 长度在某个范围之内 -->
+		</xmlField>
+		<xmlField dataName="channelDate" message="${CECO000000001}"><!-- 调用方系统日期 -->
+			<validator class="IsRamdomLength" min="8" symbol="e" message="${CECO000000004}"/>
+		</xmlField>
+		<xmlField dataName="channel" message="${CECO000000001}"><!-- 渠道编号 -->
+			<validator class="IsRamdomLength" min="10" symbol="le" message="${CECO000000005}"/>
+		</xmlField>
+		<xmlField dataName="sceneCode" message="${CECO000000001}"><!-- 场景编号 -->
+			<validator class="IsRamdomLength" min="4" symbol="e" message="${CECO000000004}"/>
+		</xmlField>
+<!-- 		<xmlField dataName="legalCode" message="${CECO000000001}"/>法人编码 -->
+		<xmlField dataName="legalId" message="${CECO000000001}"><!-- 法人编号id -->
+			<validator class="IsRamdomLength" min="36" symbol="e" message="${CECO000000004}"/>
+		</xmlField>
+		<xmlField dataName="flag" message="${CECO000000001}"><!-- 主副交易标志 -->
+			<validator class="IsRamdomLength" min="1" symbol="e" message="${CECO000000004}"/>
+		</xmlField>
+		<xmlField dataName="tradeType" message="${CECO000000001}"><!-- 交易类型 -->
+			<validator class="IsRamdomLength" min="1" symbol="e" message="${CECO000000004}"/>
+		</xmlField>
+	</xmlTag>
+</formats>

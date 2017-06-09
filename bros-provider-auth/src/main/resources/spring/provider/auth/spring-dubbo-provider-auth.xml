@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 内部授权对外发布服务-->
+	<dubbo:service retries="0"  interface="bros.p.auth.facade.service.IPInsideAuthServiceFacade" ref="pinsideAuthServiceFacade"/>
+	<!-- 对客授权任务中心对外发布服务 -->
+	<dubbo:service retries="0"  interface="bros.p.auth.facade.service.IPOutSideAuthSerivceFacade" ref="poutSideAuthServiceFacade"/>
+	<!-- 监控系统模块是否存活服务-->
+	<dubbo:service retries="0"  interface="bros.p.monitor.service.IPApplicationAliveMonitorAuthServiceFacade" ref="papplicationAliveMonitorAuthServiceFacade"/>
+</beans>  

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 调用服务提供方对外发布的服务配置位置                       服务提供方与服务消费方之间的zookeeper -->
+	<!--================================================ 内管登录管理  ================================================-->
+	<!-- 内管登录服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="manageLoginAction_1.0.0" interface="bros.c.login.facade.service.ICLoginServiceFacade" >
+		<dubbo:method name="manageLogin"/>
+	</dubbo:reference>
+	<!-- 内管登出服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="manageLogoutAction_1.0.0" interface="bros.c.login.facade.service.ICLoginServiceFacade" >
+		<dubbo:method name="manageLogout"/>
+	</dubbo:reference>
+	
+	
+	<!-- EB登录服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="ebankLoginAction_1.0.0" interface="bros.c.login.facade.service.ICEBLoginServiceFacade" >
+		<dubbo:method name="ebankLogin"/>
+	</dubbo:reference>
+	<!-- EB登出服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="ebankLogoutAction_1.0.0" interface="bros.c.login.facade.service.ICEBLoginServiceFacade" >
+		<dubbo:method name="ebankLogout"/>
+	</dubbo:reference>
+	
+	<!-- 个人客户登录服务 -->
+	<dubbo:reference check="false" version="1.0.0"  id="personLoginAction_1.0.0" interface="bros.c.login.facade.service.ICPersonLoginServiceFacade" >
+		<dubbo:method name="login"/>
+	</dubbo:reference>
+	
+	<!-- 个人客户安全签退服务  -->
+	<dubbo:reference check="false" version="1.0.0"  id="personLogoutAction_1.0.0" interface="bros.c.login.facade.service.ICPersonLoginServiceFacade" >
+		<dubbo:method name="logout"/>
+	</dubbo:reference>
+	
+	<!-- 个人客户首次登录服务  -->
+	<dubbo:reference check="false" version="1.0.0"  id="personFirstLoginAction_1.0.0" interface="bros.c.login.facade.service.ICPersonLoginServiceFacade" >
+		<dubbo:method name="firstLogin"/>
+	</dubbo:reference>
+	
+	<!-- 个人客户首次登录服务  -->
+	<dubbo:reference check="false" version="1.0.0"  id="personPauseLoginAction_1.0.0" interface="bros.c.login.facade.service.ICPersonLoginServiceFacade" >
+		<dubbo:method name="pauseLogin"/>
+	</dubbo:reference>
+</beans>

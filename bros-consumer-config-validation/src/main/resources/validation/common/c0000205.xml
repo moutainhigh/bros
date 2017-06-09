@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="uniqueCstIdentity" message="${CECO000000001}"/><!-- 客户唯一标识 -->
+		<xmlTag dataName="recordMap" message="${CECO000000001}">
+			<xmlField dataName="productId" message="${CECO000000001}"/><!-- 产品id -->
+			<xmlField dataName="productName" message="${CECO000000001}"/><!-- 产品名称 -->
+			<xmlField dataName="productDes" message="${CECO000000001}"/><!-- 产品描述 -->
+			<xmlField dataName="productPrice" message="${CECO000000001}"/><!-- 产品价格 -->
+			<xmlField dataName="productAmount" message="${CECO000000001}"/><!-- 产品数量 -->
+			<xmlTag dataName="tradeData" message="${CECO000000001}"/><!-- 产品输入要素 -->
+		</xmlTag>
+	</xmlTag>
+</formats>

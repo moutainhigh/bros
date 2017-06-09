@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+ 	 <xmlField dataName="cstNo" label="客户号" type="text" template="text001" title="本行转账" />
+	 <xmlField dataName="payAccNo" label="付款账号" type="text" template="text001" title="本行转账"/>
+	 <xmlField dataName="payAccName" label="付款户名" type="text" template="text001" title="本行转账"/>
+ 	 <xmlField dataName="voucheType" label="凭证种类" type="text" template="text001" title="本行转账" />
+	 <xmlField dataName="voucheNo" label="凭证号码" type="text" template="text001" title="本行转账"/>
+	 <xmlField dataName="voucheDate" label="凭证日期" type="text" template="text001"  title="本行转账"/>
+ 	 <xmlField dataName="cansiCode" label="现金分析码" type="text" template="text001" title="本行转账"/>
+	 <xmlField dataName="accounType" label="账户类型" type="text" template="text001" title="本行转账"/>
+	 
+	 <xmlField dataName="payBankNo" label="付款行号" type="text" template="text001" title="本行转账" />
+	 <xmlField dataName="payBankName" label="付款行名" type="text" template="text001" title="本行转账"/>
+	 <xmlField dataName="resiveAccNo" label="收款账号" type="text" template="text001"  title="本行转账"/>
+ 	 <xmlField dataName="resiveAccName" label="收款户名" type="text" template="text001" title="本行转账"/>
+	 <xmlField dataName="resiveBankNo" label="收款行号" type="text" template="text001" title="本行转账"/>
+	 
+	 <xmlField dataName="resiveBankName" label="收款行名" type="text" template="text001" title="本行转账" />
+	 <xmlField dataName="currency" label="币种" type="text" template="text001" title="本行转账"/>
+	 <xmlField dataName="transAmt" label="金额" type="text" template="text001"  title="本行转账"/>
+ 	 <xmlField dataName="feeAmt" label="手续费" type="text" template="text001" title="本行转账"/>
+	 <xmlField dataName="purpose" label="备注" type="text" template="text001" title="本行转账"/>
+</formats>

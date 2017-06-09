@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.activiti.table.acthisprocinst">
+
+	<resultMap id="actHisProcInstResultMap" type="java.util.HashMap">
+		<result property="id" column="ID_" />
+		<result property="procInstId" column="PROC_INST_ID_" />
+		<result property="businessKey" column="BUSINESS_KEY_" />
+		<result property="startTime" column="START_TIME_" jdbcType="DATE" />
+		<result property="endTime" column="END_TIME_" jdbcType="DATE" />
+		<result property="deleteReason" column="DELETE_REASON_" />
+		<result property="startUserId" column="START_USER_ID_" />		
+    </resultMap>
+ 
+	<!-- 根据操作员ID查询操作员参与的流程实例列表(流程已完成) -->
+	<select id="qryFinishedHisProcInstListByUserId" resultMap="actHisProcInstResultMap" parameterType="java.util.HashMap">
+		   select b.ID_,
+		          b.PROC_INST_ID_,
+		          b.BUSINESS_KEY_,
+		          b.START_TIME_,
+		          b.END_TIME_,
+		          b.DELETE_REASON_,
+		          b.START_USER_ID_
+		   from ACT_HI_IDENTITYLINK a , 
+		        ACT_HI_PROCINST b, 
+		        ACT_HI_VARINST c
+		   <where> 
+		        a.TYPE_='participant' 
+				and a.USER_ID_=#{userId}
+				and a.PROC_INST_ID_= b.PROC_INST_ID_
+				and a.PROC_INST_ID_= c.PROC_INST_ID_
+				and b.END_TIME_ is not null
+				and c.NAME_='bsnType'
+				<if test="bsnType!=null and bsnType!=''">
+					and c.TEXT_=#{bsnType}
+				</if>
+				and TO_CHAR(b.START_TIME_,'YYYYMMDDHH24MISS') BETWEEN #{beginDate} AND #{endDate}
+				<if test="sortType!=null and sortType==0">
+	  			    order by b.START_TIME_ asc
+	 		    </if>
+	 		    <if test="sortType!=null and sortType==1">
+	  			    order by b.START_TIME_ desc
+	 		    </if>
+		  </where>
+	</select>
+	
+	<!-- 根据操作员ID查询操作员参与的流程实例总数 -->
+	<select id="qryFinishedHisProcInstListTotalNumByUserId" resultType="int" parameterType="java.util.HashMap">
+		   select count(b.ID_) as totalNum
+		   from ACT_HI_IDENTITYLINK a , 
+		        ACT_HI_PROCINST b, 
+		        ACT_HI_VARINST c
+		   <where>
+		        a.TYPE_='participant' 
+				and a.USER_ID_=#{userId}
+				and a.PROC_INST_ID_= b.PROC_INST_ID_
+				and a.PROC_INST_ID_= c.PROC_INST_ID_
+				and b.END_TIME_ is not null
+				and c.NAME_='bsnType'
+				<if test="bsnType!=null and bsnType!=''">
+					and c.TEXT_=#{bsnType}
+				</if>
+				and TO_CHAR(b.START_TIME_,'YYYYMMDDHH24MISS') BETWEEN #{beginDate} AND #{endDate}
+		  </where>
+	</select>
+	
+	<!-- 根据操作员编号查询操作员参与的流程实例列表(流程未完成) -->
+	<select id="qryDoingHisProcInstListByUserId" resultMap="actHisProcInstResultMap" parameterType="java.util.HashMap">
+		   select b.ID_,
+		          b.PROC_INST_ID_,
+		          b.BUSINESS_KEY_,
+		          b.START_TIME_,
+		          b.END_TIME_,
+		          b.DELETE_REASON_,
+		          b.START_USER_ID_
+		   from ACT_HI_IDENTITYLINK a , 
+		        ACT_HI_PROCINST b, 
+		        ACT_HI_VARINST c,
+		        ACT_RU_EXECUTION d
+		   <where> 
+		        a.TYPE_='participant' 
+				and a.USER_ID_=#{userId}
+				and a.PROC_INST_ID_= b.PROC_INST_ID_
+				and a.PROC_INST_ID_= c.PROC_INST_ID_
+				and a.PROC_INST_ID_= d.ID_
+				and b.END_TIME_ is null
+				and c.NAME_='bsnType'
+				<if test="bsnType!=null and bsnType!=''">
+					and c.TEXT_=#{bsnType}
+				</if>
+				and d.SUSPENSION_STATE_ ='1'
+				and TO_CHAR(b.START_TIME_,'YYYYMMDDHH24MISS') BETWEEN #{beginDate} AND #{endDate}
+				<if test="sortType!=null and sortType==0">
+	  			    order by b.START_TIME_ asc
+	 		    </if>
+	 		    <if test="sortType!=null and sortType==1">
+	  			    order by b.START_TIME_ desc
+	 		    </if>
+		  </where>
+	</select>
+	
+	<!-- 根据操作员编号查询操作员参与的流程实例总数(流程未完成) -->
+	<select id="qryDoingHisProcInstListTotalNumByUserId" resultType="int" parameterType="java.util.HashMap">
+		   select count(b.ID_) as totalNum
+		   from ACT_HI_IDENTITYLINK a , 
+		        ACT_HI_PROCINST b, 
+		        ACT_HI_VARINST c,
+		        ACT_RU_EXECUTION d
+		   <where>
+		        a.TYPE_='participant' 
+				and a.USER_ID_=#{userId}
+				and a.PROC_INST_ID_= b.PROC_INST_ID_
+				and a.PROC_INST_ID_= c.PROC_INST_ID_
+				and a.PROC_INST_ID_= d.ID_
+				and c.NAME_='bsnType'
+				<if test="bsnType!=null and bsnType!=''">
+					and c.TEXT_=#{bsnType}
+				</if>
+				and d.SUSPENSION_STATE_ ='1'
+				and TO_CHAR(b.START_TIME_,'YYYYMMDDHH24MISS') BETWEEN #{beginDate} AND #{endDate}
+		  </where>		
+	</select>
+
+</mapper> 
+ 

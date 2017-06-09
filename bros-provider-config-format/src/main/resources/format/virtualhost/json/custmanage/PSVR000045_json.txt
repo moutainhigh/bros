@@ -1,0 +1,43 @@
+{
+	RspSvcHeader: {
+        channelDate: "20160721",
+        acctDate: "",
+        tranTime: "174012",
+        returnCode: "00000000",
+        tranDate: "",
+        ReturnCode: "000000000000",
+        TranDate: "20160721",
+        returnMsg: "交易成功",
+        rsrvContent: "",
+        SubSvcRetInfo:[
+            
+        ],
+        BackendSysId: "0202",
+        backendSeqNo: "0001201607211111000000003053019001000000",
+        langCode: "",
+        BackendSeqNo: "0001201607211111000000003053019001000000",
+        globalSeqNo: "000120160721111100000000305301",
+        TranTime: "174012",
+        backendSysId: "1111",
+        ReturnMsg: "交易成功"
+    },
+     "financialProductsList":[
+	     {"prodName":"好运瑞盈15年第138期圣诞节特别款",
+	      "custName":"张三",
+	      "currency":"人民币",
+	      "cancellationsType":"购买撤单",
+	      "oriAppAmt":"100000",
+	      "oriAppCol":"1"
+	     },
+	     {"prodName":"好运瑞盈16年第6期激情冬奥特别款款",
+	      "custName":"李四",
+	      "currency":"人民币",
+	      "cancellationsType":"赎回撤单",
+	      "oriAppAmt":"20000",
+	      "oriAppCol":"1"
+	     }]
+	
+}
+
+
+

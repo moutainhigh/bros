@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--公告管理表 -->
+<mapper namespace="mybatis.mapper.single.table.notice">
+	<sql id="notice_par">
+		PNE_ID,
+		PNE_LEGALID,           
+		PNE_CHANNEL,      
+		PNE_TITLE,        
+		PNE_CONTENT,      
+		PNE_TYPE,         
+		PNE_CREATETIME,   
+		PNE_RELEASETIME,  
+		PNE_STT,          
+		PNE_TELLERNO,     
+		PNE_EXPIREDATE
+	</sql>
+	 <!--公告管理表出参 -->
+	<resultMap type="java.util.HashMap" id="pubNoticeResultMap">
+	    <result property="uuid" column="PNE_ID" />
+		<result property="legalid" column="PNE_LEGALID" />
+		<result property="channel" column="PNE_CHANNEL" />
+		<result property="title" column="PNE_TITLE" />
+		<result property="content" column="PNE_CONTENT" />
+		<result property="type" column="PNE_TYPE" />
+		<result property="createtime" column="PNE_CREATETIME" />
+		<result property="releasetime" column="PNE_RELEASETIME" />
+		<result property="stt" column="PNE_STT" />
+		<result property="tellerno" column="PNE_TELLERNO" />
+		<result property="expiredate" column="PNE_EXPIREDATE" />	
+	</resultMap>
+
+	<!--分页查询公告总记录数  -->
+	<select id="queryPubNoticeTotalNo" resultType="int" parameterType="java.util.HashMap">
+		select count(*) from PUB_NOTICE where 1=1
+		<![CDATA[and PNE_LEGALID = #{legalId}]]> 
+		<if test="type!=null and type!=''">
+		    and PNE_TYPE = #{type}
+		</if>
+		<if test="operatechannel!=null and operatechannel!=''">
+			and PNE_CHANNEL = #{operatechannel}
+		</if>
+		<if test="startDate!=null and startDate!=''">
+		  	<![CDATA[ and PNE_CREATETIME >= #{startDate} ]]> 
+		</if>
+		<if test="endDate!=null and endDate!=''">
+			<![CDATA[ and PNE_CREATETIME < #{endDate} ]]> 
+		</if>
+		<if test="stt!=null and stt!=''">
+			and PNE_STT = #{stt}
+		</if>
+	</select>
+	
+	<!--条件查询公告信息  -->
+	<select id="queryPubNotice" resultMap="pubNoticeResultMap" parameterType="java.util.HashMap">
+		select * from PUB_NOTICE where 1=1
+		<![CDATA[and PNE_LEGALID = #{legalId}]]> 
+		<if test="type!=null and type!=''">
+		    and PNE_TYPE = #{type}
+		</if>
+		<if test="operatechannel!=null and operatechannel!=''">
+			and PNE_CHANNEL = #{operatechannel}
+		</if>
+		<if test="startDate!=null and startDate!=''">
+		  	<![CDATA[ and PNE_CREATETIME >= #{startDate} ]]> 
+		</if>
+		<if test="endDate!=null and endDate!=''">
+			<![CDATA[ and PNE_CREATETIME < #{endDate} ]]> 
+		</if>
+		<if test="stt!=null and stt!=''">
+			and PNE_STT = #{stt}
+		</if>
+	</select>
+	
+	<!--增加公告  -->
+	<insert id="insertNotice"  parameterType="java.util.HashMap" >
+		insert into PUB_NOTICE(
+				<include refid="notice_par"/>
+		) values(
+			#{uuid},
+			#{legalId},
+			#{operatechannel},
+			#{title},
+			#{content},
+			#{type},
+			#{createtime},
+			#{releasetime},
+			#{stt},
+			#{tellerno},
+			#{expiredate}
+		)
+	</insert>
+	
+	<!--修改公告-->
+		<update id="updateNotice" parameterType="java.util.HashMap">			
+			update  PUB_NOTICE
+				 <![CDATA[ 
+				set
+					PNE_TITLE= #{title},
+					PNE_TYPE= #{type},
+					PNE_STT= #{stt},
+					PNE_CONTENT= #{content}
+					where PNE_ID = #{uuid} and PNE_LEGALID = #{legalId}
+				 ]]>
+		</update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+           http://www.springframework.org/schema/beans/spring-beans.xsd    
+           http://www.springframework.org/schema/context    
+           http://www.springframework.org/schema/context/spring-context.xsd  
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd  
+           http://www.springframework.org/schema/aop    
+           http://www.springframework.org/schema/aop/spring-aop.xsd    
+           ">
+	<!-- 通信bean定义公共位置 -->
+	<!-- ==============================tcp客户端开始========================================== -->
+	<!-- 服务用报文解析器 -->
+	<bean id="jsonFormatService" class="bros.common.core.comm.format.impl.JsonFormatServiceImpl"></bean>
+	
+	<!-- 报文处理器服务 -->
+	<bean id="tcpIPCommProcessor" class="bros.common.core.comm.tcpip.TCPIPCommProcessor">
+	    <property name="lengthHeadLen" value="${comm.lengthHeadLen}" />
+	    <property name="encoding" value="${comm.encoding}" />
+	</bean>
+	
+	<!-- 连接某个TCPIP服务器服务 -->
+	<bean id="connectToHostService" class="bros.common.core.comm.tcpip.service.impl.ConnectToHostServiceImpl" >
+		<property name="port" value="${comm.port}" />
+		<property name="maxConnection" value="${comm.maxConnection}" />
+		<property name="hostAddr" value="${comm.hostAddr}" />
+		<property name="keepAlive" value="false" />
+		<property name="commProcessor" ref="tcpIPCommProcessor" />
+	</bean>
+	
+	<!-- TCPIP通讯实现服务-->
+	<bean id="tcpIPService" class="bros.common.core.comm.tcpip.service.impl.TCPIPServiceImpl">
+		<property name="dual" value="${comm.dual}" />
+		<property name="keepAlive" value="${comm.keepAlive}" />
+		<property name="commProcessor" ref="tcpIPCommProcessor" />
+		<property name="connectToHost" ref="connectToHostService" />
+	</bean>
+	
+	<!-- TCPIP访问服务 -->
+	<bean id="tcpIPAccessService" class="bros.common.core.comm.tcpip.service.impl.TCPIPAccessServiceImpl">
+		<property name="timeOut" value="${comm.timeOut}" />
+		<property name="encoding" value="${comm.encoding}" />
+		<property name="tcpipService" ref="tcpIPService"/>	
+		<property name="formatService" ref="jsonFormatService"/>		
+		<property name="mdKey" value="${comm.md5key}"/>		
+	</bean>
+	
+	<!-- 通信服务组装 -->
+<!-- 	<bean id="clientRouteTransService" class="bros.common.core.comm.route.service.impl.ClientTransRouteServiceImpl"> -->
+<!-- 		<property name="commType" value="1"/> -->
+<!-- 		<property name="communicationService" ref="tcpIPAccessService"/> -->
+<!-- 	</bean> -->
+	
+	<!-- 客户端服务调用 -->
+	<bean id="clientRouteTransService" class="bros.pre.common.route.service.impl.ClientRouteTransServiceImpl">
+		<property name="commType" value="${comm.commType}"/>
+		<property name="communicationService" ref="tcpIPAccessService"/>
+		<property name="recChannel" value="${comm.recChannel}"/><!-- 接力渠道编码 -->
+		<property name="sendChannel" value="${comm.sendChannel}"/><!-- 发起系统编码 -->
+		<property name="fillRightStr" value="${comm.fillRightStr}"/><!-- 接力系统初始顺序流水号 -->
+		<property name="consumerId" value="${comm.send.consumerId}"/><!-- 服务调用方系统ID -->
+		<!--shaoxu 2017/06/05<property name="currsysName" value="${comm.send.applicationName}"/>当前系统简称 -->
+		<property name="flowGenerator" ref="flowGenerator"/><!-- 流水生成器 -->
+		<property name="sessionManager" ref="sessionManager"/><!-- 渠道私有会话管理器-->
+		<property name="tokenUtil" ref="tokenUtil"/><!-- token管理工具-->
+	</bean>
+    <!-- ==============================tcp客户端结束========================================== -->
+</beans>

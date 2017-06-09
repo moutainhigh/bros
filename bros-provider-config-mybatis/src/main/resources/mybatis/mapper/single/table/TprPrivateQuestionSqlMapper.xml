@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.tprprivatequestion">
+	
+	<resultMap id="tprPrivateQuestionResultMap" type="java.util.HashMap">
+		<result property="pqId" column="TPQ_PQID"/>
+		<result property="seqNo" column="TPQ_SEQNO"/>
+		<result property="question" column="TPQ_QUESTION"/>
+		<result property="pqGroupId" column="TPQ_PQGROUPID"/>
+		<result property="languag" column="TPQ_LANGUAG"/>
+	</resultMap>
+	
+	<sql id="tpr_private_question_param">
+	    TPQ_PQID,
+		TPQ_SEQNO,
+		TPQ_QUESTION,
+		TPQ_PQGROUPID,
+		TPQ_LANGUAG
+    </sql>
+    
+	<!-- 根据问题编号查询私密问题列表 -->
+	<select id="queryTprPrivateQuestionListByPqId" resultMap="tprPrivateQuestionResultMap">  
+		  select  <include refid="tpr_private_question_param"/>
+			  from TPR_PRIVATE_QUESTION 
+			     where TPQ_PQID in  
+		  <foreach item="item" index="index" collection="pqIdArray" open="(" separator="," close=")">  
+		      <![CDATA[#{item}]]>
+		  </foreach> 
+	</select>
+	
+	<!-- 根据分组编号+语种查询私密问题列表 -->
+	<select id="queryTprPrivateQuestionListByPqGroupId" resultMap="tprPrivateQuestionResultMap">		  
+	      select <include refid="tpr_private_question_param"/>
+			 from TPR_PRIVATE_QUESTION
+		  <![CDATA[	     
+		        where TPQ_PQGROUPID = #{pqGroupId}
+		          and TPQ_LANGUAG = #{languag}
+	      ]]>
+	</select>
+	
+	<!-- 保存个人私密问题信息 -->
+    <insert id="insertTprPrivateQuestion" parameterType="java.util.HashMap">
+        insert into TPR_PRIVATE_QUESTION(
+    		<include refid="tpr_private_question_param"/>
+    	)values(
+    	    <![CDATA[ 
+		    	#{pqId},
+				#{seqNo},
+				#{question},
+				#{pqGroupId},
+				#{languag}
+			]]>
+    </insert>
+
+</mapper>

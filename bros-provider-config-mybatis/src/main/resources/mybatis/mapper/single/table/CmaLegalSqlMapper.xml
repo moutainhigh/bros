@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.single.table.cmalegal">
+
+    <resultMap type="java.util.HashMap" id="cmaLegalsetResultMap">
+    	<result property="cllId" column="cll_id"/><!-- 法人UUID（用于关联机构等信息） -->
+		<result property="cllCode" column="cll_code"/><!-- 法人编号（唯一索引）-->
+		<result property="cllName" column="cll_name"/><!-- 法人名称 -->
+		<result property="cllAddress" column="cll_address"/><!-- 法人所在地 -->
+		<result property="cllAgentaddress" column="cll_agentaddress"/><!-- 代报机构所在地 -->
+		<result property="cllEconomy" column="cll_economy"/><!-- 出资人经济成份类别 -->
+		<result property="cllIpostatus" column="cll_ipostatus"/><!-- 上市状况（0：境内上市 1：香港上市 2：其他境外上市 3：未上市） -->
+		<result property="cllStatus" column="cll_status"/><!-- 法人状态（0：正常 1：清算 2:撤销） -->
+		<result property="cllRepresentative" column="cll_representative"/><!-- 法人代表 -->
+		<result property="cllParentid" column="cll_parentid"/><!-- 直属上级ID（虚拟层级关系，用于构建机构法人树） -->
+
+    </resultMap>
+
+	<sql id="cma_legal_set">	
+	    cll_id,
+		cll_code,
+		cll_name,
+		cll_address,
+		cll_agentaddress,
+		cll_economy,
+		cll_ipostatus,
+		cll_status,
+		cll_representative,
+		cll_parentid
+	</sql>
+   
+	<!-- 增加法人信息 -->
+    <insert id="addLegal" parameterType="java.util.HashMap">
+   		 insert into cma_legal ( <include refid="cma_legal_set"/>) 
+	    <![CDATA[ 
+		    values(
+		   		#{cllId},
+				#{cllCode},
+				#{cllName},
+				#{cllAddress},
+				#{cllAgentaddress},
+				#{cllEconomy},
+				#{cllIpostatus},
+				#{cllStatus},
+				#{cllRepresentative},
+				#{cllParentid}
+		       )
+	    ]]>  
+    </insert>
+   
+	 <!-- 删除法人信息（修改状态） -->
+	<update id="deleteLegal" parameterType="java.util.HashMap">
+    	update cma_legal
+				 <![CDATA[ 
+					set		
+						cll_status = #{cllStatus}
+						
+					where cll_code = #{cllCode}
+				 ]]>
+				
+    </update>
+	<!-- 查询法人信息 -->
+    <select id="queryLegal" resultMap="cmaLegalsetResultMap">
+	    <if test="cllStatus != null and cllStatus != '' ">    
+	     select
+	       <include refid="cma_legal_set"/>
+	       from cma_legal
+       			<![CDATA[ 
+	     		 	where 1=1
+	       		 ]]> 
+	       		 <if test="cllCode != null and cllCode != '' ">
+				 	and cll_code = #{cllCode} 
+				 </if>
+	       		 <if test="cllStatus != null and cllStatus != '' ">
+				 	and cll_status = #{cllStatus}
+				 </if>
+				 <if test="cllParentid != null and cllParentid != '' ">
+				 	and cll_parentid = #{cllParentid}
+				 </if>
+				 <if test="cllId != null and cllId != '' ">
+				 	and cll_id = #{cllId}
+				 </if>
+		</if>
+		<if  test="cllStatus == null or cllStatus == '' ">
+    	WITH RECURSIVE cma_legaldg
+		        AS (SELECT *
+		              FROM cma_legal
+		              WHERE <![CDATA[ 
+			     		 	 1=1
+			       		 ]]> 
+			       		 <if test="cllCode == null or cllCode == '' ">
+			       		 	 and cll_code in( select cll_code from  cma_legal where cll_parentid='')
+			       		 </if>
+						 <if test="cllParentid != null and cllParentid != '' ">
+						 	and cll_parentid = #{cllParentid}
+						 </if>
+						 <if test="cllCode != null and cllCode != '' ">
+						 	and cll_id = (select cll_id from cma_legal where cll_code=#{cllCode} )
+						 </if>
+		            UNION ALL
+		            SELECT cma_legal.*
+		              FROM
+		                   cma_legaldg INNER JOIN cma_legal ON cma_legaldg.cll_id = cma_legal.cll_parentid) 
+		        SELECT *
+		          FROM cma_legaldg
+    </if>
+      
+    </select>
+    <!-- 查询法人信息总条数 -->
+    <select id="queryLegalNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    <if test="cllStatus != null and cllStatus != '' "> 
+    	select count(*) from cma_legal
+    			<![CDATA[ 
+	     		 	where 1=1
+	       		 ]]> 
+	       		 <if test="cllCode != null and cllCode != '' ">
+				 	and cll_code = #{cllCode} 
+				 </if>
+	       		  <if test="cllStatus != null and cllStatus != '' ">
+				 	and cll_status = #{cllStatus}
+				 </if>
+				 <if test="cllParentid != null and cllParentid != '' ">
+				 	and cll_parentid = #{cllParentid}
+				 </if>
+	</if>
+	<if test="cllStatus == null or cllStatus == '' "> 
+		WITH RECURSIVE cma_legaldg
+		        AS (SELECT *
+		              FROM cma_legal
+		              WHERE <![CDATA[ 
+			     		 	 1=1
+			       		 ]]> 
+						 <if test="cllCode == null or cllCode == '' ">
+			       		 	 and cll_code in( select cll_code from  cma_legal where cll_parentid='')
+			       		 </if>
+						 <if test="cllParentid != null and cllParentid != '' ">
+						 	and cll_parentid = #{cllParentid}
+						 </if>
+						 <if test="cllCode != null and cllCode != '' ">
+						 	and cll_id = (select cll_id from cma_legal where cll_code=#{cllCode} )
+						 </if>
+		            UNION ALL
+		            SELECT cma_legal.*
+		              FROM
+		                   cma_legaldg INNER JOIN cma_legal ON cma_legaldg.cll_id = cma_legal.cll_parentid) 
+		        select count(*)
+		          FROM cma_legaldg
+	</if>
+    </select>
+    <update id="updateLegal" parameterType="java.util.HashMap">
+    	update cma_legal
+				 <![CDATA[ 
+					set
+						cll_name = #{cllName},
+						cll_address = #{cllAddress},
+						cll_agentaddress = #{cllAgentaddress},
+						cll_economy = #{cllEconomy},
+						cll_ipostatus = #{cllIpostatus},
+						cll_status = #{cllStatus},
+						cll_representative	 = #{cllRepresentative},
+						cll_parentid = #{cllParentid}
+						
+					where cll_code = #{cllCode}
+				 ]]>
+    </update>
+</mapper>

@@ -1,0 +1,32 @@
+<td colspan="4" class="td-np" >
+                    <div class="discount-box">
+                        <div class="discount-bar">
+                            <div class="discount-title">优惠组合</div>
+                            <div class="discount-close glyphicon glyphicon-remove-sign">
+                            </div>
+                        </div>
+                        <div class="discount-list">
+                            <ul class="product-list" ng-repeat="productCarList in list">
+                                <li>
+                                    <a href=""><img src="{{productCarList.producturl}}" alt=""></a>
+                                </li>
+                                <li><b ng-bind="productCarList.productname"></b></li>
+                                <li>收益率：<strong ng-bind="productCarList.productrate"></strong><b>%</b></li>
+                                <li>起售金额:<strong ng-bind="productCarList.productrate|currency:'￥'"></strong></li>
+                                <li class="li-fp">
+                                    <input type="checkbox">
+                                    <input type="text" class="form-control"> 元
+                                </li>
+                            </ul>
+                            <ul class="product-info">
+                                <li><b>优惠信息</b></li>
+                                <li class="product-line"><span>总价:</span><i>1500.00元</i></li>
+                                <li class="product-line"><span>优惠价:</span><strong>1000.00元</strong></li>
+                                <li><span>节省:</span><i>500.00元</i></li>
+                                <li>
+                                    <i><button type="button" class="btn btn-primary">确认购买</button></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>

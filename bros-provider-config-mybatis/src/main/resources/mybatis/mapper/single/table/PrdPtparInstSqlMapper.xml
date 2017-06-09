@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.prdptparinst">
+	<sql id="prd_prdptparinst_param">
+		ppt_prdtypecode,
+		ppt_property,
+		ppt_propertyname,
+		ppt_isoptional
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="PrdPtparInstResult">
+    	<result property="prdTypeCode" column="ppt_prdtypecode"/><!-- 产品分类编号 -->
+    	<result property="property" column="ppt_property"/><!-- 产品属性编号 -->
+    	<result property="propertyName" column="ppt_propertyname"/><!-- 产品属性名称 -->
+    	<result property="isoptional" column="ppt_isoptional"/><!-- 是否必需 -->
+    	<result property="note1" column="note1"/><!-- 预留字段 -->
+    	<result property="note2" column="note2"/><!-- 预留字段 -->
+    </resultMap>
+      <!-- 插入实例属性表数据定义 -->
+    <insert id="insertPrdPtparInst" parameterType="java.util.HashMap">
+       insert into prd_ptparinst(
+    		<include refid="prd_prdptparinst_param"/>
+    	)values<foreach collection="list" item="item" index="index" separator="," >
+    	(#{item.prdTypeCode},
+		#{item.property},
+		#{item.propertyName},
+		#{item.isoptional})
+		</foreach>
+    </insert>
+     <!-- 删除实例属性表所有数据 -->
+    <delete id="deletePrdPtparInstByprdTypeCode" parameterType="java.util.HashMap">
+       delete from prd_ptparinst where ppt_prdtypecode=#{prdTypeCode}
+    </delete>
+     <!-- 查询实例属性表所有数据 -->
+    <select id="queryPrdPtparInstByprdTypeCode" resultMap="PrdPtparInstResult">
+       select <include refid="prd_prdptparinst_param"/>
+        from prd_ptparinst where ppt_prdtypecode=#{prdTypeCode}
+    </select>
+    <!-- 查询实例属性表所有数据 -->
+    <select id="queryPrdPtparInstByOne" resultMap="PrdPtparInstResult">
+       select <include refid="prd_prdptparinst_param"/>
+        from prd_ptparinst where ppt_prdtypecode=#{prdTypeCode} and ppt_property=#{property}
+    </select>
+    <!-- 查询记录数 -->
+	<select id="queryPrdPtparsPecNum" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from prd_ptparinst
+	      	 	<![CDATA[ 
+	     		 where  1 = 1
+	     		 ]]>
+		<if test="prdTypeCode!=null and prdTypeCode!=''">
+ 			and ppt_prdtypecode=#{prdTypeCode}
+		</if>
+		<if test="parentCode!=null and parentCode!=''">
+ 			 and ppt_property=#{property}
+		</if>
+	</select>
+</mapper>

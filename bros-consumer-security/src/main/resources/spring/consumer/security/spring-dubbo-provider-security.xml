@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 对统一接入发布服务                       统一接入与服务消费方之间的zookeeper -->
+	
+	<!-- 限额服务 -->
+	<dubbo:service retries="0"  interface="bros.c.limit.facade.service.ICLimitServiceFacade" ref="climitServiceFacade" />
+	
+	<!-- 个人安全服务 -->
+	<dubbo:service retries="0"  interface="bros.c.security.facade.service.ICPersonSecurityServiceFacade" ref="cPersonSecurityServiceFacade" />
+	
+	<!-- 个人私密问题服务 -->
+	<dubbo:service retries="0"  interface="bros.c.security.facade.service.ICPersonPrivateQuestionServiceFacade" ref="cPersonPrivateQuestionServiceFacade" />
+	
+	<!-- 监听当前服务是否存活 -->
+	<dubbo:service retries="0"  interface="bros.c.monitor.service.ICApplicationAliveMonitorSecurityServiceFacade" ref="capplicationAliveMonitorSecurityServiceFacade" />
+
+</beans>  

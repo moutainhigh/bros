@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+<mapper namespace="mybatis.mapper.single.table.publogfrontsys">
+	<sql id="pub_log_frontsys_param">
+		PLS_FLOWSEQ,
+		PLS_BACKFLOWSEQ,
+		PLS_GLOBALFLOWSEQ,
+		PLS_OLDGLOBALFLOWSEQ,
+		PLS_CHANNEL,
+		PLS_SCENECODE,
+		PLS_SCENENAME,
+		PLS_IMPLPACKAGE,
+		PLS_IMPLCLASSNAME,
+		PLS_IMPLMETHOD,
+		PLS_LEGALID,
+		PLS_CUSTOMERNO,
+		PLS_CSTNO,
+		PLS_FRONTCHLCODE,
+		PLS_TRANSTT,
+		PLS_TRANERRCODE,
+		PLS_TRANERRMSG,
+		PLS_FLAG,
+		PLS_TRANSAMT,
+		PLS_TELLERNO,
+		PLS_TRANSBRANCH,
+		PLS_TRANSACC,
+		PLS_TRADETYPE,
+		PLS_OPERATORNO,
+		PLS_SUBMITSTARTTIME,
+		PLS_SUBMITENDTIME,
+		PLS_TRANSTARTTIME,
+		PLS_TRANENDTIME
+	</sql>
+	
+	<!-- 前端服务调用日志插入 -->
+	<insert id="insertPubLogFrontSys" parameterType="java.util.HashMap">
+		insert into PUB_LOGFRONTSYS (
+				<include refid="pub_log_frontsys_param" />) 
+	    values(
+	         #{flowSeq},
+	   		 #{backFlowSeq},
+	   		 #{globalFlowSeq},
+	   		 #{oldGlobalFlowSeq},
+	         #{channel},
+	         #{sceneCode},
+	         #{sceneName},
+	         #{implPackage},
+	         #{implClassName},
+	         #{implMethod},
+	         #{legalId},
+	         #{customerNo},
+	         #{cstNo},
+	         #{frontChlCode},
+	         #{tranStt},
+	         #{tranErrCode},
+	         #{tranErrMsg},
+	         #{flag},
+	         #{transAmt,javaType=Object,jdbcType=DECIMAL,typeHandler=bros.common.core.mybatis.handler.ObjectOrNumericTypeHandler},
+	         #{tellerNo},
+	         #{transBranch},
+	         #{transAcc},
+	         #{tradeType},
+	         #{operatorNo},
+	         #{submitStartTime},
+	         #{submitEndTime},
+	         #{tranStartTime},
+	         #{tranEndTime}
+	       )
+
+	</insert>
+	
+	<!-- 前端服务调用日志更新 -->
+	<update id="updatePubLogFrontSys" parameterType="java.util.HashMap">
+		update PUB_LOGFRONTSYS
+		<set>
+			<if test="backFlowSeq !='' and backFlowSeq != null">
+				PLS_BACKFLOWSEQ = #{backFlowSeq},
+			</if>
+			<if test="tranStt !='' and tranStt != null">
+				PLS_TRANSTT = #{tranStt},
+			</if>
+			<if test="tranErrCode !='' and tranErrCode != null">
+				PLS_TRANERRCODE = #{tranErrCode},
+			</if>
+			<if test="tranErrMsg !='' and tranErrMsg != null">
+				PLS_TRANERRMSG = #{tranErrMsg},
+			</if>
+			<if test="submitEndTime !='' and submitEndTime != null">
+				PLS_SUBMITENDTIME = #{submitEndTime},
+			</if>
+			<if test="tranEndTime !='' and tranEndTime != null">
+				PLS_TRANENDTIME = #{tranEndTime},
+			</if>
+		</set>
+		where PLS_FLOWSEQ = #{flowSeq} 
+	</update>
+
+</mapper>

@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.relational.table.tprpaybook-subpaybook">
+	<sql id="paybook_param">
+		TPK_PAYBOOKID,	         <!-- 收款人记录唯一标识 -->     
+		TPK_CSTID,		         <!--客户号id -->            
+		TPK_ACCNO,		         <!--账号 -->             
+		TPK_ACCNAME,	         <!--账户名称 -->           
+		TPK_ACCTYPE,	         <!--账户类型 -->           
+		TPK_ALIAS,		         <!--账户别名 -->           
+		TPK_EMAIL,		         <!--E-mail -->         
+		TPK_MOBILE,		         <!--手机号码 -->           
+		TPK_PROVINCE_CODE,		 <!--省份代码 -->
+		TPK_CITY_CODE,			 <!--城市代码 -->
+		TPK_BANKNAME,			 <!--银行行名 -->
+		TPK_PAYEE_TYPE,			 <!--收款人类型 -->
+		TPK_COMMON_FLG,			 <!--常用标记 -->
+		TPK_SEND_MESSAGE_MOBILE, <!--短信通知接收手机号码 -->
+		TPK_HEAD_PIC_NAME,		 <!--头像名 -->
+		TPK_NOTE1,				 <!--备用字段1 -->
+		TPK_NOTE2				 <!--备用字段2 -->
+	</sql>
+	<sql id="subPaybook_param">
+		TSK_ID,			 		 <!-- Id --> 
+		TSK_PAYBOOKID,	         <!-- 收款人记录唯一标识 -->     
+		TSK_TRANTYPE,		     <!-- 转账类型 -->            
+		TSK_COMITRNO,		     <!-- 收款银行联行号或网银互联号（他行使用） -->             
+		TPK_NOTE1,				 <!-- 备用字段1 -->
+		TPK_NOTE2				 <!-- 备用字段2 -->
+	</sql>
+	<resultMap type="java.util.HashMap" id="payBookMap">
+		<result property="payBookId"  column="TPK_PAYBOOKID"/>
+		<result property="cstId"  column="TPK_CSTID"/>
+		<result property="accountNo"  column="TPK_ACCNO"/>
+		<result property="accountName"  column="TPK_ACCNAME"/>
+		<result property="accountType"  column="TPK_ACCTYPE"/>
+		<result property="accountAlias"  column="TPK_ALIAS"/>
+		<result property="email"  column="TPK_EMAIL"/>
+		<result property="mobileNo"  column="TPK_MOBILE"/>
+		<result property="provinceNo"  column="TPK_PROVINCE_CODE"/>
+		<result property="cityNo"  column="TPK_CITY_CODE"/>
+		<result property="bankName"  column="TPK_BANKNAME"/>
+		<result property="payeeType"  column="TPK_PAYEE_TYPE"/>
+		<result property="commonFlg"  column="TPK_COMMON_FLG"/>
+		<result property="sendMessageMobile"  column="TPK_SEND_MESSAGE_MOBILE"/>
+		<result property="headPicName"  column="TPK_HEAD_PIC_NAME"/>
+		<result property="note1"  column="TPK_NOTE1"/>
+		<result property="note2"  column="TPK_NOTE2"/>
+		
+		<!-- 表名称 PB_SUBPAYBOOK -->
+		<result property="transType" column="TSK_TRANTYPE" /><!-- 转账类型 -->	
+		<result property="objectId" column="TSK_ID" /><!--主键id -->
+		<result property="payBookId" column="TSK_PAYBOOKID" /><!--关联标示 -->
+		<result property="comitrNo" column="TSK_COMITRNO" /><!--收款银行联行号或网银互联号（他行使用）-->
+		
+		 <!-- 表名称PUB_PMSBANKNO -->
+    	<result property="bankNo" column="ppo_bankno"/>
+    	<result property="bankType" column="ppo_banktype"/>
+    	<result property="cityCode" column="ppo_citycode"/>
+    	<result property="bankName" column="ppo_bankname"/>
+    	<result property="stt" column="ppo_stt"/>
+    	<!-- 表名称PUB_PMSBANKNO -->
+     	<result property="bankNo" column="puo_bankno"/><!-- 网银互联联行号 -->
+    	<result property="bankType" column="puo_banktype"/><!--行别代码（对应PUB_BANKTYPE表中的PBE_BANKTYPE字段） -->
+    	<result property="bankName" column="puo_name"/><!-- 银行名称 -->
+    	<result property="aliasName" column="puo_aliasname"/><!-- 银行别名 -->
+    	<result property="partyTypeCode" column="puo_partytypecode"/><!-- 参与机构类型（CL00:直接接入银行业机构,CL01：直接接入非银行业机构,CL02：代理接入银行机构） -->
+    	<result property="agent" column="puo_agent"/><!-- 银行代理 -->
+    	<result property="center" column="puo_center"/><!-- 银行中心 -->
+    	<result property="stt" column="puo_stt"/><!-- 银行状态（0：失效   1：生效） -->
+    	<result property="effDate" column="puo_effdate"/><!-- 银行生效日期 -->
+    	<result property="invDate" column="puo_invdate"/><!-- 银行失效日期 -->
+    	
+    	<result property="bankName" column="BANKNAME" />
+    
+	</resultMap>
+
+	<!-- 新增收款人信息-->
+	<insert id="insertPayBookInfo" parameterType="java.util.HashMap">
+		insert into TPR_PAYBOOK (
+		<include refid="paybook_param" />) 
+	    <![CDATA[ 
+		    values(
+			    #{payBookId},
+				#{cstId},
+				#{accountNo},
+				#{accountName},
+				#{accountType},
+				#{accountAlias},
+				#{email},
+				#{mobileNo},
+				#{provinceNo},
+				#{cityNo},
+				#{bankName},
+				#{payeeType},
+				#{commonFlg},
+				#{sendMessageMobile},
+				#{headPicName},
+				#{note1},
+				#{note2}
+		       )
+	    ]]>
+	</insert>
+    <!-- 根据主键id删除该渠道客户下的某个收款人信息-->
+	<delete id="deletePayBookInfo" parameterType="java.util.HashMap">
+		delete from TPR_PAYBOOK  where  TPK_PAYBOOKID = #{payBookId}
+	</delete>
+	<!-- 更新收款人基本信息 -->
+	<update id="updatePayBookInfo" parameterType="java.util.HashMap">
+		update TPR_PAYBOOK 
+			<set> 
+			TPK_ACCNO=#{accountNo},
+			TPK_ACCNAME=#{accountName},
+			TPK_ACCTYPE=#{accountType},
+			TPK_BANKNAME=#{bankName},
+			<if test="accountAlias!=null and accountAlias!=''">
+				TPK_ALIAS=#{accountAlias},
+			</if>
+			<if test="email != null and email != '' ">
+				TPK_EMAIL=#{email},
+			</if>
+			<if test="mobileNo!=null and mobileNo!=''">
+				TPK_MOBILE=#{mobileNo},
+			</if>
+			<if test="(mobileNo==null or mobileNo=='') and noMobile==null">
+				TPK_MOBILE='',
+			</if>
+			<if test="provinceNo != null and provinceNo != '' ">
+				TPK_PROVINCE_CODE=#{provinceNo},
+			</if>
+			<if test="cityNo != null and cityNo != '' ">
+				TPK_CITY_CODE=#{cityNo},
+			</if>
+			<if test="payeeType != null and payeeType != ''">
+				TPK_PAYEE_TYPE=#{payeeType},
+			</if>
+			<if test="commonFlg != null and commonFlg != '' ">
+				TPK_COMMON_FLG=#{commonFlg},
+			</if>
+			<if test="sendMessageMobile != null and sendMessageMobile != '' ">
+				TPK_SEND_MESSAGE_MOBILE=#{sendMessageMobile},
+			</if>
+			<if test="(sendMessageMobile==null or sendMessageMobile=='')  and noMobile==null">
+				TPK_SEND_MESSAGE_MOBILE='',
+			</if>
+			<if test="headPicName != null and headPicName != '' ">
+				TPK_HEAD_PIC_NAME=#{headPicName}
+			</if>
+			</set>
+				where TPK_PAYBOOKID=#{payBookId}
+	</update>
+	
+	<!-- 查询该渠道客户的所有收款人名册列表的总记录数 -->
+	<select id="queryAllPayBooksForCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(1) from TPR_PAYBOOK a where a.TPK_CSTID = #{cstId} 
+		<if test="payeeType != null and payeeType != '' ">
+			and a.TPK_PAYEE_TYPE = #{payeeType}
+		</if>
+		<if test="accountName != null and accountName != '' ">
+			and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+		</if>
+		<if test="accountNo != null and accountNo != '' ">
+			and a.TPK_ACCNO = #{accountNo}
+		</if>
+		<if test="payBookId != null and payBookId != '' ">
+			and a.TPK_PAYBOOKID=#{payBookId}
+		</if>
+	</select>
+	<!-- 查询该渠道客户的所有收款人名册列表 -->
+	<select id="queryAllPayBooksForPageByCstNo" parameterType="java.util.HashMap" resultMap="payBookMap">
+		select 
+		<include refid="paybook_param" /> 
+		from TPR_PAYBOOK a where a.TPK_CSTID = #{cstId} 
+		<if test="payeeType != null and payeeType != '' ">
+			and a.TPK_PAYEE_TYPE = #{payeeType}
+		</if>
+		<if test="accountName != null and accountName != '' ">
+			and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+		</if>
+		<if test="accountNo != null and accountNo != '' ">
+			and a.TPK_ACCNO = #{accountNo}
+		</if>
+		<if test="payBookId != null and payBookId != '' ">
+			and a.TPK_PAYBOOKID=#{payBookId}
+		</if>
+	</select>
+	<!-- 查询该渠道平台客户的所有收款人名册列表 包含子表转账类型数据 -->
+	<select id="queryAllPayBooksForPageByCstNoWithSubPayBook" parameterType="java.util.HashMap" resultMap="payBookMap">
+		 select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PPO_BANKNAME as BANKNAME
+	     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+			<if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+	     ) d,PUB_PMSBANKNO e
+	   	 where  d.TSK_COMITRNO=e.PPO_BANKNO and (d.TSK_TRANTYPE='11'  or d.TSK_TRANTYPE='10')
+	     union all
+	     select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PUO_NAME as BANKNAME
+	     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+	     <if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+	     ) d,PUB_UNIONBANKNO e
+	     where  d.TSK_COMITRNO=e.PUO_BANKNO and d.TSK_TRANTYPE in ('01','02','03')
+	     union all
+	     select a.TPK_PAYBOOKID,a.TPK_CSTID,a.TPK_ACCNO,a.TPK_ACCNAME,a.TPK_ACCTYPE,a.TPK_ALIAS,a.TPK_EMAIL,a.TPK_MOBILE,a.TPK_PROVINCE_CODE,a.TPK_CITY_CODE,a.TPK_PAYEE_TYPE,a.TPK_COMMON_FLG,a.TPK_SEND_MESSAGE_MOBILE,a.TPK_HEAD_PIC_NAME,b.TSK_TRANTYPE,b.TSK_COMITRNO,b.TSK_ID,b.TSK_PAYBOOKID,a.TPK_BANKNAME as BANKNAME 
+	     from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId}  and b.TSK_TRANTYPE='08'
+	     <if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+			order by TPK_PAYBOOKID,TSK_TRANTYPE
+	</select>
+	
+	<!-- 查询该渠道平台客户的所有收款人名册列表 包含子表转账类型数据(根据payBookId排序且去掉账号重复) -->
+	<select id="queryDistinctPayBooksForPageByCstNoWithSubPayBook" parameterType="java.util.HashMap" resultMap="payBookMap">
+		 select * from(
+		 select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PPO_BANKNAME as BANKNAME
+	     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+			<if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+	     ) d,PUB_PMSBANKNO e
+	   	 where  d.TSK_COMITRNO=e.PPO_BANKNO and (d.TSK_TRANTYPE='11'  or d.TSK_TRANTYPE='10')
+	     union all
+	     select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PUO_NAME as BANKNAME
+	     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+	     <if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+	     ) d,PUB_UNIONBANKNO e
+	     where  d.TSK_COMITRNO=e.PUO_BANKNO and d.TSK_TRANTYPE in ('01','02','03')
+	     union all
+	     select a.TPK_PAYBOOKID,a.TPK_CSTID,a.TPK_ACCNO,a.TPK_ACCNAME,a.TPK_ACCTYPE,a.TPK_ALIAS,a.TPK_EMAIL,a.TPK_MOBILE,a.TPK_PROVINCE_CODE,a.TPK_CITY_CODE,a.TPK_PAYEE_TYPE,a.TPK_COMMON_FLG,a.TPK_SEND_MESSAGE_MOBILE,a.TPK_HEAD_PIC_NAME,b.TSK_TRANTYPE,b.TSK_COMITRNO,b.TSK_ID,b.TSK_PAYBOOKID,a.TPK_BANKNAME as BANKNAME 
+	     from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} and b.TSK_TRANTYPE='08'
+	     <if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+			) e where TSK_ID in (select MAX(TSK_ID) from (
+				select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PPO_BANKNAME as BANKNAME
+			     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+					<if test="payeeType != null and payeeType != '' ">
+						and a.TPK_PAYEE_TYPE = #{payeeType}
+					</if>
+					<if test="accountName != null and accountName != '' ">
+						and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+					</if>
+					<if test="accountNo != null and accountNo != '' ">
+						and a.TPK_ACCNO = #{accountNo}
+					</if>
+					<if test="payBookId != null and payBookId != '' ">
+						and a.TPK_PAYBOOKID=#{payBookId}
+					</if>
+			     ) d,PUB_PMSBANKNO e
+			   	 where  d.TSK_COMITRNO=e.PPO_BANKNO and (d.TSK_TRANTYPE='11'  or d.TSK_TRANTYPE='10')
+			     union all
+			     select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PUO_NAME as BANKNAME
+			     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+			     <if test="payeeType != null and payeeType != '' ">
+						and a.TPK_PAYEE_TYPE = #{payeeType}
+					</if>
+					<if test="accountName != null and accountName != '' ">
+						and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+					</if>
+					<if test="accountNo != null and accountNo != '' ">
+						and a.TPK_ACCNO = #{accountNo}
+					</if>
+					<if test="payBookId != null and payBookId != '' ">
+						and a.TPK_PAYBOOKID=#{payBookId}
+					</if>
+			     ) d,PUB_UNIONBANKNO e
+			     where  d.TSK_COMITRNO=e.PUO_BANKNO and d.TSK_TRANTYPE in ('01','02','03')
+			     union all
+			     select a.TPK_PAYBOOKID,a.TPK_CSTID,a.TPK_ACCNO,a.TPK_ACCNAME,a.TPK_ACCTYPE,a.TPK_ALIAS,a.TPK_EMAIL,a.TPK_MOBILE,a.TPK_PROVINCE_CODE,a.TPK_CITY_CODE,a.TPK_PAYEE_TYPE,a.TPK_COMMON_FLG,a.TPK_SEND_MESSAGE_MOBILE,a.TPK_HEAD_PIC_NAME,b.TSK_TRANTYPE,b.TSK_COMITRNO,b.TSK_ID,b.TSK_PAYBOOKID,a.TPK_BANKNAME as BANKNAME 
+			     from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} and b.TSK_TRANTYPE='08'
+			     <if test="payeeType != null and payeeType != '' ">
+						and a.TPK_PAYEE_TYPE = #{payeeType}
+					</if>
+					<if test="accountName != null and accountName != '' ">
+						and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+					</if>
+					<if test="accountNo != null and accountNo != '' ">
+						and a.TPK_ACCNO = #{accountNo}
+					</if>
+					<if test="payBookId != null and payBookId != '' ">
+						and a.TPK_PAYBOOKID=#{payBookId}
+					</if>
+			)e group by TPK_ACCNO)  order by TPK_PAYBOOKID
+	</select>
+	
+	<!-- 查询该渠道平台客户的所有收款人名册列表 包含子表转账类型数据 -->
+	<select id="queryAllPayBooksForCountWithSubPayBook" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		 select count(1) from (
+		 select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PPO_BANKNAME as BANKNAME
+	     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+			<if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+	     ) d,PUB_PMSBANKNO e
+	   	 where  d.TSK_COMITRNO=e.PPO_BANKNO and (d.TSK_TRANTYPE='11'  or d.TSK_TRANTYPE='10')
+	     union all
+	     select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PUO_NAME as BANKNAME
+	     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+	     <if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+	     ) d,PUB_UNIONBANKNO e
+	     where  d.TSK_COMITRNO=e.PUO_BANKNO and d.TSK_TRANTYPE in ('01','02','03')
+	     union all
+	     select a.TPK_PAYBOOKID,a.TPK_CSTID,a.TPK_ACCNO,a.TPK_ACCNAME,a.TPK_ACCTYPE,a.TPK_ALIAS,a.TPK_EMAIL,a.TPK_MOBILE,a.TPK_PROVINCE_CODE,a.TPK_CITY_CODE,a.TPK_PAYEE_TYPE,a.TPK_COMMON_FLG,a.TPK_SEND_MESSAGE_MOBILE,a.TPK_HEAD_PIC_NAME,b.TSK_TRANTYPE,b.TSK_COMITRNO,b.TSK_ID,b.TSK_PAYBOOKID,a.TPK_BANKNAME as BANKNAME 
+	     from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} and b.TSK_TRANTYPE='08'
+	     <if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+		) f
+	</select>
+	<!-- 查询该渠道平台客户的所有收款人名册列表 包含子表转账类型数据总条数（去掉账号重复） -->
+	<select id="queryDistinctPayBooksForCountWithSubPayBook" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		 select count(1) from(
+		 select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PPO_BANKNAME as BANKNAME
+	     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+			<if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+	     ) d,PUB_PMSBANKNO e
+	   	 where  d.TSK_COMITRNO=e.PPO_BANKNO and (d.TSK_TRANTYPE='11'  or d.TSK_TRANTYPE='10')
+	     union all
+	     select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PUO_NAME as BANKNAME
+	     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+	     <if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+	     ) d,PUB_UNIONBANKNO e
+	     where  d.TSK_COMITRNO=e.PUO_BANKNO and d.TSK_TRANTYPE in ('01','02','03')
+	     union all
+	     select a.TPK_PAYBOOKID,a.TPK_CSTID,a.TPK_ACCNO,a.TPK_ACCNAME,a.TPK_ACCTYPE,a.TPK_ALIAS,a.TPK_EMAIL,a.TPK_MOBILE,a.TPK_PROVINCE_CODE,a.TPK_CITY_CODE,a.TPK_PAYEE_TYPE,a.TPK_COMMON_FLG,a.TPK_SEND_MESSAGE_MOBILE,a.TPK_HEAD_PIC_NAME,b.TSK_TRANTYPE,b.TSK_COMITRNO,b.TSK_ID,b.TSK_PAYBOOKID,a.TPK_BANKNAME as BANKNAME 
+	     from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} and b.TSK_TRANTYPE='08'
+	     <if test="payeeType != null and payeeType != '' ">
+				and a.TPK_PAYEE_TYPE = #{payeeType}
+			</if>
+			<if test="accountName != null and accountName != '' ">
+				and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="accountNo != null and accountNo != '' ">
+				and a.TPK_ACCNO = #{accountNo}
+			</if>
+			<if test="payBookId != null and payBookId != '' ">
+				and a.TPK_PAYBOOKID=#{payBookId}
+			</if>
+			) e where TSK_ID in (select MAX(TSK_ID) from (
+				select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PPO_BANKNAME as BANKNAME
+			     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+					<if test="payeeType != null and payeeType != '' ">
+						and a.TPK_PAYEE_TYPE = #{payeeType}
+					</if>
+					<if test="accountName != null and accountName != '' ">
+						and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+					</if>
+					<if test="accountNo != null and accountNo != '' ">
+						and a.TPK_ACCNO = #{accountNo}
+					</if>
+					<if test="payBookId != null and payBookId != '' ">
+						and a.TPK_PAYBOOKID=#{payBookId}
+					</if>
+			     ) d,PUB_PMSBANKNO e
+			   	 where  d.TSK_COMITRNO=e.PPO_BANKNO and (d.TSK_TRANTYPE='11'  or d.TSK_TRANTYPE='10')
+			     union all
+			     select d.TPK_PAYBOOKID,d.TPK_CSTID,d.TPK_ACCNO,d.TPK_ACCNAME,d.TPK_ACCTYPE,d.TPK_ALIAS,d.TPK_EMAIL,d.TPK_MOBILE,d.TPK_PROVINCE_CODE,d.TPK_CITY_CODE,d.TPK_PAYEE_TYPE,d.TPK_COMMON_FLG,d.TPK_SEND_MESSAGE_MOBILE,d.TPK_HEAD_PIC_NAME,d.TSK_TRANTYPE,d.TSK_COMITRNO,d.TSK_ID,d.TSK_PAYBOOKID,e.PUO_NAME as BANKNAME
+			     from (select * from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} 
+			     <if test="payeeType != null and payeeType != '' ">
+						and a.TPK_PAYEE_TYPE = #{payeeType}
+					</if>
+					<if test="accountName != null and accountName != '' ">
+						and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+					</if>
+					<if test="accountNo != null and accountNo != '' ">
+						and a.TPK_ACCNO = #{accountNo}
+					</if>
+					<if test="payBookId != null and payBookId != '' ">
+						and a.TPK_PAYBOOKID=#{payBookId}
+					</if>
+			     ) d,PUB_UNIONBANKNO e
+			     where  d.TSK_COMITRNO=e.PUO_BANKNO and d.TSK_TRANTYPE in ('01','02','03')
+			     union all
+			     select a.TPK_PAYBOOKID,a.TPK_CSTID,a.TPK_ACCNO,a.TPK_ACCNAME,a.TPK_ACCTYPE,a.TPK_ALIAS,a.TPK_EMAIL,a.TPK_MOBILE,a.TPK_PROVINCE_CODE,a.TPK_CITY_CODE,a.TPK_PAYEE_TYPE,a.TPK_COMMON_FLG,a.TPK_SEND_MESSAGE_MOBILE,a.TPK_HEAD_PIC_NAME,b.TSK_TRANTYPE,b.TSK_COMITRNO,b.TSK_ID,b.TSK_PAYBOOKID,a.TPK_BANKNAME as BANKNAME 
+			     from TPR_PAYBOOK a left join TPR_SUBPAYBOOK b on a.TPK_PAYBOOKID = b.TSK_PAYBOOKID where a.TPK_CSTID = #{cstId} and b.TSK_TRANTYPE='08'
+			     <if test="payeeType != null and payeeType != '' ">
+						and a.TPK_PAYEE_TYPE = #{payeeType}
+					</if>
+					<if test="accountName != null and accountName != '' ">
+						and a.TPK_ACCNAME like '%'||#{accountName}||'%'
+					</if>
+					<if test="accountNo != null and accountNo != '' ">
+						and a.TPK_ACCNO = #{accountNo}
+					</if>
+					<if test="payBookId != null and payBookId != '' ">
+						and a.TPK_PAYBOOKID=#{payBookId}
+					</if>
+			)e group by TPK_ACCNO)
+	</select>
+	<!-- 根据渠道客户号、账号、手机号、账号名称、查询收款人信息，如果是手机号收款人，根据手机号，否则根据账号查 -->
+	<select id="queryPayBooksByCstNoAccNo" parameterType="java.util.HashMap" resultMap="payBookMap">
+		select <include refid="paybook_param" /> 
+		from TPR_PAYBOOK a where a.TPK_CSTID = #{cstId} 
+		
+		<if test="payeeType != null and payeeType != '' ">
+			and a.TPK_PAYEE_TYPE = #{payeeType}
+		</if>
+		<if test="accountName != null and accountName != '' ">
+			and a.TPK_ACCNAME = #{accountName}
+		</if>
+		<if test="payeeType != null and payeeType == 3 ">
+			and a.TPK_MOBILE = #{mobileNo}
+		</if>
+		<if test="payeeType != null and payeeType != 3">
+			and a.TPK_ACCNO = #{accountNo}
+		</if>
+	</select>
+	 
+	<!-- 根据收款人名册ID查询 -->
+	<select id="queryPayBookByBookId" parameterType="java.util.HashMap" resultMap="payBookMap">
+		select 
+			<include refid="paybook_param" /> 
+		from TPR_PAYBOOK a  where a.TPK_PAYBOOKID=#{payBookId} 
+	</select>
+	<!-- ************************************************收款人信息子表操作****************************************** -->
+	<!-- 保存收款人子表信息(不一定有网银互联号) -->
+    <insert id="insertSubPayBook" parameterType="java.util.HashMap">
+    	insert into TPR_SUBPAYBOOK
+    	(<include refid="subPaybook_param" />) 
+	    <![CDATA[ 
+		    values(
+		    	#{objectId},
+			    #{payBookId},
+				#{transType},
+				#{comitrNo},
+				#{note1},
+				#{note2}
+		       )
+	    ]]>
+    </insert>
+    <!-- 删除收款人子表中的所有记录 -->
+    <delete id="deleteSubPayBookByObjectId" parameterType="java.util.HashMap" >
+		delete from TPR_SUBPAYBOOK  where TSK_PAYBOOKID=#{payBookId}
+    </delete>
+	<!-- 根据payBookId和tranType更新收款人子表对象TPR_SUBPAYBOOK -->
+	<update id="updateSubPayBookByPayBookIdAndTranType" parameterType="java.util.HashMap"> 
+		update TPR_SUBPAYBOOK  set TSK_COMITRNO=#{comitrNo} where TSK_PAYBOOKID=#{payBookId} and TSK_TRANTYPE=#{transType}
+    </update> 
+	<!-- 根据关联字段payBookId查询收款人名册子表中的所有记录 -->
+	<select id="querySubPayBookByPayBookId" parameterType="java.util.HashMap"  resultMap="payBookMap">
+		select 
+		<include refid="subPaybook_param" /> 
+		 from TPR_SUBPAYBOOK a where a.TSK_PAYBOOKID=#{payBookId}
+	</select>
+	<!-- 根据payBookId和tranType查询收款人名册子表中的是否存在记录 -->
+	<select id="querySubPayBookByPayBookIdAndTranType" parameterType="java.util.HashMap"  resultMap="payBookMap">
+		select 
+		<include refid="subPaybook_param" /> 
+		 from TPR_SUBPAYBOOK a where a.TSK_PAYBOOKID=#{payBookId} and a.TSK_TRANTYPE=#{transType} 
+	</select>
+</mapper>

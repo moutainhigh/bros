@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+	<!-- 渠道系统新增 -->
+	<xmlTag dataName="bodyMap" message="${CECO000000001}">
+		<xmlField dataName="chlCode" message="${CECO000000001}"/><!-- 渠道系统编号 -->
+		<xmlField dataName="legalPersonId" message="${CECO000000001}"/><!-- 法人ID -->
+		<xmlField dataName="chlSysCode" message="${CECO000000001}"/><!-- 渠道系统分组编号 -->
+		<xmlField dataName="chlName" message="${CECO000000001}"/><!-- 渠道名称 -->
+	</xmlTag>
+</formats>

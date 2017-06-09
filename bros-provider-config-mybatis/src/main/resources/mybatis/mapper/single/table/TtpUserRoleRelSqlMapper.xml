@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.single.table.TtpUserRoleRel">
+	<sql id="ttp_user_role_rel">
+		turr_id,
+		turr_userid,
+		turr_roleid
+	</sql>
+
+    <resultMap type="java.util.HashMap" id="TtpUserRoleRelResult">
+    	<result property="turrId" column="turr_id"/><!-- UUID -->
+    	<result property="operatorId" column="turr_userid"/><!-- 操作员唯一标识 -->
+    	<result property="operatorRoleId" column="turr_roleid"/><!-- 角色唯一标识 -->
+    </resultMap>
+    <!-- 查询全部角色 -->
+    <select id="queryAllTtpUserRoleRel" resultMap="TtpUserRoleRelResult">
+       select
+       	<include refid="ttp_user_role_rel"/> 
+       from ttp_user_role_rel 
+    </select>
+    
+    
+    <!-- 删除操作员下可操作账户-->
+	<delete id="deleteTtpUserRoleByTuiId"  parameterType="java.util.HashMap">
+		delete from ttp_user_role_rel where turr_userid=#{operatorId}
+	</delete>
+	
+	
+    <!-- 添加操作员用户信息 -->
+	<insert id="insertTtpUserRoleRel" parameterType="java.util.HashMap">
+		insert into ttp_user_role_rel(
+			<include refid="ttp_user_role_rel"/>  
+		) values(
+			<![CDATA[ 
+				#{turrId,jdbcType=VARCHAR},
+				#{operatorId,jdbcType=VARCHAR},
+				#{operatorRoleId,jdbcType=VARCHAR}
+	       	]]> 
+		)
+	</insert>
+	
+	
+	<!-- 根据角色编号列表查询角色信息列表 -->
+	<select id="queryTtpUserRoleRelUserIdListByTreIdList" parameterType="java.util.HashMap" resultMap="TtpUserRoleRelResult" >
+		SELECT turr.turr_userid  
+		FROM ttp_user_role_rel turr 
+		WHERE  turr.turr_roleid=#{roleId}
+	</select>
+
+</mapper>
